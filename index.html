@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hotel 3 Paardekens - Contact</title>
   <meta name="description" content="Hotel 3 Paardekens - Contact details" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <style>
     :root {
       --card-bg: rgba(0, 0, 0, 0.55);
@@ -12,13 +13,15 @@
       --muted: rgba(255, 255, 255, 0.85);
       --shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
       --radius: 18px;
+      --fp-hover-color: #949494;
+      --fp-dim-month: #545454;
     }
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--text);
       background: #000;
     }
@@ -49,51 +52,49 @@
       border: 1px solid rgba(255,255,255,0.12);
     }
 
-    h1 {
-      margin: 0 0 12px 0;
-      font-size: clamp(26px, 4vw, 40px);
-      letter-spacing: 0.2px;
-    }
-
-    .lines {
-      margin: 0;
-      font-size: clamp(16px, 2.1vw, 18px);
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
-    .lines strong { color: var(--text); font-weight: 700; }
-
-    .links {
-      margin-top: 18px;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    a {
+    h1 { margin: 0 0 12px 0; font-size: clamp(26px, 4vw, 40px); }
+    .lines { margin: 0; font-size: clamp(16px, 2.1vw, 18px); line-height: 1.65; color: var(--muted); }
+    .date-row { margin-top: 16px; display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; }
+    input.datepicker {
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255,255,255,0.03);
       color: var(--text);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      min-width: 170px;
     }
+    .links { margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    a { color:var(--text); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.35); }
     a:hover { border-bottom-color: rgba(255,255,255,0.9); }
+    .pill { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); }
+    .pill[aria-disabled="true"] { opacity:0.55; pointer-events:none; }
+    footer { margin-top:18px; font-size:13px; color: rgba(255,255,255,0.7); }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-    }
+    /* flatpickr styles (dark theme tweaks) */
+    .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
+    .flatpickr-calendar, .flatpickr-calendar * { color: #fff !important; }
+    .flatpickr-calendar .flatpickr-day:hover,
+    .flatpickr-calendar .flatpickr-weekday:hover,
+    .flatpickr-calendar .flatpickr-months .flatpickr-prev-month:hover,
+    .flatpickr-calendar .flatpickr-months .flatpickr-next-month:hover { color: var(--fp-hover-color) !important; }
+    .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month { color: #fff !important; transition: color 120ms; }
+    .flatpickr-months .flatpickr-prev-month svg,
+    .flatpickr-months .flatpickr-next-month svg { fill: currentColor !important; stroke: currentColor !important; }
+    .flatpickr-current-month .numInputWrapper .arrowUp,
+    .flatpickr-current-month .numInputWrapper .arrowDown { color: #fff !important; transition: color 120ms; }
+    .flatpickr-current-month .numInputWrapper .arrowUp svg,
+    .flatpickr-current-month .numInputWrapper .arrowDown svg { fill: #fff !important; stroke: #fff !important; }
+    .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: var(--fp-dim-month) !important; }
+    .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { color: #fff !important; }
 
-    footer {
-      margin-top: 18px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.7);
-    }
+    .flatpickr-month-year-selectors { display:flex; gap:8px; justify-content:center; padding:6px 8px; }
+    .flatpickr-month-year-selectors select { background: rgba(255,255,255,0.02); color:#fff !important; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:6px 8px; font-size:13px; -webkit-appearance:none; appearance:none; }
+    .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
+
+    @media (max-width:420px) { .flatpickr-month-year-selectors select { font-size:12px; padding:5px 6px; } input.datepicker { min-width:140px; } }
   </style>
 </head>
 
@@ -111,20 +112,123 @@
         <a href="https://www.3paardekens.com" target="_blank" rel="noopener noreferrer">www.3paardekens.com</a>
       </p>
 
+      <div class="date-row" aria-label="Select stay dates">
+        <label for="checkin" style="position:absolute; left:-9999px">Check-in date</label>
+        <input id="checkin" class="datepicker" type="text" aria-label="Check-in date" placeholder="Check-in">
+        <label for="checkout" style="position:absolute; left:-9999px">Check-out date</label>
+        <input id="checkout" class="datepicker" type="text" aria-label="Check-out date" placeholder="Check-out">
+      </div>
+
       <div class="links" aria-label="Quick actions">
         <a class="pill" href="mailto:info@3paardekens.be">Email</a>
         <a class="pill" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer">Open in Maps</a>
-        <a class="pill" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer">Book a Room</a>
+        <a id="book" class="pill" href="#" role="button" aria-disabled="false">Book a Room</a>
       </div>
 
-      <footer>
-        © <span id="y"></span> Hotel 3 Paardekens
-      </footer>
+      <footer>© <span id="y"></span> Hotel 3 Paardekens</footer>
     </section>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    // Helpers
+    function formatLocalDate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${dd}`;
+    }
+    function addDays(d, n) {
+      const r = new Date(d);
+      r.setDate(r.getDate() + n);
+      return r;
+    }
+    function parseYMD(s) {
+      return s ? new Date(s + 'T00:00:00') : null;
+    }
+
+    const checkInEl = document.getElementById('checkin');
+    const checkOutEl = document.getElementById('checkout');
+    const bookEl = document.getElementById('book');
+
+    const today = new Date();
+    const tomorrow = addDays(today, 1);
+    const todayStr = formatLocalDate(today);
+    const tomorrowStr = formatLocalDate(tomorrow);
+
+    // disable manual typing for reliability (prevent conflicts)
+    const baseOptions = { dateFormat: 'Y-m-d', disableMobile: true, allowInput: false };
+
+    // initialize checkout first (so we can set its minDate from checkin)
+    const fpOut = flatpickr(checkOutEl, {
+      ...baseOptions,
+      defaultDate: tomorrowStr,
+      minDate: tomorrowStr,
+      onChange(selectedDates) {
+        // ensure checkout never ends up <= checkin (extra safety)
+        const inDate = parseYMD(checkInEl.value);
+        const outDate = selectedDates && selectedDates[0] ? selectedDates[0] : parseYMD(checkOutEl.value);
+        if (inDate && outDate && outDate.getTime() <= inDate.getTime()) {
+          const forced = addDays(inDate, 1);
+          fpOut.setDate(formatLocalDate(forced), true, 'Y-m-d');
+        }
+        updateBookState();
+      }
+    });
+
+    // initialize checkin: when pick changes, enforce checkout >= checkin+1 immediately
+    const fpIn = flatpickr(checkInEl, {
+      ...baseOptions,
+      defaultDate: todayStr,
+      minDate: todayStr,
+      onChange(selectedDates) {
+        if (!selectedDates || !selectedDates[0]) return;
+        const inDate = selectedDates[0];
+        const minOut = addDays(inDate, 1);
+        // update checkout min
+        fpOut.set('minDate', formatLocalDate(minOut));
+
+        // read current checkout
+        const currentOut = parseYMD(checkOutEl.value);
+
+        // If checkout is missing or <= checkin, set it to checkin + 1
+        if (!currentOut || currentOut.getTime() <= inDate.getTime()) {
+          // Using setDate with format arg to ensure input updates properly
+          fpOut.setDate(formatLocalDate(minOut), true, 'Y-m-d');
+        }
+
+        // update state
+        updateBookState();
+      }
+    });
+
+    function updateBookState() {
+      const start = parseYMD(checkInEl.value);
+      const end = parseYMD(checkOutEl.value);
+      const disabled = !start || !end || end.getTime() <= start.getTime();
+      bookEl.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+    }
+
+    // Book button builds URL with selected dates
+    bookEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      const start = checkInEl.value;
+      const end = checkOutEl.value;
+      if (!start || !end) { alert('Please select both check-in and check-out dates.'); return; }
+      const startDate = parseYMD(start);
+      const endDate = parseYMD(end);
+      if (!startDate || !endDate || endDate.getTime() <= startDate.getTime()) {
+        alert('Check-out date must be after the check-in date.');
+        return;
+      }
+      const base = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6';
+      const url = `${base}?mewsStart=${encodeURIComponent(start)}&mewsEnd=${encodeURIComponent(end)}&mewsRoute=rooms`;
+      window.open(url, '_blank', 'noopener');
+    });
+
+    // initialize footer + state
+    document.getElementById('y').textContent = new Date().getFullYear();
+    updateBookState();
   </script>
 </body>
 </html>
