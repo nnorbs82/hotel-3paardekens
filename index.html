@@ -121,11 +121,39 @@
 
     /* Hover background color for the Book a Room button */
     .booking-row .pill:hover {
-      background: #3f3f3f;
+      background: #B76E79;
     }
     /* also apply same background on focus/active for accessibility */
     .booking-row .pill:focus,
     .booking-row .pill:active {
+      background: #B76E79;
+      outline: none;
+    }
+
+    /* apply same Book-a-Room button style to quick action pills (Email, Open in Maps) */
+    .links .pill {
+      gap: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 120ms ease;
+
+      /* sizing to match booking button */
+      padding: 10px 12px;
+      font-size: 15px;
+      min-width: 150px;     /* never shrink below 150px */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 1 auto;
+    }
+
+    .links .pill:hover,
+    .links .pill:focus,
+    .links .pill:active {
       background: #3f3f3f;
       outline: none;
     }
@@ -135,6 +163,7 @@
       .booking-row { flex-wrap: wrap; gap: 10px; }
       input.datepicker { min-width:150px; } /* ensure never below 150px on small screens */
       .booking-row .pill { min-width:150px; }
+      .links .pill { min-width:150px; } /* ensure quick actions also never below 150px */
     }
 
     /* flatpickr styles (dark theme tweaks) */
