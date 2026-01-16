@@ -85,29 +85,38 @@
     .pill[aria-disabled="true"] { opacity:0.55; pointer-events:none; }
     footer { margin-top:18px; font-size:13px; color: rgba(255,255,255,0.7); }
 
-    /* booking bar: align checkin/checkout/book controls in a single row */
+    /* booking bar: responsive layout that stacks when the card is too narrow
+       Use CSS Grid with auto-fit/minmax so controls become columns when space allows,
+       and automatically wrap/stack when there isn't enough room. */
     .booking-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 12px;
-      justify-content: center;
+      justify-items: center;
       align-items: center;
-      flex-wrap: nowrap;
       margin-top: 6px;
+      width: 100%;
     }
-    /* ensure inputs and the button in the booking-row match visually and never shrink below 150px */
+
+    /* Make each control fill its grid cell without overflowing the card.
+       The min column width (150px) ensures controls don't become too small;
+       auto-fit will reduce the number of columns when there isn't enough space,
+       causing the items to stack vertically. */
     .booking-row input.datepicker,
     .booking-row .pill {
-      /* same interior spacing, font-size and corner roundness as the inputs */
       padding: 10px 12px;
       font-size: 15px;
       border-radius: 10px;
-      min-width: 150px;     /* never shrink below 150px */
-      flex: 0 1 auto;       /* allow wrapping but respect min-width */
+      min-width: 0; /* grid controls width; allow it to shrink below previous hard min */
+      width: 100%;
+      box-sizing: border-box;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      max-width: 100%;
     }
-    /* make sure the booking button doesn't keep the very large global pill-radius */
+
+    /* keep the Book button visual style but not the giant pill radius inside the booking row */
     .booking-row .pill {
       gap: 8px;
       border-radius: 10px;
@@ -128,6 +137,19 @@
     .booking-row .pill:active {
       background: #B76E79;
       outline: none;
+    }
+
+    /* When the layout becomes narrow such that the Book button ends up on its
+       own row, make the button span the full card width (span all grid columns).
+       This prevents it from occupying only one column and appearing half-width.
+       Increase breakpoint to 580px so the button stretches as soon as it drops
+       to a single row in common card padding scenarios. */
+    @media (max-width: 580px) {
+      .booking-row .pill {
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        width: 100%;
+      }
     }
 
     /* apply same Book-a-Room button style to quick action pills (Email, Open in Maps) */
@@ -158,11 +180,11 @@
       outline: none;
     }
 
-    /* allow the booking row to wrap on very small screens */
+    /* allow the booking row to wrap on very small screens (grid will already stack,
+       but keep a slightly smaller gap if needed) */
     @media (max-width:420px) {
-      .booking-row { flex-wrap: wrap; gap: 10px; }
-      input.datepicker { min-width:150px; } /* ensure never below 150px on small screens */
-      .booking-row .pill { min-width:150px; }
+      .booking-row { gap: 10px; }
+      input.datepicker { min-width:150px; } /* fallback */
       .links .pill { min-width:150px; } /* ensure quick actions also never below 150px */
     }
 
@@ -184,7 +206,7 @@
     .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { color: #fff !important; }
 
     .flatpickr-month-year-selectors { display:flex; gap:8px; justify-content:center; padding:6px 8px; }
-    .flatpickr-month-year-selectors select { background: rgba(255,255,255,0.02); color:#fff !important; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:6px 8px; font-size:13px; -we[...]
+    .flatpickr-month-year-selectors select { background: rgba(255,255,255,0.02); color:#fff !important; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:6px 8px; font-size:13px; -webkit-appearance: none; appearance: none; }
     .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
 
   </style>
