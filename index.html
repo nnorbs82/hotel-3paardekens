@@ -76,7 +76,7 @@
       padding: 10px 12px;
       border-radius: 10px;
       font-size: 15px;
-      min-width: 170px;
+      min-width: 150px; /* changed to 150px minimum */
     }
     .links { margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
     a { color:var(--text); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.35); }
@@ -94,10 +94,35 @@
       flex-wrap: nowrap;
       margin-top: 6px;
     }
+    /* ensure inputs and the button in the booking-row match visually and never shrink below 150px */
+    .booking-row input.datepicker,
+    .booking-row .pill {
+      /* same interior spacing, font-size and corner roundness as the inputs */
+      padding: 10px 12px;
+      font-size: 15px;
+      border-radius: 10px;
+      min-width: 150px;     /* never shrink below 150px */
+      flex: 0 1 auto;       /* allow wrapping but respect min-width */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* make sure the booking button doesn't keep the very large global pill-radius */
+    .booking-row .pill {
+      gap: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
     /* allow the booking row to wrap on very small screens */
     @media (max-width:420px) {
       .booking-row { flex-wrap: wrap; gap: 10px; }
-      input.datepicker { min-width:140px; }
+      input.datepicker { min-width:150px; } /* ensure never below 150px on small screens */
+      .booking-row .pill { min-width:150px; }
     }
 
     /* flatpickr styles (dark theme tweaks) */
