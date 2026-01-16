@@ -35,9 +35,19 @@
       background-position: center;
       background-repeat: no-repeat;
 
-      display: grid;
-      place-items: center;
+      /* use flex with a fixed gap so horizontal spacing between cards is always 50px */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 50px;
       padding: 28px;
+    }
+
+    /* on wide screens place cards side-by-side (horizontal gap = 50px) */
+    @media (min-width: 900px) {
+      .bg { flex-direction: row; }
     }
 
     .card {
@@ -52,10 +62,9 @@
       border: 1px solid rgba(255,255,255,0.12);
     }
 
-    /* default spacing between stacked cards */
-    .card + .card { margin-top: 18px; }
-    /* larger gap specifically between contactinfo and bookingbar */
-    #contactinfo + #bookingbar { margin-top: 50px; }
+    /* gap handled by .bg gap now; prevent duplicate margins */
+    .card + .card { margin-top: 0; }
+    #contactinfo + #bookingbar { margin-top: 0; }
 
     h1 { margin: 0 0 12px 0; font-size: clamp(26px, 4vw, 40px); }
     .lines { margin: 0; font-size: clamp(16px, 2.1vw, 18px); line-height: 1.65; color: var(--muted); }
@@ -111,7 +120,7 @@
     .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { color: #fff !important; }
 
     .flatpickr-month-year-selectors { display:flex; gap:8px; justify-content:center; padding:6px 8px; }
-    .flatpickr-month-year-selectors select { background: rgba(255,255,255,0.02); color:#fff !important; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:6px 8px; font-size:13px; -webkit-appearance: none; }
+    .flatpickr-month-year-selectors select { background: rgba(255,255,255,0.02); color:#fff !important; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:6px 8px; font-size:13px; -webkit-appearance: none; appearance: none; }
     .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
 
   </style>
