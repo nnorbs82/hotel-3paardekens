@@ -116,6 +116,18 @@
       color: var(--text);
       text-decoration: none;
       cursor: pointer;
+      transition: background-color 120ms ease;
+    }
+
+    /* Hover background color for the Book a Room button */
+    .booking-row .pill:hover {
+      background: #3f3f3f;
+    }
+    /* also apply same background on focus/active for accessibility */
+    .booking-row .pill:focus,
+    .booking-row .pill:active {
+      background: #3f3f3f;
+      outline: none;
     }
 
     /* allow the booking row to wrap on very small screens */
