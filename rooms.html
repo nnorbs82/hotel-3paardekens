@@ -125,7 +125,7 @@
       gap: 12px;
     }
 
-    /* Amenities list (Single/Twin) - CLEAN LINE SVG ICONS */
+    /* Amenities list (Single/Twin/Double) - CLEAN LINE SVG ICONS */
     .amenities {
       margin: 0;
       padding-left: 0;
@@ -439,7 +439,6 @@
           <p class="room-desc">Comfortable single room, ideal for short business stays.</p>
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
-          <!-- Amenities list (re-used for Twin as well) -->
           <ul class="amenities" aria-label="Single Room amenities">
             <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17v2"></path><path d="M16 17v2"></path></svg></span><span>Desk</span></li>
             <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat screen TV</span></li>
@@ -455,7 +454,7 @@
           </div>
         </article>
 
-        <!-- Twin Room (UPDATED) -->
+        <!-- Twin Room -->
         <article class="room-card" aria-label="Twin Room">
           <div class="room-slider" tabindex="0"
                data-room="Twin Room"
@@ -466,11 +465,9 @@
 
           <h2 class="room-title">Twin Room</h2>
 
-          <!-- UPDATED TEXT -->
           <p class="room-desc">Travelling with a friend? We have you. Twin beds in the middle of the city.</p>
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
-          <!-- SAME AMENITIES AS SINGLE ROOM -->
           <ul class="amenities" aria-label="Twin Room amenities">
             <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17v2"></path><path d="M16 17v2"></path></svg></span><span>Desk</span></li>
             <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat screen TV</span></li>
@@ -486,7 +483,7 @@
           </div>
         </article>
 
-        <!-- Double Room unchanged -->
+        <!-- Double Room (UPDATED) -->
         <article class="room-card" aria-label="Double Room">
           <div class="room-slider" tabindex="0"
                data-room="Double Room"
@@ -496,7 +493,22 @@
                aria-label="Double Room photos slider"></div>
 
           <h2 class="room-title">Double Room</h2>
-          <p class="room-desc">Our premium option with separate seating and enhanced amenities.</p>
+
+          <!-- UPDATED TEXT -->
+          <p class="room-desc">Cosy getaway with your better half, or just prefer a larger bed? Make it Double!</p>
+          <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
+
+          <!-- SAME AMENITIES AS SINGLE ROOM -->
+          <ul class="amenities" aria-label="Double Room amenities">
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17v2"></path><path d="M16 17v2"></path></svg></span><span>Desk</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat screen TV</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14l0 0"></path><path d="M12 14l0 0"></path><path d="M16 14l0 0"></path><path d="M9 18l0 0"></path><path d="M13 18l0 0"></path><path d="M17 18l0 0"></path></svg></span><span>Private bathroom with shower</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path><path d="M14 8h2"></path></svg></span><span>Hairdryer</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect></svg></span><span>Hygiene products</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span><span>Central heating</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span><span>Luggage rack</span></li>
+          </ul>
+
           <div class="room-actions">
             <a class="pill" href="https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms" target="_blank" rel="noopener noreferrer">View Room</a>
           </div>
