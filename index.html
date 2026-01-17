@@ -110,7 +110,16 @@
       justify-content: center;
       height: 100%;
       padding-left: 2px;
+
+      /* remove ALL link underline/border styling */
+      border-bottom: 0 !important;
+      text-decoration: none !important;
     }
+    .menu-logo:hover {
+      border-bottom: 0 !important;
+      text-decoration: none !important;
+    }
+
     .menu-logo img {
       height: 46px;   /* fits comfortably within 70px menubar */
       width: auto;
@@ -263,7 +272,7 @@
         <a href="https://www.3paardekens.com" target="_blank" rel="noopener noreferrer">www.3paardekens.com</a>
       </p>
 
-      <div class="links" aria-label="Quick actions">
+    <div class="links" aria-label="Quick actions">
         <a class="pill" href="mailto:info@3paardekens.be">Email</a>
         <a class="pill" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer">Open in Maps</a>
       </div>
