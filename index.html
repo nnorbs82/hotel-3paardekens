@@ -96,6 +96,25 @@
       gap: 12px;
       width: 100%;
       height: 100%;
+      position: relative; /* allow absolute-positioned logo */
+    }
+
+    /* logo on the left inside menubar */
+    .menu-logo {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding-left: 2px;
+    }
+    .menu-logo img {
+      height: 46px;   /* fits comfortably within 70px menubar */
+      width: auto;
+      display: block;
     }
 
     /* Make menubar buttons match booking bar style */
@@ -222,6 +241,11 @@
     <!-- Fixed top menubar card -->
     <section class="card menubar" id="menubar" aria-label="Menu bar">
       <nav class="menu-row" aria-label="Primary menu">
+        <!-- 3P logo on the left -->
+        <a class="menu-logo" href="index.html" aria-label="Hotel 3 Paardekens home">
+          <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
+        </a>
+
         <a class="pill" href="#contactinfo">Contact</a>
         <a class="pill" href="rooms.html">Rooms</a>
       </nav>
