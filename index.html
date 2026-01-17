@@ -1,13 +1,342 @@
-<div class="fixed-menubar">
-    <img src="assets/3plogo.png" alt="Logo" class="menubar-logo">
-    <!-- Other menubar content -->
-</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel 3 Paardekens - Contact</title>
+  <meta name="description" content="Hotel 3 Paardekens - Contact details" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    :root {
+      --card-bg: rgba(0, 0, 0, 0.55);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.85);
+      --shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --fp-hover-color: #949494;
+      --fp-dim-month: #545454;
+    }
 
-<style>
-.menubar-logo {
-    float: left;               /* Align to the left side of menubar */
-    margin-right: 10px;       /* Space between the logo and other items */
-    height: 50px;             /* Set a height for the logo */
-    width: auto;              /* Maintain aspect ratio */
-}
-</style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: #000;
+    }
+
+    .bg {
+      min-height: 100vh;
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+        url("assets/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      /* always stack vertically */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      /* fixed 50px spacing between stacked cards */
+      gap: 50px;
+      padding: 28px;
+    }
+
+    /* add extra top padding to account for fixed menubar (70px) + desired gap (50px) */
+    .bg.with-menubar {
+      padding-top: calc(70px + 50px + 28px);
+    }
+
+    .card {
+      width: min(720px, 100%);
+      background: var(--card-bg);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 40px);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    /* Ensure spacing when browser doesn't support flex gap */
+    @supports not (gap: 50px) {
+      .card + .card { margin-top: 50px; }
+    }
+
+    /* Fixed top menubar card - full width, square corners */
+    .menubar.card {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 9999; /* sit above all other items */
+      height: 70px;
+      min-height: 70px;
+      /* override card padding to maintain exact height */
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* all corners squared */
+      border-radius: 0;
+    }
+
+    /* content row inside menubar */
+    .menu-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Make menubar buttons match booking bar style */
+    .menubar .pill {
+      gap: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 120ms ease;
+      padding: 10px 12px;
+      font-size: 15px;
+      min-width: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menubar .pill:hover,
+    .menubar .pill:focus,
+    .menubar .pill:active {
+      background: #B76E79;
+      outline: none;
+    }
+
+    h1 { margin: 0 0 12px 0; font-size: clamp(26px, 4vw, 40px); }
+    .lines { margin: 0; font-size: clamp(16px, 2.1vw, 18px); line-height: 1.65; color: var(--muted); }
+    .date-row { margin-top: 16px; display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; }
+    input.datepicker {
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      min-width: 150px; /* changed to 150px minimum */
+    }
+    .links { margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    a { color:var(--text); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.35); }
+    a:hover { border-bottom-color: rgba(255,255,255,0.9); }
+    .pill { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); }
+    .pill[aria-disabled="true"] { opacity:0.55; pointer-events:none; }
+    footer { margin-top:18px; font-size:13px; color: rgba(255,255,255,0.7); }
+
+    .booking-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      justify-items: center;
+      align-items: center;
+      margin-top: 6px;
+      width: 100%;
+    }
+
+    .booking-row input.datepicker,
+    .booking-row .pill {
+      padding: 10px 12px;
+      font-size: 15px;
+      border-radius: 10px;
+      min-width: 0;
+      width: 100%;
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
+    }
+
+    .booking-row .pill { gap: 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--text); text-decoration: none; cursor: pointer; transition: background-color 120ms ease; }
+
+    .booking-row .pill:hover { background: #B76E79; }
+    .booking-row .pill:focus,
+    .booking-row .pill:active { background: #B76E79; outline: none; }
+
+    @media (max-width: 580px) {
+      .booking-row .pill {
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        width: 100%;
+      }
+    }
+
+    .links .pill { gap: 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--text); text-decoration: none; cursor: pointer; transition: background-color 120ms ease; padding: 10px 12px; font-size: 15px; min-width: 150px; display: inline-flex; align-items: center; justify-content: center; flex: 0 1 auto; }
+
+    .links .pill:hover,
+    .links .pill:focus,
+    .links .pill:active { background: #B76E79; outline: none; }
+
+    @media (max-width:420px) {
+      .booking-row { gap: 10px; }
+      input.datepicker { min-width:150px; }
+      .links .pill { min-width:150px; }
+    }
+
+    .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
+    .flatpickr-calendar, .flatpickr-calendar * { color: #fff !important; }
+    .flatpickr-calendar .flatpickr-day:hover,
+    .flatpickr-calendar .flatpickr-weekday:hover,
+    .flatpickr-calendar .flatpickr-months .flatpickr-prev-month:hover,
+    .flatpickr-calendar .flatpickr-months .flatpickr-next-month:hover { color: var(--fp-hover-color) !important; }
+    .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month { color: #fff !important; transition: color 120ms; }
+    .flatpickr-months .flatpickr-prev-month svg,
+    .flatpickr-months .flatpickr-next-month svg { fill: currentColor !important; stroke: currentColor !important; }
+    .flatpickr-current-month .numInputWrapper .arrowUp,
+    .flatpickr-current-month .numInputWrapper .arrowDown { color: #fff !important; transition: color 120ms; }
+    .flatpickr-current-month .numInputWrapper .arrowUp svg,
+    .flatpickr-current-month .numInputWrapper .arrowDown svg { fill: #fff !important; stroke: #fff !important; }
+    .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: var(--fp-dim-month) !important; }
+    .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { color: #fff !important; }
+
+    .flatpickr-month-year-selectors { display:flex; gap:8px; justify-content:center; padding:6px 8px; }
+    .flatpickr-month-year-selectors select { background: rgba(255,255,255,0.02); color:#fff !important; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:6px 8px; font-size:13px; -webkit-appearance: none; appearance: none; }
+    .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
+
+  </style>
+</head>
+
+<body>
+  <main class="bg with-menubar">
+    <!-- Fixed top menubar card -->
+    <section class="card menubar" id="menubar" aria-label="Menu bar">
+      <nav class="menu-row" aria-label="Primary menu">
+        <a class="pill" href="#contactinfo">Contact</a>
+        <a class="pill" href="rooms.html">Rooms</a>
+      </nav>
+    </section>
+
+    <section id="contactinfo" class="card" aria-label="Contact details">
+      <h1>Hotel 3 Paardekens</h1>
+
+      <p class="lines">
+        Begijnenstraat 3<br />
+        2800 Mechelen<br />
+        <strong>TEL</strong> +32 15 342 713<br />
+        <strong>FAX</strong> +32 15 342 715<br />
+        <a href="mailto:info@3paardekens.be">info@3paardekens.be</a><br />
+        <a href="https://www.3paardekens.com" target="_blank" rel="noopener noreferrer">www.3paardekens.com</a>
+      </p>
+
+      <div class="links" aria-label="Quick actions">
+        <a class="pill" href="mailto:info@3paardekens.be">Email</a>
+        <a class="pill" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer">Open in Maps</a>
+      </div>
+
+      <footer>© <span id="y"></span> Hotel 3 Paardekens</footer>
+    </section>
+
+    <section class="card" id="bookingbar" aria-label="Booking bar">
+      <div class="booking-row" aria-label="Booking controls">
+        <label for="checkin" style="position:absolute; left:-9999px">Check-in date</label>
+        <input id="checkin" class="datepicker" type="text" aria-label="Check-in date" placeholder="Check-in">
+        <label for="checkout" style="position:absolute; left:-9999px">Check-out date</label>
+        <input id="checkout" class="datepicker" type="text" aria-label="Check-out date" placeholder="Check-out">
+        <a id="book" class="pill" href="#" role="button" aria-disabled="false">Book a Room</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    function formatLocalDate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${dd}`;
+    }
+    function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+    function parseYMD(s) { return s ? new Date(s + 'T00:00:00') : null; }
+
+    const checkInEl = document.getElementById('checkin');
+    const checkOutEl = document.getElementById('checkout');
+    const bookEl = document.getElementById('book');
+
+    const today = new Date();
+    const tomorrow = addDays(today, 1);
+    const todayStr = formatLocalDate(today);
+    const tomorrowStr = formatLocalDate(tomorrow);
+
+    const baseOptions = { dateFormat: 'Y-m-d', disableMobile: true, allowInput: false };
+
+    const fpOut = flatpickr(checkOutEl, {
+      ...baseOptions,
+      defaultDate: tomorrowStr,
+      minDate: tomorrowStr,
+      onChange(selectedDates) {
+        const inDate = parseYMD(checkInEl.value);
+        const outDate = selectedDates && selectedDates[0] ? selectedDates[0] : parseYMD(checkOutEl.value);
+        if (inDate && outDate && outDate.getTime() <= inDate.getTime()) {
+          const forced = addDays(inDate, 1);
+          fpOut.setDate(formatLocalDate(forced), true, 'Y-m-d');
+        }
+        updateBookState();
+      }
+    });
+
+    const fpIn = flatpickr(checkInEl, {
+      ...baseOptions,
+      defaultDate: todayStr,
+      minDate: todayStr,
+      onChange(selectedDates) {
+        if (!selectedDates || !selectedDates[0]) return;
+        const inDate = selectedDates[0];
+        const minOut = addDays(inDate, 1);
+        fpOut.set('minDate', formatLocalDate(minOut));
+        const currentOut = parseYMD(checkOutEl.value);
+        if (!currentOut || currentOut.getTime() <= inDate.getTime()) {
+          fpOut.setDate(formatLocalDate(minOut), true, 'Y-m-d');
+        }
+        updateBookState();
+      }
+    });
+
+    function updateBookState() {
+      const start = parseYMD(checkInEl.value);
+      const end = parseYMD(checkOutEl.value);
+      const disabled = !start || !end || end.getTime() <= start.getTime();
+      bookEl.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+    }
+
+    bookEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      const start = checkInEl.value;
+      const end = checkOutEl.value;
+      if (!start || !end) { alert('Please select both check-in and check-out dates.'); return; }
+      const startDate = parseYMD(start);
+      const endDate = parseYMD(end);
+      if (!startDate || !endDate || endDate.getTime() <= startDate.getTime()) {
+        alert('Check-out date must be after the check-in date.');
+        return;
+      }
+      const base = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6';
+      const url = `${base}?mewsStart=${encodeURIComponent(start)}&mewsEnd=${encodeURIComponent(end)}&mewsRoute=rooms`;
+      window.open(url, '_blank', 'noopener');
+    });
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+    updateBookState();
+  </script>
+</body>
+</html>
