@@ -129,7 +129,10 @@
     .room-slider {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 10;
+
+      /* CHANGED: make the card a bit higher (more vertical space) */
+      aspect-ratio: 16 / 9;
+
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
@@ -160,7 +163,12 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
+
+      /* CHANGED: do not crop; show entire image */
+      object-fit: contain;
+
+      /* Optional: makes the empty bars look intentional */
+      background: rgba(0,0,0,0.35);
     }
 
     .slider-btn {
