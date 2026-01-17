@@ -129,13 +129,13 @@
     .room-slider {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9; /* slightly taller than before */
+      aspect-ratio: 16 / 9;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.2);
       outline: none;
-      cursor: zoom-in; /* indicates click opens larger view */
+      cursor: zoom-in;
     }
 
     .room-slider:focus-visible {
@@ -160,7 +160,7 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover; /* small sliders: crop to fill */
+      object-fit: cover;
     }
 
     .slider-btn {
@@ -222,10 +222,10 @@
     .popup-overlay {
       position: fixed;
       inset: 0;
-      z-index: 10000; /* above menubar */
+      z-index: 10000;
 
-      /* CHANGED: slightly less dark */
-      background: rgba(0,0,0,0.55);
+      /* CHANGED AGAIN: even less dark than 0.55 */
+      background: rgba(0,0,0,0.45);
 
       display: none;
       align-items: center;
@@ -294,7 +294,6 @@
       outline: none;
     }
 
-    /* IMPORTANT: only popup large image should not crop */
     .popup-slider .room-slide img {
       object-fit: contain;
       background: rgba(0,0,0,0.35);
@@ -318,7 +317,7 @@
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       overflow: auto hidden;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
     }
     .slider-thumbs::-webkit-scrollbar { display: none; }
 
@@ -445,7 +444,6 @@
     </section>
   </main>
 
-  <!-- Popup overlay (large slideshow) -->
   <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
     <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
       <div class="popup-header">
@@ -465,7 +463,7 @@
 
     function getRoomImagesFromDataset(el) {
       const roomName = (el.dataset.room || 'Room').trim();
-      const base = (el.dataset.base || '').trim(); // e.g. "Rooms/Single/"
+      const base = (el.dataset.base || '').trim();
       const ext = (el.dataset.ext || 'jpg').trim().replace(/^\./, '');
       const count = Number(el.dataset.count || 0);
 
@@ -478,12 +476,7 @@
     }
 
     function buildSlider(sliderEl, { roomName, images }, opts = {}) {
-      const {
-        startIndex = 0,
-        large = false,
-        showThumbs = false,
-        thumbsMountEl = null
-      } = opts;
+      const { startIndex = 0, large = false, showThumbs = false, thumbsMountEl = null } = opts;
 
       let index = Math.min(Math.max(Number(startIndex) || 0, 0), images.length - 1);
 
@@ -605,10 +598,7 @@
 
       const api = buildSlider(sliderEl, data);
 
-      sliderEl.addEventListener('click', () => {
-        openPopupForSlider(sliderEl, api.getIndex());
-      });
-
+      sliderEl.addEventListener('click', () => openPopupForSlider(sliderEl, api.getIndex()));
       sliderEl.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -632,12 +622,7 @@
       lastFocusedEl = document.activeElement;
       popupTitle.textContent = data.roomName + ' photos';
 
-      buildSlider(popupSlider, data, {
-        startIndex,
-        large: true,
-        showThumbs: true,
-        thumbsMountEl: popupThumbsRow
-      });
+      buildSlider(popupSlider, data, { startIndex, large: true, showThumbs: true, thumbsMountEl: popupThumbsRow });
 
       popupOverlay.classList.add('is-open');
       popupOverlay.setAttribute('aria-hidden', 'false');
