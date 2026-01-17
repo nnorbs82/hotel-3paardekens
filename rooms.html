@@ -1,18 +1,678 @@
-<style>
-  /* CSS changes for the popup */
-  .popup {
-    height: auto;
-  }
-  .popup img {
-    object-fit: contain;
-  }
-  .thumbnail-strip {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-  }
-</style>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel 3 Paardekens - Rooms</title>
+  <meta name="description" content="Hotel 3 Paardekens - Rooms overview" />
+  <style>
+    :root {
+      --card-bg: rgba(0, 0, 0, 0.55);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.85);
+      --shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+    }
 
-<script>
-  // JavaScript to adjust popup layout can go here, if needed
-</script>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: #000;
+    }
+
+    .bg {
+      min-height: 100vh;
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+        url("assets/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 50px;
+      padding: 28px;
+    }
+
+    /* Extra top padding to account for fixed menubar (70px) + gap (50px) */
+    .bg.with-menubar {
+      padding-top: calc(70px + 50px + 28px);
+    }
+
+    .card {
+      width: min(980px, 100%);
+      background: var(--card-bg);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 40px);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    @supports not (gap: 50px) {
+      .card + .card { margin-top: 50px; }
+    }
+
+    /* Fixed top menubar - full width, square corners */
+    .menubar.card {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 9999;
+      height: 70px;
+      min-height: 70px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0; /* all corners 0 roundness */
+    }
+
+    .menu-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 120ms ease;
+    }
+    .pill:hover, .pill:focus, .pill:active { background: #B76E79; outline: none; }
+
+    h1 { margin: 0 0 10px 0; font-size: clamp(26px, 4vw, 40px); }
+    .muted { color: var(--muted); font-size: 16px; }
+
+    .rooms-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      text-align: left;
+    }
+
+    .room-card {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ===== Slider ===== */
+    .room-slider {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.2);
+      outline: none;
+      cursor: zoom-in; /* indicates click opens larger view */
+    }
+
+    .room-slider:focus-visible {
+      box-shadow: 0 0 0 3px rgba(183,110,121,0.55);
+    }
+
+    .room-slider-track {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      transform: translateX(0%);
+      transition: transform 320ms ease;
+      will-change: transform;
+    }
+
+    .room-slide {
+      flex: 0 0 100%;
+      height: 100%;
+    }
+
+    .room-slide img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.35);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      user-select: none;
+      padding: 0;
+      line-height: 1;
+      transition: background-color 120ms ease, transform 120ms ease;
+    }
+
+    .slider-btn:hover,
+    .slider-btn:focus-visible {
+      background: #B76E79;
+      outline: none;
+    }
+
+    .slider-btn:active {
+      transform: translateY(-50%) scale(0.98);
+    }
+
+    .slider-btn.prev { left: 10px; }
+    .slider-btn.next { right: 10px; }
+
+    .slider-btn[disabled] {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .slider-counter {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 6px 10px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .room-slider-track { transition: none; }
+    }
+    /* ===== End slider ===== */
+
+    /* ===== Popup (Lightbox) ===== */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000; /* above menubar */
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .popup-overlay.is-open { display: flex; }
+
+    .popup-card {
+      width: min(1100px, 100%);
+      background: rgba(0,0,0,0.72);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      box-shadow: 0 22px 80px rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 6px 12px 6px;
+    }
+
+    .popup-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 650;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .popup-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background-color 120ms ease, transform 120ms ease;
+    }
+
+    .popup-close:hover,
+    .popup-close:focus-visible {
+      background: #B76E79;
+      outline: none;
+    }
+    .popup-close:active { transform: scale(0.98); }
+
+    .popup-slider {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.2);
+      outline: none;
+    }
+
+    .popup-slider .slider-btn { width: 46px; height: 46px; }
+    .popup-slider .slider-btn.prev { left: 12px; }
+    .popup-slider .slider-btn.next { right: 12px; }
+    .popup-slider .slider-counter { right: 12px; bottom: 12px; }
+
+    /* Popup thumbnail strip */
+    .slider-thumbs {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: flex;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      overflow: auto hidden;
+      scrollbar-width: none; /* Firefox */
+    }
+    .slider-thumbs::-webkit-scrollbar { display: none; }
+
+    .thumb {
+      flex: 0 0 auto;
+      width: 74px;
+      height: 48px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(255,255,255,0.06);
+      padding: 0;
+      cursor: pointer;
+      overflow: hidden;
+      display: grid;
+      place-items: stretch;
+      transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05);
+    }
+
+    .thumb:hover,
+    .thumb:focus-visible {
+      outline: none;
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-1px);
+    }
+
+    .thumb[aria-current="true"] {
+      border-color: rgba(255,255,255,0.95);
+      box-shadow: 0 0 0 3px rgba(183,110,121,0.55);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 640px) {
+      .popup-card { padding: 12px; }
+      .popup-slider { aspect-ratio: 4 / 3; }
+      .thumb { width: 64px; height: 44px; }
+      .slider-thumbs { gap: 8px; padding: 8px 10px; }
+    }
+    /* ===== End popup ===== */
+
+    .room-title { font-size: 18px; font-weight: 600; margin: 0; }
+    .room-desc { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+    .room-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    footer { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,0.7); }
+  </style>
+</head>
+
+<body>
+  <main class="bg with-menubar">
+    <!-- Fixed top menubar -->
+    <section class="card menubar" id="menubar" aria-label="Menu bar">
+      <nav class="menu-row" aria-label="Primary menu">
+        <a class="pill" href="index.html#contactinfo">Contact</a>
+        <a class="pill" href="#rooms">Rooms</a>
+      </nav>
+    </section>
+
+    <section id="rooms" class="card" aria-label="Rooms">
+      <h1>Rooms</h1>
+      <p class="muted">Explore our room types and check availability.</p>
+
+      <div class="rooms-grid" aria-label="Room types">
+        <article class="room-card" aria-label="Single Room">
+          <div class="room-slider" tabindex="0"
+               data-room="Single Room"
+               data-base="Rooms/Single/"
+               data-count="7"
+               data-ext="jpg"
+               aria-label="Single Room photos slider"></div>
+
+          <h2 class="room-title">Single Room</h2>
+          <p class="room-desc">Comfortable room with essential amenities, ideal for short stays.</p>
+          <div class="room-actions">
+            <a class="pill" href="https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms" target="_blank" rel="noopener noreferrer">View Room</a>
+          </div>
+        </article>
+
+        <article class="room-card" aria-label="Twin Room">
+          <div class="room-slider" tabindex="0"
+               data-room="Twin Room"
+               data-base="Rooms/Twin/"
+               data-count="4"
+               data-ext="jpg"
+               aria-label="Twin Room photos slider"></div>
+
+          <h2 class="room-title">Twin Room</h2>
+          <p class="room-desc">Spacious and refined, with added comfort features.</p>
+          <div class="room-actions">
+            <a class="pill" href="https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms" target="_blank" rel="noopener noreferrer">View Room</a>
+          </div>
+        </article>
+
+        <article class="room-card" aria-label="Double Room">
+          <div class="room-slider" tabindex="0"
+               data-room="Double Room"
+               data-base="Rooms/Double/"
+               data-count="8"
+               data-ext="jpg"
+               aria-label="Double Room photos slider"></div>
+
+          <h2 class="room-title">Double Room</h2>
+          <p class="room-desc">Our premium option with separate seating and enhanced amenities.</p>
+          <div class="room-actions">
+            <a class="pill" href="https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms" target="_blank" rel="noopener noreferrer">View Room</a>
+          </div>
+        </article>
+      </div>
+
+      <footer>© <span id="y"></span> Hotel 3 Paardekens</footer>
+    </section>
+  </main>
+
+  <!-- Popup overlay (large slideshow) -->
+  <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+    <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+      <div class="popup-header">
+        <h3 class="popup-title" id="popupTitle">Room photos</h3>
+        <button class="popup-close" type="button" id="popupClose" aria-label="Close popup">
+          &#10005;
+        </button>
+      </div>
+
+      <div class="popup-slider" id="popupSlider" tabindex="0" aria-label="Large room photos slider"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    function getRoomImagesFromDataset(el) {
+      const roomName = (el.dataset.room || 'Room').trim();
+      const base = (el.dataset.base || '').trim(); // e.g. "Rooms/Single/"
+      const ext = (el.dataset.ext || 'jpg').trim().replace(/^\./, '');
+      const count = Number(el.dataset.count || 0);
+
+      if (!base || !Number.isFinite(count) || count <= 0) {
+        return { roomName, images: [] };
+      }
+
+      const images = Array.from({ length: count }, (_, i) => `${base}${i + 1}.${ext}`);
+      return { roomName, images };
+    }
+
+    function buildSlider(sliderEl, { roomName, images }, opts = {}) {
+      const {
+        startIndex = 0,
+        large = false,
+        showThumbs = false
+      } = opts;
+
+      let index = Math.min(Math.max(Number(startIndex) || 0, 0), images.length - 1);
+
+      const track = document.createElement('div');
+      track.className = 'room-slider-track';
+
+      images.forEach((src, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'room-slide';
+
+        const img = document.createElement('img');
+        img.loading = large ? 'eager' : 'lazy';
+        img.src = src;
+        img.alt = `${roomName} photo ${i + 1} of ${images.length}`;
+
+        slide.appendChild(img);
+        track.appendChild(slide);
+      });
+
+      const prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.className = 'slider-btn prev';
+      prevBtn.setAttribute('aria-label', `Previous ${roomName} photo`);
+      prevBtn.innerHTML = '&#10094;';
+
+      const nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'slider-btn next';
+      nextBtn.setAttribute('aria-label', `Next ${roomName} photo`);
+      nextBtn.innerHTML = '&#10095;';
+
+      const counter = document.createElement('div');
+      counter.className = 'slider-counter';
+
+      // Optional thumbnails
+      let thumbsWrap = null;
+      let thumbs = [];
+
+      if (showThumbs) {
+        thumbsWrap = document.createElement('div');
+        thumbsWrap.className = 'slider-thumbs';
+        thumbsWrap.setAttribute('aria-label', 'Photo thumbnails');
+
+        thumbs = images.map((src, i) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'thumb';
+          btn.setAttribute('aria-label', `Go to ${roomName} photo ${i + 1}`);
+
+          const tImg = document.createElement('img');
+          tImg.loading = 'lazy';
+          tImg.src = src;
+          tImg.alt = `Thumbnail ${i + 1}`;
+
+          btn.appendChild(tImg);
+
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            index = i;
+            render();
+          });
+
+          thumbsWrap.appendChild(btn);
+          return btn;
+        });
+      }
+
+      sliderEl.innerHTML = '';
+      sliderEl.appendChild(track);
+      sliderEl.appendChild(prevBtn);
+      sliderEl.appendChild(nextBtn);
+      sliderEl.appendChild(counter);
+      if (thumbsWrap) sliderEl.appendChild(thumbsWrap);
+
+      function updateThumbs() {
+        if (!thumbs.length) return;
+        thumbs.forEach((t, i) => t.setAttribute('aria-current', String(i === index)));
+
+        const active = thumbs[index];
+        if (active && active.scrollIntoView) {
+          active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        }
+      }
+
+      function render() {
+        track.style.transform = `translateX(${-index * 100}%)`;
+        counter.textContent = `${index + 1} / ${images.length}`;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === images.length - 1;
+        updateThumbs();
+      }
+
+      function prev() {
+        if (index > 0) { index -= 1; render(); }
+      }
+
+      function next() {
+        if (index < images.length - 1) { index += 1; render(); }
+      }
+
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+
+      sliderEl.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      });
+
+      render();
+
+      return {
+        getIndex: () => index,
+        setIndex: (i) => { index = Math.min(Math.max(i, 0), images.length - 1); render(); },
+        next,
+        prev
+      };
+    }
+
+    function initRoomSlider(sliderEl) {
+      const data = getRoomImagesFromDataset(sliderEl);
+      if (!data.images.length) return;
+
+      // Build the small slider in the card.
+      const api = buildSlider(sliderEl, data);
+
+      // Clicking the slider opens the popup at current slide index.
+      sliderEl.addEventListener('click', () => {
+        openPopupForSlider(sliderEl, api.getIndex());
+      });
+
+      // Keyboard open (Enter/Space) when slider is focused.
+      sliderEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openPopupForSlider(sliderEl, api.getIndex());
+        }
+      });
+    }
+
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupClose = document.getElementById('popupClose');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupSlider = document.getElementById('popupSlider');
+
+    let lastFocusedEl = null;
+
+    function openPopupForSlider(sourceSliderEl, startIndex) {
+      const data = getRoomImagesFromDataset(sourceSliderEl);
+      if (!data.images.length) return;
+
+      lastFocusedEl = document.activeElement;
+
+      popupTitle.textContent = data.roomName + ' photos';
+
+      // Build large slider with thumbnails
+      buildSlider(popupSlider, data, { startIndex, large: true, showThumbs: true });
+
+      popupOverlay.classList.add('is-open');
+      popupOverlay.setAttribute('aria-hidden', 'false');
+
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden';
+
+      // Focus the popup slider so arrow keys work immediately
+      popupSlider.focus();
+    }
+
+    function closePopup() {
+      popupOverlay.classList.remove('is-open');
+      popupOverlay.setAttribute('aria-hidden', 'true');
+      popupSlider.innerHTML = '';
+
+      document.body.style.overflow = '';
+
+      if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+        lastFocusedEl.focus();
+      }
+      lastFocusedEl = null;
+    }
+
+    popupClose.addEventListener('click', closePopup);
+
+    // Click outside the card closes
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) closePopup();
+    });
+
+    // Escape closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popupOverlay.classList.contains('is-open')) {
+        e.preventDefault();
+        closePopup();
+      }
+    });
+
+    document.querySelectorAll('.room-slider').forEach(initRoomSlider);
+  </script>
+</body>
+</html>
