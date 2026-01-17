@@ -161,7 +161,7 @@
       height: 100%;
       display: block;
 
-      /* Default behavior for the small sliders on the cards: crop to fill */
+      /* Small sliders on the cards: crop to fill */
       object-fit: cover;
     }
 
@@ -284,15 +284,33 @@
     }
     .popup-close:active { transform: scale(0.98); }
 
+    /* Change: make the popup slider become a column container:
+       - large image area on top
+       - thumbnails strip BELOW the image (not overlapping it) */
     .popup-slider {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      outline: none;
+
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      /* We no longer use aspect-ratio here because the slider now includes thumbs below.
+         The image area itself will control its own aspect ratio. */
+    }
+
+    /* The image viewport inside the popup slider */
+    .popup-slider .room-slider-track {
+      /* We'll wrap the "track + buttons + counter" in the same element (popupSlider),
+         so we make the track act like the image viewport via border/rounding here. */
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.2);
-      outline: none;
+
+      /* give the IMAGE AREA a fixed ratio/height */
+      aspect-ratio: 16 / 9;
     }
 
     /* IMPORTANT: only the popup "room slideshow card" should not crop */
@@ -301,17 +319,23 @@
       background: rgba(0,0,0,0.35);
     }
 
-    .popup-slider .slider-btn { width: 46px; height: 46px; }
-    .popup-slider .slider-btn.prev { left: 12px; }
-    .popup-slider .slider-btn.next { right: 12px; }
-    .popup-slider .slider-counter { right: 12px; bottom: 12px; }
+    /* Make popup controls position against the image area */
+    .popup-slider .slider-btn,
+    .popup-slider .slider-counter {
+      /* These are absolutely positioned; they need a positioned ancestor.
+         We'll position them relative to the track area by making the popup-slider relative,
+         but ensure their vertical placement aligns with the image area. */
+    }
 
-    /* Popup thumbnail strip */
+    /* Buttons/counter should overlay the image area, not the thumbnails */
+    .popup-slider .slider-btn { width: 46px; height: 46px; }
+    .popup-slider .slider-btn.prev { left: 12px; top: calc((100% - 12px - 58px) * 0.5); }
+    .popup-slider .slider-btn.next { right: 12px; top: calc((100% - 12px - 58px) * 0.5); }
+    .popup-slider .slider-counter { right: 12px; bottom: calc(12px + 58px); }
+
+    /* Popup thumbnail strip (now BELOW the image) */
     .slider-thumbs {
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
+      position: static;              /* CHANGED: no longer absolute */
       display: flex;
       gap: 10px;
       padding: 10px 12px;
@@ -363,7 +387,7 @@
 
     @media (max-width: 640px) {
       .popup-card { padding: 12px; }
-      .popup-slider { aspect-ratio: 4 / 3; }
+      .popup-slider .room-slider-track { aspect-ratio: 4 / 3; }
       .thumb { width: 64px; height: 44px; }
       .slider-thumbs { gap: 8px; padding: 8px 10px; }
     }
