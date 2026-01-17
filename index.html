@@ -144,9 +144,6 @@
     .pill[aria-disabled="true"] { opacity:0.55; pointer-events:none; }
     footer { margin-top:18px; font-size:13px; color: rgba(255,255,255,0.7); }
 
-    /* booking bar: responsive layout that stacks when the card is too narrow
-       Use CSS Grid with auto-fit/minmax so controls become columns when space allows,
-       and automatically wrap/stack when there isn't enough room. */
     .booking-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -157,16 +154,12 @@
       width: 100%;
     }
 
-    /* Make each control fill its grid cell without overflowing the card.
-       The min column width (150px) ensures controls don't become too small;
-       auto-fit will reduce the number of columns when there isn't enough space,
-       causing the items to stack vertically. */
     .booking-row input.datepicker,
     .booking-row .pill {
       padding: 10px 12px;
       font-size: 15px;
       border-radius: 10px;
-      min-width: 0; /* grid controls width; allow it to shrink below previous hard min */
+      min-width: 0;
       width: 100%;
       box-sizing: border-box;
       display: inline-flex;
@@ -175,34 +168,12 @@
       max-width: 100%;
     }
 
-    /* keep the Book button visual style but not the giant pill radius inside the booking row */
-    .booking-row .pill {
-      gap: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 120ms ease;
-    }
+    .booking-row .pill { gap: 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--text); text-decoration: none; cursor: pointer; transition: background-color 120ms ease; }
 
-    /* Hover background color for the Book a Room button */
-    .booking-row .pill:hover {
-      background: #B76E79;
-    }
-    /* also apply same background on focus/active for accessibility */
+    .booking-row .pill:hover { background: #B76E79; }
     .booking-row .pill:focus,
-    .booking-row .pill:active {
-      background: #B76E79;
-      outline: none;
-    }
+    .booking-row .pill:active { background: #B76E79; outline: none; }
 
-    /* When the layout becomes narrow such that the Book button ends up on its
-       own row, make the button span the full card width (span all grid columns).
-       This prevents it from occupying only one column and appearing half-width.
-       Increase breakpoint to 580px so the button stretches as soon as it drops
-       to a single row in common card padding scenarios. */
     @media (max-width: 580px) {
       .booking-row .pill {
         grid-column: 1 / -1;
@@ -211,43 +182,18 @@
       }
     }
 
-    /* apply same Book-a-Room button style to quick action pills (Email, Open in Maps) */
-    .links .pill {
-      gap: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 120ms ease;
-
-      /* sizing to match booking button */
-      padding: 10px 12px;
-      font-size: 15px;
-      min-width: 150px;     /* never shrink below 150px */
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 1 auto;
-    }
+    .links .pill { gap: 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--text); text-decoration: none; cursor: pointer; transition: background-color 120ms ease; padding: 10px 12px; font-size: 15px; min-width: 150px; display: inline-flex; align-items: center; justify-content: center; flex: 0 1 auto; }
 
     .links .pill:hover,
     .links .pill:focus,
-    .links .pill:active {
-      background: #B76E79;
-      outline: none;
-    }
+    .links .pill:active { background: #B76E79; outline: none; }
 
-    /* allow the booking row to wrap on very small screens (grid will already stack,
-       but keep a slightly smaller gap if needed) */
     @media (max-width:420px) {
       .booking-row { gap: 10px; }
-      input.datepicker { min-width:150px; } /* fallback */
-      .links .pill { min-width:150px; } /* ensure quick actions also never below 150px */
+      input.datepicker { min-width:150px; }
+      .links .pill { min-width:150px; }
     }
 
-    /* flatpickr styles (dark theme tweaks) */
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
     .flatpickr-calendar, .flatpickr-calendar * { color: #fff !important; }
     .flatpickr-calendar .flatpickr-day:hover,
@@ -277,7 +223,7 @@
     <section class="card menubar" id="menubar" aria-label="Menu bar">
       <nav class="menu-row" aria-label="Primary menu">
         <a class="pill" href="#contactinfo">Contact</a>
-        <a class="pill" href="#bookingbar">Rooms</a>
+        <a class="pill" href="rooms.html">Rooms</a>
       </nav>
     </section>
 
@@ -301,7 +247,6 @@
       <footer>© <span id="y"></span> Hotel 3 Paardekens</footer>
     </section>
 
-    <!-- New booking card: same styling as the contact card -->
     <section class="card" id="bookingbar" aria-label="Booking bar">
       <div class="booking-row" aria-label="Booking controls">
         <label for="checkin" style="position:absolute; left:-9999px">Check-in date</label>
@@ -315,21 +260,14 @@
 
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
-    // Helpers
     function formatLocalDate(d) {
       const y = d.getFullYear();
       const m = String(d.getMonth() + 1).padStart(2, '0');
       const dd = String(d.getDate()).padStart(2, '0');
       return `${y}-${m}-${dd}`;
     }
-    function addDays(d, n) {
-      const r = new Date(d);
-      r.setDate(r.getDate() + n);
-      return r;
-    }
-    function parseYMD(s) {
-      return s ? new Date(s + 'T00:00:00') : null;
-    }
+    function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+    function parseYMD(s) { return s ? new Date(s + 'T00:00:00') : null; }
 
     const checkInEl = document.getElementById('checkin');
     const checkOutEl = document.getElementById('checkout');
@@ -340,16 +278,13 @@
     const todayStr = formatLocalDate(today);
     const tomorrowStr = formatLocalDate(tomorrow);
 
-    // disable manual typing for reliability (prevent conflicts)
     const baseOptions = { dateFormat: 'Y-m-d', disableMobile: true, allowInput: false };
 
-    // initialize checkout first (so we can set its minDate from checkin)
     const fpOut = flatpickr(checkOutEl, {
       ...baseOptions,
       defaultDate: tomorrowStr,
       minDate: tomorrowStr,
       onChange(selectedDates) {
-        // ensure checkout never ends up <= checkin (extra safety)
         const inDate = parseYMD(checkInEl.value);
         const outDate = selectedDates && selectedDates[0] ? selectedDates[0] : parseYMD(checkOutEl.value);
         if (inDate && outDate && outDate.getTime() <= inDate.getTime()) {
@@ -360,7 +295,6 @@
       }
     });
 
-    // initialize checkin: when pick changes, enforce checkout >= checkin+1 immediately
     const fpIn = flatpickr(checkInEl, {
       ...baseOptions,
       defaultDate: todayStr,
@@ -369,19 +303,11 @@
         if (!selectedDates || !selectedDates[0]) return;
         const inDate = selectedDates[0];
         const minOut = addDays(inDate, 1);
-        // update checkout min
         fpOut.set('minDate', formatLocalDate(minOut));
-
-        // read current checkout
         const currentOut = parseYMD(checkOutEl.value);
-
-        // If checkout is missing or <= checkin, set it to checkin + 1
         if (!currentOut || currentOut.getTime() <= inDate.getTime()) {
-          // Using setDate with format arg to ensure input updates properly
           fpOut.setDate(formatLocalDate(minOut), true, 'Y-m-d');
         }
-
-        // update state
         updateBookState();
       }
     });
@@ -393,7 +319,6 @@
       bookEl.setAttribute('aria-disabled', disabled ? 'true' : 'false');
     }
 
-    // Book button builds URL with selected dates
     bookEl.addEventListener('click', (e) => {
       e.preventDefault();
       const start = checkInEl.value;
@@ -410,7 +335,6 @@
       window.open(url, '_blank', 'noopener');
     });
 
-    // initialize footer + state
     document.getElementById('y').textContent = new Date().getFullYear();
     updateBookState();
   </script>
