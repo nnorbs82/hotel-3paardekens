@@ -21,13 +21,18 @@
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
+    html { 
+      height: 100%; 
+      overflow-x: hidden;
+    }
+    body { 
+      height: 100%; 
       margin: 0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--text);
       background: #000;
       position: relative;
+      overflow-x: hidden;
     }
 
     /* Fixed background using pseudo-element for better cross-browser support */
@@ -36,18 +41,23 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
       background-image:
         linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
         url("assets/background.jpg");
       background-size: cover;
-      background-position: center;
+      background-position: center center;
       background-repeat: no-repeat;
       z-index: -1;
+      pointer-events: none;
       will-change: transform;
       transform: translateZ(0);
       -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     .bg {
