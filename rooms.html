@@ -129,10 +129,7 @@
     .room-slider {
       position: relative;
       width: 100%;
-
-      /* CHANGED: make the card a bit higher (more vertical space) */
-      aspect-ratio: 16 / 9;
-
+      aspect-ratio: 16 / 9; /* slightly taller than before */
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
@@ -164,11 +161,8 @@
       height: 100%;
       display: block;
 
-      /* CHANGED: do not crop; show entire image */
-      object-fit: contain;
-
-      /* Optional: makes the empty bars look intentional */
-      background: rgba(0,0,0,0.35);
+      /* Default behavior for the small sliders on the cards: crop to fill */
+      object-fit: cover;
     }
 
     .slider-btn {
@@ -299,6 +293,12 @@
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.2);
       outline: none;
+    }
+
+    /* IMPORTANT: only the popup "room slideshow card" should not crop */
+    .popup-slider .room-slide img {
+      object-fit: contain;
+      background: rgba(0,0,0,0.35);
     }
 
     .popup-slider .slider-btn { width: 46px; height: 46px; }
