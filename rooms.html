@@ -80,12 +80,35 @@
     }
 
     .menu-row {
+      position: relative; /* allow absolute-positioned logo */
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
       width: 100%;
       height: 100%;
+    }
+
+    /* Left logo inside the fixed menubar */
+    .menu-logo {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .menu-logo img {
+      height: 46px;      /* adjust if you want bigger/smaller */
+      width: auto;
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .menu-logo img { height: 40px; }
     }
 
     .pill {
@@ -417,6 +440,10 @@
     <!-- Fixed top menubar -->
     <section class="card menubar" id="menubar" aria-label="Menu bar">
       <nav class="menu-row" aria-label="Primary menu">
+        <a class="menu-logo" href="index.html" aria-label="Hotel 3 Paardekens home">
+          <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo" />
+        </a>
+
         <a class="pill" href="index.html#contactinfo">Contact</a>
         <a class="pill" href="#rooms">Rooms</a>
       </nav>
@@ -442,13 +469,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Single Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17v2"></path><path d="M16 17v2"></path></svg></span><span>Desk</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat screen TV</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14l0 0"></path><path d="M12 14l0 0"></path><path d="M16 14l0 0"></path><path d="M9 18l0 0"></path><path d="M13 18l0 0"></path><path d="M17 18l0 0"></path></svg></span><span>Private bathroom with shower</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path><path d="M14 8h2"></path></svg></span><span>Hairdryer</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect></svg></span><span>Hygiene products</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span><span>Central heating</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span><span>Luggage rack</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 16h8"></path><path d="M4 20v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"></path></svg></span><span>Single bed</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat-screen TV</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M12 14v7"></path></svg></span><span>En-suite bathroom</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span><span>Free Wi-Fi</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M12 10v2"></path><path d="M12 14v2"></path></svg></span><span>Heating</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span><span>Air conditioning</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span><span>Safe</span></li>
           </ul>
 
           <div class="room-actions">
@@ -471,13 +498,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Twin Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17v2"></path><path d="M16 17v2"></path></svg></span><span>Desk</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat screen TV</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14l0 0"></path><path d="M12 14l0 0"></path><path d="M16 14l0 0"></path><path d="M9 18l0 0"></path><path d="M13 18l0 0"></path><path d="M17 18l0 0"></path></svg></span><span>Private bathroom with shower</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path><path d="M14 8h2"></path></svg></span><span>Hairdryer</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect></svg></span><span>Hygiene products</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span><span>Central heating</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span><span>Luggage rack</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 16h8"></path><path d="M4 20v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"></path></svg></span><span>Twin beds</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat-screen TV</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M12 14v7"></path></svg></span><span>En-suite bathroom</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span><span>Free Wi-Fi</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M12 10v2"></path><path d="M12 14v2"></path></svg></span><span>Heating</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0  0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span><span>Air conditioning</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span><span>Safe</span></li>
           </ul>
 
           <div class="room-actions">
@@ -500,13 +527,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Double Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17v2"></path><path d="M16 17v2"></path></svg></span><span>Desk</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat screen TV</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14l0 0"></path><path d="M12 14l0 0"></path><path d="M16 14l0 0"></path><path d="M9 18l0 0"></path><path d="M13 18l0 0"></path><path d="M17 18l0 0"></path></svg></span><span>Private bathroom with shower</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path><path d="M14 8h2"></path></svg></span><span>Hairdryer</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect></svg></span><span>Hygiene products</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span><span>Central heating</span></li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span><span>Luggage rack</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 16h8"></path><path d="M4 20v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"></path></svg></span><span>Double bed</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat-screen TV</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M12 14v7"></path></svg></span><span>En-suite bathroom</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span><span>Free Wi-Fi</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M12 10v2"></path><path d="M12 14v2"></path></svg></span><span>Heating</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span><span>Air conditioning</span></li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span><span>Safe</span></li>
           </ul>
 
           <div class="room-actions">
