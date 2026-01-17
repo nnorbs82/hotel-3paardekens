@@ -162,7 +162,7 @@
     .room-slider {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16 / 9; /* slightly taller card */
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
@@ -189,11 +189,12 @@
       height: 100%;
     }
 
+    /* Small room cards: crop to fill */
     .room-slide img {
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover; /* small sliders cropped */
+      object-fit: cover;
     }
 
     .slider-btn {
@@ -255,8 +256,8 @@
     .popup-overlay {
       position: fixed;
       inset: 0;
-      z-index: 10000;
-      background: rgba(0,0,0,0.45);
+      z-index: 10000; /* above menubar */
+      background: rgba(0,0,0,0.45); /* less dark */
       display: none;
       align-items: center;
       justify-content: center;
@@ -324,7 +325,7 @@
       outline: none;
     }
 
-    /* Popup large images not cropped */
+    /* Popup large images: do NOT crop */
     .popup-slider .room-slide img {
       object-fit: contain;
       background: rgba(0,0,0,0.35);
@@ -337,6 +338,7 @@
 
     .popup-thumbs-row { margin-top: 12px; }
 
+    /* Thumbnails under the large image */
     .slider-thumbs {
       position: static;
       display: flex;
@@ -348,7 +350,7 @@
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       overflow: auto hidden;
-      scrollbar-width: none;
+      scrollbar-width: none; /* Firefox */
     }
     .slider-thumbs::-webkit-scrollbar { display: none; }
 
@@ -483,7 +485,7 @@
           </div>
         </article>
 
-        <!-- Double Room (UPDATED) -->
+        <!-- Double Room -->
         <article class="room-card" aria-label="Double Room">
           <div class="room-slider" tabindex="0"
                data-room="Double Room"
@@ -494,11 +496,9 @@
 
           <h2 class="room-title">Double Room</h2>
 
-          <!-- UPDATED TEXT -->
           <p class="room-desc">Cosy getaway with your better half, or just prefer a larger bed? Make it Double!</p>
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
-          <!-- SAME AMENITIES AS SINGLE ROOM -->
           <ul class="amenities" aria-label="Double Room amenities">
             <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17v2"></path><path d="M16 17v2"></path></svg></span><span>Desk</span></li>
             <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span><span>Flat screen TV</span></li>
@@ -524,7 +524,9 @@
     <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
       <div class="popup-header">
         <h3 class="popup-title" id="popupTitle">Room photos</h3>
-        <button class="popup-close" type="button" id="popupClose" aria-label="Close popup">&#10005;</button>
+        <button class="popup-close" type="button" id="popupClose" aria-label="Close popup">
+          &#10005;
+        </button>
       </div>
 
       <div class="popup-slider" id="popupSlider" tabindex="0" aria-label="Large room photos slider"></div>
@@ -537,7 +539,7 @@
 
     function getRoomImagesFromDataset(el) {
       const roomName = (el.dataset.room || 'Room').trim();
-      const base = (el.dataset.base || '').trim();
+      const base = (el.dataset.base || '').trim(); // e.g. "Rooms/Single/"
       const ext = (el.dataset.ext || 'jpg').trim().replace(/^\./, '');
       const count = Number(el.dataset.count || 0);
 
@@ -550,7 +552,12 @@
     }
 
     function buildSlider(sliderEl, { roomName, images }, opts = {}) {
-      const { startIndex = 0, large = false, showThumbs = false, thumbsMountEl = null } = opts;
+      const {
+        startIndex = 0,
+        large = false,
+        showThumbs = false,
+        thumbsMountEl = null
+      } = opts;
 
       let index = Math.min(Math.max(Number(startIndex) || 0, 0), images.length - 1);
 
@@ -585,6 +592,7 @@
       const counter = document.createElement('div');
       counter.className = 'slider-counter';
 
+      // Optional thumbnails
       let thumbsWrap = null;
       let thumbs = [];
 
@@ -623,6 +631,7 @@
       sliderEl.appendChild(nextBtn);
       sliderEl.appendChild(counter);
 
+      // Mount thumbs below the image if thumbsMountEl is provided
       if (thumbsWrap) {
         if (thumbsMountEl) {
           thumbsMountEl.innerHTML = '';
@@ -650,8 +659,13 @@
         updateThumbs();
       }
 
-      function prev() { if (index > 0) { index -= 1; render(); } }
-      function next() { if (index < images.length - 1) { index += 1; render(); } }
+      function prev() {
+        if (index > 0) { index -= 1; render(); }
+      }
+
+      function next() {
+        if (index < images.length - 1) { index += 1; render(); }
+      }
 
       prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
       nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
@@ -663,16 +677,27 @@
 
       render();
 
-      return { getIndex: () => index, setIndex: (i) => { index = Math.min(Math.max(i, 0), images.length - 1); render(); }, next, prev };
+      return {
+        getIndex: () => index,
+        setIndex: (i) => { index = Math.min(Math.max(i, 0), images.length - 1); render(); },
+        next,
+        prev
+      };
     }
 
     function initRoomSlider(sliderEl) {
       const data = getRoomImagesFromDataset(sliderEl);
       if (!data.images.length) return;
 
+      // Build the small slider in the card.
       const api = buildSlider(sliderEl, data);
 
-      sliderEl.addEventListener('click', () => openPopupForSlider(sliderEl, api.getIndex()));
+      // Clicking the slider opens the popup at current slide index.
+      sliderEl.addEventListener('click', () => {
+        openPopupForSlider(sliderEl, api.getIndex());
+      });
+
+      // Keyboard open (Enter/Space) when slider is focused.
       sliderEl.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -694,13 +719,19 @@
       if (!data.images.length) return;
 
       lastFocusedEl = document.activeElement;
+
       popupTitle.textContent = data.roomName + ' photos';
 
+      // Build large slider with thumbnails mounted below the image
       buildSlider(popupSlider, data, { startIndex, large: true, showThumbs: true, thumbsMountEl: popupThumbsRow });
 
       popupOverlay.classList.add('is-open');
       popupOverlay.setAttribute('aria-hidden', 'false');
+
+      // Prevent background scroll
       document.body.style.overflow = 'hidden';
+
+      // Focus the popup slider so arrow keys work immediately
       popupSlider.focus();
     }
 
@@ -709,18 +740,23 @@
       popupOverlay.setAttribute('aria-hidden', 'true');
       popupSlider.innerHTML = '';
       popupThumbsRow.innerHTML = '';
+
       document.body.style.overflow = '';
 
-      if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') lastFocusedEl.focus();
+      if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+        lastFocusedEl.focus();
+      }
       lastFocusedEl = null;
     }
 
     popupClose.addEventListener('click', closePopup);
 
+    // Click outside the card closes
     popupOverlay.addEventListener('click', (e) => {
       if (e.target === popupOverlay) closePopup();
     });
 
+    // Escape closes
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && popupOverlay.classList.contains('is-open')) {
         e.preventDefault();
