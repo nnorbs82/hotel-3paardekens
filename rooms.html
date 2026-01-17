@@ -135,6 +135,11 @@
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.2);
       outline: none;
+      cursor: zoom-in; /* indicates click opens larger view */
+    }
+
+    .room-slider:focus-visible {
+      box-shadow: 0 0 0 3px rgba(183,110,121,0.55);
     }
 
     .room-slider-track {
@@ -207,12 +212,154 @@
       padding: 6px 10px;
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
+      pointer-events: none;
     }
 
     @media (prefers-reduced-motion: reduce) {
       .room-slider-track { transition: none; }
     }
     /* ===== End slider ===== */
+
+    /* ===== Popup (Lightbox) ===== */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000; /* above menubar */
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .popup-overlay.is-open { display: flex; }
+
+    .popup-card {
+      width: min(1100px, 100%);
+      background: rgba(0,0,0,0.72);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      box-shadow: 0 22px 80px rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 6px 12px 6px;
+    }
+
+    .popup-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 650;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .popup-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background-color 120ms ease, transform 120ms ease;
+    }
+
+    .popup-close:hover,
+    .popup-close:focus-visible {
+      background: #B76E79;
+      outline: none;
+    }
+    .popup-close:active { transform: scale(0.98); }
+
+    .popup-slider {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.2);
+      outline: none;
+    }
+
+    .popup-slider .slider-btn { width: 46px; height: 46px; }
+    .popup-slider .slider-btn.prev { left: 12px; }
+    .popup-slider .slider-btn.next { right: 12px; }
+    .popup-slider .slider-counter { right: 12px; bottom: 12px; }
+
+    /* Popup thumbnail strip */
+    .slider-thumbs {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: flex;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      overflow: auto hidden;
+      scrollbar-width: none; /* Firefox */
+    }
+    .slider-thumbs::-webkit-scrollbar { display: none; }
+
+    .thumb {
+      flex: 0 0 auto;
+      width: 74px;
+      height: 48px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(255,255,255,0.06);
+      padding: 0;
+      cursor: pointer;
+      overflow: hidden;
+      display: grid;
+      place-items: stretch;
+      transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05);
+    }
+
+    .thumb:hover,
+    .thumb:focus-visible {
+      outline: none;
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-1px);
+    }
+
+    .thumb[aria-current="true"] {
+      border-color: rgba(255,255,255,0.95);
+      box-shadow: 0 0 0 3px rgba(183,110,121,0.55);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 640px) {
+      .popup-card { padding: 12px; }
+      .popup-slider { aspect-ratio: 4 / 3; }
+      .thumb { width: 64px; height: 44px; }
+      .slider-thumbs { gap: 8px; padding: 8px 10px; }
+    }
+    /* ===== End popup ===== */
 
     .room-title { font-size: 18px; font-weight: 600; margin: 0; }
     .room-desc { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
@@ -293,21 +440,45 @@
     </section>
   </main>
 
+  <!-- Popup overlay (large slideshow) -->
+  <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+    <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+      <div class="popup-header">
+        <h3 class="popup-title" id="popupTitle">Room photos</h3>
+        <button class="popup-close" type="button" id="popupClose" aria-label="Close popup">
+          &#10005;
+        </button>
+      </div>
+
+      <div class="popup-slider" id="popupSlider" tabindex="0" aria-label="Large room photos slider"></div>
+    </div>
+  </div>
+
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    function initRoomSlider(sliderEl) {
-      const roomName = (sliderEl.dataset.room || 'Room').trim();
+    function getRoomImagesFromDataset(el) {
+      const roomName = (el.dataset.room || 'Room').trim();
+      const base = (el.dataset.base || '').trim(); // e.g. "Rooms/Single/"
+      const ext = (el.dataset.ext || 'jpg').trim().replace(/^\./, '');
+      const count = Number(el.dataset.count || 0);
 
-      const base = (sliderEl.dataset.base || '').trim(); // e.g. "Rooms/Single/"
-      const ext = (sliderEl.dataset.ext || 'jpg').trim().replace(/^\./, ''); // "jpg"
-      const count = Number(sliderEl.dataset.count || 0);
-
-      if (!base || !Number.isFinite(count) || count <= 0) return;
+      if (!base || !Number.isFinite(count) || count <= 0) {
+        return { roomName, images: [] };
+      }
 
       const images = Array.from({ length: count }, (_, i) => `${base}${i + 1}.${ext}`);
+      return { roomName, images };
+    }
 
-      let index = 0;
+    function buildSlider(sliderEl, { roomName, images }, opts = {}) {
+      const {
+        startIndex = 0,
+        large = false,
+        showThumbs = false
+      } = opts;
+
+      let index = Math.min(Math.max(Number(startIndex) || 0, 0), images.length - 1);
 
       const track = document.createElement('div');
       track.className = 'room-slider-track';
@@ -317,7 +488,7 @@
         slide.className = 'room-slide';
 
         const img = document.createElement('img');
-        img.loading = 'lazy';
+        img.loading = large ? 'eager' : 'lazy';
         img.src = src;
         img.alt = `${roomName} photo ${i + 1} of ${images.length}`;
 
@@ -340,17 +511,62 @@
       const counter = document.createElement('div');
       counter.className = 'slider-counter';
 
+      // Optional thumbnails
+      let thumbsWrap = null;
+      let thumbs = [];
+
+      if (showThumbs) {
+        thumbsWrap = document.createElement('div');
+        thumbsWrap.className = 'slider-thumbs';
+        thumbsWrap.setAttribute('aria-label', 'Photo thumbnails');
+
+        thumbs = images.map((src, i) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'thumb';
+          btn.setAttribute('aria-label', `Go to ${roomName} photo ${i + 1}`);
+
+          const tImg = document.createElement('img');
+          tImg.loading = 'lazy';
+          tImg.src = src;
+          tImg.alt = `Thumbnail ${i + 1}`;
+
+          btn.appendChild(tImg);
+
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            index = i;
+            render();
+          });
+
+          thumbsWrap.appendChild(btn);
+          return btn;
+        });
+      }
+
       sliderEl.innerHTML = '';
       sliderEl.appendChild(track);
       sliderEl.appendChild(prevBtn);
       sliderEl.appendChild(nextBtn);
       sliderEl.appendChild(counter);
+      if (thumbsWrap) sliderEl.appendChild(thumbsWrap);
+
+      function updateThumbs() {
+        if (!thumbs.length) return;
+        thumbs.forEach((t, i) => t.setAttribute('aria-current', String(i === index)));
+
+        const active = thumbs[index];
+        if (active && active.scrollIntoView) {
+          active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        }
+      }
 
       function render() {
         track.style.transform = `translateX(${-index * 100}%)`;
         counter.textContent = `${index + 1} / ${images.length}`;
         prevBtn.disabled = index === 0;
         nextBtn.disabled = index === images.length - 1;
+        updateThumbs();
       }
 
       function prev() {
@@ -361,8 +577,8 @@
         if (index < images.length - 1) { index += 1; render(); }
       }
 
-      prevBtn.addEventListener('click', prev);
-      nextBtn.addEventListener('click', next);
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
 
       sliderEl.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
@@ -370,7 +586,91 @@
       });
 
       render();
+
+      return {
+        getIndex: () => index,
+        setIndex: (i) => { index = Math.min(Math.max(i, 0), images.length - 1); render(); },
+        next,
+        prev
+      };
     }
+
+    function initRoomSlider(sliderEl) {
+      const data = getRoomImagesFromDataset(sliderEl);
+      if (!data.images.length) return;
+
+      // Build the small slider in the card.
+      const api = buildSlider(sliderEl, data);
+
+      // Clicking the slider opens the popup at current slide index.
+      sliderEl.addEventListener('click', () => {
+        openPopupForSlider(sliderEl, api.getIndex());
+      });
+
+      // Keyboard open (Enter/Space) when slider is focused.
+      sliderEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openPopupForSlider(sliderEl, api.getIndex());
+        }
+      });
+    }
+
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupClose = document.getElementById('popupClose');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupSlider = document.getElementById('popupSlider');
+
+    let lastFocusedEl = null;
+
+    function openPopupForSlider(sourceSliderEl, startIndex) {
+      const data = getRoomImagesFromDataset(sourceSliderEl);
+      if (!data.images.length) return;
+
+      lastFocusedEl = document.activeElement;
+
+      popupTitle.textContent = data.roomName + ' photos';
+
+      // Build large slider with thumbnails
+      buildSlider(popupSlider, data, { startIndex, large: true, showThumbs: true });
+
+      popupOverlay.classList.add('is-open');
+      popupOverlay.setAttribute('aria-hidden', 'false');
+
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden';
+
+      // Focus the popup slider so arrow keys work immediately
+      popupSlider.focus();
+    }
+
+    function closePopup() {
+      popupOverlay.classList.remove('is-open');
+      popupOverlay.setAttribute('aria-hidden', 'true');
+      popupSlider.innerHTML = '';
+
+      document.body.style.overflow = '';
+
+      if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+        lastFocusedEl.focus();
+      }
+      lastFocusedEl = null;
+    }
+
+    popupClose.addEventListener('click', closePopup);
+
+    // Click outside the card closes
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) closePopup();
+    });
+
+    // Escape closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popupOverlay.classList.contains('is-open')) {
+        e.preventDefault();
+        closePopup();
+      }
+    });
 
     document.querySelectorAll('.room-slider').forEach(initRoomSlider);
   </script>
