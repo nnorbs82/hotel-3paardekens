@@ -223,7 +223,10 @@
       position: fixed;
       inset: 0;
       z-index: 10000; /* above menubar */
-      background: rgba(0,0,0,0.7);
+
+      /* CHANGED: slightly less dark */
+      background: rgba(0,0,0,0.55);
+
       display: none;
       align-items: center;
       justify-content: center;
@@ -280,10 +283,6 @@
     }
     .popup-close:active { transform: scale(0.98); }
 
-    /* FIX: Keep the popup slider behaving like the small slider:
-       - it's still the "viewport" with absolute buttons/counter,
-       - but we reserve space BELOW for thumbnails (padding-bottom),
-       - and place thumbs as normal flow element BELOW. */
     .popup-slider {
       position: relative;
       width: 100%;
@@ -293,9 +292,6 @@
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.2);
       outline: none;
-
-      /* Reserve room at the bottom so thumbs don't overlap the image */
-      padding-bottom: 0; /* thumbs are outside now, so none needed */
     }
 
     /* IMPORTANT: only popup large image should not crop */
@@ -309,10 +305,7 @@
     .popup-slider .slider-btn.next { right: 12px; }
     .popup-slider .slider-counter { right: 12px; bottom: 12px; }
 
-    /* New: thumbnails wrapper sits UNDER the slider as its own row */
-    .popup-thumbs-row {
-      margin-top: 12px;
-    }
+    .popup-thumbs-row { margin-top: 12px; }
 
     .slider-thumbs {
       position: static;
@@ -462,9 +455,6 @@
         </button>
       </div>
 
-      <!-- IMPORTANT STRUCTURE CHANGE:
-           Keep popupSlider as the actual slider viewport,
-           and place thumbs in a sibling container BELOW it. -->
       <div class="popup-slider" id="popupSlider" tabindex="0" aria-label="Large room photos slider"></div>
       <div class="popup-thumbs-row" id="popupThumbsRow"></div>
     </div>
@@ -528,7 +518,6 @@
       const counter = document.createElement('div');
       counter.className = 'slider-counter';
 
-      // Optional thumbnails
       let thumbsWrap = null;
       let thumbs = [];
 
@@ -567,7 +556,6 @@
       sliderEl.appendChild(nextBtn);
       sliderEl.appendChild(counter);
 
-      // Mount thumbs either inside sliderEl (default) or in an external container below it.
       if (thumbsWrap) {
         if (thumbsMountEl) {
           thumbsMountEl.innerHTML = '';
@@ -644,8 +632,6 @@
       lastFocusedEl = document.activeElement;
       popupTitle.textContent = data.roomName + ' photos';
 
-      // Key fix: thumbnails are mounted OUTSIDE the slider viewport,
-      // so the slider viewport keeps the correct structure/height/overflow.
       buildSlider(popupSlider, data, {
         startIndex,
         large: true,
