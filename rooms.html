@@ -80,7 +80,7 @@
     }
 
     .menu-row {
-      position: relative; /* allow absolute-positioned logo */
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -89,7 +89,7 @@
       height: 100%;
     }
 
-    /* Left logo inside the fixed menubar */
+    /* Logo: match index.html by using the same height and left inset */
     .menu-logo {
       position: absolute;
       left: 14px;
@@ -97,18 +97,17 @@
       transform: translateY(-50%);
       display: inline-flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
     }
 
     .menu-logo img {
-      height: 46px;      /* adjust if you want bigger/smaller */
+      height: 46px;   /* keep identical to index.html */
       width: auto;
       display: block;
     }
 
     @media (max-width: 480px) {
-      .menu-logo img { height: 40px; }
+      .menu-logo img { height: 40px; } /* keep identical to index.html */
     }
 
     .pill {
