@@ -21,17 +21,29 @@
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--text);
       background: #000;
+      position: relative;
     }
 
-    .bg {
-      min-height: 100vh;
+    /* Fixed background layer */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background-image:
         linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
         url("assets/background.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      z-index: -1;
+    }
+
+    .bg {
+      min-height: 100vh;
+      /* Remove background properties - now handled by body::before */
 
       display: flex;
       flex-direction: column;
