@@ -32,6 +32,9 @@
       background-position: center;
       background-repeat: no-repeat;
 
+      /* Keep background fixed while content scrolls */
+      background-attachment: fixed;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -499,13 +502,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Single Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17h8"></path></svg></span>Free Wi‑Fi</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span>Flat‑screen TV</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path></svg></span>Private bathroom</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span>Breakfast available</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect></svg></span>Mini fridge</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span>Air conditioning</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span>Safe</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg><[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path>[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path>[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"[...]
           </ul>
 
           <div class="room-actions">
@@ -528,13 +531,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Twin Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17h8"></path></svg></span>Free Wi‑Fi</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span>Flat‑screen TV</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path></svg></span>Private bathroom</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span>Breakfast available</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect></svg></span>Mini fridge</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span>Air conditioning</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span>Safe</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg><[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path>[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path>[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0  0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"[...]
           </ul>
 
           <div class="room-actions">
@@ -557,13 +560,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Double Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17h8"></path></svg></span>Free Wi‑Fi</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span>Flat‑screen TV</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path></svg></span>Private bathroom</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span>Breakfast available</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect></svg></span>Mini fridge</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span>Air conditioning</li>
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span>Safe</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg><[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path>[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path>[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a[...]
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"[...]
           </ul>
 
           <div class="room-actions">
