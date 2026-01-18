@@ -140,7 +140,7 @@
       padding: clamp(28px, 6vw, 64px);
     }
 
-    /* Mainlogo card inside hero: remove its own card chrome */
+    /* Mainlogo card inside hero: remove its own card chrome, and cap height */
     #hero #mainlogo.card {
       width: 100%;
       background: transparent;
@@ -149,6 +149,12 @@
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
       padding: 0;
+
+      /* ensure mainlogo container never exceeds 500px */
+      max-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #hero #mainlogo img {
@@ -157,6 +163,10 @@
       max-width: 100%;
       display: block;
       margin: 0 auto;
+
+      /* ensure the image never makes the card taller than 500px */
+      max-height: 500px;
+      object-fit: contain;
     }
 
     /* Make menubar buttons match booking bar style */
