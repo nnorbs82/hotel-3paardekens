@@ -140,20 +140,26 @@
       padding: clamp(28px, 6vw, 64px);
     }
 
-    /* Mainlogo card inside hero: KEEP card look, but cap height to 400px */
+    /*
+      Mainlogo card inside hero:
+      - keep height capped (so it doesn't fill the screen)
+      - make its background fully transparent
+      - remove border/shadow/blur so it doesn't look like a card
+    */
     #hero #mainlogo.card {
       width: min(520px, 90%);
       max-height: 400px;
 
-      /* ensure it looks like a card (slightly darker, see-through) */
-      background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
 
+      /* optional: keep rounded corners even though transparent */
       border-radius: var(--radius);
-      padding: 22px;
+
+      padding: 0;
 
       display: flex;
       align-items: center;
@@ -162,12 +168,12 @@
     }
 
     #hero #mainlogo img {
-      width: min(420px, 70vw);
+      width: min(520px, 70vw);
       height: auto;
       max-width: 100%;
 
-      /* keep the image from making the card taller than 400px */
-      max-height: calc(400px - 44px); /* 400 minus ~top+bottom padding (22px+22px) */
+      /* critical: keep the image from making the container taller than 400px */
+      max-height: 400px;
       object-fit: contain;
 
       display: block;
@@ -300,8 +306,7 @@
         width: 100%;
       }
 
-      /* slightly smaller on tiny screens */
-      #hero #mainlogo img { width: min(360px, 78vw); }
+      #hero #mainlogo img { width: min(420px, 78vw); }
     }
 
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
