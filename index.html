@@ -133,6 +133,7 @@
     #hero.card {
       width: min(920px, 100%);
       min-height: calc(100svh - (70px + 50px + 56px)); /* viewport minus menubar+gap+base padding */
+      max-height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -143,7 +144,6 @@
     #hero #mainlogo.card {
       width: 100vw;           /* full screen width */
       max-width: none;        /* remove 400px cap */
-      max-height: 500px;
       background: transparent;
       border: 0;
       box-shadow: none;
