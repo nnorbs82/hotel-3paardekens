@@ -129,13 +129,18 @@
       display: block;
     }
 
-    /* Hero card: contains mainlogo card */
+    /* HERO sizing for hero card */
     #hero.card {
       width: min(920px, 100%);
-      padding: clamp(20px, 4vw, 40px);
+      min-height: calc(100svh - (70px + 50px + 56px)); /* viewport minus menubar+gap+base padding */
+      max-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(28px, 6vw, 64px);
     }
 
-    /* Mainlogo card (now nested inside hero): remove its own "card look" and just size the image */
+    /* Mainlogo card inside hero: remove its own card chrome */
     #hero #mainlogo.card {
       width: 100%;
       background: transparent;
@@ -147,7 +152,7 @@
     }
 
     #hero #mainlogo img {
-      width: min(420px, 75vw);
+      width: min(520px, 70vw);
       height: auto;
       max-width: 100%;
       display: block;
@@ -279,6 +284,8 @@
         min-width:150px;
         width: 100%;
       }
+
+      #hero #mainlogo img { width: min(420px, 78vw); }
     }
 
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
@@ -328,7 +335,7 @@
       </nav>
     </section>
 
-    <!-- New hero card containing mainlogo -->
+    <!-- Hero card containing mainlogo -->
     <section id="hero" class="card" aria-label="Hero">
       <section id="mainlogo" class="card" aria-label="Main logo">
         <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
