@@ -15,6 +15,9 @@
       --radius: 18px;
       --fp-hover-color: #949494;
       --fp-dim-month: #545454;
+
+      /* hero fade strength at the center (tweak 0.0 -> 1.0) */
+      --hero-fade-alpha: 0.55;
     }
 
     * { box-sizing: border-box; }
@@ -129,28 +132,43 @@
       display: block;
     }
 
-    /* HERO sizing for hero card (FULL SCREEN WIDTH) */
+    /* HERO sizing for hero card (FULL SCREEN WIDTH + CENTER->EDGES FADE) */
     #hero.card {
       width: 100%;
       max-width: none;
-      border-radius: 0; /* optional: makes it feel like a full-width hero band */
+      border-radius: 0;
 
-      min-height: calc(100svh - (70px + 50px + 56px)); /* viewport minus menubar+gap+base padding */
+      /* replace the normal card background with a horizontal fade:
+         center has opacity, edges fade to 0 */
+      background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,var(--hero-fade-alpha)) 50%,
+        rgba(0,0,0,0) 100%
+      );
+
+      /* optional: hero shouldn't have a border/shadow like other cards */
+      border: 0;
+      box-shadow: none;
+
+      /* optional: blur looks odd when edges are transparent; turn it off */
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+
+      min-height: calc(100svh - (70px + 50px + 56px));
       max-height: 500px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      /* keep some internal breathing room */
       padding: clamp(28px, 6vw, 64px);
     }
 
     /*
       Mainlogo card inside hero:
       - keep height capped (so it doesn't fill the screen)
-      - make its background fully transparent
-      - remove border/shadow/blur so it doesn't look like a card
+      - fully transparent background
     */
     #hero #mainlogo.card {
       width: min(520px, 90%);
@@ -162,9 +180,7 @@
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
 
-      /* optional: keep rounded corners even though transparent */
       border-radius: var(--radius);
-
       padding: 0;
 
       display: flex;
@@ -177,11 +193,8 @@
       width: min(520px, 70vw);
       height: auto;
       max-width: 100%;
-
-      /* critical: keep the image from making the container taller than 400px */
       max-height: 400px;
       object-fit: contain;
-
       display: block;
       margin: 0 auto;
     }
@@ -343,7 +356,6 @@
       appearance: none;
     }
     .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
-
   </style>
 </head>
 
