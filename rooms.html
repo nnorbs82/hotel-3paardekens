@@ -26,10 +26,12 @@
     .bg {
       min-height: 100vh;
 
-      /* iOS fix:
-         Don't use background-attachment: fixed on iOS/WebKit.
-         Instead, paint a fixed layer behind the content via ::before. */
+      /* iOS/WebKit fix: do not use background-attachment: fixed */
       background: none;
+
+      /* create stacking context so ::before can sit behind content reliably */
+      position: relative;
+      isolation: isolate;
 
       display: flex;
       flex-direction: column;
@@ -38,13 +40,9 @@
       flex-wrap: wrap;
       gap: 50px;
       padding: 28px;
-
-      /* needed so ::before can be stacked behind content inside .bg */
-      position: relative;
-      isolation: isolate;
     }
 
-    /* Fixed background layer (replaces background-attachment: fixed approach) */
+    /* Fixed background layer (replaces background-attachment: fixed) */
     .bg::before {
       content: "";
       position: fixed;
@@ -58,7 +56,7 @@
       background-position: center;
       background-repeat: no-repeat;
 
-      /* Helps iOS keep the fixed layer stable */
+      /* Helps iOS keep it on its own layer */
       transform: translateZ(0);
       will-change: transform;
     }
@@ -521,7 +519,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Single Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8[...]</path></svg></span> ...</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17h8"></path><path d="M9 17v3"></path><path d="M15 17v3"></path></svg></span> Single bed</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span> TV</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path><path d="M10 14v4"></path><path d="M14 14v4"></path></svg></span> Private bathroom</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span> City view</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M10 10h4"></path></svg></span> Coffee/tea maker</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span> Heating</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span> Wardrobe</li>
           </ul>
 
           <div class="room-actions">
@@ -544,7 +548,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Twin Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8[...]</path></svg></span> ...</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17h8"></path><path d="M9 17v3"></path><path d="M15 17v3"></path></svg></span> Twin beds</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span> TV</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path><path d="M10 14v4"></path><path d="M14 14v4"></path></svg></span> Private bathroom</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span> City view</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M10 10h4"></path></svg></span> Coffee/tea maker</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span> Heating</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span> Wardrobe</li>
           </ul>
 
           <div class="room-actions">
@@ -567,7 +577,13 @@
           <p class="room-desc" style="margin-top:-6px;">Amenities include:</p>
 
           <ul class="amenities" aria-label="Double Room amenities">
-            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8[...]</path></svg></span> ...</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17h8"></path><path d="M9 17v3"></path><path d="M15 17v3"></path></svg></span> Double bed</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></span> TV</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path><path d="M10 14v4"></path><path d="M14 14v4"></path></svg></span> Private bathroom</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg></span> City view</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M10 10h4"></path></svg></span> Coffee/tea maker</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg></span> Heating</li>
+            <li><span class="amenity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></span> Wardrobe</li>
           </ul>
 
           <div class="room-actions">
