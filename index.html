@@ -133,6 +133,10 @@
     #mainlogo.card {
       width: min(920px, 100%);
       min-height: calc(100svh - (70px + 50px + 56px)); /* viewport minus menubar+gap+base padding (top+bottom) */
+
+      /* NEW: cap hero height */
+      max-height: 600px;
+
       display: flex;
       align-items: center;
       justify-content: center;
