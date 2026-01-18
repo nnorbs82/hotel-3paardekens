@@ -164,7 +164,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
+
+      /* keep the layout controlled: logo, then 50px space, then booking bar */
+      gap: 0;
 
       padding: clamp(28px, 6vw, 64px);
     }
@@ -213,6 +215,9 @@
 
       /* inner padding */
       padding: 20px;
+
+      /* requested: 50px space above booking bar */
+      margin-top: 50px;
     }
 
     /* small heading inside bookingbar */
