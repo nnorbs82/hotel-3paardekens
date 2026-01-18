@@ -129,6 +129,14 @@
       display: block;
     }
 
+    /* main logo card image */
+    #mainlogo img {
+      height: 120px;
+      width: auto;
+      max-width: 100%;
+      display: inline-block;
+    }
+
     /* Make menubar buttons match booking bar style */
     .menubar .pill {
       gap: 8px;
@@ -238,7 +246,7 @@
       cursor: pointer;
       transition: background-color 120ms ease;
 
-      /* FIX: make both buttons the same width */
+      /* make both buttons the same width */
       width: 180px;
       justify-content: center;
     }
@@ -252,8 +260,10 @@
       input.datepicker { min-width:150px; }
       .links .pill {
         min-width:150px;
-        width: 100%; /* on very small screens let them fill the row evenly */
+        width: 100%;
       }
+
+      #mainlogo img { height: 96px; }
     }
 
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
@@ -298,12 +308,18 @@
           <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
         </a>
 
-        <a class="pill" href="#contactinfo">Contact</a>
+        <a class="pill" href="#contact">Contact</a>
         <a class="pill" href="rooms.html">Rooms</a>
       </nav>
     </section>
 
-    <section id="contactinfo" class="card" aria-label="Contact details">
+    <!-- New first card: mainlogo -->
+    <section id="mainlogo" class="card" aria-label="Main logo">
+      <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
+    </section>
+
+    <!-- Contact card -->
+    <section id="contact" class="card" aria-label="Contact details">
       <h1>Hotel 3 Paardekens</h1>
 
       <p class="lines">
