@@ -140,10 +140,10 @@
       padding: clamp(28px, 6vw, 64px);
     }
 
-    /* Mainlogo card inside hero: remove its own card chrome, and cap height */
+    /* Mainlogo card inside hero: remove its own card chrome, and stretch full viewport width */
     #hero #mainlogo.card {
-      width: 100%;
-      max-width: 400px; /* <= added: cap mainlogo card at 400px */
+      width: 100vw;           /* full screen width */
+      max-width: none;        /* remove 400px cap */
       background: transparent;
       border: 0;
       box-shadow: none;
