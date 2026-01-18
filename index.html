@@ -129,8 +129,24 @@
       display: block;
     }
 
-    /* Mainlogo card: just size the image nicely (no hero sizing) */
-    #mainlogo img {
+    /* Hero card: contains mainlogo card */
+    #hero.card {
+      width: min(920px, 100%);
+      padding: clamp(20px, 4vw, 40px);
+    }
+
+    /* Mainlogo card (now nested inside hero): remove its own "card look" and just size the image */
+    #hero #mainlogo.card {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      padding: 0;
+    }
+
+    #hero #mainlogo img {
       width: min(420px, 75vw);
       height: auto;
       max-width: 100%;
@@ -312,9 +328,11 @@
       </nav>
     </section>
 
-    <!-- Mainlogo card (no hero sizing) -->
-    <section id="mainlogo" class="card" aria-label="Main logo">
-      <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
+    <!-- New hero card containing mainlogo -->
+    <section id="hero" class="card" aria-label="Hero">
+      <section id="mainlogo" class="card" aria-label="Main logo">
+        <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
+      </section>
     </section>
 
     <!-- Contact card -->
