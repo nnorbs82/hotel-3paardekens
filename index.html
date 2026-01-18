@@ -32,18 +32,12 @@
       margin: 0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--text);
-      background: #000;
+      background: #000; /* fallback behind fixed layer */
     }
 
     .bg {
+      /* iOS fix: don't use background-attachment: fixed here */
       min-height: 100vh;
-      background-image:
-        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
-        url("assets/background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
 
       display: flex;
       flex-direction: column;
@@ -53,6 +47,31 @@
 
       gap: 50px;
       padding: 28px;
+
+      /* Create stacking context so ::before can sit behind content cleanly */
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Fixed background layer (works reliably on iOS Safari/Chrome) */
+    .bg::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+
+      /* Keep your original dark overlay + image */
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+        url("assets/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      /* Helps iOS keep this as its own composited layer */
+      transform: translateZ(0);
+      will-change: transform;
+      pointer-events: none;
     }
 
     .bg.with-menubar {
