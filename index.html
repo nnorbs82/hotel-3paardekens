@@ -19,7 +19,7 @@
       /* fade strength at center for hero/contact "band" */
       --band-fade-alpha: 0.55;
 
-      /* accent color (matches your hover color) */
+      /* accent color (rose gold) */
       --accent: #B76E79;
 
       /* bookingbar border at 60% opacity */
@@ -43,23 +43,18 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-
-      /* keep the background fixed while content scrolls */
       background-attachment: fixed;
 
-      /* always stack vertically */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
 
-      /* fixed 50px spacing between stacked cards */
       gap: 50px;
       padding: 28px;
     }
 
-    /* add extra top padding to account for fixed menubar (70px) + desired gap (50px) */
     .bg.with-menubar {
       padding-top: calc(70px + 50px + 28px);
     }
@@ -76,31 +71,26 @@
       border: 1px solid rgba(255,255,255,0.12);
     }
 
-    /* Ensure spacing when browser doesn't support flex gap */
     @supports not (gap: 50px) {
       .card + .card { margin-top: 50px; }
     }
 
-    /* Fixed top menubar card - full width, square corners */
     .menubar.card {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       width: 100%;
-      z-index: 9999; /* sit above all other items */
+      z-index: 9999;
       height: 70px;
       min-height: 70px;
-      /* override card padding to maintain exact height */
       padding: 0 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      /* all corners squared */
       border-radius: 0;
     }
 
-    /* content row inside menubar */
     .menu-row {
       display: flex;
       align-items: center;
@@ -108,10 +98,9 @@
       gap: 12px;
       width: 100%;
       height: 100%;
-      position: relative; /* allow absolute-positioned logo */
+      position: relative;
     }
 
-    /* logo on the left inside menubar */
     .menu-logo {
       position: absolute;
       left: 0;
@@ -122,8 +111,6 @@
       justify-content: center;
       height: 100%;
       padding-left: 2px;
-
-      /* remove ALL link underline/border styling */
       border-bottom: 0 !important;
       text-decoration: none !important;
     }
@@ -133,18 +120,16 @@
     }
 
     .menu-logo img {
-      height: 46px;   /* fits comfortably within 70px menubar */
+      height: 46px;
       width: auto;
       display: block;
     }
 
-    /* HERO sizing for hero card (FULL SCREEN WIDTH + CENTER->EDGES FADE) */
     #hero.card {
       width: 100%;
       max-width: none;
       border-radius: 0;
 
-      /* horizontal fade: center has opacity, edges fade to 0 */
       background: linear-gradient(
         90deg,
         rgba(0,0,0,0) 0%,
@@ -165,15 +150,10 @@
       align-items: center;
       justify-content: center;
 
-      gap: 0; /* using margin-top on bookingbar for exact spacing */
+      gap: 0;
       padding: clamp(28px, 6vw, 64px);
     }
 
-    /*
-      Mainlogo container inside hero:
-      - keep height capped (so it doesn't fill the screen)
-      - fully transparent background
-    */
     #hero #mainlogo.card {
       width: min(520px, 90%);
       max-height: 400px;
@@ -203,15 +183,12 @@
       margin: 0 auto;
     }
 
-    /* Booking bar INSIDE hero */
     #hero #bookingbar.card {
       width: min(920px, 92%);
       max-width: 920px;
 
       border: 1px solid var(--accent-60);
       padding: 20px;
-
-      /* 50px space above booking bar */
       margin-top: 50px;
     }
 
@@ -224,7 +201,6 @@
       text-align: center;
     }
 
-    /* CONTACT card: full width band like hero */
     #contact.card {
       width: 100%;
       max-width: none;
@@ -250,7 +226,6 @@
       margin: 0 auto;
     }
 
-    /* Make menubar buttons match booking bar style */
     .menubar .pill {
       gap: 8px;
       border-radius: 10px;
@@ -278,7 +253,7 @@
     h1 { margin: 0 0 12px 0; font-size: clamp(26px, 4vw, 40px); }
     .lines { margin: 0; font-size: clamp(16px, 2.1vw, 18px); line-height: 1.65; color: var(--muted); }
 
-    /* Center the text inside the datepicker inputs */
+    /* Datepicker inputs */
     input.datepicker {
       -webkit-appearance: none;
       appearance: none;
@@ -290,13 +265,27 @@
       font-size: 15px;
       min-width: 150px;
 
-      text-align: center; /* <-- requested */
+      text-align: center;
+      outline: none; /* remove default blue outline */
+      transition: border-color 120ms ease, box-shadow 120ms ease;
     }
 
-    /* also center the placeholder text */
     input.datepicker::placeholder {
       text-align: center;
       color: rgba(255,255,255,0.75);
+    }
+
+    /* Rose-gold hover border for datepickers */
+    input.datepicker:hover {
+      border-color: var(--accent);
+    }
+
+    /* Rose-gold focus border for datepickers */
+    input.datepicker:focus,
+    input.datepicker:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(183, 110, 121, 0.25);
+      outline: none;
     }
 
     .links { margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
@@ -309,7 +298,6 @@
 
     footer { margin-top:18px; font-size:13px; color: rgba(255,255,255,0.7); }
 
-    /* booking grid */
     .booking-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -357,7 +345,6 @@
       }
     }
 
-    /* links buttons */
     .links .pill {
       gap: 8px;
       border-radius: 10px;
@@ -368,7 +355,6 @@
       cursor: pointer;
       transition: background-color 120ms ease;
 
-      /* make both buttons the same width */
       width: 180px;
       justify-content: center;
     }
@@ -421,10 +407,8 @@
 
 <body>
   <main class="bg with-menubar">
-    <!-- Fixed top menubar card -->
     <section class="card menubar" id="menubar" aria-label="Menu bar">
       <nav class="menu-row" aria-label="Primary menu">
-        <!-- 3P logo on the left -->
         <a class="menu-logo" href="index.html" aria-label="Hotel 3 Paardekens home">
           <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
         </a>
@@ -434,7 +418,6 @@
       </nav>
     </section>
 
-    <!-- Hero card containing mainlogo + bookingbar -->
     <section id="hero" class="card" aria-label="Hero">
       <section id="mainlogo" class="card" aria-label="Main logo">
         <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
@@ -453,7 +436,6 @@
       </section>
     </section>
 
-    <!-- Contact card (now full width band like hero) -->
     <section id="contact" class="card" aria-label="Contact details">
       <div class="contact-inner">
         <h1>Hotel 3 Paardekens</h1>
