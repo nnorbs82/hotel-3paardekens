@@ -35,7 +35,7 @@
       background-position: center;
       background-repeat: no-repeat;
 
-      /* FIX: keep the background fixed while content scrolls */
+      /* keep the background fixed while content scrolls */
       background-attachment: fixed;
 
       /* always stack vertically */
@@ -166,15 +166,20 @@
       padding: 10px 12px;
       border-radius: 10px;
       font-size: 15px;
-      min-width: 150px; /* changed to 150px minimum */
+      min-width: 150px;
     }
+
     .links { margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
     a { color:var(--text); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.35); }
     a:hover { border-bottom-color: rgba(255,255,255,0.9); }
+
     .pill { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); }
     .pill[aria-disabled="true"] { opacity:0.55; pointer-events:none; }
+
     footer { margin-top:18px; font-size:13px; color: rgba(255,255,255,0.7); }
 
+    /* booking grid */
     .booking-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -222,6 +227,7 @@
       }
     }
 
+    /* links buttons */
     .links .pill {
       gap: 8px;
       border-radius: 10px;
@@ -231,6 +237,10 @@
       text-decoration: none;
       cursor: pointer;
       transition: background-color 120ms ease;
+
+      /* FIX: make both buttons the same width */
+      width: 180px;
+      justify-content: center;
     }
 
     .links .pill:hover,
@@ -240,7 +250,10 @@
     @media (max-width:420px) {
       .booking-row { gap: 10px; }
       input.datepicker { min-width:150px; }
-      .links .pill { min-width:150px; }
+      .links .pill {
+        min-width:150px;
+        width: 100%; /* on very small screens let them fill the row evenly */
+      }
     }
 
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
@@ -271,6 +284,7 @@
       appearance: none;
     }
     .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
+
   </style>
 </head>
 
