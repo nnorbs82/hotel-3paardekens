@@ -18,6 +18,9 @@
 
       /* hero fade strength at the center (tweak 0.0 -> 1.0) */
       --hero-fade-alpha: 0.55;
+
+      /* accent color (matches your hover color) */
+      --accent: #B76E79;
     }
 
     * { box-sizing: border-box; }
@@ -155,10 +158,10 @@
       max-height: 500px;
 
       display: flex;
-      flex-direction: column;         /* stack mainlogo + bookingbar */
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;                      /* space between logo and bookingbar */
+      gap: 24px;
 
       padding: clamp(28px, 6vw, 64px);
     }
@@ -201,6 +204,19 @@
     #hero #bookingbar.card {
       width: min(920px, 92%);
       max-width: 920px;
+
+      /* thin accent border (same as the highlighted Book button) */
+      border: 1px solid var(--accent);
+    }
+
+    /* small heading inside bookingbar */
+    .booking-title {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-align: center;
     }
 
     /* Make menubar buttons match booking bar style */
@@ -224,7 +240,7 @@
     .menubar .pill:hover,
     .menubar .pill:focus,
     .menubar .pill:active {
-      background: #B76E79;
+      background: var(--accent);
       outline: none;
     }
 
@@ -289,9 +305,9 @@
       transition: background-color 120ms ease;
     }
 
-    .booking-row .pill:hover { background: #B76E79; }
+    .booking-row .pill:hover { background: var(--accent); }
     .booking-row .pill:focus,
-    .booking-row .pill:active { background: #B76E79; outline: none; }
+    .booking-row .pill:active { background: var(--accent); outline: none; }
 
     @media (max-width: 580px) {
       .booking-row .pill {
@@ -319,7 +335,7 @@
 
     .links .pill:hover,
     .links .pill:focus,
-    .links .pill:active { background: #B76E79; outline: none; }
+    .links .pill:active { background: var(--accent); outline: none; }
 
     @media (max-width:420px) {
       .booking-row { gap: 10px; }
@@ -385,6 +401,8 @@
       </section>
 
       <section class="card" id="bookingbar" aria-label="Booking bar">
+        <p class="booking-title">Check Availability</p>
+
         <div class="booking-row" aria-label="Booking controls">
           <label for="checkin" style="position:absolute; left:-9999px">Check-in date</label>
           <input id="checkin" class="datepicker" type="text" aria-label="Check-in date" placeholder="Check-in">
