@@ -35,6 +35,9 @@
       background-position: center;
       background-repeat: no-repeat;
 
+      /* FIX: keep the background fixed while content scrolls */
+      background-attachment: fixed;
+
       /* always stack vertically */
       display: flex;
       flex-direction: column;
@@ -196,7 +199,16 @@
       max-width: 100%;
     }
 
-    .booking-row .pill { gap: 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--text); text-decoration: none; cursor: pointer; transition: background-color 120ms ease; }
+    .booking-row .pill {
+      gap: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 120ms ease;
+    }
 
     .booking-row .pill:hover { background: #B76E79; }
     .booking-row .pill:focus,
@@ -210,7 +222,16 @@
       }
     }
 
-    .links .pill { gap: 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: var(--text); text-decoration: none; cursor: pointer; transition: background-color 120ms ease; padding: 10px 12px; font-size: 15px; min-width: 150px; display: inline-flex; align-items: center; justify-content: center; flex: 0 1 auto; }
+    .links .pill {
+      gap: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 120ms ease;
+    }
 
     .links .pill:hover,
     .links .pill:focus,
@@ -239,9 +260,17 @@
     .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { color: #fff !important; }
 
     .flatpickr-month-year-selectors { display:flex; gap:8px; justify-content:center; padding:6px 8px; }
-    .flatpickr-month-year-selectors select { background: rgba(255,255,255,0.02); color:#fff !important; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:6px 8px; font-size:13px; -webkit-appearance: none; appearance: none; }
+    .flatpickr-month-year-selectors select {
+      background: rgba(255,255,255,0.02);
+      color:#fff !important;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:6px;
+      padding:6px 8px;
+      font-size:13px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
     .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
-
   </style>
 </head>
 
@@ -272,7 +301,7 @@
         <a href="https://www.3paardekens.com" target="_blank" rel="noopener noreferrer">www.3paardekens.com</a>
       </p>
 
-    <div class="links" aria-label="Quick actions">
+      <div class="links" aria-label="Quick actions">
         <a class="pill" href="mailto:info@3paardekens.be">Email</a>
         <a class="pill" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer">Open in Maps</a>
       </div>
