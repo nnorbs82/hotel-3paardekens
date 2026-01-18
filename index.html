@@ -129,12 +129,21 @@
       display: block;
     }
 
-    /* main logo card image */
+    /* HERO sizing for mainlogo card only */
+    #mainlogo.card {
+      width: min(920px, 100%);
+      min-height: calc(100svh - (70px + 50px + 56px)); /* viewport minus menubar+gap+base padding (top+bottom) */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(28px, 6vw, 64px);
+    }
+
     #mainlogo img {
-      height: 120px;
-      width: auto;
+      width: min(520px, 70vw);
+      height: auto;
       max-width: 100%;
-      display: inline-block;
+      display: block;
     }
 
     /* Make menubar buttons match booking bar style */
@@ -263,7 +272,8 @@
         width: 100%;
       }
 
-      #mainlogo img { height: 96px; }
+      /* slightly smaller hero logo on small screens */
+      #mainlogo img { width: min(420px, 78vw); }
     }
 
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
@@ -313,7 +323,7 @@
       </nav>
     </section>
 
-    <!-- New first card: mainlogo -->
+    <!-- Hero card: mainlogo -->
     <section id="mainlogo" class="card" aria-label="Main logo">
       <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
     </section>
