@@ -129,14 +129,20 @@
       display: block;
     }
 
-    /* HERO sizing for hero card */
+    /* HERO sizing for hero card (FULL SCREEN WIDTH) */
     #hero.card {
-      width: min(920px, 100%);
+      width: 100%;
+      max-width: none;
+      border-radius: 0; /* optional: makes it feel like a full-width hero band */
+
       min-height: calc(100svh - (70px + 50px + 56px)); /* viewport minus menubar+gap+base padding */
       max-height: 500px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
+      /* keep some internal breathing room */
       padding: clamp(28px, 6vw, 64px);
     }
 
