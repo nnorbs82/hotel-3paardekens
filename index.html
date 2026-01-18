@@ -253,7 +253,6 @@
     h1 { margin: 0 0 12px 0; font-size: clamp(26px, 4vw, 40px); }
     .lines { margin: 0; font-size: clamp(16px, 2.1vw, 18px); line-height: 1.65; color: var(--muted); }
 
-    /* Datepicker inputs */
     input.datepicker {
       -webkit-appearance: none;
       appearance: none;
@@ -266,7 +265,7 @@
       min-width: 150px;
 
       text-align: center;
-      outline: none; /* remove default blue outline */
+      outline: none;
       transition: border-color 120ms ease, box-shadow 120ms ease;
     }
 
@@ -275,12 +274,10 @@
       color: rgba(255,255,255,0.75);
     }
 
-    /* Rose-gold hover border for datepickers */
     input.datepicker:hover {
       border-color: var(--accent);
     }
 
-    /* Rose-gold focus border for datepickers */
     input.datepicker:focus,
     input.datepicker:focus-visible {
       border-color: var(--accent);
@@ -374,8 +371,35 @@
       #hero #mainlogo img { width: min(420px, 78vw); }
     }
 
+    /* Flatpickr styling */
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
     .flatpickr-calendar, .flatpickr-calendar * { color: #fff !important; }
+
+    /* Change "active" day highlight (blue) to rose gold */
+    .flatpickr-day.selected,
+    .flatpickr-day.selected:hover,
+    .flatpickr-day.selected:focus,
+    .flatpickr-day.startRange,
+    .flatpickr-day.startRange:hover,
+    .flatpickr-day.startRange:focus,
+    .flatpickr-day.endRange,
+    .flatpickr-day.endRange:hover,
+    .flatpickr-day.endRange:focus {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+      color: #fff !important;
+    }
+
+    /* Also handle "today" if flatpickr marks it with a border/dot */
+    .flatpickr-day.today {
+      border-color: var(--accent) !important;
+    }
+    .flatpickr-day.today:hover,
+    .flatpickr-day.today:focus {
+      background: rgba(183, 110, 121, 0.25) !important;
+      border-color: var(--accent) !important;
+    }
+
     .flatpickr-calendar .flatpickr-day:hover,
     .flatpickr-calendar .flatpickr-weekday:hover,
     .flatpickr-calendar .flatpickr-months .flatpickr-prev-month:hover,
@@ -388,7 +412,6 @@
     .flatpickr-current-month .numInputWrapper .arrowUp svg,
     .flatpickr-current-month .numInputWrapper .arrowDown svg { fill: #fff !important; stroke: #fff !important; }
     .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: var(--fp-dim-month) !important; }
-    .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange { color: #fff !important; }
 
     .flatpickr-month-year-selectors { display:flex; gap:8px; justify-content:center; padding:6px 8px; }
     .flatpickr-month-year-selectors select {
