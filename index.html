@@ -24,12 +24,10 @@
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--text);
       background: #000;
-      position: relative;
     }
 
-    /* Fixed background layer */
-    body::before {
-      content: '';
+    /* Fixed background layer - actual element for better browser compatibility */
+    .fixed-background {
       position: fixed;
       top: 0;
       left: 0;
@@ -42,11 +40,13 @@
       background-position: center;
       background-repeat: no-repeat;
       z-index: -1;
+      pointer-events: none;
     }
 
     .bg {
       min-height: 100vh;
-      /* Remove background properties - now handled by body::before */
+      position: relative;
+      /* Background is now in separate fixed div */
 
       /* always stack vertically */
       display: flex;
@@ -259,6 +259,9 @@
 </head>
 
 <body>
+  <!-- Fixed background layer -->
+  <div class="fixed-background" aria-hidden="true"></div>
+  
   <main class="bg with-menubar">
     <!-- Fixed top menubar card -->
     <section class="card menubar" id="menubar" aria-label="Menu bar">
