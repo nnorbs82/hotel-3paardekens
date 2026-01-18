@@ -140,34 +140,38 @@
       padding: clamp(28px, 6vw, 64px);
     }
 
-    /* Mainlogo card inside hero: remove its own card chrome, and stretch full viewport width */
+    /* Mainlogo card inside hero: KEEP card look, but cap height to 400px */
     #hero #mainlogo.card {
-      width: 100vw;           /* full screen width */
-      max-width: none;        /* remove 400px cap */
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      padding: 0;
+      width: min(520px, 90%);
+      max-height: 400px;
 
-      /* ensure mainlogo container never exceeds 500px */
-      max-height: 500px;
+      /* ensure it looks like a card (slightly darker, see-through) */
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+
+      border-radius: var(--radius);
+      padding: 22px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
     }
 
     #hero #mainlogo img {
-      width: min(520px, 70vw);
+      width: min(420px, 70vw);
       height: auto;
       max-width: 100%;
+
+      /* keep the image from making the card taller than 400px */
+      max-height: calc(400px - 44px); /* 400 minus ~top+bottom padding (22px+22px) */
+      object-fit: contain;
+
       display: block;
       margin: 0 auto;
-
-      /* ensure the image never makes the card taller than 500px */
-      max-height: 500px;
-      object-fit: contain;
     }
 
     /* Make menubar buttons match booking bar style */
@@ -296,7 +300,8 @@
         width: 100%;
       }
 
-      #hero #mainlogo img { width: min(420px, 78vw); }
+      /* slightly smaller on tiny screens */
+      #hero #mainlogo img { width: min(360px, 78vw); }
     }
 
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
