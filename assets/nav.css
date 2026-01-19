@@ -75,11 +75,11 @@
     top: 70px;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid rgba(183, 110, 121, 0.6);
+    border-bottom: 1px solid rgba(183, 110, 121, 0.6);
     padding: 20px 14px;
     display: none;
     flex-direction: column;
