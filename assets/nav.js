@@ -29,9 +29,21 @@
     if (!burgerBtn || !mobileMenu || !menubar) return;
 
     // Determine current page and update links
-    // Use DOM-based detection: check for #rooms element (unique to rooms.html)
-    // This works reliably across GitHub Pages, dev servers, and local file:// URLs
-    const currentPage = document.getElementById('rooms') ? 'rooms' : 'index';
+    // Primary: URL-based detection to handle production routing (/rooms, /rooms/, rooms.html, rooms.htm)
+    // Fallback: DOM-based detection for cases where URL detection might not work
+    // This ensures About Us and Contact links navigate to homepage sections when on rooms page
+    let currentPage = 'index';
+    const pathname = window.location.pathname;
+    
+    // Check if we're on the rooms page using URL patterns
+    if (pathname.match(/\/rooms(\/|\.html?)?$/i) || pathname.endsWith('/rooms')) {
+      currentPage = 'rooms';
+    }
+    // Fallback: check for #rooms element (unique to rooms.html)
+    else if (document.getElementById('rooms')) {
+      currentPage = 'rooms';
+    }
+    
     const links = mobileMenu.querySelectorAll('a.pill');
     
     links.forEach(link => {
