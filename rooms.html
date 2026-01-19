@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hotel 3 Paardekens - Rooms</title>
   <meta name="description" content="Hotel 3 Paardekens - Rooms overview" />
+  <link rel="stylesheet" href="assets/nav.css">
   <style>
     :root {
       --card-bg: rgba(0, 0, 0, 0.55);
@@ -489,14 +490,7 @@
   <main class="bg with-menubar">
     <!-- Fixed top menubar -->
     <section class="card menubar" id="menubar" aria-label="Menu bar">
-      <nav class="menu-row" aria-label="Primary menu">
-        <a class="menu-logo" href="index.html" aria-label="Hotel 3 Paardekens home">
-          <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo" />
-        </a>
-
-        <a class="pill" href="index.html#contactinfo">Contact</a>
-        <a class="pill" href="#rooms">Rooms</a>
-      </nav>
+      <!-- Navigation loaded via nav.js -->
     </section>
 
     <section id="rooms" class="card" aria-label="Rooms">
@@ -843,5 +837,6 @@
 
     document.querySelectorAll('.room-slider').forEach(initRoomSlider);
   </script>
+  <script src="assets/nav.js"></script>
 </body>
 </html>

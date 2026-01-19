@@ -6,6 +6,7 @@
   <title>Hotel 3 Paardekens - Contact</title>
   <meta name="description" content="Hotel 3 Paardekens - Contact details" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="assets/nav.css">
   <style>
     :root {
       --card-bg: rgba(0, 0, 0, 0.55);
@@ -610,15 +611,7 @@
 <body>
   <main class="bg with-menubar">
     <section class="card menubar" id="menubar" aria-label="Menu bar">
-      <nav class="menu-row" aria-label="Primary menu">
-        <a class="menu-logo" href="index.html" aria-label="Hotel 3 Paardekens home">
-          <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
-        </a>
-
-        <a class="pill" href="#aboutus">About Us</a>
-        <a class="pill" href="#contact">Contact</a>
-        <a class="pill" href="rooms.html">Rooms</a>
-      </nav>
+      <!-- Navigation loaded via nav.js -->
     </section>
 
     <section id="hero" class="card" aria-label="Hero">
@@ -800,5 +793,6 @@
     document.getElementById('y').textContent = new Date().getFullYear();
     updateBookState();
   </script>
+  <script src="assets/nav.js"></script>
 </body>
 </html>
