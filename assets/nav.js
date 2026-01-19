@@ -34,17 +34,20 @@
     
     // Compute base path for GitHub Pages compatibility
     // Extract the directory portion of the current pathname
-    const pathname = window.location.pathname;
-    const lastSlashIndex = pathname.lastIndexOf('/');
-    // If no slash found (shouldn't happen in practice), use root
-    const basePath = lastSlashIndex >= 0 ? pathname.substring(0, lastSlashIndex + 1) : '/';
+    const currentPathname = window.location.pathname;
+    const lastSlashIndex = currentPathname.lastIndexOf('/');
+    // Calculate base path: everything up to and including the last slash
+    // e.g., "/repo/rooms.html" -> "/repo/", "/" -> "/"
+    const basePath = lastSlashIndex > 0 
+      ? currentPathname.substring(0, lastSlashIndex + 1)
+      : '/';
     
     links.forEach(link => {
       let href = link.getAttribute(`data-page-${currentPage}`);
       if (href) {
         // If on rooms page and href points to index.html, prepend the base path
         if (currentPage === 'rooms' && href.startsWith('index.html')) {
-          // basePath already ends with '/', so concatenation is safe
+          // basePath always ends with '/', href starts with 'index.html'
           href = basePath + href;
         }
         link.setAttribute('href', href);
