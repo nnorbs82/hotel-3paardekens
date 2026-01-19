@@ -28,6 +28,10 @@
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
+
+    /* Fix anchor jump under fixed menubar */
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -240,6 +244,9 @@
 
       padding: clamp(26px, 5vw, 46px);
       text-align: left;
+
+      /* extra safety for browsers that ignore scroll-padding-top on html */
+      scroll-margin-top: 90px;
     }
 
     #aboutus .aboutus-inner {
@@ -285,12 +292,6 @@
     .aboutus-copy p { margin: 0 0 16px 0; }
     .aboutus-copy p:last-child { margin-bottom: 0; }
 
-    /* Make About Us button match the Contact "Email" pill */
-    .aboutus-actions {
-      display: flex;
-      justify-content: center;
-      margin-top: 18px;
-    }
     /* reuse the existing .links .pill sizing/style by applying class="pill" and placing inside .links */
     #aboutus .links {
       margin-top: 18px;
@@ -396,6 +397,8 @@
       -webkit-backdrop-filter: none;
 
       padding: clamp(26px, 5vw, 46px);
+
+      scroll-margin-top: 90px;
     }
 
     #contact .contact-inner {
@@ -656,7 +659,6 @@
                 with an absolutely impressive view on St Rumbold's Cathedral.
               </p>
 
-              <!-- Book Now matches Contact Email pill (same class + container) -->
               <div class="links" aria-label="About us actions">
                 <a class="pill" href="#" id="aboutusBook">Book Now</a>
               </div>
@@ -787,7 +789,6 @@
       openBookingWithSelectedDates();
     });
 
-    // About Us "Book now" button uses the same booking dates as the booking bar
     const aboutusBook = document.getElementById('aboutusBook');
     if (aboutusBook) {
       aboutusBook.addEventListener('click', (e) => {
