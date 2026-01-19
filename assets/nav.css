@@ -1,0 +1,113 @@
+/* Burger button - hidden on desktop, visible on mobile */
+.burger-btn {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10001;
+  outline: none;
+}
+
+.burger-btn:focus-visible {
+  outline: 2px solid rgba(183, 110, 121, 0.8);
+  outline-offset: 2px;
+}
+
+.burger-icon {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  margin: 0 auto;
+  transition: background 200ms ease;
+}
+
+.burger-icon::before,
+.burger-icon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  left: 0;
+  transition: transform 200ms ease, top 200ms ease, bottom 200ms ease;
+}
+
+.burger-icon::before {
+  top: -8px;
+}
+
+.burger-icon::after {
+  bottom: -8px;
+}
+
+/* Animate burger to X when expanded */
+.burger-btn[aria-expanded="true"] .burger-icon {
+  background: transparent;
+}
+
+.burger-btn[aria-expanded="true"] .burger-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.burger-btn[aria-expanded="true"] .burger-icon::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* Mobile menu styles */
+@media (max-width: 599px) {
+  .burger-btn {
+    display: block;
+  }
+
+  .menu-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 20px 14px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10000;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+
+  .menu-links.is-open {
+    display: flex;
+  }
+
+  .menu-links .pill {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 12px;
+    font-size: 16px;
+  }
+}
+
+/* Desktop menu - ensure horizontal layout */
+@media (min-width: 600px) {
+  .menu-links {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+}
