@@ -390,6 +390,168 @@
       #hero #mainlogo img { width: min(420px, 78vw); }
     }
 
+    /* ===== About Us section (recreate style from image) ===== */
+    #aboutus.card {
+      width: 100%;
+      max-width: none;
+      border-radius: 0;
+
+      background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,var(--band-fade-alpha)) 50%,
+        rgba(0,0,0,0) 100%
+      );
+
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+
+      padding: clamp(26px, 5vw, 46px);
+      text-align: left;
+    }
+
+    #aboutus .aboutus-inner {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .aboutus-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(18px, 3vw, 36px);
+      align-items: start;
+    }
+
+    .aboutus-kicker {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      text-transform: none;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+    }
+
+    .aboutus-title {
+      margin: 0 0 14px 0;
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: 0.95;
+      font-weight: 500;
+      text-align: center;
+      /* serif-ish look similar to the sample */
+      font-family: ui-serif, "Georgia", "Times New Roman", Times, serif;
+      letter-spacing: -0.01em;
+    }
+
+    .aboutus-copy {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .aboutus-copy p { margin: 0 0 16px 0; }
+    .aboutus-copy p:last-child { margin-bottom: 0; }
+
+    .aboutus-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .aboutus-book {
+      border-radius: 0;
+      padding: 10px 18px;
+      background: rgba(183, 110, 121, 0.22);
+      border: 1px solid rgba(183, 110, 121, 0.55);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background-color 120ms ease, border-color 120ms ease;
+    }
+    .aboutus-book:hover,
+    .aboutus-book:focus {
+      background: rgba(183, 110, 121, 0.4);
+      border-color: rgba(183, 110, 121, 0.8);
+      outline: none;
+    }
+
+    .aboutus-collage {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 520px;
+    }
+
+    .aboutus-collage img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.25);
+    }
+
+    .aboutus-img-top {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 78%;
+      height: 44%;
+      z-index: 1;
+    }
+
+    .aboutus-img-bottom {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 78%;
+      height: 52%;
+      z-index: 1;
+    }
+
+    .aboutus-img-right {
+      position: absolute;
+      right: 0;
+      top: 15%;
+      width: 44%;
+      height: 68%;
+      z-index: 2;
+    }
+
+    @media (max-width: 980px) {
+      .aboutus-grid {
+        grid-template-columns: 1fr;
+      }
+      .aboutus-collage {
+        max-width: 640px;
+        min-height: 540px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .aboutus-collage {
+        min-height: 480px;
+      }
+      .aboutus-img-right {
+        top: 18%;
+        width: 52%;
+      }
+      .aboutus-img-top,
+      .aboutus-img-bottom {
+        width: 86%;
+      }
+    }
+    /* ===== End About Us ===== */
+
     /* Flatpickr styling */
     .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
     .flatpickr-calendar, .flatpickr-calendar * { color: #fff !important; }
@@ -455,6 +617,7 @@
         </a>
 
         <a class="pill" href="#contact">Contact</a>
+        <a class="pill" href="#aboutus">About Us</a>
         <a class="pill" href="rooms.html">Rooms</a>
       </nav>
     </section>
@@ -496,6 +659,49 @@
         </div>
 
         <footer>© <span id="y"></span> Hotel 3 Paardekens</footer>
+      </div>
+    </section>
+
+    <!-- About Us (new card under Contact) -->
+    <section id="aboutus" class="card" aria-label="About us">
+      <div class="aboutus-inner">
+        <div class="aboutus-grid">
+          <div class="aboutus-left" aria-label="About us text">
+            <p class="aboutus-kicker">Hotel 3 Paardekens</p>
+            <h2 class="aboutus-title">About Us</h2>
+
+            <div class="aboutus-copy">
+              <p>
+                The 33 rooms of the charming Hotel 3 Paardekens were thoroughly renovated and refurbished in 2010.
+                In other words: a 'historical renovation'! Everything is there to welcome you with the comfort of a 3-star hotel.
+                The counter in the reception area exudes the grandeur of the past. You can sit and chat at the bar or relax in one of the cozy armchairs.
+              </p>
+
+              <p>
+                The pride and uniqueness of Hotel 3 Paardekens, however, is the sublime glass-enclosed breakfast room on the top floor,
+                with an absolutely impressive view on St Rumbold's Cathedral.
+              </p>
+
+              <div class="aboutus-actions" aria-label="About us actions">
+                <a class="aboutus-book" href="#" id="aboutusBook">Book now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="aboutus-right" aria-label="About us images">
+            <div class="aboutus-collage" aria-label="About us photo collage">
+              <div class="aboutus-img-top">
+                <img src="aboutus/aboutus1.jpg" alt="Hotel 3 Paardekens interior">
+              </div>
+              <div class="aboutus-img-bottom">
+                <img src="aboutus/aboutus2.jpg" alt="Hotel 3 Paardekens room">
+              </div>
+              <div class="aboutus-img-right">
+                <img src="aboutus/aboutus3.jpg" alt="Hotel 3 Paardekens detail">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -561,8 +767,7 @@
       bookEl.setAttribute('aria-disabled', disabled ? 'true' : 'false');
     }
 
-    bookEl.addEventListener('click', (e) => {
-      e.preventDefault();
+    function openBookingWithSelectedDates() {
       const start = checkInEl.value;
       const end = checkOutEl.value;
       if (!start || !end) { alert('Please select both check-in and check-out dates.'); return; }
@@ -575,7 +780,21 @@
       const base = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6';
       const url = `${base}?mewsStart=${encodeURIComponent(start)}&mewsEnd=${encodeURIComponent(end)}&mewsRoute=rooms`;
       window.open(url, '_blank', 'noopener');
+    }
+
+    bookEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      openBookingWithSelectedDates();
     });
+
+    // About Us "Book now" button uses the same booking dates as the booking bar
+    const aboutusBook = document.getElementById('aboutusBook');
+    if (aboutusBook) {
+      aboutusBook.addEventListener('click', (e) => {
+        e.preventDefault();
+        openBookingWithSelectedDates();
+      });
+    }
 
     document.getElementById('y').textContent = new Date().getFullYear();
     updateBookState();
