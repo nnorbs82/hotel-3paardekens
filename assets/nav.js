@@ -17,10 +17,11 @@
 
   // Initialize navigation after loading
   function initNav() {
+    const menubar = document.getElementById('menubar');
     const burgerBtn = document.getElementById('burgerBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     
-    if (!burgerBtn || !mobileMenu) return;
+    if (!burgerBtn || !mobileMenu || !menubar) return;
 
     // Determine current page and update links
     const currentPage = window.location.pathname.includes('rooms.html') ? 'rooms' : 'index';
