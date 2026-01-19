@@ -29,7 +29,9 @@
     if (!burgerBtn || !mobileMenu || !menubar) return;
 
     // Determine current page and update links
-    const currentPage = window.location.pathname.includes('rooms.html') ? 'rooms' : 'index';
+    // Use DOM-based detection: check for #rooms element (unique to rooms.html)
+    // This works reliably across GitHub Pages, dev servers, and local file:// URLs
+    const currentPage = document.getElementById('rooms') ? 'rooms' : 'index';
     const links = mobileMenu.querySelectorAll('a.pill');
     
     links.forEach(link => {
