@@ -36,7 +36,8 @@
     const pathname = window.location.pathname;
     
     // Check if we're on the rooms page using URL patterns
-    if (pathname.match(/\/rooms(\/|\.html?)?$/i) || pathname.endsWith('/rooms')) {
+    // Handles: /rooms, /rooms/, /rooms.html, /rooms.htm, rooms.html, rooms.htm
+    if (pathname.match(/\/?rooms(\/|\.html?)?$/i)) {
       currentPage = 'rooms';
     }
     // Fallback: check for #rooms element (unique to rooms.html)
