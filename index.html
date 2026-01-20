@@ -391,7 +391,7 @@
 
     /* Sister Hotel section */
     #sisterhotel.card {
-      width: 100vw;
+      width: calc(100% + 56px);
       max-width: none;
       border-radius: 0;
 
@@ -407,14 +407,9 @@
 
       scroll-margin-top: 90px;
       
-      /* Break out of parent padding */
+      /* Break out of parent padding (28px on each side) */
       margin-left: -28px;
       margin-right: -28px;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
     }
 
     #sisterhotel .sisterhotel-inner {
