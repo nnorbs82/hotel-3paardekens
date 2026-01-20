@@ -391,11 +391,11 @@
 
     /* Sister Hotel section */
     #sisterhotel.card {
-      width: 100%;
+      width: 100vw;
       max-width: none;
       border-radius: 0;
 
-      background: #000;
+      background: rgba(0, 0, 0, 0.85);
 
       border: 0;
       box-shadow: none;
@@ -406,6 +406,15 @@
       text-align: left;
 
       scroll-margin-top: 90px;
+      
+      /* Break out of parent padding */
+      margin-left: -28px;
+      margin-right: -28px;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
     }
 
     #sisterhotel .sisterhotel-inner {
