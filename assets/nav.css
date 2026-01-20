@@ -101,13 +101,42 @@
   }
 }
 
-/* Desktop menu - ensure horizontal layout */
+/* Desktop menu - ensure horizontal layout and right-align */
 @media (min-width: 600px) {
   .menu-links {
     display: flex;
     flex-direction: row;
     gap: 12px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+  }
+  
+  /* Remove button chrome on desktop */
+  .menu-links .pill {
+    background: transparent;
+    border: 1px solid transparent;
+    transition: color 120ms ease;
+  }
+  
+  /* Hover: highlight text and underline instead of background */
+  .menu-links .pill:hover {
+    background: transparent;
+    color: #B76E79;
+    text-decoration: underline;
+    text-decoration-color: #B76E79;
+  }
+  
+  /* Focus-visible for keyboard navigation */
+  .menu-links .pill:focus-visible {
+    background: transparent;
+    outline: 2px solid rgba(183, 110, 121, 0.8);
+    outline-offset: 2px;
+    color: #B76E79;
+  }
+  
+  /* Active state */
+  .menu-links .pill:active {
+    background: transparent;
+    color: #B76E79;
   }
 }
