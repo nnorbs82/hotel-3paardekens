@@ -432,11 +432,24 @@
     .sisterhotel-title {
       margin: 0 0 20px 0;
       font-size: clamp(36px, 5vw, 56px);
-      line-height: 1.1;
+      line-height: 0.95;
       font-weight: 400;
       font-family: 'Playfair Display', ui-serif, "Georgia", "Times New Roman", Times, serif;
       letter-spacing: -0.01em;
       color: rgba(255,255,255,0.95);
+      position: relative;
+    }
+
+    .sisterhotel-title .title-line1 {
+      display: block;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .sisterhotel-title .title-line2 {
+      display: block;
+      color: var(--accent); /* rose gold */
+      margin-left: 30px;
+      margin-top: -8px;
     }
 
     .sisterhotel-copy {
@@ -795,19 +808,15 @@
           </div>
 
           <div class="sisterhotel-right">
-            <p class="sisterhotel-kicker">Our Sister Hotel</p>
-            <h2 class="sisterhotel-title">Hotel Elisabeth</h2>
+            <p class="sisterhotel-kicker">Elegance - Comfort - Design</p>
+            <h2 class="sisterhotel-title">
+              <span class="title-line1">Discover Our</span>
+              <span class="title-line2">Sister Property</span>
+            </h2>
 
             <div class="sisterhotel-copy">
               <p>
-                Discover Hotel Elisabeth, our sister property located in the heart of the city. 
-                With modern amenities and contemporary design, Hotel Elisabeth offers a unique experience 
-                for discerning travelers seeking comfort and style.
-              </p>
-
-              <p>
-                From luxurious rooms to exceptional service, Hotel Elisabeth combines elegance with 
-                the warm hospitality you've come to expect from our family of hotels.
+                Hotel Elisabeth is a former Hospital dating from the Inter-war Period. It has been respectively transformed in keeping with the existing architecture to a modern and cosy four-star Hotel. It is situated less than 200m walking distance from the heart of Mechelen city and offers 66 stylish and contemporary designed rooms. These rooms provide maximum comfort for guests traveling on business or those wishing to explore the unique Historical City. The Breakfast Room is beautifully light and overlooks a lovely courtyard with olive trees. Parking is located beneath the Hotel.
               </p>
 
               <div class="links">
