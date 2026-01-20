@@ -7,6 +7,9 @@
   <meta name="description" content="Hotel 3 Paardekens - Contact details" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="assets/nav.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --card-bg: rgba(0, 0, 0, 0.55);
@@ -386,6 +389,103 @@
       }
     }
 
+    /* Sister Hotel section */
+    #sisterhotel.card {
+      width: 100%;
+      max-width: none;
+      border-radius: 0;
+
+      background: #000;
+
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+
+      padding: clamp(26px, 5vw, 46px);
+      text-align: left;
+
+      scroll-margin-top: 90px;
+    }
+
+    #sisterhotel .sisterhotel-inner {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .sisterhotel-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(18px, 3vw, 36px);
+      align-items: center;
+    }
+
+    .sisterhotel-kicker {
+      margin: 0 0 10px 0;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+    }
+
+    .sisterhotel-title {
+      margin: 0 0 20px 0;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.1;
+      font-weight: 400;
+      font-family: 'Playfair Display', ui-serif, "Georgia", "Times New Roman", Times, serif;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .sisterhotel-copy {
+      max-width: 540px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .sisterhotel-copy p { margin: 0 0 16px 0; }
+    .sisterhotel-copy p:last-child { margin-bottom: 0; }
+
+    #sisterhotel .links {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .sisterhotel-image {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .sisterhotel-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @media (max-width: 980px) {
+      .sisterhotel-grid {
+        grid-template-columns: 1fr;
+      }
+      .sisterhotel-image {
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      #sisterhotel .links {
+        justify-content: center;
+      }
+    }
+
     /* Contact section */
     #contact.card {
       width: 100%;
@@ -677,6 +777,41 @@
 
               <div class="aboutus-img-right">
                 <img src="aboutus/aboutus2.jpg" alt="Hotel 3 Paardekens detail">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sister Hotel section -->
+    <section id="sisterhotel" class="card" aria-label="Sister Hotel">
+      <div class="sisterhotel-inner">
+        <div class="sisterhotel-grid">
+          <div class="sisterhotel-left" aria-label="Sister hotel image">
+            <div class="sisterhotel-image">
+              <img src="elisabeth/sisterhotel.jpg" alt="Hotel Elisabeth">
+            </div>
+          </div>
+
+          <div class="sisterhotel-right" aria-label="Sister hotel text">
+            <p class="sisterhotel-kicker">Our Sister Hotel</p>
+            <h2 class="sisterhotel-title">Hotel Elisabeth</h2>
+
+            <div class="sisterhotel-copy">
+              <p>
+                Discover Hotel Elisabeth, our sister property located in the heart of the city. 
+                With modern amenities and contemporary design, Hotel Elisabeth offers a unique experience 
+                for discerning travelers seeking comfort and style.
+              </p>
+
+              <p>
+                From luxurious rooms to exceptional service, Hotel Elisabeth combines elegance with 
+                the warm hospitality you've come to expect from our family of hotels.
+              </p>
+
+              <div class="links" aria-label="Sister hotel actions">
+                <a class="pill" href="#" id="sisterhotelVisit">Visit Hotel Elisabeth</a>
               </div>
             </div>
           </div>
