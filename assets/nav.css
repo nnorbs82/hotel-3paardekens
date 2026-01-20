@@ -121,9 +121,9 @@
   /* Hover: highlight text and underline instead of background */
   .menu-links .pill:hover {
     background: transparent;
-    color: #B76E79;
+    color: var(--accent);
     text-decoration: underline;
-    text-decoration-color: #B76E79;
+    text-decoration-color: var(--accent);
   }
   
   /* Focus-visible for keyboard navigation */
@@ -131,12 +131,12 @@
     background: transparent;
     outline: 2px solid rgba(183, 110, 121, 0.8);
     outline-offset: 2px;
-    color: #B76E79;
+    color: var(--accent);
   }
   
   /* Active state */
   .menu-links .pill:active {
     background: transparent;
-    color: #B76E79;
+    color: var(--accent);
   }
 }
