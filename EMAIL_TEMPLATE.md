@@ -150,7 +150,7 @@ Password Reset - Hotel 3 Paardekens Admin Panel
           <tr>
             <td style="padding: 30px; background-color: #f8f9fa; text-align: center; border-top: 1px solid #e9ecef;">
               <p style="margin: 0 0 10px 0; color: #888888; font-size: 14px;">
-                © 2026 Hotel 3 Paardekens
+                © Hotel 3 Paardekens
               </p>
               <p style="margin: 0; color: #aaaaaa; font-size: 12px;">
                 This is an automated email. Please do not reply.

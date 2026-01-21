@@ -174,17 +174,18 @@
         // Prepare template parameters for EmailJS
         // The EmailJS service uses the public key initialized in hoteladmin.html
         // Each key-value pair below will replace {{key}} in the email template
+        const resetUrl = window.location.origin + '/hoteladmin.html';
         const templateParams = {
           // Standardized variable names (recommended for all templates)
           email: email,                                        // Maps to {{email}} in template
-          link: window.location.origin + '/hoteladmin.html',  // Maps to {{link}} in template
+          link: resetUrl,                                      // Maps to {{link}} in template
           
           // Legacy/additional variables (for backward compatibility)
           to_email: email,                                    // Maps to {{to_email}} in template
           to_name: 'Admin',                                   // Maps to {{to_name}} in template
           admin_email: ADMIN_EMAIL,                           // Maps to {{admin_email}} in template
           admin_password: ADMIN_PASSWORD,                     // Maps to {{admin_password}} in template
-          reset_link: window.location.origin + '/hoteladmin.html',  // Maps to {{reset_link}} in template
+          reset_link: resetUrl,                               // Maps to {{reset_link}} in template (legacy)
           message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'  // Maps to {{message}} in template
         };
         
