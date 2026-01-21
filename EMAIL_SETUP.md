@@ -74,9 +74,19 @@ Hotel 3 Paardekens Team
 - Use HTTPS for all communications
 - Store passwords securely in a database with proper hashing
 
+## Verification
+
+After setting up EmailJS, use the **EMAILJS_VERIFICATION_CHECKLIST.md** to verify your configuration is correct. This checklist will guide you through verifying:
+- Public Key is active
+- Service exists and is enabled
+- Template exists with all required variables
+- Account limits are not exceeded
+
 ## Troubleshooting
 
-If you encounter errors with the password reset functionality, please see **TROUBLESHOOTING_PASSWORD_RESET.md** for a comprehensive troubleshooting guide.
+If you encounter errors with the password reset functionality:
+1. **First**: Complete the **EMAILJS_VERIFICATION_CHECKLIST.md** to ensure your EmailJS account is properly configured
+2. **If issues persist**: See **TROUBLESHOOTING_PASSWORD_RESET.md** for comprehensive troubleshooting
 
 ### Quick Troubleshooting
 
