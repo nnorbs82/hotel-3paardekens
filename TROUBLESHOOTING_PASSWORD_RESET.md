@@ -2,6 +2,19 @@
 
 This guide will help you resolve issues with the password reset email functionality.
 
+## 🚀 Quick Start: Use the Verification Checklist
+
+**Before troubleshooting**, complete the **[EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md)** to systematically verify your EmailJS configuration. The checklist covers:
+- Public Key activation
+- Service setup and enablement  
+- Template configuration and variables
+- Account usage limits
+- Step-by-step testing
+
+If the checklist doesn't resolve your issue, continue with the detailed troubleshooting below.
+
+---
+
 ## Error: "There was an error sending the password reset email"
 
 This error occurs when the EmailJS service fails to send the email. Here are the most common causes and solutions:
