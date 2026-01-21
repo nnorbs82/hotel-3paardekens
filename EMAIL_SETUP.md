@@ -76,6 +76,10 @@ Hotel 3 Paardekens Team
 
 ## Troubleshooting
 
+If you encounter errors with the password reset functionality, please see **TROUBLESHOOTING_PASSWORD_RESET.md** for a comprehensive troubleshooting guide.
+
+### Quick Troubleshooting
+
 - **Email not received?** Check spam/junk folder
 - **"Email service not configured" error?** Verify EmailJS SDK is loaded in the browser console
 - **"Failed to send" error?** 
@@ -83,6 +87,7 @@ Hotel 3 Paardekens Team
   - Verify Service ID and Template ID match your EmailJS dashboard
   - Ensure your EmailJS service is active
   - Check that email service provider allows sending from EmailJS
+  - **See TROUBLESHOOTING_PASSWORD_RESET.md for detailed steps**
 - **"Email address not found" error?** Make sure you entered `rev.management@groupdaedalus.be` exactly
 
 ## Additional Configuration

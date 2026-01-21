@@ -139,23 +139,39 @@
         // Since this is a demo app with hardcoded credentials,
         // we'll send the password directly in the email
         // In a production environment, you would send a secure token instead
+        
+        // Prepare template parameters for EmailJS
+        // The EmailJS service uses the public key initialized in hoteladmin.html
+        const templateParams = {
+          to_email: email,
+          to_name: 'Admin',
+          admin_email: ADMIN_EMAIL,
+          admin_password: ADMIN_PASSWORD,
+          reset_link: window.location.origin + '/hoteladmin.html',
+          message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
+        };
+        
+        console.log('Sending password reset email with params:', {
+          serviceId: EMAILJS_SERVICE_ID,
+          templateId: EMAILJS_TEMPLATE_ID,
+          to_email: email
+        });
+        
         const response = await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
-          {
-            to_email: email,
-            to_name: 'Admin',
-            admin_email: ADMIN_EMAIL,
-            admin_password: ADMIN_PASSWORD,
-            reset_link: window.location.origin + '/hoteladmin.html',
-            message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
-          }
+          templateParams
         );
         
         console.log('Password reset email sent successfully', response);
         return { success: true };
       } catch (error) {
         console.error('Error sending password reset email:', error);
+        console.error('Error details:', {
+          message: error.message,
+          text: error.text,
+          status: error.status
+        });
         return { success: false, error: 'send_failed', details: error };
       }
     }
