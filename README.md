@@ -2,8 +2,13 @@
 
 Website for Hotel 3 Paardekens with admin panel for room management.
 
+## 🚀 Just Updated EmailJS Configuration?
+
+If you just verified your EmailJS configuration values, see **[NEXT_STEPS.md](NEXT_STEPS.md)** for what to do next.
+
 ## Documentation
 
+- **[NEXT_STEPS.md](NEXT_STEPS.md)** - What to do after updating EmailJS configuration
 - **[EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md)** - Complete checklist to verify EmailJS configuration is correct
 - **[EMAIL_SETUP.md](EMAIL_SETUP.md)** - Email configuration setup guide
 - **[TROUBLESHOOTING_PASSWORD_RESET.md](TROUBLESHOOTING_PASSWORD_RESET.md)** - Detailed troubleshooting guide for password reset issues
