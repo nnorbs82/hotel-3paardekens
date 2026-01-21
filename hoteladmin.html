@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel 3 Paardekens - Admin</title>
+  <meta name="description" content="Hotel 3 Paardekens - Administration Panel" />
+  <link rel="stylesheet" href="admin-styles.css">
+</head>
+
+<body>
+  <!-- Login Screen -->
+  <div id="loginScreen" class="bg">
+    <div class="card login-card">
+      <h1>Admin Login</h1>
+      <p>Sign in to manage Hotel 3 Paardekens</p>
+
+      <div id="loginAlert" class="alert alert-error hidden">
+        <span>Invalid email address</span>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input 
+            type="email" 
+            id="loginEmail" 
+            name="email"
+            placeholder="Enter your email" 
+            required 
+            autocomplete="email"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="adminDashboard" class="bg hidden">
+    <div class="card">
+      <div class="admin-header">
+        <h1>Room Management</h1>
+        <div class="admin-header-actions">
+          <button id="btnAddRoom" class="btn btn-success">
+            ➕ Add Room
+          </button>
+          <button id="btnResetData" class="btn btn-danger btn-small">
+            🔄 Reset to Defaults
+          </button>
+          <button id="btnLogout" class="btn">
+            🚪 Logout
+          </button>
+        </div>
+      </div>
+
+      <div id="roomsContainer" class="rooms-list">
+        <!-- Rooms will be loaded here -->
+      </div>
+
+      <div id="emptyState" class="empty-state hidden">
+        <div class="empty-state-icon">🏨</div>
+        <h2 class="empty-state-title">No Rooms Yet</h2>
+        <p class="empty-state-desc">Create your first room category to get started</p>
+        <button class="btn btn-success" onclick="document.getElementById('btnAddRoom').click()">
+          ➕ Add Your First Room
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Room Editor Modal -->
+  <div id="roomModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Add Room</h2>
+        <button class="modal-close" id="modalClose" type="button">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="roomForm">
+          <div class="form-group">
+            <label for="roomName">Room Name *</label>
+            <input type="text" id="roomName" name="name" placeholder="e.g., Deluxe Suite" required />
+          </div>
+
+          <div class="form-group">
+            <label for="roomDescription">Description *</label>
+            <textarea id="roomDescription" name="description" placeholder="Describe the room..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="roomBookingUrl">Booking URL</label>
+            <input type="url" id="roomBookingUrl" name="bookingUrl" placeholder="https://..." />
+          </div>
+
+          <div class="form-group">
+            <label>Amenities</label>
+            <div id="amenitiesList" class="amenities-list">
+              <!-- Amenities will be added here -->
+            </div>
+            <button type="button" class="btn btn-small" id="btnAddAmenity" style="margin-top: 8px;">
+              ➕ Add Amenity
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label>Photos</label>
+            <div class="photo-upload-area" id="photoUploadArea">
+              <p style="margin: 0; color: var(--muted); font-size: 14px;">
+                📷 Click to upload or drag and drop photos<br>
+                <span style="font-size: 12px; opacity: 0.7;">Supports JPG, PNG, WebP</span>
+              </p>
+              <input type="file" id="photoInput" accept="image/*" multiple />
+            </div>
+            <div id="photosList" class="photos-list">
+              <!-- Photos will be added here -->
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="btnCancelRoom">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnSaveRoom">
+          💾 Save Room
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Amenity Editor Modal -->
+  <div id="amenityModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title">Add Amenity</h2>
+        <button class="modal-close" id="amenityModalClose" type="button">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="amenityName">Amenity Name *</label>
+          <input type="text" id="amenityName" placeholder="e.g., King Size Bed" required />
+        </div>
+
+        <div class="form-group">
+          <label>Select Icon *</label>
+          <div id="iconPicker" class="icon-picker">
+            <!-- Icons will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="btnCancelAmenity">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnSaveAmenity">
+          ✓ Add Amenity
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div id="confirmModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Delete</h2>
+        <button class="modal-close" id="confirmModalClose" type="button">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p id="confirmMessage" style="color: var(--muted); margin: 0;">
+          Are you sure you want to delete this room? This action cannot be undone.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="btnCancelConfirm">Cancel</button>
+        <button type="button" class="btn btn-danger" id="btnConfirmDelete">
+          🗑️ Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin-auth.js"></script>
+  <script src="admin-room-manager.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      // DOM Elements
+      const loginScreen = document.getElementById('loginScreen');
+      const adminDashboard = document.getElementById('adminDashboard');
+      const loginForm = document.getElementById('loginForm');
+      const loginAlert = document.getElementById('loginAlert');
+      const btnLogout = document.getElementById('btnLogout');
+      const btnAddRoom = document.getElementById('btnAddRoom');
+      const btnResetData = document.getElementById('btnResetData');
+      const roomsContainer = document.getElementById('roomsContainer');
+      const emptyState = document.getElementById('emptyState');
+      
+      // Modal elements
+      const roomModal = document.getElementById('roomModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalClose = document.getElementById('modalClose');
+      const btnCancelRoom = document.getElementById('btnCancelRoom');
+      const btnSaveRoom = document.getElementById('btnSaveRoom');
+      const roomForm = document.getElementById('roomForm');
+      
+      // Amenity modal
+      const amenityModal = document.getElementById('amenityModal');
+      const amenityModalClose = document.getElementById('amenityModalClose');
+      const btnAddAmenity = document.getElementById('btnAddAmenity');
+      const btnCancelAmenity = document.getElementById('btnCancelAmenity');
+      const btnSaveAmenity = document.getElementById('btnSaveAmenity');
+      const amenityName = document.getElementById('amenityName');
+      const amenitiesList = document.getElementById('amenitiesList');
+      const iconPicker = document.getElementById('iconPicker');
+      
+      // Photo elements
+      const photoUploadArea = document.getElementById('photoUploadArea');
+      const photoInput = document.getElementById('photoInput');
+      const photosList = document.getElementById('photosList');
+      
+      // Confirm modal
+      const confirmModal = document.getElementById('confirmModal');
+      const confirmModalClose = document.getElementById('confirmModalClose');
+      const confirmMessage = document.getElementById('confirmMessage');
+      const btnCancelConfirm = document.getElementById('btnCancelConfirm');
+      const btnConfirmDelete = document.getElementById('btnConfirmDelete');
+
+      // State
+      let currentEditingRoom = null;
+      let currentAmenities = [];
+      let currentPhotos = [];
+      let selectedIcon = null;
+      let deleteCallback = null;
+      let draggedPhotoIndex = null;
+
+      // Initialize
+      function init() {
+        if (HotelAuth.isAuthenticated()) {
+          showDashboard();
+        } else {
+          showLogin();
+        }
+      }
+
+      // Show login screen
+      function showLogin() {
+        loginScreen.classList.remove('hidden');
+        adminDashboard.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      // Show dashboard
+      function showDashboard() {
+        loginScreen.classList.add('hidden');
+        adminDashboard.classList.remove('hidden');
+        loadRooms();
+      }
+
+      // Login form submission
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        
+        if (HotelAuth.login(email)) {
+          loginAlert.classList.add('hidden');
+          showDashboard();
+        } else {
+          loginAlert.classList.remove('hidden');
+        }
+      });
+
+      // Logout
+      btnLogout.addEventListener('click', () => {
+        if (confirm('Are you sure you want to logout?')) {
+          HotelAuth.logout();
+          showLogin();
+          loginForm.reset();
+        }
+      });
+
+      // Load and display rooms
+      function loadRooms() {
+        const rooms = RoomManager.getRooms();
+        roomsContainer.innerHTML = '';
+
+        if (rooms.length === 0) {
+          emptyState.classList.remove('hidden');
+          roomsContainer.classList.add('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+          roomsContainer.classList.remove('hidden');
+          
+          rooms.forEach(room => {
+            const roomEl = createRoomElement(room);
+            roomsContainer.appendChild(roomEl);
+          });
+        }
+      }
+
+      // Create room element
+      function createRoomElement(room) {
+        const div = document.createElement('div');
+        div.className = 'room-item';
+        
+        const firstPhoto = room.photos && room.photos.length > 0 ? 
+          room.photos.sort((a, b) => a.order - b.order)[0].url : '';
+
+        div.innerHTML = `
+          <div class="room-item-photos">
+            ${firstPhoto ? `<img src="${firstPhoto}" alt="${room.name}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: rgba(255,255,255,0.4);">No photo</div>'}
+          </div>
+          <div class="room-item-info">
+            <h3 class="room-item-name">${room.name}</h3>
+            <p class="room-item-desc">${room.description}</p>
+            <div class="room-item-meta">
+              ${room.amenities.length} amenities • ${room.photos.length} photos
+            </div>
+          </div>
+          <div class="room-item-actions">
+            <button class="btn btn-small btn-edit" data-room-id="${room.id}">
+              ✏️ Edit
+            </button>
+            <button class="btn btn-small btn-danger btn-delete" data-room-id="${room.id}">
+              🗑️ Delete
+            </button>
+          </div>
+        `;
+
+        // Event listeners
+        div.querySelector('.btn-edit').addEventListener('click', () => editRoom(room.id));
+        div.querySelector('.btn-delete').addEventListener('click', () => deleteRoom(room.id));
+
+        return div;
+      }
+
+      // Open room modal for adding
+      btnAddRoom.addEventListener('click', () => {
+        currentEditingRoom = null;
+        currentAmenities = [];
+        currentPhotos = [];
+        modalTitle.textContent = 'Add Room';
+        roomForm.reset();
+        renderAmenities();
+        renderPhotos();
+        openModal(roomModal);
+      });
+
+      // Open room modal for editing
+      function editRoom(roomId) {
+        const room = RoomManager.getRoom(roomId);
+        if (!room) return;
+
+        currentEditingRoom = room.id;
+        currentAmenities = [...room.amenities];
+        currentPhotos = [...room.photos];
+        
+        modalTitle.textContent = 'Edit Room';
+        document.getElementById('roomName').value = room.name;
+        document.getElementById('roomDescription').value = room.description;
+        document.getElementById('roomBookingUrl').value = room.bookingUrl || '';
+        
+        renderAmenities();
+        renderPhotos();
+        openModal(roomModal);
+      }
+
+      // Delete room
+      function deleteRoom(roomId) {
+        const room = RoomManager.getRoom(roomId);
+        if (!room) return;
+
+        confirmMessage.textContent = `Are you sure you want to delete "${room.name}"? This action cannot be undone.`;
+        deleteCallback = () => {
+          if (RoomManager.deleteRoom(roomId)) {
+            loadRooms();
+            closeModal(confirmModal);
+          }
+        };
+        openModal(confirmModal);
+      }
+
+      // Reset data to defaults
+      btnResetData.addEventListener('click', () => {
+        confirmMessage.textContent = 'Are you sure you want to reset all rooms to default data? This will erase all your custom changes.';
+        deleteCallback = () => {
+          RoomManager.resetToDefaults();
+          loadRooms();
+          closeModal(confirmModal);
+        };
+        openModal(confirmModal);
+      });
+
+      // Save room
+      btnSaveRoom.addEventListener('click', () => {
+        const name = document.getElementById('roomName').value.trim();
+        const description = document.getElementById('roomDescription').value.trim();
+        const bookingUrl = document.getElementById('roomBookingUrl').value.trim();
+
+        if (!name || !description) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        const roomData = {
+          name,
+          description,
+          bookingUrl,
+          amenities: currentAmenities,
+          photos: currentPhotos
+        };
+
+        if (currentEditingRoom) {
+          RoomManager.updateRoom(currentEditingRoom, roomData);
+        } else {
+          RoomManager.createRoom(roomData);
+        }
+
+        closeModal(roomModal);
+        loadRooms();
+      });
+
+      // Amenity management
+      btnAddAmenity.addEventListener('click', () => {
+        selectedIcon = null;
+        amenityName.value = '';
+        renderIconPicker();
+        openModal(amenityModal);
+      });
+
+      function renderIconPicker() {
+        iconPicker.innerHTML = '';
+        const icons = Object.keys(IconLibrary).filter(key => key !== 'getIcon');
+        
+        icons.forEach(iconKey => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'icon-option';
+          btn.innerHTML = IconLibrary[iconKey];
+          btn.title = iconKey;
+          
+          if (selectedIcon === iconKey) {
+            btn.classList.add('selected');
+          }
+          
+          btn.addEventListener('click', () => {
+            selectedIcon = iconKey;
+            renderIconPicker();
+          });
+          
+          iconPicker.appendChild(btn);
+        });
+      }
+
+      btnSaveAmenity.addEventListener('click', () => {
+        const name = amenityName.value.trim();
+        
+        if (!name || !selectedIcon) {
+          alert('Please enter an amenity name and select an icon');
+          return;
+        }
+
+        currentAmenities.push({ name, icon: selectedIcon });
+        renderAmenities();
+        closeModal(amenityModal);
+      });
+
+      function renderAmenities() {
+        amenitiesList.innerHTML = '';
+        
+        currentAmenities.forEach((amenity, index) => {
+          const div = document.createElement('div');
+          div.className = 'amenity-item';
+          div.innerHTML = `
+            <div class="amenity-icon-preview">${IconLibrary[amenity.icon]}</div>
+            <span>${amenity.name}</span>
+            <button type="button" class="btn btn-small btn-danger" data-index="${index}">
+              ✕
+            </button>
+          `;
+          
+          div.querySelector('button').addEventListener('click', () => {
+            currentAmenities.splice(index, 1);
+            renderAmenities();
+          });
+          
+          amenitiesList.appendChild(div);
+        });
+      }
+
+      // Photo management
+      photoUploadArea.addEventListener('click', () => {
+        photoInput.click();
+      });
+
+      photoInput.addEventListener('change', (e) => {
+        handlePhotoFiles(e.target.files);
+      });
+
+      // Drag and drop
+      photoUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        photoUploadArea.classList.add('drag-over');
+      });
+
+      photoUploadArea.addEventListener('dragleave', () => {
+        photoUploadArea.classList.remove('drag-over');
+      });
+
+      photoUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        photoUploadArea.classList.remove('drag-over');
+        handlePhotoFiles(e.dataTransfer.files);
+      });
+
+      function handlePhotoFiles(files) {
+        Array.from(files).forEach(file => {
+          if (!file.type.startsWith('image/')) return;
+
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const order = currentPhotos.length + 1;
+            currentPhotos.push({ url: e.target.result, order });
+            renderPhotos();
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function renderPhotos() {
+        photosList.innerHTML = '';
+        
+        currentPhotos.sort((a, b) => a.order - b.order).forEach((photo, index) => {
+          const div = document.createElement('div');
+          div.className = 'photo-item';
+          div.draggable = true;
+          div.dataset.index = index;
+          
+          div.innerHTML = `
+            <img src="${photo.url}" alt="Room photo ${index + 1}">
+            <div class="photo-item-order">${photo.order}</div>
+            <div class="photo-item-overlay">
+              <button type="button" class="btn btn-small btn-danger" data-index="${index}">
+                🗑️
+              </button>
+            </div>
+          `;
+          
+          // Delete photo
+          div.querySelector('button').addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentPhotos.splice(index, 1);
+            // Reorder remaining photos
+            currentPhotos.forEach((p, i) => p.order = i + 1);
+            renderPhotos();
+          });
+
+          // Drag and drop for reordering
+          div.addEventListener('dragstart', (e) => {
+            draggedPhotoIndex = index;
+            div.classList.add('dragging');
+          });
+
+          div.addEventListener('dragend', () => {
+            div.classList.remove('dragging');
+          });
+
+          div.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            div.classList.add('drag-over');
+          });
+
+          div.addEventListener('dragleave', () => {
+            div.classList.remove('drag-over');
+          });
+
+          div.addEventListener('drop', (e) => {
+            e.preventDefault();
+            div.classList.remove('drag-over');
+            
+            if (draggedPhotoIndex !== null && draggedPhotoIndex !== index) {
+              const draggedPhoto = currentPhotos[draggedPhotoIndex];
+              currentPhotos.splice(draggedPhotoIndex, 1);
+              currentPhotos.splice(index, 0, draggedPhoto);
+              
+              // Reorder all photos
+              currentPhotos.forEach((p, i) => p.order = i + 1);
+              renderPhotos();
+            }
+            
+            draggedPhotoIndex = null;
+          });
+          
+          photosList.appendChild(div);
+        });
+      }
+
+      // Modal controls
+      function openModal(modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(modal) {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      // Close modal buttons
+      modalClose.addEventListener('click', () => closeModal(roomModal));
+      btnCancelRoom.addEventListener('click', () => closeModal(roomModal));
+      
+      amenityModalClose.addEventListener('click', () => closeModal(amenityModal));
+      btnCancelAmenity.addEventListener('click', () => closeModal(amenityModal));
+      
+      confirmModalClose.addEventListener('click', () => closeModal(confirmModal));
+      btnCancelConfirm.addEventListener('click', () => closeModal(confirmModal));
+      btnConfirmDelete.addEventListener('click', () => {
+        if (deleteCallback) deleteCallback();
+        deleteCallback = null;
+      });
+
+      // Close modals on overlay click
+      [roomModal, amenityModal, confirmModal].forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal(modal);
+        });
+      });
+
+      // Close modals on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (roomModal.classList.contains('is-open')) closeModal(roomModal);
+          if (amenityModal.classList.contains('is-open')) closeModal(amenityModal);
+          if (confirmModal.classList.contains('is-open')) closeModal(confirmModal);
+        }
+      });
+
+      // Initialize app
+      init();
+    })();
+  </script>
+</body>
+</html>
