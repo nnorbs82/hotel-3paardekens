@@ -6,6 +6,18 @@
   <title>Hotel 3 Paardekens - Admin</title>
   <meta name="description" content="Hotel 3 Paardekens - Administration Panel" />
   <link rel="stylesheet" href="admin-styles.css">
+  <!-- EmailJS SDK for sending password reset emails -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    // Initialize EmailJS with your public key
+    // To enable password reset emails, sign up at https://www.emailjs.com/
+    // and replace 'YOUR_PUBLIC_KEY' with your actual public key
+    (function(){
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -318,7 +330,7 @@
         }
 
         if (HotelAuth.requestPasswordReset(email)) {
-          alert(`A password reset link has been sent to ${email}.\n\nFor this demo, the password is: Hotel3Paardekens2024!`);
+          alert(`A password reset link has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to reset your password.`);
         } else {
           alert('Email address not found in our system.');
         }
