@@ -329,11 +329,36 @@
           return;
         }
 
-        if (HotelAuth.requestPasswordReset(email)) {
-          alert(`A password reset link has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to reset your password.`);
-        } else {
-          alert('Email address not found in our system.');
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Please enter a valid email address.');
+          document.getElementById('loginEmail').focus();
+          return;
         }
+
+        // Show loading state
+        const link = e.target;
+        const originalText = link.textContent;
+        link.textContent = 'Sending...';
+        link.style.pointerEvents = 'none';
+        link.style.opacity = '0.6';
+
+        // Request password reset
+        setTimeout(() => {
+          const success = HotelAuth.requestPasswordReset(email);
+          
+          // Restore link state
+          link.textContent = originalText;
+          link.style.pointerEvents = '';
+          link.style.opacity = '';
+          
+          if (success) {
+            alert(`A password reset email has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to retrieve your password.`);
+          } else {
+            alert('Email address not found in our system.\n\nPlease make sure you entered the correct admin email address.');
+          }
+        }, 100);
       });
 
       // Logout

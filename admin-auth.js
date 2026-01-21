@@ -11,8 +11,9 @@
   const SESSION_KEY = 'hotel3p_admin_session';
   
   // EmailJS Configuration
-  const EMAILJS_SERVICE_ID = 'service_hotel3p';  // Update with your EmailJS service ID
-  const EMAILJS_TEMPLATE_ID = 'template_password_reset';  // Update with your EmailJS template ID
+  // These should match the Service ID and Template ID in your EmailJS dashboard
+  const EMAILJS_SERVICE_ID = 'service_iu8cxtm';  // EmailJS service ID
+  const EMAILJS_TEMPLATE_ID = 'template_2oxmlh8';  // EmailJS template ID for password reset
 
   // NOTE: This is a hardcoded credential as specified in the requirements.
   // In a production environment, this should be replaced with proper
@@ -129,13 +130,19 @@
       try {
         // Initialize EmailJS if not already initialized
         if (typeof emailjs !== 'undefined') {
+          // Since this is a demo app with hardcoded credentials,
+          // we'll send the password directly in the email
+          // In a production environment, you would send a secure token instead
           emailjs.send(
-            EMAILJS_SERVICE_ID,  // Service ID (to be configured in EmailJS)
-            EMAILJS_TEMPLATE_ID,  // Template ID (to be configured in EmailJS)
+            EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID,
             {
               to_email: email,
+              to_name: 'Admin',
+              admin_email: ADMIN_EMAIL,
+              admin_password: ADMIN_PASSWORD,
               reset_link: window.location.origin + '/hoteladmin.html',
-              admin_email: ADMIN_EMAIL
+              message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
             }
           ).then(
             function(response) {
@@ -143,15 +150,18 @@
             },
             function(error) {
               console.error('Failed to send password reset email', error);
+              alert('There was an error sending the password reset email. Please check your EmailJS configuration.');
             }
           );
         } else {
           console.warn('EmailJS not loaded. Password reset email not sent.');
-          // Return true to show success message to user even if EmailJS is not configured
-          // This maintains the demo functionality while allowing for future email integration
+          alert('Email service is not configured. Please contact the administrator.');
+          return false;
         }
       } catch (error) {
         console.error('Error sending password reset email:', error);
+        alert('There was an error sending the password reset email. Please try again.');
+        return false;
       }
       
       return true;
