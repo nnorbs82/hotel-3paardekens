@@ -99,6 +99,7 @@ body {
 
 .form-group input[type="text"],
 .form-group input[type="email"],
+.form-group input[type="password"],
 .form-group input[type="url"],
 .form-group textarea {
   width: 100%;
@@ -408,6 +409,7 @@ body {
   justify-content: center;
   transition: all 120ms ease;
   padding: 0;
+  color: rgba(255,255,255,0.85);
 }
 
 .icon-option:hover,
@@ -420,6 +422,7 @@ body {
 .icon-option.selected {
   background: var(--accent);
   border-color: var(--accent);
+  color: #fff;
 }
 
 .icon-option svg {
