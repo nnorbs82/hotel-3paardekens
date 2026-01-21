@@ -22,7 +22,7 @@ Now verify these settings in your EmailJS dashboard at https://www.emailjs.com/
 3. Verify that `OuUDb11x_6V6Gvh7l` appears in your list of public keys
 4. Ensure the key is **active** (not revoked)
 
-**✓ Public Key Status:** ___________________
+**✓ Public Key Status:** [ ] Verified and Active
 
 ### Step 2: Verify Email Service
 
@@ -35,7 +35,7 @@ Now verify these settings in your EmailJS dashboard at https://www.emailjs.com/
    - [ ] Email provider credentials are correct
    - [ ] No error warnings shown on the service
 
-**✓ Service Status:** ___________________
+**✓ Service Status:** [ ] Verified and Enabled
 
 ### Step 3: Verify Email Template
 
@@ -46,7 +46,7 @@ Now verify these settings in your EmailJS dashboard at https://www.emailjs.com/
    - [ ] Template is **active/enabled**
    - [ ] Template includes ALL required variables (see below)
 
-**✓ Template Status:** ___________________
+**✓ Template Status:** [ ] Verified and Active
 
 ### Step 4: Verify Template Variables
 
@@ -66,7 +66,7 @@ Required Variables:
 3. Ensure ALL six variables above are present
 4. Variable names must match exactly (case-sensitive)
 
-**✓ All Variables Present:** ___________________
+**✓ All Variables Present:** [ ] Verified
 
 ### Step 5: Check Account Limits
 
@@ -76,9 +76,7 @@ Required Variables:
    - [ ] Free tier: 200 emails/month
    - [ ] Paid tier: Check your plan limits
 
-**Current Usage:** ___________ / ___________ emails
-
-**✓ Within Limits:** ___________________
+**✓ Within Limits:** [ ] Verified
 
 ### Step 6: Test Template (Optional but Recommended)
 
@@ -99,7 +97,7 @@ Required Variables:
    - [ ] Email formatting looks correct
    - [ ] Links are clickable
 
-**✓ Test Email Sent:** ___________________
+**✓ Test Email Status:** [ ] Sent and Verified
 
 ## 🧪 Browser Testing
 
@@ -145,7 +143,7 @@ Plus detailed error information that will help identify the problem.
 - If it doesn't work in Safari, test in Chrome/Firefox first
 - See section 3 of `TROUBLESHOOTING_PASSWORD_RESET.md` for Safari-specific solutions
 
-**Test Result:** ___________________
+**✓ Test Result:** [ ] Passed
 
 ## 📋 Common Issues and Solutions
 
