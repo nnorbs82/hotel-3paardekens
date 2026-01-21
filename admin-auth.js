@@ -140,8 +140,8 @@
         // we'll send the password directly in the email
         // In a production environment, you would send a secure token instead
         
-        // In EmailJS v4, we can pass the public key directly to send()
-        // This is more explicit and works better across different browsers
+        // Prepare template parameters for EmailJS
+        // The EmailJS service uses the public key initialized in hoteladmin.html
         const templateParams = {
           to_email: email,
           to_name: 'Admin',
