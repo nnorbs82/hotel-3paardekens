@@ -112,6 +112,37 @@
      * Request password reset
      * @param {string} email - Email address to send reset link to
      * @returns {Promise<object>} - Promise resolving to object with success status and optional error message
+     * 
+     * EmailJS Variable Replacement:
+     * ==============================
+     * When EmailJS sends the email, it automatically replaces template variables with the values
+     * provided in templateParams. The variables use double curly brace syntax: {{variable_name}}
+     * 
+     * Available variables for the email template (configured in EmailJS dashboard):
+     * - {{email}} - The recipient's email address (standardized variable name)
+     * - {{link}} - The password reset/login link (standardized variable name)
+     * - {{to_name}} - Name of the recipient (Admin)
+     * - {{admin_email}} - Admin email for reference in email body
+     * - {{admin_password}} - Admin password (demo only - NOT for production)
+     * - {{message}} - Custom message text
+     * 
+     * Example template usage in EmailJS dashboard:
+     * --------------------------------------------
+     * Subject: Password Reset - Hotel 3 Paardekens
+     * 
+     * Body:
+     *   Hello {{to_name}},
+     *   
+     *   {{message}}
+     *   
+     *   Click the button below to access the admin panel:
+     *   <a href="{{link}}" style="...">Access Admin Panel</a>
+     *   
+     *   Your email: {{email}}
+     *   Your credentials are included below for reference.
+     *   
+     *   Email: {{admin_email}}
+     *   Password: {{admin_password}}
      */
     async requestPasswordReset(email) {
       if (!email) {
@@ -142,13 +173,19 @@
         
         // Prepare template parameters for EmailJS
         // The EmailJS service uses the public key initialized in hoteladmin.html
+        // Each key-value pair below will replace {{key}} in the email template
         const templateParams = {
-          to_email: email,
-          to_name: 'Admin',
-          admin_email: ADMIN_EMAIL,
-          admin_password: ADMIN_PASSWORD,
-          reset_link: window.location.origin + '/hoteladmin.html',
-          message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
+          // Standardized variable names (recommended for all templates)
+          email: email,                                        // Maps to {{email}} in template
+          link: window.location.origin + '/hoteladmin.html',  // Maps to {{link}} in template
+          
+          // Legacy/additional variables (for backward compatibility)
+          to_email: email,                                    // Maps to {{to_email}} in template
+          to_name: 'Admin',                                   // Maps to {{to_name}} in template
+          admin_email: ADMIN_EMAIL,                           // Maps to {{admin_email}} in template
+          admin_password: ADMIN_PASSWORD,                     // Maps to {{admin_password}} in template
+          reset_link: window.location.origin + '/hoteladmin.html',  // Maps to {{reset_link}} in template
+          message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'  // Maps to {{message}} in template
         };
         
         console.log('Sending password reset email with params:', {

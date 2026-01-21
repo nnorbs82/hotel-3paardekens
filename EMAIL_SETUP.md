@@ -4,32 +4,65 @@ This application uses EmailJS to send password reset emails. The setup has been 
 
 ## Current Configuration
 
-- **EmailJS Public Key**: `OuUDb11x_6V6Gvh7l` (configured in hoteladmin.html)
+- **EmailJS Public Key**: `MEiKFhBHfwDzT-xz1` (configured in hoteladmin.html)
 - **Service ID**: `service_iu8cxtm`
 - **Template ID**: `template_2oxmlh8`
 - **Admin Email**: `rev.management@groupdaedalus.be`
+
+## Email Template
+
+For a modern, visually appealing email template with styled buttons and responsive design, see **[EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)**. This guide includes:
+- Complete HTML email template with gradient header and styled button
+- Instructions for configuring in EmailJS dashboard
+- Documentation on variable replacement mechanism
+- Mobile-responsive design best practices
 
 ## How Password Reset Works
 
 1. User enters their email address in the login form
 2. User clicks "Forgot your password?" link
 3. System validates the email matches the admin email
-4. EmailJS sends an email with login credentials
+4. EmailJS sends an email with login credentials using a modern, styled template
 5. User receives email and can log in with the provided password
+
+**Note:** For the improved email template with modern styling, visual hierarchy, and a styled button (instead of a plain link), see **[EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)**.
 
 ## EmailJS Template Configuration
 
 The EmailJS template should be configured with the following variables:
 
-### Template Variables:
-- `{{to_email}}` - Recipient email address
+### Primary Template Variables (Standardized):
+- `{{email}}` - Recipient email address (standardized variable name)
+- `{{link}}` - Password reset/login link (standardized variable name)
+
+### Additional Template Variables (Backward Compatible):
+- `{{to_email}}` - Recipient email address (legacy)
 - `{{to_name}}` - Recipient name (set to "Admin")
 - `{{admin_email}}` - Admin email address for reference
 - `{{admin_password}}` - The admin password (for demo purposes)
-- `{{reset_link}}` - Link back to the admin login page
+- `{{reset_link}}` - Link back to the admin login page (legacy)
 - `{{message}}` - Password reset message
 
+### How Variable Replacement Works:
+When the code sends an email, it provides a `templateParams` object with key-value pairs. EmailJS automatically finds all `{{variable_name}}` placeholders in your template and replaces them with the corresponding values from `templateParams`.
+
+**Example:**
+- Code sends: `{ email: 'admin@example.com', link: 'https://example.com/login' }`
+- Template contains: `Your email is {{email}}. Click: {{link}}`
+- Email received: `Your email is admin@example.com. Click: https://example.com/login`
+
+For complete details on how variable replacement works and to see a modern, visually appealing email template, see **[EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)**.
+
 ### Recommended Template Content:
+
+**For the best user experience**, use the modern HTML template provided in [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md), which includes:
+- Gradient header with clear branding
+- Styled button for the password reset link (not a plain text link)
+- Responsive design that looks great on mobile and desktop
+- Visual hierarchy with clear sections
+- Professional styling with inline CSS for email client compatibility
+
+**Legacy Plain Text Template** (if you prefer a simple version):
 
 **Subject:** Password Reset - Hotel 3 Paardekens Admin
 
