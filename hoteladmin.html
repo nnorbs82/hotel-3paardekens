@@ -319,7 +319,7 @@
       });
 
       // Forgot password link
-      document.getElementById('forgotPasswordLink').addEventListener('click', (e) => {
+      document.getElementById('forgotPasswordLink').addEventListener('click', async (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         
@@ -329,10 +329,56 @@
           return;
         }
 
-        if (HotelAuth.requestPasswordReset(email)) {
-          alert(`A password reset link has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to reset your password.`);
-        } else {
-          alert('Email address not found in our system.');
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Please enter a valid email address.');
+          document.getElementById('loginEmail').focus();
+          return;
+        }
+
+        // Show loading state
+        const link = e.target;
+        const originalText = link.textContent;
+        link.textContent = 'Sending...';
+        link.style.pointerEvents = 'none';
+        link.style.opacity = '0.6';
+
+        try {
+          // Request password reset (now properly awaiting async operation)
+          const result = await HotelAuth.requestPasswordReset(email);
+          
+          // Restore link state
+          link.textContent = originalText;
+          link.style.pointerEvents = '';
+          link.style.opacity = '';
+          
+          if (result.success) {
+            alert(`A password reset email has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to retrieve your password.`);
+          } else {
+            // Handle different error types
+            switch (result.error) {
+              case 'email_not_found':
+                alert('Email address not found in our system.\n\nPlease make sure you entered the correct admin email address.');
+                break;
+              case 'emailjs_not_loaded':
+                alert('Email service is not currently available. Please try again later or contact the administrator.\n\nNote: For this demo, EmailJS needs to be loaded from CDN. If you are testing locally, the service should work when deployed.');
+                break;
+              case 'send_failed':
+                alert('There was an error sending the password reset email. Please check your EmailJS configuration and try again.');
+                break;
+              default:
+                alert('An error occurred. Please try again.');
+            }
+          }
+        } catch (error) {
+          // Restore link state in case of unexpected error
+          link.textContent = originalText;
+          link.style.pointerEvents = '';
+          link.style.opacity = '';
+          
+          console.error('Unexpected error during password reset:', error);
+          alert('An unexpected error occurred. Please try again.');
         }
       });
 

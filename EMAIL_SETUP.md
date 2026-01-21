@@ -1,90 +1,94 @@
 # Email Configuration for Password Reset
 
-This application uses EmailJS to send password reset emails. Follow these steps to configure email sending:
+This application uses EmailJS to send password reset emails. The setup has been completed with the following configuration.
 
-## Setup Instructions
+## Current Configuration
 
-### 1. Create an EmailJS Account
-- Go to [https://www.emailjs.com/](https://www.emailjs.com/)
-- Sign up for a free account
+- **EmailJS Public Key**: `OuUDb11x_6V6Gvh7l` (configured in hoteladmin.html)
+- **Service ID**: `service_iu8cxtm`
+- **Template ID**: `template_2oxmlh8`
+- **Admin Email**: `rev.management@groupdaedalus.be`
 
-### 2. Configure Email Service
-- In your EmailJS dashboard, go to "Email Services"
-- Click "Add New Service"
-- Choose your email provider (Gmail, Outlook, etc.)
-- Follow the prompts to connect your email account
-- Note the **Service ID** (e.g., `service_hotel3p`)
+## How Password Reset Works
 
-### 3. Create Email Template
-- In your EmailJS dashboard, go to "Email Templates"
-- Click "Create New Template"
-- Use the template ID: `template_password_reset`
-- Configure the template with the following variables:
-  - `{{to_email}}` - Recipient email address
-  - `{{reset_link}}` - Password reset link
-  - `{{admin_email}}` - Admin email for reference
+1. User enters their email address in the login form
+2. User clicks "Forgot your password?" link
+3. System validates the email matches the admin email
+4. EmailJS sends an email with login credentials
+5. User receives email and can log in with the provided password
 
-Example template:
+## EmailJS Template Configuration
+
+The EmailJS template should be configured with the following variables:
+
+### Template Variables:
+- `{{to_email}}` - Recipient email address
+- `{{to_name}}` - Recipient name (set to "Admin")
+- `{{admin_email}}` - Admin email address for reference
+- `{{admin_password}}` - The admin password (for demo purposes)
+- `{{reset_link}}` - Link back to the admin login page
+- `{{message}}` - Password reset message
+
+### Recommended Template Content:
+
+**Subject:** Password Reset - Hotel 3 Paardekens Admin
+
+**Body:**
 ```
-Subject: Password Reset Request - Hotel 3 Paardekens
+Hello {{to_name}},
 
-Hello,
+{{message}}
 
-You have requested to reset your password for Hotel 3 Paardekens Admin Panel.
+Your login credentials are:
+Email: {{admin_email}}
+Password: {{admin_password}}
 
-Click the link below to reset your password:
-{{reset_link}}
+You can log in here: {{reset_link}}
 
-If you did not request this password reset, please ignore this email.
-
-Admin Email: {{admin_email}}
+If you did not request this password reset, please contact the administrator immediately.
 
 Best regards,
 Hotel 3 Paardekens Team
 ```
 
-### 4. Update Configuration
-- Go to "Account" -> "General" in EmailJS dashboard
-- Copy your **Public Key**
-- Open `hoteladmin.html`
-- Find the line: `emailjs.init('YOUR_PUBLIC_KEY');`
-- Replace `'YOUR_PUBLIC_KEY'` with your actual public key
-
-### 5. Update Service and Template IDs (if different)
-If you used different IDs than the defaults:
-- Open `admin-auth.js`
-- Update the service ID in line with `emailjs.send()`
-- Update the template ID in the same function
-
 ## Testing
+
 1. Open `hoteladmin.html` in a browser
 2. Enter the admin email: `rev.management@groupdaedalus.be`
 3. Click "Forgot your password?"
-4. Check the inbox of the configured email service for the reset email
-
-## Current Limitations
-
-This implementation provides the foundation for password reset emails but has the following limitations:
-
-1. **Reset Link**: The email contains a reset link, but the application doesn't yet have a password reset page or token validation system. For a complete implementation, you would need to:
-   - Create a password reset page that accepts reset tokens
-   - Implement token generation and storage (requires backend)
-   - Add token expiration and validation
-   - Allow users to set a new password
-
-2. **Client-Side Only**: This is a client-side only implementation using EmailJS. For production use, consider implementing server-side password reset with proper security measures.
-
-3. **Configuration Management**: The EmailJS public key is currently in the HTML file. For production, use environment variables or a secure configuration management system.
+4. Check the configured email inbox for the password reset email
+5. Use the credentials provided in the email to log in
 
 ## Security Notes
-- Never commit your actual EmailJS public key to version control
-- Consider using environment variables or a configuration file
-- In production, implement proper server-side password reset with tokens and expiration
-- The current implementation is suitable for demo/development purposes only
-- The security vulnerability (displaying password in alert) has been removed
+
+**Important:** This implementation sends the actual password via email, which is only acceptable for this demo/development environment because:
+1. It uses a hardcoded password
+2. It's a single-user admin system
+3. It's not handling sensitive production data
+
+**For production use, you should:**
+- Implement proper server-side password reset with secure tokens
+- Use password hashing (bcrypt, argon2, etc.)
+- Implement token expiration (typically 15-60 minutes)
+- Never send passwords via email
+- Use HTTPS for all communications
+- Store passwords securely in a database with proper hashing
 
 ## Troubleshooting
-- Check browser console for any EmailJS errors
-- Verify that your EmailJS service is active and properly configured
-- Ensure your email service provider allows sending from EmailJS
-- Check spam folder if emails are not received
+
+- **Email not received?** Check spam/junk folder
+- **"Email service not configured" error?** Verify EmailJS SDK is loaded in the browser console
+- **"Failed to send" error?** 
+  - Check browser console for detailed error messages
+  - Verify Service ID and Template ID match your EmailJS dashboard
+  - Ensure your EmailJS service is active
+  - Check that email service provider allows sending from EmailJS
+- **"Email address not found" error?** Make sure you entered `rev.management@groupdaedalus.be` exactly
+
+## Additional Configuration
+
+If you need to change the Service ID or Template ID:
+1. Open `admin-auth.js`
+2. Update `EMAILJS_SERVICE_ID` constant (line 14)
+3. Update `EMAILJS_TEMPLATE_ID` constant (line 15)
+4. Save the file and refresh the page
