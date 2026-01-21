@@ -367,7 +367,15 @@
                 alert('Email service is not currently available. Please try again later or contact the administrator.\n\nNote: For this demo, EmailJS needs to be loaded from CDN. If you are testing locally, the service should work when deployed.');
                 break;
               case 'send_failed':
-                alert('There was an error sending the password reset email. Please check your EmailJS configuration and try again.');
+                // Provide detailed troubleshooting information
+                console.log('EmailJS send failed. Please check:');
+                console.log('1. Service ID:', 'service_iu8cxtm');
+                console.log('2. Template ID:', 'template_2oxmlh8');
+                console.log('3. Public Key:', 'OuUDb11x_6V6Gvh7l');
+                console.log('4. Check your EmailJS dashboard to ensure the service and template are active');
+                console.log('5. Verify template variables match: to_email, to_name, admin_email, admin_password, reset_link, message');
+                
+                alert('There was an error sending the password reset email.\n\nPlease check the browser console for details.\n\nCommon issues:\n• EmailJS service is not active\n• Template ID is incorrect\n• Template variables are not configured\n• Email service provider is blocking EmailJS\n\nFor help, see EMAIL_SETUP.md in the project.');
                 break;
               default:
                 alert('An error occurred. Please try again.');

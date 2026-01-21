@@ -151,6 +151,12 @@
           message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
         };
         
+        console.log('Sending password reset email with params:', {
+          serviceId: EMAILJS_SERVICE_ID,
+          templateId: EMAILJS_TEMPLATE_ID,
+          to_email: email
+        });
+        
         const response = await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
@@ -161,6 +167,11 @@
         return { success: true };
       } catch (error) {
         console.error('Error sending password reset email:', error);
+        console.error('Error details:', {
+          message: error.message,
+          text: error.text,
+          status: error.status
+        });
         return { success: false, error: 'send_failed', details: error };
       }
     }
