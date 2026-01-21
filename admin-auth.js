@@ -21,6 +21,13 @@
 
   // Authentication API
   window.HotelAuth = {
+    // Expose EmailJS configuration for reference
+    config: {
+      serviceId: EMAILJS_SERVICE_ID,
+      templateId: EMAILJS_TEMPLATE_ID,
+      publicKey: 'MEiKFhBHfwDzT-xz1'
+    },
+    
     /**
      * Check if user is currently authenticated
      * @returns {boolean}
@@ -223,6 +230,8 @@
         });
         
         // Provide more specific error messages based on the error
+        // Note: EmailJS doesn't provide specific error codes in public API,
+        // so we use string matching on error.text as a best-effort approach
         let errorMessage = 'send_failed';
         if (error.text && error.text.includes('template')) {
           errorMessage = 'template_error';
