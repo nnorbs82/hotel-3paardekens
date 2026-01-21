@@ -894,8 +894,17 @@
             placeholder: 'Enter title...',
             modules: {
               toolbar: [
-                ['bold', 'italic', 'underline'],
-                ['link']
+                [{ 'font': [] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],
+                [{ 'align': [] }],
+                ['blockquote', 'code-block'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
+                ['link', 'image'],
+                ['clean']
               ]
             }
           });
@@ -909,11 +918,16 @@
             placeholder: 'Enter content...',
             modules: {
               toolbar: [
-                [{ 'header': [1, 2, 3, false] }],
+                [{ 'font': [] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                 ['bold', 'italic', 'underline', 'strike'],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],
+                [{ 'align': [] }],
                 ['blockquote', 'code-block'],
-                ['link'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
+                ['link', 'image'],
                 ['clean']
               ]
             }
