@@ -80,9 +80,6 @@
           <button id="btnAddRoom" class="btn btn-success">
             ➕ Add Room
           </button>
-          <button id="btnResetData" class="btn btn-danger btn-small">
-            🔄 Reset to Defaults
-          </button>
           <button id="btnLogout" class="btn">
             🚪 Logout
           </button>
@@ -241,7 +238,6 @@
       const loginAlert = document.getElementById('loginAlert');
       const btnLogout = document.getElementById('btnLogout');
       const btnAddRoom = document.getElementById('btnAddRoom');
-      const btnResetData = document.getElementById('btnResetData');
       const roomsContainer = document.getElementById('roomsContainer');
       const emptyState = document.getElementById('emptyState');
       
@@ -523,17 +519,6 @@
         };
         openModal(confirmModal);
       }
-
-      // Reset data to defaults
-      btnResetData.addEventListener('click', () => {
-        confirmMessage.textContent = 'Are you sure you want to reset all rooms to default data? This will erase all your custom changes.';
-        deleteCallback = () => {
-          RoomManager.resetToDefaults();
-          loadRooms();
-          closeModal(confirmModal);
-        };
-        openModal(confirmModal);
-      });
 
       // Save room
       btnSaveRoom.addEventListener('click', () => {
