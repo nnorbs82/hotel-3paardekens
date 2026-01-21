@@ -319,7 +319,7 @@
       });
 
       // Forgot password link
-      document.getElementById('forgotPasswordLink').addEventListener('click', (e) => {
+      document.getElementById('forgotPasswordLink').addEventListener('click', async (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         
@@ -344,9 +344,9 @@
         link.style.pointerEvents = 'none';
         link.style.opacity = '0.6';
 
-        // Request password reset
-        setTimeout(() => {
-          const result = HotelAuth.requestPasswordReset(email);
+        try {
+          // Request password reset (now properly awaiting async operation)
+          const result = await HotelAuth.requestPasswordReset(email);
           
           // Restore link state
           link.textContent = originalText;
@@ -371,7 +371,15 @@
                 alert('An error occurred. Please try again.');
             }
           }
-        }, 100);
+        } catch (error) {
+          // Restore link state in case of unexpected error
+          link.textContent = originalText;
+          link.style.pointerEvents = '';
+          link.style.opacity = '';
+          
+          console.error('Unexpected error during password reset:', error);
+          alert('An unexpected error occurred. Please try again.');
+        }
       });
 
       // Logout

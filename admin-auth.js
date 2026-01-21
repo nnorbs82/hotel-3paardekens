@@ -111,9 +111,9 @@
     /**
      * Request password reset
      * @param {string} email - Email address to send reset link to
-     * @returns {object} - Object with success status and optional error message
+     * @returns {Promise<object>} - Promise resolving to object with success status and optional error message
      */
-    requestPasswordReset(email) {
+    async requestPasswordReset(email) {
       if (!email) {
         return { success: false, error: 'email_required' };
       }
@@ -139,7 +139,7 @@
         // Since this is a demo app with hardcoded credentials,
         // we'll send the password directly in the email
         // In a production environment, you would send a secure token instead
-        emailjs.send(
+        const response = await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
           {
@@ -150,20 +150,14 @@
             reset_link: window.location.origin + '/hoteladmin.html',
             message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
           }
-        ).then(
-          function(response) {
-            console.log('Password reset email sent successfully', response);
-          },
-          function(error) {
-            console.error('Failed to send password reset email', error);
-          }
         );
+        
+        console.log('Password reset email sent successfully', response);
+        return { success: true };
       } catch (error) {
         console.error('Error sending password reset email:', error);
-        return { success: false, error: 'send_failed' };
+        return { success: false, error: 'send_failed', details: error };
       }
-      
-      return { success: true };
     }
   };
 })();
