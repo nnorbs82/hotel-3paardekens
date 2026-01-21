@@ -1,57 +1,117 @@
 /**
  * Info Manager Module for Hotel 3 Paardekens Admin Panel
- * Handles CRUD operations for info blocks using localStorage
+ * Handles CRUD operations for info blocks using Firebase Realtime Database
  */
 
 (function() {
   'use strict';
 
-  const STORAGE_KEY = 'hotel3p_info';
+  const STORAGE_KEY = 'hotel3p_info'; // Legacy localStorage key for migration
+  const FIREBASE_PATH = 'infoBlocks'; // Firebase database path
+
+  // Helper to get Firebase database reference
+  function getDatabase() {
+    if (typeof firebase === 'undefined' || !firebase.database) {
+      console.warn('Firebase not available, using localStorage fallback');
+      return null;
+    }
+    return firebase.database();
+  }
 
   // Info Manager API
   window.InfoManager = {
     /**
      * Get all info blocks
-     * @returns {Array} Array of info block objects
+     * @returns {Promise<Array>} Promise resolving to array of info block objects
      */
-    getInfoBlocks() {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        try {
-          return JSON.parse(stored);
-        } catch (e) {
-          console.error('Error parsing stored info blocks:', e);
-          return [];
+    async getInfoBlocks() {
+      const db = getDatabase();
+      
+      if (!db) {
+        // Fallback to localStorage if Firebase is not available
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch (e) {
+            console.error('Error parsing stored info blocks:', e);
+            return [];
+          }
         }
+        return [];
       }
-      return [];
+
+      try {
+        const snapshot = await db.ref(FIREBASE_PATH).once('value');
+        const data = snapshot.val();
+        
+        if (!data) {
+          // Try to migrate from localStorage if Firebase is empty
+          return await this._migrateFromLocalStorage();
+        }
+        
+        // Convert Firebase object to array
+        return Object.keys(data).map(key => ({
+          ...data[key],
+          id: key
+        })).sort((a, b) => a.order - b.order);
+      } catch (error) {
+        console.error('Error fetching info blocks from Firebase:', error);
+        // Fallback to localStorage on error
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+      }
     },
 
     /**
      * Get a single info block by ID
      * @param {string} id - Info block ID
-     * @returns {object|null} Info block object or null
+     * @returns {Promise<object|null>} Promise resolving to info block object or null
      */
-    getInfoBlock(id) {
-      const blocks = this.getInfoBlocks();
+    async getInfoBlock(id) {
+      const blocks = await this.getInfoBlocks();
       return blocks.find(b => b.id === id) || null;
     },
 
     /**
      * Save all info blocks to storage
      * @param {Array} blocks - Array of info block objects
+     * @returns {Promise<boolean>} Promise resolving to true if successful
      */
-    saveInfoBlocks(blocks) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
+    async saveInfoBlocks(blocks) {
+      const db = getDatabase();
+      
+      if (!db) {
+        // Fallback to localStorage
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
+        return true;
+      }
+
+      try {
+        // Convert array to object keyed by ID for Firebase
+        const dataObject = {};
+        blocks.forEach(block => {
+          const { id, ...blockData } = block;
+          dataObject[id] = blockData;
+        });
+        
+        await db.ref(FIREBASE_PATH).set(dataObject);
+        return true;
+      } catch (error) {
+        console.error('Error saving info blocks to Firebase:', error);
+        // Fallback to localStorage on error
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
+        return false;
+      }
     },
 
     /**
      * Create a new info block
      * @param {object} blockData - Info block data {title, body}
-     * @returns {object} Created info block with generated ID
+     * @returns {Promise<object>} Promise resolving to created info block with generated ID
      */
-    createInfoBlock(blockData) {
-      const blocks = this.getInfoBlocks();
+    async createInfoBlock(blockData) {
+      const blocks = await this.getInfoBlocks();
       const id = this._generateId();
       const order = blocks.length > 0 ? Math.max(...blocks.map(b => b.order)) + 1 : 1;
       
@@ -65,7 +125,7 @@
       };
 
       blocks.push(newBlock);
-      this.saveInfoBlocks(blocks);
+      await this.saveInfoBlocks(blocks);
       return newBlock;
     },
 
@@ -73,10 +133,10 @@
      * Update an existing info block
      * @param {string} id - Info block ID
      * @param {object} updates - Fields to update
-     * @returns {boolean} True if successful
+     * @returns {Promise<boolean>} Promise resolving to true if successful
      */
-    updateInfoBlock(id, updates) {
-      const blocks = this.getInfoBlocks();
+    async updateInfoBlock(id, updates) {
+      const blocks = await this.getInfoBlocks();
       const index = blocks.findIndex(b => b.id === id);
       
       if (index === -1) return false;
@@ -88,32 +148,32 @@
         updatedAt: new Date().toISOString()
       };
       
-      this.saveInfoBlocks(blocks);
+      await this.saveInfoBlocks(blocks);
       return true;
     },
 
     /**
      * Delete an info block
      * @param {string} id - Info block ID
-     * @returns {boolean} True if successful
+     * @returns {Promise<boolean>} Promise resolving to true if successful
      */
-    deleteInfoBlock(id) {
-      const blocks = this.getInfoBlocks();
+    async deleteInfoBlock(id) {
+      const blocks = await this.getInfoBlocks();
       const filtered = blocks.filter(b => b.id !== id);
       
       if (filtered.length === blocks.length) return false;
       
-      this.saveInfoBlocks(filtered);
+      await this.saveInfoBlocks(filtered);
       return true;
     },
 
     /**
      * Reorder info blocks
      * @param {Array} orderedIds - Array of info block IDs in the new order
-     * @returns {boolean} True if successful
+     * @returns {Promise<boolean>} Promise resolving to true if successful
      */
-    reorderInfoBlocks(orderedIds) {
-      const blocks = this.getInfoBlocks();
+    async reorderInfoBlocks(orderedIds) {
+      const blocks = await this.getInfoBlocks();
       
       // Create a map of id to block
       const blockMap = {};
@@ -133,8 +193,31 @@
         return null;
       }).filter(b => b !== null);
       
-      this.saveInfoBlocks(reordered);
+      await this.saveInfoBlocks(reordered);
       return true;
+    },
+
+    /**
+     * Migrate data from localStorage to Firebase
+     * @private
+     * @returns {Promise<Array>} Promise resolving to migrated blocks
+     */
+    async _migrateFromLocalStorage() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) return [];
+      
+      try {
+        const blocks = JSON.parse(stored);
+        if (blocks.length > 0) {
+          console.log('Migrating', blocks.length, 'info blocks from localStorage to Firebase...');
+          await this.saveInfoBlocks(blocks);
+          console.log('✓ Migration complete');
+          return blocks;
+        }
+      } catch (e) {
+        console.error('Error migrating from localStorage:', e);
+      }
+      return [];
     },
 
     /**
