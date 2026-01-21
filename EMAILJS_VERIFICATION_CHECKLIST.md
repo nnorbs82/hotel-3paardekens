@@ -6,10 +6,12 @@ This checklist will help you verify that your EmailJS account is properly config
 
 All values in the codebase have been verified and are consistent:
 
-- ✅ **Public Key**: `OuUDb11x_6V6Gvh7l` (in `hoteladmin.html`, line 18)
+- ✅ **Public Key**: `MEiKFhBHfwDzT-xz1` (in `hoteladmin.html`, line 18)
 - ✅ **Service ID**: `service_iu8cxtm` (in `admin-auth.js`, line 15)
 - ✅ **Template ID**: `template_2oxmlh8` (in `admin-auth.js`, line 16)
 - ✅ **Admin Email**: `rev.management@groupdaedalus.be` (in `admin-auth.js`, line 9)
+
+**Note:** For an improved email template with modern styling and better user experience, see [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md).
 
 ## 🔍 EmailJS Dashboard Verification
 
@@ -19,7 +21,7 @@ Now verify these settings in your EmailJS dashboard at https://www.emailjs.com/
 
 1. Log in to EmailJS at https://www.emailjs.com/
 2. Go to **Account** → **General** (or **API Keys**)
-3. Verify that `OuUDb11x_6V6Gvh7l` appears in your list of public keys
+3. Verify that `MEiKFhBHfwDzT-xz1` appears in your list of public keys
 4. Ensure the key is **active** (not revoked)
 
 **✓ Public Key Status:** [ ] Verified and Active
@@ -50,21 +52,28 @@ Now verify these settings in your EmailJS dashboard at https://www.emailjs.com/
 
 ### Step 4: Verify Template Variables
 
-Your template **MUST** include these exact variable names:
+Your template **MUST** include these variable names. We recommend using the modern template from [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md).
 
-Required Variables:
-- [ ] `{{to_email}}` - Recipient email address
+Primary Variables (Standardized):
+- [ ] `{{email}}` - Recipient email address (standardized)
+- [ ] `{{link}}` - Password reset/login link (standardized)
+
+Additional Variables (Optional, for backward compatibility):
+- [ ] `{{to_email}}` - Recipient email address (legacy)
 - [ ] `{{to_name}}` - Recipient name
 - [ ] `{{admin_email}}` - Admin email address  
 - [ ] `{{admin_password}}` - Admin password
-- [ ] `{{reset_link}}` - Link to admin login page
+- [ ] `{{reset_link}}` - Link to admin login page (legacy)
 - [ ] `{{message}}` - Password reset message
+
+**Important:** At minimum, your template should use `{{email}}` and `{{link}}` for the standardized approach. The code sends all variables for backward compatibility.
 
 **How to check:**
 1. Click on your template `template_2oxmlh8`
 2. Look at the template body content
-3. Ensure ALL six variables above are present
+3. Ensure the required variables above are present
 4. Variable names must match exactly (case-sensitive)
+5. For a complete modern template, see [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)
 
 **✓ All Variables Present:** [ ] Verified
 
@@ -82,20 +91,26 @@ Required Variables:
 
 1. In EmailJS dashboard, go to your template `template_2oxmlh8`
 2. Click **Test It** button
-3. Fill in test values for all variables:
-   - `to_email`: Your test email address
+3. Fill in test values for the variables (use standardized names):
+   - `email`: Your test email address
+   - `link`: "https://yoursite.com/hoteladmin.html"
+   - `to_email`: Your test email address (legacy)
    - `to_name`: "Test Admin"
    - `admin_email`: "rev.management@groupdaedalus.be"
    - `admin_password`: "TestPassword123"
-   - `reset_link`: "https://yoursite.com/hoteladmin.html"
+   - `reset_link`: "https://yoursite.com/hoteladmin.html" (legacy)
    - `message`: "This is a test password reset email"
 4. Send the test email
 5. Check your inbox (and spam folder)
 6. Verify the email:
    - [ ] Was received successfully
    - [ ] All variables were replaced correctly
-   - [ ] Email formatting looks correct
+   - [ ] Email formatting looks correct (especially if using the modern template)
+   - [ ] Button is styled and clickable (if using modern template)
    - [ ] Links are clickable
+   - [ ] Layout is responsive on mobile
+
+**Note:** For best results, use the modern HTML template from [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md).
 
 **✓ Test Email Status:** [ ] Sent and Verified
 
@@ -154,10 +169,10 @@ Plus detailed error information that will help identify the problem.
 **Solution:** Template ID `template_2oxmlh8` is incorrect. Double-check the Template ID in your EmailJS dashboard and update `admin-auth.js` line 16 if needed.
 
 ### Issue: "The public key is invalid"
-**Solution:** Public Key `OuUDb11x_6V6Gvh7l` is incorrect or revoked. Check your API keys in EmailJS dashboard and update `hoteladmin.html` line 18 if needed.
+**Solution:** Public Key `MEiKFhBHfwDzT-xz1` is incorrect or revoked. Check your API keys in EmailJS dashboard and update `hoteladmin.html` line 18 if needed.
 
 ### Issue: "Template variables are missing"
-**Solution:** Your EmailJS template is missing one or more required variables. Edit your template in the EmailJS dashboard and add all required variables listed in Step 4 above.
+**Solution:** Your EmailJS template is missing one or more required variables. At minimum, use `{{email}}` and `{{link}}`. For the best experience, use the modern template from [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md) which includes all variables with professional styling.
 
 ### Issue: "Monthly limit exceeded"
 **Solution:** You've sent 200+ emails this month (free tier limit). Either wait until next month or upgrade to a paid plan.

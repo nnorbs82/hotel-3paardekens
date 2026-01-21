@@ -8,6 +8,8 @@ If you just verified your EmailJS configuration values, see **[NEXT_STEPS.md](NE
 
 ## Documentation
 
+- **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Complete testing guide for password reset functionality with new EmailJS key
+- **[EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)** - Modern, visually appealing email template with styled buttons and responsive design
 - **[NEXT_STEPS.md](NEXT_STEPS.md)** - What to do after updating EmailJS configuration
 - **[EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md)** - Complete checklist to verify EmailJS configuration is correct
 - **[EMAIL_SETUP.md](EMAIL_SETUP.md)** - Email configuration setup guide
@@ -21,7 +23,12 @@ If you just verified your EmailJS configuration values, see **[NEXT_STEPS.md](NE
 
 ## Password Reset Configuration
 
-If you're experiencing issues with the password reset email functionality:
+The password reset functionality uses EmailJS with an improved modern email template. 
 
-1. **First Step**: Review [EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md) to verify your EmailJS account settings
-2. **If issues persist**: See [TROUBLESHOOTING_PASSWORD_RESET.md](TROUBLESHOOTING_PASSWORD_RESET.md) for detailed troubleshooting
+**NEW EmailJS Public Key**: `MEiKFhBHfwDzT-xz1`
+
+### Quick Start Testing
+1. **Testing Guide**: See [TESTING_GUIDE.md](TESTING_GUIDE.md) for complete step-by-step testing instructions
+2. **Email Template**: See [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md) for a modern, responsive email template with styled buttons
+3. **Verification**: Review [EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md) to verify your EmailJS account settings
+4. **Troubleshooting**: If issues persist, see [TROUBLESHOOTING_PASSWORD_RESET.md](TROUBLESHOOTING_PASSWORD_RESET.md) for detailed troubleshooting
