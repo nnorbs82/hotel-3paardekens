@@ -9,6 +9,10 @@
   const ADMIN_EMAIL = 'rev.management@groupdaedalus.be';
   const ADMIN_PASSWORD = 'Hotel3Paardekens2024!'; // Hardcoded password for demo
   const SESSION_KEY = 'hotel3p_admin_session';
+  
+  // EmailJS Configuration
+  const EMAILJS_SERVICE_ID = 'service_hotel3p';  // Update with your EmailJS service ID
+  const EMAILJS_TEMPLATE_ID = 'template_password_reset';  // Update with your EmailJS template ID
 
   // NOTE: This is a hardcoded credential as specified in the requirements.
   // In a production environment, this should be replaced with proper
@@ -126,11 +130,11 @@
         // Initialize EmailJS if not already initialized
         if (typeof emailjs !== 'undefined') {
           emailjs.send(
-            'service_hotel3p',  // Service ID (to be configured in EmailJS)
-            'template_password_reset',  // Template ID (to be configured in EmailJS)
+            EMAILJS_SERVICE_ID,  // Service ID (to be configured in EmailJS)
+            EMAILJS_TEMPLATE_ID,  // Template ID (to be configured in EmailJS)
             {
               to_email: email,
-              reset_link: window.location.origin + '/hoteladmin.html?reset=true',
+              reset_link: window.location.origin + '/hoteladmin.html',
               admin_email: ADMIN_EMAIL
             }
           ).then(

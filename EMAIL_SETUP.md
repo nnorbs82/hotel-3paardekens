@@ -62,11 +62,26 @@ If you used different IDs than the defaults:
 3. Click "Forgot your password?"
 4. Check the inbox of the configured email service for the reset email
 
+## Current Limitations
+
+This implementation provides the foundation for password reset emails but has the following limitations:
+
+1. **Reset Link**: The email contains a reset link, but the application doesn't yet have a password reset page or token validation system. For a complete implementation, you would need to:
+   - Create a password reset page that accepts reset tokens
+   - Implement token generation and storage (requires backend)
+   - Add token expiration and validation
+   - Allow users to set a new password
+
+2. **Client-Side Only**: This is a client-side only implementation using EmailJS. For production use, consider implementing server-side password reset with proper security measures.
+
+3. **Configuration Management**: The EmailJS public key is currently in the HTML file. For production, use environment variables or a secure configuration management system.
+
 ## Security Notes
 - Never commit your actual EmailJS public key to version control
 - Consider using environment variables or a configuration file
 - In production, implement proper server-side password reset with tokens and expiration
 - The current implementation is suitable for demo/development purposes only
+- The security vulnerability (displaying password in alert) has been removed
 
 ## Troubleshooting
 - Check browser console for any EmailJS errors
