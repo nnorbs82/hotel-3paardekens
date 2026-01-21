@@ -113,3 +113,5 @@ Email → SEE Password → Click Link → Login Page → Use Password → Done
 ---
 
 **Still confused?** The password is `Hotel3Paardekens2024!` - you can use it to log in right now without waiting for an email.
+
+**Security Note:** This password is shown here because it's a demo application with hardcoded credentials. In a production environment, passwords should never be exposed in documentation, code comments, or emails.

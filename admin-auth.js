@@ -14,6 +14,9 @@
   // These should match the Service ID and Template ID in your EmailJS dashboard
   const EMAILJS_SERVICE_ID = 'service_iu8cxtm';  // EmailJS service ID
   const EMAILJS_TEMPLATE_ID = 'template_2oxmlh8';  // EmailJS template ID for password reset
+  
+  // Password reminder email message
+  const PASSWORD_REMINDER_MESSAGE = 'You requested a password reminder for the Hotel 3 Paardekens Admin Panel. Your login credentials are shown below - use the password to log in.';
 
   // NOTE: This is a hardcoded credential as specified in the requirements.
   // In a production environment, this should be replaced with proper
@@ -193,7 +196,7 @@
           admin_email: ADMIN_EMAIL,                           // Maps to {{admin_email}} in template
           admin_password: ADMIN_PASSWORD,                     // Maps to {{admin_password}} in template
           reset_link: resetUrl,                               // Maps to {{reset_link}} in template (legacy)
-          message: 'You requested a password reminder for the Hotel 3 Paardekens Admin Panel. Your login credentials are shown below - use the password to log in.'  // Maps to {{message}} in template
+          message: PASSWORD_REMINDER_MESSAGE                  // Maps to {{message}} in template
         };
         
         console.log('Sending password reset email with params:', {
