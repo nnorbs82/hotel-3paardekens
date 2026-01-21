@@ -202,6 +202,17 @@
         );
         
         console.log('Password reset email sent successfully', response);
+        
+        // Validate response to ensure email was actually sent
+        if (!response || response.status !== 200) {
+          console.error('EmailJS returned non-200 status:', response);
+          return { 
+            success: false, 
+            error: 'send_failed',
+            details: 'EmailJS service returned an error status. Check template configuration.'
+          };
+        }
+        
         return { success: true };
       } catch (error) {
         console.error('Error sending password reset email:', error);
@@ -210,7 +221,21 @@
           text: error.text,
           status: error.status
         });
-        return { success: false, error: 'send_failed', details: error };
+        
+        // Provide more specific error messages based on the error
+        let errorMessage = 'send_failed';
+        if (error.text && error.text.includes('template')) {
+          errorMessage = 'template_error';
+          console.error('TEMPLATE ERROR: Check that template ID "template_2oxmlh8" exists and is configured correctly in EmailJS dashboard');
+          console.error('Required template settings in EmailJS dashboard:');
+          console.error('  - To Email field must be set to: {{to_email}} or {{email}}');
+          console.error('  - Template must include variables: {{to_name}}, {{message}}, {{link}}, {{email}}, {{admin_password}}');
+        } else if (error.text && error.text.includes('service')) {
+          errorMessage = 'service_error';
+          console.error('SERVICE ERROR: Check that service ID "service_iu8cxtm" exists and is enabled in EmailJS dashboard');
+        }
+        
+        return { success: false, error: errorMessage, details: error };
       }
     }
   };
