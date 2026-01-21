@@ -9,6 +9,10 @@
   const ADMIN_EMAIL = 'rev.management@groupdaedalus.be';
   const SESSION_KEY = 'hotel3p_admin_session';
 
+  // NOTE: This is a hardcoded credential as specified in the requirements.
+  // In a production environment, this should be replaced with proper
+  // server-side authentication with secure password hashing.
+
   // Authentication API
   window.HotelAuth = {
     /**

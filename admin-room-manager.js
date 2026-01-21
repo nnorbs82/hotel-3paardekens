@@ -191,16 +191,23 @@
      * @private
      */
     _generateId(name) {
+      if (!name || typeof name !== 'string') {
+        name = 'room';
+      }
+      
       const base = name.toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '');
       
+      // Ensure we have a valid base ID
+      const validBase = base || 'room';
+      
       const rooms = this.getRooms();
-      let id = base;
+      let id = validBase;
       let counter = 1;
       
       while (rooms.some(r => r.id === id)) {
-        id = `${base}-${counter}`;
+        id = `${validBase}-${counter}`;
         counter++;
       }
       
@@ -236,7 +243,14 @@
 
   // Get icon SVG by name
   window.IconLibrary.getIcon = function(iconName) {
-    return this[iconName] || this.bed; // Default to bed icon if not found
+    // Return the requested icon, or bed icon as fallback for backward compatibility
+    if (this[iconName]) {
+      return this[iconName];
+    }
+    
+    // Log warning for debugging
+    console.warn(`Icon '${iconName}' not found in IconLibrary, using 'bed' as fallback`);
+    return this.bed;
   };
 
 })();

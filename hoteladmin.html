@@ -405,7 +405,14 @@
         const bookingUrl = document.getElementById('roomBookingUrl').value.trim();
 
         if (!name || !description) {
-          alert('Please fill in all required fields');
+          // Show error feedback
+          const existingAlert = roomForm.querySelector('.alert');
+          if (existingAlert) existingAlert.remove();
+          
+          const alert = document.createElement('div');
+          alert.className = 'alert alert-error';
+          alert.textContent = 'Please fill in all required fields (Name and Description)';
+          roomForm.insertBefore(alert, roomForm.firstChild);
           return;
         }
 
@@ -463,7 +470,14 @@
         const name = amenityName.value.trim();
         
         if (!name || !selectedIcon) {
-          alert('Please enter an amenity name and select an icon');
+          // Show error feedback
+          const existingAlert = amenityModal.querySelector('.modal-body .alert');
+          if (existingAlert) existingAlert.remove();
+          
+          const alert = document.createElement('div');
+          alert.className = 'alert alert-error';
+          alert.textContent = 'Please enter an amenity name and select an icon';
+          amenityModal.querySelector('.modal-body').insertBefore(alert, amenityModal.querySelector('.form-group'));
           return;
         }
 
