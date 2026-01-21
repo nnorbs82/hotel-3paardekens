@@ -346,17 +346,30 @@
 
         // Request password reset
         setTimeout(() => {
-          const success = HotelAuth.requestPasswordReset(email);
+          const result = HotelAuth.requestPasswordReset(email);
           
           // Restore link state
           link.textContent = originalText;
           link.style.pointerEvents = '';
           link.style.opacity = '';
           
-          if (success) {
+          if (result.success) {
             alert(`A password reset email has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to retrieve your password.`);
           } else {
-            alert('Email address not found in our system.\n\nPlease make sure you entered the correct admin email address.');
+            // Handle different error types
+            switch (result.error) {
+              case 'email_not_found':
+                alert('Email address not found in our system.\n\nPlease make sure you entered the correct admin email address.');
+                break;
+              case 'emailjs_not_loaded':
+                alert('Email service is not currently available. Please try again later or contact the administrator.\n\nNote: For this demo, EmailJS needs to be loaded from CDN. If you are testing locally, the service should work when deployed.');
+                break;
+              case 'send_failed':
+                alert('There was an error sending the password reset email. Please check your EmailJS configuration and try again.');
+                break;
+              default:
+                alert('An error occurred. Please try again.');
+            }
           }
         }, 100);
       });

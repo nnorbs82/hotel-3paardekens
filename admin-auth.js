@@ -111,60 +111,59 @@
     /**
      * Request password reset
      * @param {string} email - Email address to send reset link to
-     * @returns {boolean} - True if reset email would be sent
+     * @returns {object} - Object with success status and optional error message
      */
     requestPasswordReset(email) {
-      if (!email) return false;
+      if (!email) {
+        return { success: false, error: 'email_required' };
+      }
       
       const normalizedEmail = email.trim().toLowerCase();
       const normalizedAdmin = ADMIN_EMAIL.toLowerCase();
       
       // Check if email matches the admin email
       if (normalizedEmail !== normalizedAdmin) {
-        return false;
+        return { success: false, error: 'email_not_found' };
+      }
+      
+      // Check if EmailJS is loaded
+      if (typeof emailjs === 'undefined') {
+        console.warn('EmailJS not loaded. Password reset email cannot be sent.');
+        return { success: false, error: 'emailjs_not_loaded' };
       }
       
       // Send password reset email using EmailJS
       // This uses EmailJS service to send emails from client-side
       // The template should be configured in EmailJS dashboard
       try {
-        // Initialize EmailJS if not already initialized
-        if (typeof emailjs !== 'undefined') {
-          // Since this is a demo app with hardcoded credentials,
-          // we'll send the password directly in the email
-          // In a production environment, you would send a secure token instead
-          emailjs.send(
-            EMAILJS_SERVICE_ID,
-            EMAILJS_TEMPLATE_ID,
-            {
-              to_email: email,
-              to_name: 'Admin',
-              admin_email: ADMIN_EMAIL,
-              admin_password: ADMIN_PASSWORD,
-              reset_link: window.location.origin + '/hoteladmin.html',
-              message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
-            }
-          ).then(
-            function(response) {
-              console.log('Password reset email sent successfully', response);
-            },
-            function(error) {
-              console.error('Failed to send password reset email', error);
-              alert('There was an error sending the password reset email. Please check your EmailJS configuration.');
-            }
-          );
-        } else {
-          console.warn('EmailJS not loaded. Password reset email not sent.');
-          alert('Email service is not configured. Please contact the administrator.');
-          return false;
-        }
+        // Since this is a demo app with hardcoded credentials,
+        // we'll send the password directly in the email
+        // In a production environment, you would send a secure token instead
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          {
+            to_email: email,
+            to_name: 'Admin',
+            admin_email: ADMIN_EMAIL,
+            admin_password: ADMIN_PASSWORD,
+            reset_link: window.location.origin + '/hoteladmin.html',
+            message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'
+          }
+        ).then(
+          function(response) {
+            console.log('Password reset email sent successfully', response);
+          },
+          function(error) {
+            console.error('Failed to send password reset email', error);
+          }
+        );
       } catch (error) {
         console.error('Error sending password reset email:', error);
-        alert('There was an error sending the password reset email. Please try again.');
-        return false;
+        return { success: false, error: 'send_failed' };
       }
       
-      return true;
+      return { success: true };
     }
   };
 })();
