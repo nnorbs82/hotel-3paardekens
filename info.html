@@ -144,10 +144,16 @@
       transition: background-color 120ms ease;
       padding: 10px 12px;
       font-size: 15px;
-      width: 94px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+    }
+
+    /* Desktop width for menu pills */
+    @media (min-width: 600px) {
+      .menubar .pill {
+        width: 94px;
+      }
     }
 
     .menubar .pill:hover,
