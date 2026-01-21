@@ -529,7 +529,9 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-
+  </script>
+  <script src="admin-room-manager.js"></script>
+  <script>
     function getRoomImagesFromDataset(el) {
       const roomName = (el.dataset.room || 'Room').trim();
       const base = (el.dataset.base || '').trim(); // e.g. "Rooms/Single/"
@@ -883,7 +885,6 @@
     // Re-initialize sliders for any pre-existing room-slider elements
     document.querySelectorAll('.room-slider').forEach(initRoomSlider);
   </script>
-  <script src="admin-room-manager.js"></script>
   <script src="assets/nav.js"></script>
 </body>
 </html>
