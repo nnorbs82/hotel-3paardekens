@@ -6,6 +6,9 @@
   <title>Hotel 3 Paardekens - Admin</title>
   <meta name="description" content="Hotel 3 Paardekens - Administration Panel" />
   <link rel="stylesheet" href="admin-styles.css">
+  <!-- Quill Rich Text Editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
   <!-- EmailJS SDK for sending password reset emails -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
@@ -74,29 +77,70 @@
   <!-- Admin Dashboard -->
   <div id="adminDashboard" class="bg hidden">
     <div class="card">
-      <div class="admin-header">
-        <h1>Room Management</h1>
-        <div class="admin-header-actions">
-          <button id="btnAddRoom" class="btn btn-success">
-            ➕ Add Room
-          </button>
-          <button id="btnLogout" class="btn">
-            🚪 Logout
+      <!-- Admin Navigation -->
+      <div class="admin-nav">
+        <button id="btnNavRooms" class="admin-nav-btn active">
+          🏨 Rooms
+        </button>
+        <button id="btnNavInfo" class="admin-nav-btn">
+          ℹ️ Info
+        </button>
+      </div>
+
+      <!-- Room Management Section -->
+      <div id="roomManagementSection">
+        <div class="admin-header">
+          <h1>Room Management</h1>
+          <div class="admin-header-actions">
+            <button id="btnAddRoom" class="btn btn-success">
+              ➕ Add Room
+            </button>
+            <button id="btnLogout" class="btn">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+
+        <div id="roomsContainer" class="rooms-list">
+          <!-- Rooms will be loaded here -->
+        </div>
+
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-state-icon">🏨</div>
+          <h2 class="empty-state-title">No Rooms Yet</h2>
+          <p class="empty-state-desc">Create your first room category to get started</p>
+          <button class="btn btn-success" onclick="document.getElementById('btnAddRoom').click()">
+            ➕ Add Your First Room
           </button>
         </div>
       </div>
 
-      <div id="roomsContainer" class="rooms-list">
-        <!-- Rooms will be loaded here -->
-      </div>
+      <!-- Info Management Section -->
+      <div id="infoManagementSection" class="hidden">
+        <div class="admin-header">
+          <h1>Info Management</h1>
+          <div class="admin-header-actions">
+            <button id="btnAddInfo" class="btn btn-success">
+              ➕ Add Info Block
+            </button>
+            <button id="btnLogoutInfo" class="btn">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
 
-      <div id="emptyState" class="empty-state hidden">
-        <div class="empty-state-icon">🏨</div>
-        <h2 class="empty-state-title">No Rooms Yet</h2>
-        <p class="empty-state-desc">Create your first room category to get started</p>
-        <button class="btn btn-success" onclick="document.getElementById('btnAddRoom').click()">
-          ➕ Add Your First Room
-        </button>
+        <div id="infoBlocksContainer" class="info-blocks-list">
+          <!-- Info blocks will be loaded here -->
+        </div>
+
+        <div id="emptyStateInfo" class="empty-state hidden">
+          <div class="empty-state-icon">ℹ️</div>
+          <h2 class="empty-state-title">No Info Blocks Yet</h2>
+          <p class="empty-state-desc">Create your first info block to get started</p>
+          <button class="btn btn-success" onclick="document.getElementById('btnAddInfo').click()">
+            ➕ Add Your First Info Block
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -225,8 +269,40 @@
     </div>
   </div>
 
+  <!-- Info Block Editor Modal -->
+  <div id="infoBlockModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 900px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="infoModalTitle">Add Info Block</h2>
+        <button class="modal-close" id="infoModalClose" type="button">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="infoBlockForm">
+          <div class="form-group">
+            <label for="infoBlockTitle">Title *</label>
+            <div id="infoBlockTitleEditor" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="infoBlockBody">Content *</label>
+            <div id="infoBlockBodyEditor" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="btnCancelInfo">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnSaveInfo">
+          💾 Save Info Block
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="admin-auth.js"></script>
   <script src="admin-room-manager.js"></script>
+  <script src="admin-info-manager.js"></script>
   <script>
     (function() {
       'use strict';
@@ -776,7 +852,295 @@
           if (roomModal.classList.contains('is-open')) closeModal(roomModal);
           if (amenityModal.classList.contains('is-open')) closeModal(amenityModal);
           if (confirmModal.classList.contains('is-open')) closeModal(confirmModal);
+          if (infoBlockModal.classList.contains('is-open')) closeModal(infoBlockModal);
         }
+      });
+
+      // ============================================================
+      // INFO MANAGEMENT
+      // ============================================================
+
+      // Info Management Elements
+      const btnNavRooms = document.getElementById('btnNavRooms');
+      const btnNavInfo = document.getElementById('btnNavInfo');
+      const roomManagementSection = document.getElementById('roomManagementSection');
+      const infoManagementSection = document.getElementById('infoManagementSection');
+      const btnAddInfo = document.getElementById('btnAddInfo');
+      const btnLogoutInfo = document.getElementById('btnLogoutInfo');
+      const infoBlocksContainer = document.getElementById('infoBlocksContainer');
+      const emptyStateInfo = document.getElementById('emptyStateInfo');
+      
+      // Info modal elements
+      const infoBlockModal = document.getElementById('infoBlockModal');
+      const infoModalTitle = document.getElementById('infoModalTitle');
+      const infoModalClose = document.getElementById('infoModalClose');
+      const btnCancelInfo = document.getElementById('btnCancelInfo');
+      const btnSaveInfo = document.getElementById('btnSaveInfo');
+      const infoBlockForm = document.getElementById('infoBlockForm');
+
+      // Quill editors
+      let titleQuill = null;
+      let bodyQuill = null;
+      let currentEditingInfoBlock = null;
+      let draggedInfoBlockId = null;
+
+      // Initialize Quill editors
+      function initQuillEditors() {
+        if (titleQuill) {
+          titleQuill.setText('');
+        } else {
+          titleQuill = new Quill('#infoBlockTitleEditor', {
+            theme: 'snow',
+            placeholder: 'Enter title...',
+            modules: {
+              toolbar: [
+                ['bold', 'italic', 'underline'],
+                ['link']
+              ]
+            }
+          });
+        }
+
+        if (bodyQuill) {
+          bodyQuill.setText('');
+        } else {
+          bodyQuill = new Quill('#infoBlockBodyEditor', {
+            theme: 'snow',
+            placeholder: 'Enter content...',
+            modules: {
+              toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['blockquote', 'code-block'],
+                ['link'],
+                ['clean']
+              ]
+            }
+          });
+        }
+      }
+
+      // Admin Navigation
+      btnNavRooms.addEventListener('click', () => {
+        btnNavRooms.classList.add('active');
+        btnNavInfo.classList.remove('active');
+        roomManagementSection.classList.remove('hidden');
+        infoManagementSection.classList.add('hidden');
+      });
+
+      btnNavInfo.addEventListener('click', () => {
+        btnNavInfo.classList.add('active');
+        btnNavRooms.classList.remove('active');
+        infoManagementSection.classList.remove('hidden');
+        roomManagementSection.classList.add('hidden');
+        loadInfoBlocks();
+      });
+
+      // Logout from info section
+      btnLogoutInfo.addEventListener('click', () => {
+        if (confirm('Are you sure you want to logout?')) {
+          HotelAuth.logout();
+          showLogin();
+          loginForm.reset();
+        }
+      });
+
+      // Load and display info blocks
+      function loadInfoBlocks() {
+        const blocks = InfoManager.getInfoBlocks();
+        infoBlocksContainer.innerHTML = '';
+
+        if (blocks.length === 0) {
+          emptyStateInfo.classList.remove('hidden');
+          infoBlocksContainer.classList.add('hidden');
+        } else {
+          emptyStateInfo.classList.add('hidden');
+          infoBlocksContainer.classList.remove('hidden');
+          
+          // Sort by order
+          blocks.sort((a, b) => a.order - b.order);
+          
+          blocks.forEach(block => {
+            const blockEl = createInfoBlockElement(block);
+            infoBlocksContainer.appendChild(blockEl);
+          });
+        }
+      }
+
+      // Create info block element
+      function createInfoBlockElement(block) {
+        const div = document.createElement('div');
+        div.className = 'info-block-item';
+        div.draggable = true;
+        div.dataset.id = block.id;
+        
+        // Create a text preview (strip HTML for preview)
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = block.title;
+        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+        
+        tempDiv.innerHTML = block.body;
+        const bodyText = tempDiv.textContent || tempDiv.innerText || '';
+        const bodyPreview = bodyText.substring(0, 150) + (bodyText.length > 150 ? '...' : '');
+
+        div.innerHTML = `
+          <div class="info-block-item-handle" title="Drag to reorder">
+            ⋮⋮
+          </div>
+          <div class="info-block-item-content">
+            <h3 class="info-block-item-title">${titleText}</h3>
+            <p class="info-block-item-desc">${bodyPreview}</p>
+            <div class="info-block-item-meta">
+              Order: ${block.order}
+            </div>
+          </div>
+          <div class="info-block-item-actions">
+            <button class="btn btn-small btn-edit" data-block-id="${block.id}">
+              ✏️ Edit
+            </button>
+            <button class="btn btn-small btn-danger btn-delete" data-block-id="${block.id}">
+              🗑️ Delete
+            </button>
+          </div>
+        `;
+
+        // Event listeners
+        div.querySelector('.btn-edit').addEventListener('click', () => editInfoBlock(block.id));
+        div.querySelector('.btn-delete').addEventListener('click', () => deleteInfoBlock(block.id));
+
+        // Drag and drop for reordering
+        div.addEventListener('dragstart', (e) => {
+          draggedInfoBlockId = block.id;
+          div.classList.add('dragging');
+        });
+
+        div.addEventListener('dragend', () => {
+          div.classList.remove('dragging');
+        });
+
+        div.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          div.classList.add('drag-over');
+        });
+
+        div.addEventListener('dragleave', () => {
+          div.classList.remove('drag-over');
+        });
+
+        div.addEventListener('drop', (e) => {
+          e.preventDefault();
+          div.classList.remove('drag-over');
+          
+          if (draggedInfoBlockId && draggedInfoBlockId !== block.id) {
+            reorderInfoBlocks(draggedInfoBlockId, block.id);
+          }
+          
+          draggedInfoBlockId = null;
+        });
+
+        return div;
+      }
+
+      // Reorder info blocks
+      function reorderInfoBlocks(draggedId, targetId) {
+        const blocks = InfoManager.getInfoBlocks();
+        const draggedIndex = blocks.findIndex(b => b.id === draggedId);
+        const targetIndex = blocks.findIndex(b => b.id === targetId);
+
+        if (draggedIndex === -1 || targetIndex === -1) return;
+
+        // Remove dragged block
+        const [draggedBlock] = blocks.splice(draggedIndex, 1);
+        // Insert at target position
+        blocks.splice(targetIndex, 0, draggedBlock);
+
+        // Get ordered IDs
+        const orderedIds = blocks.map(b => b.id);
+        InfoManager.reorderInfoBlocks(orderedIds);
+        loadInfoBlocks();
+      }
+
+      // Open info block modal for adding
+      btnAddInfo.addEventListener('click', () => {
+        currentEditingInfoBlock = null;
+        infoModalTitle.textContent = 'Add Info Block';
+        initQuillEditors();
+        openModal(infoBlockModal);
+      });
+
+      // Open info block modal for editing
+      function editInfoBlock(blockId) {
+        const block = InfoManager.getInfoBlock(blockId);
+        if (!block) return;
+
+        currentEditingInfoBlock = block.id;
+        infoModalTitle.textContent = 'Edit Info Block';
+        initQuillEditors();
+        
+        // Set editor content
+        titleQuill.root.innerHTML = block.title;
+        bodyQuill.root.innerHTML = block.body;
+        
+        openModal(infoBlockModal);
+      }
+
+      // Delete info block
+      function deleteInfoBlock(blockId) {
+        const block = InfoManager.getInfoBlock(blockId);
+        if (!block) return;
+
+        // Create a text preview for confirmation
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = block.title;
+        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+
+        confirmMessage.textContent = `Are you sure you want to delete "${titleText}"? This action cannot be undone.`;
+        deleteCallback = () => {
+          if (InfoManager.deleteInfoBlock(blockId)) {
+            loadInfoBlocks();
+            closeModal(confirmModal);
+          }
+        };
+        openModal(confirmModal);
+      }
+
+      // Save info block
+      btnSaveInfo.addEventListener('click', () => {
+        const title = titleQuill.root.innerHTML.trim();
+        const body = bodyQuill.root.innerHTML.trim();
+
+        // Check if editors are empty (only have <p><br></p> or similar)
+        const titleText = titleQuill.getText().trim();
+        const bodyText = bodyQuill.getText().trim();
+
+        if (!titleText || !bodyText) {
+          alert('Please fill in both the title and content.');
+          return;
+        }
+
+        const blockData = {
+          title,
+          body
+        };
+
+        if (currentEditingInfoBlock) {
+          InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
+        } else {
+          InfoManager.createInfoBlock(blockData);
+        }
+
+        closeModal(infoBlockModal);
+        loadInfoBlocks();
+      });
+
+      // Info modal close events
+      infoModalClose.addEventListener('click', () => closeModal(infoBlockModal));
+      btnCancelInfo.addEventListener('click', () => closeModal(infoBlockModal));
+
+      // Close info modal on overlay click
+      infoBlockModal.addEventListener('click', (e) => {
+        if (e.target === infoBlockModal) closeModal(infoBlockModal);
       });
 
       // Initialize app
