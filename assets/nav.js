@@ -41,9 +41,19 @@
     if (pathname.match(/\/?rooms(\/|\.html?)?$/i)) {
       currentPage = 'rooms';
     }
+    // Check if we're on the info page using URL patterns
+    // Pattern matches: [/]info[/|.html|.htm]
+    // Examples: /info, /info/, /info.html, /info.htm, info.html, info.htm
+    else if (pathname.match(/\/?info(\/|\.html?)?$/i)) {
+      currentPage = 'info';
+    }
     // Fallback: check for #rooms element (unique to rooms.html)
     else if (document.getElementById('rooms')) {
       currentPage = 'rooms';
+    }
+    // Fallback: check for #infoBlocks element (unique to info.html)
+    else if (document.getElementById('infoBlocks')) {
+      currentPage = 'info';
     }
     
     const links = mobileMenu.querySelectorAll('a.pill');
