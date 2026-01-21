@@ -16,7 +16,7 @@
       <p>Sign in to manage Hotel 3 Paardekens</p>
 
       <div id="loginAlert" class="alert alert-error hidden">
-        <span>Invalid email address</span>
+        <span>Invalid credentials</span>
       </div>
 
       <form id="loginForm">
@@ -30,6 +30,24 @@
             required 
             autocomplete="email"
           />
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            name="password"
+            placeholder="Enter your password" 
+            required 
+            autocomplete="current-password"
+          />
+        </div>
+
+        <div style="text-align: right; margin-bottom: 16px;">
+          <a href="#" id="forgotPasswordLink" style="font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 120ms ease;">
+            Forgot your password?
+          </a>
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 100%;">
@@ -94,7 +112,17 @@
 
           <div class="form-group">
             <label for="roomBookingUrl">Booking URL</label>
-            <input type="url" id="roomBookingUrl" name="bookingUrl" placeholder="https://..." />
+            <input 
+              type="url" 
+              id="roomBookingUrl" 
+              name="bookingUrl" 
+              value="https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
+              readonly
+              style="background: rgba(255,255,255,0.02); cursor: not-allowed; opacity: 0.7;"
+            />
+            <p style="font-size: 12px; color: rgba(255,255,255,0.5); margin: 4px 0 0 0;">
+              This URL is automatically set for all rooms and cannot be changed.
+            </p>
           </div>
 
           <div class="form-group">
@@ -268,12 +296,31 @@
       loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
         
-        if (HotelAuth.login(email)) {
+        if (HotelAuth.login(email, password)) {
           loginAlert.classList.add('hidden');
           showDashboard();
         } else {
           loginAlert.classList.remove('hidden');
+        }
+      });
+
+      // Forgot password link
+      document.getElementById('forgotPasswordLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        
+        if (!email) {
+          alert('Please enter your email address first to request a password reset.');
+          document.getElementById('loginEmail').focus();
+          return;
+        }
+
+        if (HotelAuth.requestPasswordReset(email)) {
+          alert(`A password reset link has been sent to ${email}.\n\nFor this demo, the password is: Hotel3Paardekens2024!`);
+        } else {
+          alert('Email address not found in our system.');
         }
       });
 
@@ -348,6 +395,8 @@
         currentPhotos = [];
         modalTitle.textContent = 'Add Room';
         roomForm.reset();
+        // Set the default booking URL
+        document.getElementById('roomBookingUrl').value = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms';
         renderAmenities();
         renderPhotos();
         openModal(roomModal);

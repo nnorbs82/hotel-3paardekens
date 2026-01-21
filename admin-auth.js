@@ -7,6 +7,7 @@
   'use strict';
 
   const ADMIN_EMAIL = 'rev.management@groupdaedalus.be';
+  const ADMIN_PASSWORD = 'Hotel3Paardekens2024!'; // Hardcoded password for demo
   const SESSION_KEY = 'hotel3p_admin_session';
 
   // NOTE: This is a hardcoded credential as specified in the requirements.
@@ -32,17 +33,18 @@
     },
 
     /**
-     * Attempt to login with provided email
+     * Attempt to login with provided email and password
      * @param {string} email - Email address to authenticate
+     * @param {string} password - Password to authenticate
      * @returns {boolean} - True if login successful
      */
-    login(email) {
-      if (!email) return false;
+    login(email, password) {
+      if (!email || !password) return false;
       
       const normalizedEmail = email.trim().toLowerCase();
       const normalizedAdmin = ADMIN_EMAIL.toLowerCase();
       
-      if (normalizedEmail === normalizedAdmin) {
+      if (normalizedEmail === normalizedAdmin && password === ADMIN_PASSWORD) {
         const session = {
           authenticated: true,
           email: ADMIN_EMAIL,
@@ -99,6 +101,22 @@
         sessionStorage.removeItem('hotel3p_redirect');
         window.location.href = redirect || 'hoteladmin.html';
       }
+    },
+
+    /**
+     * Request password reset
+     * @param {string} email - Email address to send reset link to
+     * @returns {boolean} - True if reset email would be sent
+     */
+    requestPasswordReset(email) {
+      if (!email) return false;
+      
+      const normalizedEmail = email.trim().toLowerCase();
+      const normalizedAdmin = ADMIN_EMAIL.toLowerCase();
+      
+      // In a real system, this would send an email with a reset link
+      // For this demo, we'll just return true if the email matches
+      return normalizedEmail === normalizedAdmin;
     }
   };
 })();
