@@ -888,13 +888,17 @@
       let currentEditingInfoBlock = null;
       let draggedInfoBlockId = null;
 
+      // Define font and size options as constants to avoid duplication
+      const CUSTOM_FONTS = ['roboto', 'open-sans', 'lato', 'montserrat', 'playfair', 'merriweather', 'raleway', 'poppins', 'crimson', 'libre-baskerville', 'oswald', 'source-sans', 'pt-serif', 'ubuntu', 'nunito'];
+      const CUSTOM_SIZES = ['8px', '9px', '10px', '11px', '12px', '14px', '16px', '18px', '20px', '22px', '24px', '26px', '28px', '32px', '36px', '48px', '72px'];
+
       // Register custom fonts and sizes with Quill
       const Font = Quill.import('formats/font');
-      Font.whitelist = ['roboto', 'open-sans', 'lato', 'montserrat', 'playfair', 'merriweather', 'raleway', 'poppins', 'crimson', 'libre-baskerville', 'oswald', 'source-sans', 'pt-serif', 'ubuntu', 'nunito'];
+      Font.whitelist = CUSTOM_FONTS;
       Quill.register(Font, true);
 
       const Size = Quill.import('attributors/style/size');
-      Size.whitelist = ['8px', '9px', '10px', '11px', '12px', '14px', '16px', '18px', '20px', '22px', '24px', '26px', '28px', '32px', '36px', '48px', '72px'];
+      Size.whitelist = CUSTOM_SIZES;
       Quill.register(Size, true);
 
       // Initialize Quill editors
@@ -907,8 +911,8 @@
             placeholder: 'Enter title...',
             modules: {
               toolbar: [
-                [{ 'font': ['roboto', 'open-sans', 'lato', 'montserrat', 'playfair', 'merriweather', 'raleway', 'poppins', 'crimson', 'libre-baskerville', 'oswald', 'source-sans', 'pt-serif', 'ubuntu', 'nunito'] }],
-                [{ 'size': ['8px', '9px', '10px', '11px', '12px', '14px', '16px', '18px', '20px', '22px', '24px', '26px', '28px', '32px', '36px', '48px', '72px'] }],
+                [{ 'font': CUSTOM_FONTS }],
+                [{ 'size': CUSTOM_SIZES }],
                 ['bold', 'italic', 'underline', 'strike'],
                 [{ 'color': [] }, { 'background': [] }],
                 [{ 'script': 'sub'}, { 'script': 'super' }],
@@ -930,8 +934,8 @@
             placeholder: 'Enter content...',
             modules: {
               toolbar: [
-                [{ 'font': ['roboto', 'open-sans', 'lato', 'montserrat', 'playfair', 'merriweather', 'raleway', 'poppins', 'crimson', 'libre-baskerville', 'oswald', 'source-sans', 'pt-serif', 'ubuntu', 'nunito'] }],
-                [{ 'size': ['8px', '9px', '10px', '11px', '12px', '14px', '16px', '18px', '20px', '22px', '24px', '26px', '28px', '32px', '36px', '48px', '72px'] }],
+                [{ 'font': CUSTOM_FONTS }],
+                [{ 'size': CUSTOM_SIZES }],
                 ['bold', 'italic', 'underline', 'strike'],
                 [{ 'color': [] }, { 'background': [] }],
                 [{ 'script': 'sub'}, { 'script': 'super' }],
