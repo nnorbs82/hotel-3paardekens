@@ -59,7 +59,15 @@
         console.error('Error fetching info blocks from Firebase:', error);
         // Fallback to localStorage on error
         const stored = localStorage.getItem(STORAGE_KEY);
-        return stored ? JSON.parse(stored) : [];
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch (e) {
+            console.error('Error parsing localStorage data:', e);
+            return [];
+          }
+        }
+        return [];
       }
     },
 
