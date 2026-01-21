@@ -356,7 +356,7 @@
           link.style.opacity = '';
           
           if (result.success) {
-            alert(`A password reset email has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to retrieve your password.`);
+            alert(`A password reminder email has been sent to ${email}.\n\nThe email contains your login password. Check your inbox and use that password to log in.`);
           } else {
             // Handle different error types
             switch (result.error) {
@@ -366,16 +366,36 @@
               case 'emailjs_not_loaded':
                 alert('Email service is not currently available. Please try again later or contact the administrator.\n\nNote: For this demo, EmailJS needs to be loaded from CDN. If you are testing locally, the service should work when deployed.');
                 break;
-              case 'send_failed':
-                // Provide detailed troubleshooting information
-                console.log('EmailJS send failed. Please check:');
-                console.log('1. Service ID:', 'service_iu8cxtm');
-                console.log('2. Template ID:', 'template_2oxmlh8');
-                console.log('3. Public Key:', 'MEiKFhBHfwDzT-xz1');
-                console.log('4. Check your EmailJS dashboard to ensure the service and template are active');
-                console.log('5. Verify template variables match: to_email, to_name, admin_email, admin_password, reset_link, message');
+              case 'template_error':
+                // Template configuration error
+                console.log('EmailJS template error detected. Please check:');
+                console.log('1. Template ID:', HotelAuth.config.templateId, '- does it exist in your EmailJS dashboard?');
+                console.log('2. Template "To Email" field must be set to: {{to_email}} or {{email}}');
+                console.log('3. Template must include these variables: {{to_name}}, {{message}}, {{link}}, {{email}}, {{admin_password}}');
+                console.log('4. Go to https://dashboard.emailjs.com/admin/templates/', 'to configure your template');
                 
-                alert('There was an error sending the password reset email.\n\nPlease check the browser console for details.\n\nCommon issues:\n• EmailJS service is not active\n• Template ID is incorrect\n• Template variables are not configured\n• Email service provider is blocking EmailJS\n\nFor help, see EMAIL_SETUP.md in the project.');
+                alert('Template Configuration Error\n\nThe EmailJS template is not configured correctly.\n\nPlease check:\n\n1. Template ID "' + HotelAuth.config.templateId + '" exists in your EmailJS dashboard\n\n2. In the template settings, the "To Email" field must be set to:\n   {{to_email}} or {{email}}\n\n3. The template must include these variables:\n   {{to_name}}, {{message}}, {{link}}, {{email}}, {{admin_password}}\n\nSee the browser console and EMAIL_SETUP.md for details.');
+                break;
+              case 'service_error':
+                // Service configuration error
+                console.log('EmailJS service error detected. Please check:');
+                console.log('1. Service ID:', HotelAuth.config.serviceId, '- is it enabled in your EmailJS dashboard?');
+                console.log('2. Go to https://dashboard.emailjs.com/admin to check service status');
+                console.log('3. Verify your email service provider credentials are correct');
+                
+                alert('Service Configuration Error\n\nThe EmailJS service is not properly configured.\n\nPlease check:\n\n1. Service ID "' + HotelAuth.config.serviceId + '" exists and is ENABLED in your EmailJS dashboard\n\n2. Your email service provider credentials are correct\n\n3. Your EmailJS account has not exceeded its sending limits\n\nSee the browser console and EMAIL_SETUP.md for details.');
+                break;
+              case 'send_failed':
+                // Generic send failure
+                console.log('EmailJS send failed. Please check:');
+                console.log('1. Service ID:', HotelAuth.config.serviceId);
+                console.log('2. Template ID:', HotelAuth.config.templateId);
+                console.log('3. Public Key:', HotelAuth.config.publicKey);
+                console.log('4. Check your EmailJS dashboard to ensure the service and template are active');
+                console.log('5. Verify template "To Email" field is set to: {{to_email}} or {{email}}');
+                console.log('6. Verify template variables match: {{to_name}}, {{message}}, {{link}}, {{email}}, {{admin_password}}');
+                
+                alert('There was an error sending the password reset email.\n\nPlease check the browser console for details.\n\nCommon issues:\n• EmailJS service is not active\n• Template ID is incorrect\n• Template "To Email" field not set to {{to_email}} or {{email}}\n• Template variables are not configured\n• Email service provider is blocking EmailJS\n\nFor help, see EMAIL_SETUP.md in the project.');
                 break;
               default:
                 alert('An error occurred. Please try again.');

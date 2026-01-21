@@ -17,13 +17,28 @@ For a modern, visually appealing email template with styled buttons and responsi
 - Documentation on variable replacement mechanism
 - Mobile-responsive design best practices
 
-## How Password Reset Works
+## How Password Reminder Works
+
+**Important:** This is a password REMINDER system, not a password RESET system. Since this is a demo app with a hardcoded password, the email sends you the existing password rather than allowing you to create a new one.
+
+### The Flow:
 
 1. User enters their email address in the login form
 2. User clicks "Forgot your password?" link
 3. System validates the email matches the admin email
-4. EmailJS sends an email with login credentials using a modern, styled template
-5. User receives email and can log in with the provided password
+4. EmailJS sends an email with the current login credentials
+5. User receives email showing their password
+6. User clicks "Access Admin Panel" button to return to login page
+7. User enters the password shown in the email to log in
+
+### What the Email Contains:
+
+The email includes:
+- **Your Email**: The admin email address
+- **Your Password**: The current hardcoded password for this demo
+- **Access Admin Panel button**: A link back to the login page
+
+**Note:** The "Access Admin Panel" button simply takes you back to the login page. You need to use the password shown in the email body to log in.
 
 **Note:** For the improved email template with modern styling, visual hierarchy, and a styled button (instead of a plain link), see **[EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)**.
 

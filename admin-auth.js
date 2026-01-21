@@ -14,6 +14,9 @@
   // These should match the Service ID and Template ID in your EmailJS dashboard
   const EMAILJS_SERVICE_ID = 'service_iu8cxtm';  // EmailJS service ID
   const EMAILJS_TEMPLATE_ID = 'template_2oxmlh8';  // EmailJS template ID for password reset
+  
+  // Password reminder email message
+  const PASSWORD_REMINDER_MESSAGE = 'You requested a password reminder for the Hotel 3 Paardekens Admin Panel. Your login credentials are shown below - use the password to log in.';
 
   // NOTE: This is a hardcoded credential as specified in the requirements.
   // In a production environment, this should be replaced with proper
@@ -21,6 +24,13 @@
 
   // Authentication API
   window.HotelAuth = {
+    // Expose EmailJS configuration for reference
+    config: {
+      serviceId: EMAILJS_SERVICE_ID,
+      templateId: EMAILJS_TEMPLATE_ID,
+      publicKey: 'MEiKFhBHfwDzT-xz1'
+    },
+    
     /**
      * Check if user is currently authenticated
      * @returns {boolean}
@@ -186,7 +196,7 @@
           admin_email: ADMIN_EMAIL,                           // Maps to {{admin_email}} in template
           admin_password: ADMIN_PASSWORD,                     // Maps to {{admin_password}} in template
           reset_link: resetUrl,                               // Maps to {{reset_link}} in template (legacy)
-          message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'  // Maps to {{message}} in template
+          message: PASSWORD_REMINDER_MESSAGE                  // Maps to {{message}} in template
         };
         
         console.log('Sending password reset email with params:', {
@@ -202,6 +212,17 @@
         );
         
         console.log('Password reset email sent successfully', response);
+        
+        // Validate response to ensure email was actually sent
+        if (!response || response.status !== 200) {
+          console.error('EmailJS returned non-200 status:', response);
+          return { 
+            success: false, 
+            error: 'send_failed',
+            details: 'EmailJS service returned an error status. Check template configuration.'
+          };
+        }
+        
         return { success: true };
       } catch (error) {
         console.error('Error sending password reset email:', error);
@@ -210,7 +231,23 @@
           text: error.text,
           status: error.status
         });
-        return { success: false, error: 'send_failed', details: error };
+        
+        // Provide more specific error messages based on the error
+        // Note: EmailJS doesn't provide specific error codes in public API,
+        // so we use string matching on error.text as a best-effort approach
+        let errorMessage = 'send_failed';
+        if (error.text && error.text.includes('template')) {
+          errorMessage = 'template_error';
+          console.error('TEMPLATE ERROR: Check that template ID "template_2oxmlh8" exists and is configured correctly in EmailJS dashboard');
+          console.error('Required template settings in EmailJS dashboard:');
+          console.error('  - To Email field must be set to: {{to_email}} or {{email}}');
+          console.error('  - Template must include variables: {{to_name}}, {{message}}, {{link}}, {{email}}, {{admin_password}}');
+        } else if (error.text && error.text.includes('service')) {
+          errorMessage = 'service_error';
+          console.error('SERVICE ERROR: Check that service ID "service_iu8cxtm" exists and is enabled in EmailJS dashboard');
+        }
+        
+        return { success: false, error: errorMessage, details: error };
       }
     }
   };
