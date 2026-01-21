@@ -217,28 +217,93 @@
 
   // Icon library for amenities
   window.IconLibrary = {
+    // Bed types
     bed: '<svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v10"></path><path d="M18 7v10"></path><path d="M6 12h12"></path><path d="M8 17h8"></path><path d="M9 17v3"></path><path d="M15 17v3"></path></svg>',
+    king_bed: '<svg viewBox="0 0 24 24"><path d="M3 7h18"></path><path d="M5 7v10"></path><path d="M19 7v10"></path><path d="M5 12h14"></path><path d="M7 17h10"></path><path d="M8 17v3"></path><path d="M16 17v3"></path></svg>',
+    queen_bed: '<svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v9"></path><path d="M18 7v9"></path><path d="M6 12h12"></path><path d="M8 16h8"></path><path d="M9 16v3"></path><path d="M15 16v3"></path></svg>',
+    twin_bed: '<svg viewBox="0 0 24 24"><path d="M2 8h8"></path><path d="M14 8h8"></path><path d="M3 8v8"></path><path d="M9 8v8"></path><path d="M15 8v8"></path><path d="M21 8v8"></path><path d="M3 12h6"></path><path d="M15 12h6"></path></svg>',
+    sofa_bed: '<svg viewBox="0 0 24 24"><path d="M4 10h16"></path><path d="M4 10v6"></path><path d="M20 10v6"></path><path d="M6 16h12"></path><path d="M4 6h2v4"></path><path d="M18 6h2v4"></path></svg>',
+    
+    // Electronics
     tv: '<svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg>',
-    bathroom: '<svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path><path d="M10 14v4"></path><path d="M14 14v4"></path></svg>',
-    view: '<svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg>',
-    coffee: '<svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M10 10h4"></path></svg>',
-    heating: '<svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg>',
-    wardrobe: '<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg>',
     wifi: '<svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14 0"></path><path d="M8.5 16.5a6 6 0 0 1 7 0"></path><circle cx="12" cy="20" r="1"></circle></svg>',
     phone: '<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>',
-    ac: '<svg viewBox="0 0 24 24"><path d="M12 2v20"></path><path d="M2 12h20"></path><path d="m4.93 4.93 2.83 2.83"></path><path d="m16.24 16.24 2.83 2.83"></path><path d="m4.93 19.07 2.83-2.83"></path><path d="m16.24 7.76 2.83-2.83"></path></svg>',
-    minibar: '<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"></path><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>',
-    desk: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M7 20v-4"></path><path d="M17 20v-4"></path></svg>',
-    chair: '<svg viewBox="0 0 24 24"><path d="M5 9v6"></path><path d="M19 9v6"></path><path d="M5 9h14"></path><path d="M5 15h14"></path><path d="M7 20v-5"></path><path d="M17 20v-5"></path></svg>',
-    safe: '<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"></rect><circle cx="12" cy="14" r="3"></circle><path d="M12 14v4"></path></svg>',
-    balcony: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M4 12h16"></path><path d="M12 4v16"></path></svg>',
-    iron: '<svg viewBox="0 0 24 24"><path d="M8 19V7.2c0-.6.4-1 1-1h6.5c.5 0 1 .4 1 1v11.8"></path><path d="M3 19h18"></path><path d="M8 15h8"></path></svg>',
-    hairdryer: '<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"></circle><path d="M13 13l7 7"></path><path d="M16 8V6a2 2 0 0 1 2-2h2"></path></svg>',
+    smart_tv: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M7 21h10"></path><path d="M12 17v4"></path><circle cx="9" cy="10" r="1"></circle><circle cx="15" cy="10" r="1"></circle></svg>',
+    sound_system: '<svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>',
+    
+    // Bathroom
+    bathroom: '<svg viewBox="0 0 24 24"><path d="M7 6a5 5 0 0 1 10 0"></path><path d="M17 6v4"></path><path d="M7 10h10"></path><path d="M8 14h8"></path><path d="M9 18h6"></path><path d="M10 14v4"></path><path d="M14 14v4"></path></svg>',
     shower: '<svg viewBox="0 0 24 24"><path d="M6 8v12"></path><path d="M10 8v12"></path><path d="M14 8v12"></path><path d="M18 8v12"></path><path d="M4 4h16"></path></svg>',
     bathtub: '<svg viewBox="0 0 24 24"><path d="M4 12h16"></path><path d="M6 12v6"></path><path d="M18 12v6"></path><path d="M4 18h16"></path><circle cx="8" cy="8" r="2"></circle></svg>',
     towel: '<svg viewBox="0 0 24 24"><rect x="8" y="4" width="10" height="16" rx="1"></rect><path d="M8 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"></path></svg>',
-    king_bed: '<svg viewBox="0 0 24 24"><path d="M3 7h18"></path><path d="M5 7v10"></path><path d="M19 7v10"></path><path d="M5 12h14"></path><path d="M7 17h10"></path><path d="M8 17v3"></path><path d="M16 17v3"></path></svg>',
-    queen_bed: '<svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M6 7v9"></path><path d="M18 7v9"></path><path d="M6 12h12"></path><path d="M8 16h8"></path><path d="M9 16v3"></path><path d="M15 16v3"></path></svg>'
+    hairdryer: '<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"></circle><path d="M13 13l7 7"></path><path d="M16 8V6a2 2 0 0 1 2-2h2"></path></svg>',
+    toiletries: '<svg viewBox="0 0 24 24"><path d="M9 3h6"></path><rect x="8" y="3" width="8" height="18" rx="2"></rect><path d="M10 8h4"></path><path d="M10 12h4"></path><path d="M10 16h4"></path></svg>',
+    
+    // Comfort & Climate
+    ac: '<svg viewBox="0 0 24 24"><path d="M12 2v20"></path><path d="M2 12h20"></path><path d="m4.93 4.93 2.83 2.83"></path><path d="m16.24 16.24 2.83 2.83"></path><path d="m4.93 19.07 2.83-2.83"></path><path d="m16.24 7.76 2.83-2.83"></path></svg>',
+    heating: '<svg viewBox="0 0 24 24"><path d="M10 14a2 2 0 1 0 4 0V6a2 2 0 0 0-4 0v8z"></path><path d="M12 20a4 4 0 0 0 2-7.5"></path><path d="M12 20a4 4 0 0 1-2-7.5"></path></svg>',
+    fan: '<svg viewBox="0 0 24 24"><path d="M12 12v.01"></path><path d="M12 6a6 6 0 0 0 0 12"></path><path d="M12 6a6 6 0 0 1 0 12"></path><path d="M6 12a6 6 0 0 0 12 0"></path></svg>',
+    fireplace: '<svg viewBox="0 0 24 24"><path d="M12 2c-1.5 3-3.5 5.5-3.5 9.5a3.5 3.5 0 0 0 7 0c0-4-2-6.5-3.5-9.5z"></path><path d="M5 22h14"></path><path d="M5 18h14"></path></svg>',
+    
+    // Furniture
+    wardrobe: '<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"></rect><path d="M9 7V5a3 3 0 0 1 6 0v2"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg>',
+    desk: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M7 20v-4"></path><path d="M17 20v-4"></path></svg>',
+    chair: '<svg viewBox="0 0 24 24"><path d="M5 9v6"></path><path d="M19 9v6"></path><path d="M5 9h14"></path><path d="M5 15h14"></path><path d="M7 20v-5"></path><path d="M17 20v-5"></path></svg>',
+    sofa: '<svg viewBox="0 0 24 24"><path d="M4 10h16"></path><path d="M4 10v8h16v-8"></path><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M4 6h2v4"></path><path d="M18 6h2v4"></path></svg>',
+    table: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="4"></rect><path d="M6 8v12"></path><path d="M18 8v12"></path><path d="M10 8v12"></path><path d="M14 8v12"></path></svg>',
+    nightstand: '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"></rect><path d="M6 11h12"></path><circle cx="12" cy="7.5" r="0.5"></circle><circle cx="12" cy="14.5" r="0.5"></circle></svg>',
+    
+    // Kitchen & Dining
+    coffee: '<svg viewBox="0 0 24 24"><path d="M10 4h4"></path><path d="M11 4v2"></path><path d="M13 4v2"></path><rect x="9" y="6" width="6" height="14" rx="2"></rect><path d="M10 10h4"></path></svg>',
+    minibar: '<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"></path><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>',
+    kettle: '<svg viewBox="0 0 24 24"><path d="M8 4h8"></path><path d="M9 4v2"></path><path d="M15 4v2"></path><path d="M8 6h8v10H8z"></path><path d="M6 10h2"></path><path d="M6 14h2"></path></svg>',
+    microwave: '<svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"></rect><path d="M4 10h16"></path><circle cx="17" cy="8" r="0.5"></circle><circle cx="17" cy="12" r="0.5"></circle><circle cx="17" cy="16" r="0.5"></circle></svg>',
+    kitchen: '<svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M9 6v10"></path><path d="M15 6v10"></path><path d="M4 10h16"></path></svg>',
+    dining: '<svg viewBox="0 0 24 24"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect x="6" y="6" width="12" height="12" rx="2"></rect><path d="M6 11h12"></path></svg>',
+    
+    // Services & Amenities
+    safe: '<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"></rect><circle cx="12" cy="14" r="3"></circle><path d="M12 14v4"></path></svg>',
+    iron: '<svg viewBox="0 0 24 24"><path d="M8 19V7.2c0-.6.4-1 1-1h6.5c.5 0 1 .4 1 1v11.8"></path><path d="M3 19h18"></path><path d="M8 15h8"></path></svg>',
+    laundry: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><circle cx="12" cy="14" r="5"></circle><path d="M8 4h8"></path></svg>',
+    hangers: '<svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2"></circle><path d="M12 8v2"></path><path d="M12 10L6 18h12L12 10z"></path><path d="M6 18h12"></path></svg>',
+    slippers: '<svg viewBox="0 0 24 24"><path d="M4 16h6a4 4 0 0 1 4 4"></path><path d="M14 16h6a4 4 0 0 0-4 4"></path><path d="M4 12h6"></path><path d="M14 12h6"></path></svg>',
+    
+    // Views & Outdoor
+    view: '<svg viewBox="0 0 24 24"><path d="M4 10h8a4 4 0 0 1 4 4v2H9a5 5 0 0 1-5-5v-1z"></path><path d="M16 12h4"></path><path d="M18 12v4"></path></svg>',
+    balcony: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M4 12h16"></path><path d="M12 4v16"></path></svg>',
+    terrace: '<svg viewBox="0 0 24 24"><path d="M4 18h16"></path><path d="M6 18v-6"></path><path d="M10 18v-6"></path><path d="M14 18v-6"></path><path d="M18 18v-6"></path><path d="M4 12h16"></path></svg>',
+    garden: '<svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 3 2 5 2 5h12s2-2 2-5a8 8 0 0 0-8-8z"></path><path d="M12 15v7"></path><path d="M8 22h8"></path></svg>',
+    pool: '<svg viewBox="0 0 24 24"><path d="M2 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2"></path><path d="M2 14a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2"></path><circle cx="12" cy="8" r="4"></circle></svg>',
+    parking: '<svg viewBox="0 0 24 24"><path d="M6 4h8a4 4 0 0 1 0 8H8v8"></path><path d="M8 4v16"></path></svg>',
+    
+    // Business & Work
+    workspace: '<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M6 8h12"></path><path d="M6 12h8"></path><path d="M6 16h10"></path></svg>',
+    meeting_room: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><circle cx="9" cy="7" r="1"></circle><circle cx="15" cy="7" r="1"></circle></svg>',
+    printer: '<svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>',
+    laptop: '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="17" x2="22" y2="17"></line></svg>',
+    
+    // Security & Safety
+    lock: '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>',
+    security: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
+    smoke_detector: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6"></path><circle cx="12" cy="16" r="1"></circle></svg>',
+    
+    // Accessibility
+    wheelchair: '<svg viewBox="0 0 24 24"><circle cx="12" cy="11" r="8"></circle><path d="M12 3v8"></path><path d="M8 11h8"></path><circle cx="12" cy="5" r="2"></circle></svg>',
+    elevator: '<svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M12 6v12"></path><path d="M8 10l4-4 4 4"></path></svg>',
+    
+    // Entertainment
+    games: '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"></rect><path d="M10 10h4"></path><path d="M12 8v4"></path><circle cx="16" cy="10" r="1"></circle><circle cx="16" cy="14" r="1"></circle></svg>',
+    books: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>',
+    
+    // Extras
+    breakfast: '<svg viewBox="0 0 24 24"><path d="M8 4v12a4 4 0 0 0 4 4"></path><path d="M16 4v12a4 4 0 0 1-4 4"></path><path d="M4 8h16"></path><path d="M4 12h16"></path></svg>',
+    bar: '<svg viewBox="0 0 24 24"><path d="M3 3h18"></path><path d="M12 3v18"></path><path d="M6 15h12"></path><path d="M6 19h12"></path></svg>',
+    restaurant: '<svg viewBox="0 0 24 24"><path d="M5 2v14"></path><path d="M9 2v6"></path><path d="M13 2v6"></path><path d="M3 8h8"></path><path d="M19 2v20"></path></svg>',
+    room_service: '<svg viewBox="0 0 24 24"><path d="M3 16a9 9 0 1 1 18 0"></path><path d="M3 16h18"></path><path d="M12 6v4"></path></svg>',
+    concierge: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 20v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path></svg>',
+    cleaning: '<svg viewBox="0 0 24 24"><path d="M12 2L4 8v12h16V8l-8-6z"></path><path d="M9 21V12h6v9"></path></svg>',
+    pet_friendly: '<svg viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"></circle><circle cx="18" cy="8" r="2"></circle><circle cx="20" cy="16" r="2"></circle><circle cx="9" cy="10" r="2"></circle><path d="M12.5 21c.5-2 1.5-3.5 3-4s2.5 0 3.5 1"></path></svg>',
+    luggage: '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="14" rx="2"></rect><path d="M10 6V4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2"></path><path d="M6 10h12"></path><path d="M6 14h12"></path></svg>'
   };
 
   // Get icon SVG by name
