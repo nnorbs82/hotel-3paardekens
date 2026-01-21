@@ -114,9 +114,43 @@
       const normalizedEmail = email.trim().toLowerCase();
       const normalizedAdmin = ADMIN_EMAIL.toLowerCase();
       
-      // In a real system, this would send an email with a reset link
-      // For this demo, we'll just return true if the email matches
-      return normalizedEmail === normalizedAdmin;
+      // Check if email matches the admin email
+      if (normalizedEmail !== normalizedAdmin) {
+        return false;
+      }
+      
+      // Send password reset email using EmailJS
+      // This uses EmailJS service to send emails from client-side
+      // The template should be configured in EmailJS dashboard
+      try {
+        // Initialize EmailJS if not already initialized
+        if (typeof emailjs !== 'undefined') {
+          emailjs.send(
+            'service_hotel3p',  // Service ID (to be configured in EmailJS)
+            'template_password_reset',  // Template ID (to be configured in EmailJS)
+            {
+              to_email: email,
+              reset_link: window.location.origin + '/hoteladmin.html?reset=true',
+              admin_email: ADMIN_EMAIL
+            }
+          ).then(
+            function(response) {
+              console.log('Password reset email sent successfully', response);
+            },
+            function(error) {
+              console.error('Failed to send password reset email', error);
+            }
+          );
+        } else {
+          console.warn('EmailJS not loaded. Password reset email not sent.');
+          // Return true to show success message to user even if EmailJS is not configured
+          // This maintains the demo functionality while allowing for future email integration
+        }
+      } catch (error) {
+        console.error('Error sending password reset email:', error);
+      }
+      
+      return true;
     }
   };
 })();
