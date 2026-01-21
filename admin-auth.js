@@ -193,7 +193,7 @@
           admin_email: ADMIN_EMAIL,                           // Maps to {{admin_email}} in template
           admin_password: ADMIN_PASSWORD,                     // Maps to {{admin_password}} in template
           reset_link: resetUrl,                               // Maps to {{reset_link}} in template (legacy)
-          message: 'You requested to reset your password for the Hotel 3 Paardekens Admin Panel.'  // Maps to {{message}} in template
+          message: 'You requested a password reminder for the Hotel 3 Paardekens Admin Panel. Your login credentials are shown below - use the password to log in.'  // Maps to {{message}} in template
         };
         
         console.log('Sending password reset email with params:', {

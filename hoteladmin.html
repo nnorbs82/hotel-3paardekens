@@ -356,7 +356,7 @@
           link.style.opacity = '';
           
           if (result.success) {
-            alert(`A password reset email has been sent to ${email}.\n\nPlease check your inbox and follow the instructions to retrieve your password.`);
+            alert(`A password reminder email has been sent to ${email}.\n\nThe email contains your login password. Check your inbox and use that password to log in.`);
           } else {
             // Handle different error types
             switch (result.error) {
