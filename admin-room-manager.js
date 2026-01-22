@@ -1,12 +1,40 @@
 /**
  * Room Manager Module for Hotel 3 Paardekens Admin Panel
- * Handles CRUD operations for room categories using localStorage
+ * Handles CRUD operations for room categories using Firebase Realtime Database
  */
 
 (function() {
   'use strict';
 
-  const STORAGE_KEY = 'hotel3p_rooms';
+  const STORAGE_KEY = 'hotel3p_rooms'; // Legacy localStorage key for migration
+  const FIREBASE_PATH = 'rooms'; // Firebase database path
+
+  // Helper to get Firebase database reference
+  function getDatabase() {
+    if (typeof firebase === 'undefined' || !firebase.database) {
+      console.warn('Firebase not available, using localStorage fallback');
+      return null;
+    }
+    
+    // Check if Firebase app is initialized
+    if (!firebase.apps || firebase.apps.length === 0) {
+      console.warn('Firebase app not initialized, using localStorage fallback');
+      return null;
+    }
+    
+    try {
+      const db = firebase.database();
+      // Verify database is actually accessible
+      if (!db) {
+        console.warn('Firebase database not accessible, using localStorage fallback');
+        return null;
+      }
+      return db;
+    } catch (error) {
+      console.error('Error accessing Firebase database:', error);
+      return null;
+    }
+  }
 
   // Default rooms data (fallback if no custom data exists)
   const DEFAULT_ROOMS = [
@@ -86,46 +114,127 @@
   window.RoomManager = {
     /**
      * Get all rooms
-     * @returns {Array} Array of room objects
+     * @returns {Promise<Array>} Promise resolving to array of room objects
      */
-    getRooms() {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        try {
-          return JSON.parse(stored);
-        } catch (e) {
-          console.error('Error parsing stored rooms:', e);
-          return DEFAULT_ROOMS;
+    async getRooms() {
+      const db = getDatabase();
+      
+      if (!db) {
+        // Fallback to localStorage if Firebase is not available
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch (e) {
+            console.error('Error parsing stored rooms:', e);
+            return DEFAULT_ROOMS;
+          }
         }
+        return DEFAULT_ROOMS;
       }
-      return DEFAULT_ROOMS;
+
+      try {
+        const snapshot = await db.ref(FIREBASE_PATH).once('value');
+        const data = snapshot.val();
+        
+        if (!data) {
+          // Try to migrate from localStorage if Firebase is empty
+          return await this._migrateFromLocalStorage();
+        }
+        
+        // Convert Firebase object to array
+        return Object.keys(data).map(key => ({
+          ...data[key],
+          id: key
+        }));
+      } catch (error) {
+        console.error('Error fetching rooms from Firebase:', error);
+        // Fallback to localStorage on error
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch (e) {
+            console.error('Error parsing localStorage data:', e);
+            return DEFAULT_ROOMS;
+          }
+        }
+        return DEFAULT_ROOMS;
+      }
     },
 
     /**
      * Get a single room by ID
      * @param {string} id - Room ID
-     * @returns {object|null} Room object or null
+     * @returns {Promise<object|null>} Promise resolving to room object or null
      */
-    getRoom(id) {
-      const rooms = this.getRooms();
+    async getRoom(id) {
+      const rooms = await this.getRooms();
       return rooms.find(r => r.id === id) || null;
     },
 
     /**
      * Save all rooms to storage
      * @param {Array} rooms - Array of room objects
+     * @returns {Promise<boolean>} Promise resolving to true if successful, false on error
      */
-    saveRooms(rooms) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms));
+    async saveRooms(rooms) {
+      const db = getDatabase();
+      
+      if (!db) {
+        // Fallback to localStorage
+        console.log('Using localStorage fallback for saving rooms');
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms));
+          return true;
+        } catch (error) {
+          console.error('Error saving to localStorage:', error);
+          return false;
+        }
+      }
+
+      try {
+        // Convert array to object keyed by ID for Firebase
+        const dataObject = {};
+        rooms.forEach(room => {
+          const { id, ...roomData } = room;
+          dataObject[id] = roomData;
+        });
+        
+        console.log('Saving rooms to Firebase...');
+        await db.ref(FIREBASE_PATH).set(dataObject);
+        console.log('✓ Rooms saved successfully to Firebase');
+        
+        // Also save to localStorage as backup
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms));
+        } catch (lsError) {
+          console.warn('Could not save to localStorage backup:', lsError);
+        }
+        return true;
+      } catch (error) {
+        console.error('Error saving rooms to Firebase:', error);
+        console.error('Error details:', error.message, error.code);
+        // Fallback to localStorage on error
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms));
+          console.log('Saved to localStorage as fallback');
+          return true; // Success via fallback
+        } catch (lsError) {
+          console.error('Failed to save to localStorage fallback:', lsError);
+          return false; // Complete failure
+        }
+      }
     },
 
     /**
      * Create a new room
      * @param {object} roomData - Room data {name, description, amenities, photos, bookingUrl}
-     * @returns {object} Created room with generated ID
+     * @returns {Promise<object|null>} Promise resolving to created room with generated ID, or null on error
      */
-    createRoom(roomData) {
-      const rooms = this.getRooms();
+    async createRoom(roomData) {
+      console.log('Creating new room:', roomData.name);
+      const rooms = await this.getRooms();
       const id = this._generateId(roomData.name);
       
       const newRoom = {
@@ -138,21 +247,32 @@
       };
 
       rooms.push(newRoom);
-      this.saveRooms(rooms);
-      return newRoom;
+      
+      const success = await this.saveRooms(rooms);
+      if (success) {
+        console.log('✓ Room created successfully:', id);
+        return newRoom;
+      } else {
+        console.error('Failed to save new room');
+        return null; // Maintain API contract by returning null on failure
+      }
     },
 
     /**
      * Update an existing room
      * @param {string} id - Room ID
      * @param {object} updates - Fields to update
-     * @returns {boolean} True if successful
+     * @returns {Promise<boolean>} Promise resolving to true if successful, false on error
      */
-    updateRoom(id, updates) {
-      const rooms = this.getRooms();
+    async updateRoom(id, updates) {
+      console.log('Updating room:', id);
+      const rooms = await this.getRooms();
       const index = rooms.findIndex(r => r.id === id);
       
-      if (index === -1) return false;
+      if (index === -1) {
+        console.error('Room not found:', id);
+        return false;
+      }
       
       rooms[index] = {
         ...rooms[index],
@@ -160,37 +280,69 @@
         id // Preserve original ID
       };
       
-      this.saveRooms(rooms);
-      return true;
+      const success = await this.saveRooms(rooms);
+      if (success) {
+        console.log('✓ Room updated successfully:', id);
+        return true;
+      } else {
+        console.error('Failed to update room');
+        return false;
+      }
     },
 
     /**
      * Delete a room
      * @param {string} id - Room ID
-     * @returns {boolean} True if successful
+     * @returns {Promise<boolean>} Promise resolving to true if successful
      */
-    deleteRoom(id) {
-      const rooms = this.getRooms();
+    async deleteRoom(id) {
+      const rooms = await this.getRooms();
       const filtered = rooms.filter(r => r.id !== id);
       
       if (filtered.length === rooms.length) return false;
       
-      this.saveRooms(filtered);
+      await this.saveRooms(filtered);
       return true;
     },
 
     /**
      * Reset rooms to default data
+     * @returns {Promise<boolean>} Promise resolving to true if successful
      */
-    resetToDefaults() {
-      this.saveRooms(DEFAULT_ROOMS);
+    async resetToDefaults() {
+      return await this.saveRooms(DEFAULT_ROOMS);
+    },
+
+    /**
+     * Migrate data from localStorage to Firebase
+     * @private
+     * @returns {Promise<Array>} Promise resolving to migrated rooms
+     */
+    async _migrateFromLocalStorage() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) return DEFAULT_ROOMS;
+      
+      try {
+        const rooms = JSON.parse(stored);
+        if (rooms.length > 0) {
+          console.log('Migrating', rooms.length, 'rooms from localStorage to Firebase...');
+          await this.saveRooms(rooms);
+          console.log('✓ Migration complete');
+          return rooms;
+        }
+      } catch (e) {
+        console.error('Error migrating from localStorage:', e);
+      }
+      return DEFAULT_ROOMS;
     },
 
     /**
      * Generate a unique ID from room name
      * @private
+     * @param {string} name - Room name
+     * @returns {string} Generated unique ID
      */
-    _generateId(name) {
+    async _generateId(name) {
       if (!name || typeof name !== 'string') {
         name = 'room';
       }
@@ -202,7 +354,7 @@
       // Ensure we have a valid base ID
       const validBase = base || 'room';
       
-      const rooms = this.getRooms();
+      const rooms = await this.getRooms();
       let id = validBase;
       let counter = 1;
       

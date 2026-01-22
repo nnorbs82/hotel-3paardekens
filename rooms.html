@@ -536,6 +536,14 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  
+  <!-- Firebase Configuration -->
+  <script src="firebase-config.js"></script>
+  
   <script src="admin-room-manager.js"></script>
   <script>
     function getRoomImagesFromDataset(el) {
@@ -766,13 +774,13 @@
     });
 
     // Load rooms dynamically from RoomManager
-    function loadRooms() {
+    async function loadRooms() {
       const roomsGrid = document.getElementById('roomsGrid');
       if (!roomsGrid) return;
 
       // Load room manager if available
       if (typeof RoomManager !== 'undefined') {
-        const rooms = RoomManager.getRooms();
+        const rooms = await RoomManager.getRooms();
         renderRooms(rooms);
       }
     }
@@ -887,6 +895,19 @@
 
     // Load rooms when DOM is ready
     loadRooms();
+    
+    // Set up real-time listener for Firebase updates
+    // This ensures changes made in one browser are reflected in all open browsers
+    if (typeof firebase !== 'undefined' && firebase.database) {
+      try {
+        const db = firebase.database();
+        db.ref('rooms').on('value', () => {
+          loadRooms();
+        });
+      } catch (error) {
+        console.warn('Could not set up real-time listener:', error);
+      }
+    }
     
     // Re-initialize sliders for any pre-existing room-slider elements
     document.querySelectorAll('.room-slider').forEach(initRoomSlider);

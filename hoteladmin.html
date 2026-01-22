@@ -566,8 +566,8 @@
       });
 
       // Load and display rooms
-      function loadRooms() {
-        const rooms = RoomManager.getRooms();
+      async function loadRooms() {
+        const rooms = await RoomManager.getRooms();
         roomsContainer.innerHTML = '';
 
         if (rooms.length === 0) {
@@ -635,8 +635,8 @@
       });
 
       // Open room modal for editing
-      function editRoom(roomId) {
-        const room = RoomManager.getRoom(roomId);
+      async function editRoom(roomId) {
+        const room = await RoomManager.getRoom(roomId);
         if (!room) return;
 
         currentEditingRoom = room.id;
@@ -654,14 +654,14 @@
       }
 
       // Delete room
-      function deleteRoom(roomId) {
-        const room = RoomManager.getRoom(roomId);
+      async function deleteRoom(roomId) {
+        const room = await RoomManager.getRoom(roomId);
         if (!room) return;
 
         confirmMessage.textContent = `Are you sure you want to delete "${room.name}"? This action cannot be undone.`;
-        deleteCallback = () => {
-          if (RoomManager.deleteRoom(roomId)) {
-            loadRooms();
+        deleteCallback = async () => {
+          if (await RoomManager.deleteRoom(roomId)) {
+            await loadRooms();
             closeModal(confirmModal);
           }
         };
@@ -669,7 +669,7 @@
       }
 
       // Save room
-      btnSaveRoom.addEventListener('click', () => {
+      btnSaveRoom.addEventListener('click', async () => {
         const name = document.getElementById('roomName').value.trim();
         const description = document.getElementById('roomDescription').value.trim();
         const bookingUrl = document.getElementById('roomBookingUrl').value.trim();
@@ -695,13 +695,13 @@
         };
 
         if (currentEditingRoom) {
-          RoomManager.updateRoom(currentEditingRoom, roomData);
+          await RoomManager.updateRoom(currentEditingRoom, roomData);
         } else {
-          RoomManager.createRoom(roomData);
+          await RoomManager.createRoom(roomData);
         }
 
         closeModal(roomModal);
-        loadRooms();
+        await loadRooms();
       });
 
       // Amenity management
