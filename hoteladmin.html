@@ -1094,6 +1094,15 @@
         }
       }
 
+      function resetInfoBlockEditorColor() {
+        const editors = [titleQuill, bodyQuill];
+        editors.forEach((editor) => {
+          if (!editor) return;
+          editor.setSelection(0, 0, 'silent');
+          editor.format('color', false);
+        });
+      }
+
       // Admin Navigation
       btnNavRooms.addEventListener('click', () => {
         btnNavRooms.classList.add('active');
@@ -1239,6 +1248,7 @@
         currentEditingInfoBlock = null;
         infoModalTitle.textContent = 'Add Info Block';
         initQuillEditors();
+        resetInfoBlockEditorColor();
         openModal(infoBlockModal);
       });
 
