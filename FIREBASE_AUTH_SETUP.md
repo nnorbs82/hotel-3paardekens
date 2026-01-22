@@ -1,5 +1,7 @@
 # Firebase Authentication Setup for InfoBlock Persistence
 
+> 📖 **Quick Troubleshooting**: If you're seeing permission denied errors or data not syncing, see [FIREBASE_AUTHENTICATION_SETUP.md](FIREBASE_AUTHENTICATION_SETUP.md) for detailed troubleshooting steps.
+
 ## Overview
 
 This guide explains how to enable Firebase Authentication to fix the issue where info blocks don't persist across different browsers or after closing incognito/private browsing sessions.

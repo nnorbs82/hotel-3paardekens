@@ -141,10 +141,26 @@
       } catch (error) {
         console.error('Error saving info blocks to Firebase:', error);
         console.error('Error details:', error.message, error.code);
+        
+        // Check if this is a permission error
+        if (error.code === 'PERMISSION_DENIED' || error.message?.includes('Permission denied')) {
+          console.error('⚠ FIREBASE PERMISSION DENIED!');
+          console.error('This means you are not authenticated with Firebase.');
+          console.error('Possible causes:');
+          console.error('1. Firebase Authentication is not enabled in Firebase Console');
+          console.error('2. Email/Password sign-in method is not enabled');
+          console.error('3. You need to log out and log in again');
+          console.error('4. Firebase security rules are too restrictive');
+          console.error('');
+          console.error('IMPACT: Data is only saved to localStorage (browser-specific).');
+          console.error('To fix: See FIREBASE_AUTH_SETUP.md for setup instructions.');
+        }
+        
         // Fallback to localStorage on error
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
           console.log('Saved to localStorage as fallback');
+          console.warn('⚠ Data NOT synced to Firebase - only visible in this browser!');
           return true; // Success via fallback
         } catch (lsError) {
           console.error('Failed to save to localStorage fallback:', lsError);

@@ -2,6 +2,15 @@
 
 Website for Hotel 3 Paardekens with admin panel for room management.
 
+## 🚨 Data Not Syncing Across Browsers?
+
+If info blocks and rooms are only visible in the browser where you created them:
+1. **Open `firebase-diagnostics.html`** in your browser
+2. **Run diagnostics** to identify the issue
+3. **Follow the fix instructions** provided
+
+See **[QUICK_FIX_GUIDE.md](QUICK_FIX_GUIDE.md)** for the complete troubleshooting guide.
+
 ## 🚀 Just Updated EmailJS Configuration?
 
 If you just verified your EmailJS configuration values, see **[NEXT_STEPS.md](NEXT_STEPS.md)** for what to do next.
