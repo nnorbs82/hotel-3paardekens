@@ -18,6 +18,23 @@
   // Password reminder email message
   const PASSWORD_REMINDER_MESSAGE = 'You requested a password reminder for the Hotel 3 Paardekens Admin Panel. Your login credentials are shown below - use the password to log in.';
 
+  async function setFirebasePersistence() {
+    if (typeof firebase === 'undefined' || !firebase.auth) {
+      return;
+    }
+
+    try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    } catch (error) {
+      console.warn('Could not set Firebase auth persistence to LOCAL, falling back to SESSION:', error);
+      try {
+        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+      } catch (sessionError) {
+        console.warn('Could not set Firebase auth persistence to SESSION. Continuing without persistence.', sessionError);
+      }
+    }
+  }
+
   // NOTE: This is a hardcoded credential as specified in the requirements.
   // In a production environment, this should be replaced with proper
   // server-side authentication with secure password hashing.
@@ -64,9 +81,7 @@
         try {
           if (typeof firebase !== 'undefined' && firebase.auth) {
             console.log('Authenticating with Firebase...');
-            // Use Firebase Auth with persistence enabled
-            // This ensures auth state persists across page refreshes and browser sessions
-            await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+            await setFirebasePersistence();
             
             // Sign in with email/password to Firebase Auth
             // This creates an authenticated context for Firebase operations
@@ -320,8 +335,7 @@
     async initializeFirebaseAuth() {
       try {
         if (typeof firebase !== 'undefined' && firebase.auth) {
-          // Set persistence to LOCAL (survives browser restarts)
-          await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+          await setFirebasePersistence();
           
           // Wait for auth state to be determined
           const user = await new Promise((resolve) => {
