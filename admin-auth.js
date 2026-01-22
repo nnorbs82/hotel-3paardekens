@@ -81,10 +81,23 @@
                   await firebase.auth().createUserWithEmailAndPassword(email, password);
                   console.log('✓ Firebase Auth user created and signed in');
                 } catch (createError) {
-                  console.warn('Could not create Firebase Auth user:', createError);
+                  console.error('Could not create Firebase Auth user:', createError);
+                  console.error('Error code:', createError.code);
+                  console.error('Error message:', createError.message);
+                  if (createError.code === 'auth/operation-not-allowed') {
+                    console.error('⚠ FIREBASE AUTH NOT ENABLED!');
+                    console.error('Please enable Email/Password authentication in Firebase Console:');
+                    console.error('1. Go to https://console.firebase.google.com/');
+                    console.error('2. Select your project: hotel-3paardekens');
+                    console.error('3. Go to Authentication → Sign-in method');
+                    console.error('4. Enable "Email/Password" provider');
+                    console.error('5. Try logging in again');
+                    console.error('IMPACT: Without Firebase Auth, data will NOT sync across browsers!');
+                  }
                   throw createError; // Don't fall back to anonymous auth - fail explicitly
                 }
               } else {
+                console.error('Firebase authentication error:', authError.code, authError.message);
                 throw authError;
               }
             }
