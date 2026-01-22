@@ -1,6 +1,6 @@
 /**
  * Firebase Configuration for Hotel 3 Paardekens
- * This connects the application to Firebase Realtime Database for persistent storage
+ * This connects the application to Firebase Realtime Database and Storage for persistent storage
  * 
  * SETUP REQUIRED: Replace the placeholder values below with your actual Firebase configuration
  * See FIREBASE_SETUP.md for detailed setup instructions
@@ -9,26 +9,18 @@
 (function() {
   'use strict';
 
-  // TODO: Replace these placeholder values with your actual Firebase configuration
+  // Firebase configuration
   // Get these values from: https://console.firebase.google.com/
   // Project Settings > General > Your apps > SDK setup and configuration
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyD5i8P4OqyjfVZkLQTFiOGDLweFYENgxpM",
-  authDomain: "hotel-3paardekens.firebaseapp.com",
-  projectId: "hotel-3paardekens",
-  storageBucket: "hotel-3paardekens.firebasestorage.app",
-  messagingSenderId: "671251674657",
-  appId: "1:671251674657:web:a16f986234f162a92f1560"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+  const firebaseConfig = {
+    apiKey: "AIzaSyD5i8P4OqyjfVZkLQTFiOGDLweFYENgxpM",
+    authDomain: "hotel-3paardekens.firebaseapp.com",
+    databaseURL: "https://hotel-3paardekens-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "hotel-3paardekens",
+    storageBucket: "hotel-3paardekens.firebasestorage.app",
+    messagingSenderId: "671251674657",
+    appId: "1:671251674657:web:a16f986234f162a92f1560"
+  };
 
   // Check if Firebase SDK is loaded
   if (typeof firebase === 'undefined') {
@@ -41,6 +33,8 @@ const app = initializeApp(firebaseConfig);
     if (!firebase.apps || firebase.apps.length === 0) {
       firebase.initializeApp(firebaseConfig);
       console.log('✓ Firebase initialized successfully');
+      console.log('✓ Database URL:', firebaseConfig.databaseURL);
+      console.log('✓ Storage Bucket:', firebaseConfig.storageBucket);
     } else {
       console.log('✓ Firebase already initialized');
     }
@@ -51,8 +45,9 @@ const app = initializeApp(firebaseConfig);
 
   // Make config available globally (for debugging)
   window.FirebaseConfig = {
-    isConfigured: firebaseConfig.apiKey !== "YOUR_API_KEY_HERE",
-    databaseURL: firebaseConfig.databaseURL
+    isConfigured: true,
+    databaseURL: firebaseConfig.databaseURL,
+    storageBucket: firebaseConfig.storageBucket
   };
 
 })();

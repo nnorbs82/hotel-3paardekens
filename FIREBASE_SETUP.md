@@ -78,7 +78,42 @@ const firebaseConfig = {
 
 3. Click **Publish**
 
-### Step 6: Set Up Admin Authentication (Optional but Recommended)
+### Step 6: Enable Firebase Storage (For Photo Uploads)
+
+To allow uploading room photos through the admin panel:
+
+1. In Firebase Console, go to **Build** → **Storage** → **Get started**
+2. Choose **Start in test mode** (or production mode with rules below)
+3. Click **Next**
+4. Select storage location (same region as your Realtime Database)
+5. Click **Done**
+
+**Configure Storage Security Rules:**
+
+1. Go to **Storage** → **Rules** tab
+2. Replace with these rules:
+
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /rooms/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
+```
+
+**What this does:**
+- Anyone can **read/view** photos (needed for public website visitors)
+- Only **authenticated users** can upload photos (admin only)
+
+3. Click **Publish**
+
+**Note:** If Firebase Storage is not configured, the system will fall back to storing photos as base64 in localStorage (not recommended for production due to size limitations).
+
+### Step 7: Set Up Admin Authentication (Optional but Recommended)
 
 To properly secure write access, you should set up Firebase Authentication:
 
@@ -89,15 +124,23 @@ To properly secure write access, you should set up Firebase Authentication:
 
 **Note:** The current implementation uses a simple admin login check. For production, you should integrate Firebase Authentication properly.
 
-### Step 7: Test the Setup
+### Step 8: Test the Setup
 
 1. **Deploy your updated website** (upload all changed files to your web server)
 2. **Open the admin panel** on your computer
-3. **Create a test info block**
-4. **Open the website on a different computer/browser**
-5. **Verify you can see the info block** on the public info page
+3. **Test info blocks:**
+   - Create a test info block
+   - You should see a green success notification
+   - Open the website on a different computer/browser
+   - Verify you can see the info block on the public info page
+4. **Test photo uploads:**
+   - In the admin panel, edit or create a room
+   - Try uploading a photo by dragging/dropping or clicking the upload area
+   - You should see an "Uploading photos..." notification
+   - If successful, you'll see "Successfully uploaded X photo(s)"
+   - The photo should appear in Firebase Storage console under the `rooms/` folder
 
-✅ If you can see the info block on different devices, setup is complete!
+✅ If you can see the info block on different devices and photos upload successfully, setup is complete!
 
 ## Data Migration
 

@@ -30,6 +30,9 @@
 </head>
 
 <body>
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+  
   <!-- Login Screen -->
   <div id="loginScreen" class="bg">
     <div class="card login-card">
@@ -307,6 +310,7 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
   
   <!-- Firebase Configuration -->
   <script src="firebase-config.js"></script>
@@ -317,6 +321,55 @@
   <script>
     (function() {
       'use strict';
+
+      // ============================================================
+      // TOAST NOTIFICATION SYSTEM
+      // ============================================================
+      
+      const toastContainer = document.getElementById('toastContainer');
+      
+      /**
+       * Show a toast notification
+       * @param {string} type - Type of toast: 'success', 'error', 'warning', 'info'
+       * @param {string} title - Toast title
+       * @param {string} message - Toast message
+       * @param {number} duration - Duration in milliseconds (default: 5000)
+       */
+      function showToast(type, title, message, duration = 5000) {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        const icons = {
+          success: '✓',
+          error: '✕',
+          warning: '⚠',
+          info: 'ℹ'
+        };
+        
+        toast.innerHTML = `
+          <div class="toast-icon">${icons[type] || icons.info}</div>
+          <div class="toast-content">
+            <div class="toast-title">${title}</div>
+            <div class="toast-message">${message}</div>
+          </div>
+          <button class="toast-close" onclick="this.parentElement.remove()">✕</button>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Auto-remove after duration
+        setTimeout(() => {
+          toast.classList.add('hiding');
+          setTimeout(() => toast.remove(), 300);
+        }, duration);
+      }
+      
+      // Make toast function globally available
+      window.showToast = showToast;
+
+      // ============================================================
+      // DOM ELEMENTS
+      // ============================================================
 
       // DOM Elements
       const loginScreen = document.getElementById('loginScreen');
@@ -743,18 +796,71 @@
         handlePhotoFiles(e.dataTransfer.files);
       });
 
-      function handlePhotoFiles(files) {
-        Array.from(files).forEach(file => {
-          if (!file.type.startsWith('image/')) return;
+      async function handlePhotoFiles(files) {
+        const fileArray = Array.from(files);
+        const validFiles = fileArray.filter(file => file.type.startsWith('image/'));
+        
+        if (validFiles.length === 0) {
+          showToast('warning', 'Invalid Files', 'Please select only image files (JPG, PNG, WebP).');
+          return;
+        }
 
-          const reader = new FileReader();
-          reader.onload = (e) => {
+        // Check if Firebase Storage is available
+        const storage = firebase.storage && firebase.storage();
+        
+        if (!storage) {
+          // Fallback to base64 if Firebase Storage is not available
+          showToast('warning', 'Using Local Storage', 'Photos will be stored locally. For production, configure Firebase Storage.');
+          validFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const order = currentPhotos.length + 1;
+              currentPhotos.push({ url: e.target.result, order });
+              renderPhotos();
+            };
+            reader.readAsDataURL(file);
+          });
+          return;
+        }
+
+        // Upload to Firebase Storage
+        showToast('info', 'Uploading Photos', `Uploading ${validFiles.length} photo(s)...`);
+        
+        try {
+          for (const file of validFiles) {
+            // Generate unique filename
+            const timestamp = Date.now();
+            const randomStr = Math.random().toString(36).substring(2, 9);
+            const ext = file.name.split('.').pop();
+            const filename = `rooms/${timestamp}-${randomStr}.${ext}`;
+            
+            // Upload to Firebase Storage
+            const storageRef = storage.ref(filename);
+            const snapshot = await storageRef.put(file);
+            const downloadURL = await snapshot.ref.getDownloadURL();
+            
+            // Add to photos array
             const order = currentPhotos.length + 1;
-            currentPhotos.push({ url: e.target.result, order });
-            renderPhotos();
-          };
-          reader.readAsDataURL(file);
-        });
+            currentPhotos.push({ url: downloadURL, order });
+          }
+          
+          renderPhotos();
+          showToast('success', 'Photos Uploaded', `Successfully uploaded ${validFiles.length} photo(s).`);
+        } catch (error) {
+          console.error('Error uploading photos:', error);
+          showToast('error', 'Upload Failed', `Failed to upload photos: ${error.message}`);
+          
+          // Fallback to base64 on error
+          validFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const order = currentPhotos.length + 1;
+              currentPhotos.push({ url: e.target.result, order });
+              renderPhotos();
+            };
+            reader.readAsDataURL(file);
+          });
+        }
       }
 
       function renderPhotos() {
@@ -1151,23 +1257,46 @@
         const bodyText = bodyQuill.getText().trim();
 
         if (!titleText || !bodyText) {
-          alert('Please fill in both the title and content.');
+          showToast('error', 'Validation Error', 'Please fill in both the title and content.');
           return;
         }
 
-        const blockData = {
-          title,
-          body
-        };
+        // Add loading state to button
+        btnSaveInfo.classList.add('loading');
+        btnSaveInfo.disabled = true;
 
-        if (currentEditingInfoBlock) {
-          await InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
-        } else {
-          await InfoManager.createInfoBlock(blockData);
+        try {
+          const blockData = {
+            title,
+            body
+          };
+
+          if (currentEditingInfoBlock) {
+            const success = await InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
+            if (success) {
+              showToast('success', 'Info Block Updated', 'Your changes have been saved successfully.');
+            } else {
+              throw new Error('Failed to update info block');
+            }
+          } else {
+            const newBlock = await InfoManager.createInfoBlock(blockData);
+            if (newBlock) {
+              showToast('success', 'Info Block Created', 'Your new info block has been created successfully.');
+            } else {
+              throw new Error('Failed to create info block');
+            }
+          }
+
+          closeModal(infoBlockModal);
+          await loadInfoBlocks();
+        } catch (error) {
+          console.error('Error saving info block:', error);
+          showToast('error', 'Save Failed', 'There was an error saving your info block. Please try again.');
+        } finally {
+          // Remove loading state
+          btnSaveInfo.classList.remove('loading');
+          btnSaveInfo.disabled = false;
         }
-
-        closeModal(infoBlockModal);
-        await loadInfoBlocks();
       });
 
       // Info modal close events
