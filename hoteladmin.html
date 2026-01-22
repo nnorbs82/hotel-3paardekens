@@ -1281,6 +1281,7 @@
       // Save info block
       btnSaveInfo.addEventListener('click', async () => {
         const title = titleQuill.getText().trim();
+        // Quill doesn't expose a getHTML helper, so use the editor root HTML for rich text content.
         const body = bodyQuill.root.innerHTML.trim();
 
         // Check if editors are empty (only have <p><br></p> or similar)
