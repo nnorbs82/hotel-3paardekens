@@ -17,24 +17,16 @@
   // Firebase uses security rules to control access, not credential secrecy.
   // Ensure you configure proper security rules and domain restrictions in
   // the Firebase Console to prevent unauthorized access.
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyD5i8P4OqyjfVZkLQTFiOGDLweFYENgxpM",
-  authDomain: "hotel-3paardekens.firebaseapp.com",
-  databaseURL: "https://hotel-3paardekens-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "hotel-3paardekens",
-  storageBucket: "hotel-3paardekens.firebasestorage.app",
-  messagingSenderId: "671251674657",
-  appId: "1:671251674657:web:a16f986234f162a92f1560"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyD5i8P4OqyjfVZkLQTFiOGDLweFYENgxpM",
+    authDomain: "hotel-3paardekens.firebaseapp.com",
+    databaseURL: "https://hotel-3paardekens-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "hotel-3paardekens",
+    storageBucket: "hotel-3paardekens.firebasestorage.app",
+    messagingSenderId: "671251674657",
+    appId: "1:671251674657:web:a16f986234f162a92f1560"
+  };
 
   // Check if Firebase SDK is loaded
   if (typeof firebase === 'undefined') {
