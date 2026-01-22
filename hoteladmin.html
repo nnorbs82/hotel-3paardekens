@@ -423,6 +423,7 @@
       let selectedIcon = null;
       let deleteCallback = null;
       let draggedPhotoIndex = null;
+      let draggedRoomId = null;
 
       // Initialize
       async function init() {
@@ -577,7 +578,7 @@
           emptyState.classList.add('hidden');
           roomsContainer.classList.remove('hidden');
           
-          rooms.forEach(room => {
+          rooms.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach(room => {
             const roomEl = createRoomElement(room);
             roomsContainer.appendChild(roomEl);
           });
@@ -588,11 +589,16 @@
       function createRoomElement(room) {
         const div = document.createElement('div');
         div.className = 'room-item';
+        div.draggable = true;
+        div.dataset.id = room.id;
         
         const firstPhoto = room.photos && room.photos.length > 0 ? 
           room.photos.sort((a, b) => a.order - b.order)[0].url : '';
 
         div.innerHTML = `
+          <div class="room-item-handle" title="Drag to reorder">
+            ⋮⋮
+          </div>
           <div class="room-item-photos">
             ${firstPhoto ? `<img src="${firstPhoto}" alt="${room.name}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: rgba(255,255,255,0.4);">No photo</div>'}
           </div>
@@ -617,7 +623,55 @@
         div.querySelector('.btn-edit').addEventListener('click', () => editRoom(room.id));
         div.querySelector('.btn-delete').addEventListener('click', () => deleteRoom(room.id));
 
+        // Drag and drop for reordering
+        div.addEventListener('dragstart', () => {
+          draggedRoomId = room.id;
+          div.classList.add('dragging');
+        });
+
+        div.addEventListener('dragend', () => {
+          div.classList.remove('dragging');
+        });
+
+        div.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          div.classList.add('drag-over');
+        });
+
+        div.addEventListener('dragleave', () => {
+          div.classList.remove('drag-over');
+        });
+
+        div.addEventListener('drop', (e) => {
+          e.preventDefault();
+          div.classList.remove('drag-over');
+          
+          if (draggedRoomId && draggedRoomId !== room.id) {
+            reorderRooms(draggedRoomId, room.id);
+          }
+          
+          draggedRoomId = null;
+        });
+
         return div;
+      }
+
+      // Reorder rooms
+      async function reorderRooms(draggedId, targetId) {
+        const rooms = await RoomManager.getRooms();
+        const draggedIndex = rooms.findIndex(room => room.id === draggedId);
+        const targetIndex = rooms.findIndex(room => room.id === targetId);
+
+        if (draggedIndex === -1 || targetIndex === -1) return;
+
+        // Remove dragged room
+        const [draggedRoom] = rooms.splice(draggedIndex, 1);
+        // Insert at target position
+        rooms.splice(targetIndex, 0, draggedRoom);
+
+        const orderedIds = rooms.map(room => room.id);
+        await RoomManager.reorderRooms(orderedIds);
+        await loadRooms();
       }
 
       // Open room modal for adding
