@@ -200,7 +200,7 @@
 
     <div class="action-buttons">
       <button id="runTests">Run Diagnostics</button>
-      <button id="viewConsole" onclick="alert('Press F12 (or Cmd+Option+I on Mac) to open the browser console')">View Console</button>
+      <button id="viewConsole">View Console</button>
     </div>
 
     <div id="results"></div>
@@ -218,6 +218,12 @@
     const results = document.getElementById('results');
     const overallStatus = document.getElementById('overallStatus');
     const runTestsBtn = document.getElementById('runTests');
+    const viewConsoleBtn = document.getElementById('viewConsole');
+
+    // Add event listener for View Console button
+    viewConsoleBtn.addEventListener('click', () => {
+      alert('Press F12 (or Cmd+Option+I on Mac) to open the browser console');
+    });
 
     let testsPassed = 0;
     let testsFailed = 0;
@@ -293,10 +299,15 @@
       // Test 2: Firebase Initialized
       if (firebase.apps && firebase.apps.length > 0) {
         const app = firebase.apps[0];
+        const projectId = app.options.projectId || 'unknown';
+        // Mask the database URL for security
+        const dbUrl = app.options.databaseURL || 'unknown';
+        const maskedDbUrl = dbUrl.replace(/\/\/([^.]+)/, '//*****');
+        
         addTest(
           'Test 2: Firebase App Initialized',
           'success',
-          `Firebase app initialized successfully.<br>Project ID: <code>${app.options.projectId}</code><br>Database URL: <code>${app.options.databaseURL}</code>`
+          `Firebase app initialized successfully.<br>Project ID: <code>${projectId}</code><br>Database URL: <code>${maskedDbUrl}</code>`
         );
       } else {
         addTest(
