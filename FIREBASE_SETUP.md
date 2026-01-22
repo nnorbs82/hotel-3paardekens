@@ -67,13 +67,17 @@ const firebaseConfig = {
     "infoBlocks": {
       ".read": true,
       ".write": "auth != null"
+    },
+    "rooms": {
+      ".read": true,
+      ".write": "auth != null"
     }
   }
 }
 ```
 
 **What this does:**
-- Anyone can **read** info blocks (needed for public website visitors)
+- Anyone can **read** info blocks and rooms (needed for public website visitors)
 - Only **authenticated users** can write/update/delete (admin only)
 
 3. Click **Publish**
