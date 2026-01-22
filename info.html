@@ -328,7 +328,25 @@
           console.warn('Firebase not available, using localStorage fallback');
           return null;
         }
-        return firebase.database();
+        
+        // Check if Firebase app is initialized
+        if (!firebase.apps || firebase.apps.length === 0) {
+          console.warn('Firebase app not initialized, using localStorage fallback');
+          return null;
+        }
+        
+        try {
+          const db = firebase.database();
+          // Verify database is actually accessible
+          if (!db) {
+            console.warn('Firebase database not accessible, using localStorage fallback');
+            return null;
+          }
+          return db;
+        } catch (error) {
+          console.error('Error accessing Firebase database:', error);
+          return null;
+        }
       }
 
       // Get info blocks from Firebase or localStorage fallback
