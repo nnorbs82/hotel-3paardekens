@@ -60,25 +60,39 @@ const firebaseConfig = {
 };
 ```
 
-### Step 6: Upload & Test
-1. Upload ALL the changed files to your web server:
-   - `admin-info-manager.js`
-   - `info.html`
-   - `hoteladmin.html`
-   - `firebase-config.js` ← **NEW FILE**
-2. Open admin panel on your computer
-3. Open website on a different computer/phone
-4. ✅ You should see your 13 info blocks on BOTH devices!
+### Step 6: Deploy & Test
+
+**What "Upload" Means:**
+This step is about deploying your website files to your web hosting server (like uploading via FTP, cPanel, or your hosting provider's file manager). This is NOT about uploading photos or content - that's done through the admin panel interface.
+
+**Files to Deploy:**
+1. Upload ALL the changed files to your web server using your preferred method:
+   - `admin-info-manager.js` (updated)
+   - `info.html` (updated)
+   - `hoteladmin.html` (updated - includes Firebase Storage for photos)
+   - `admin-styles.css` (updated - new toast notifications)
+   - `firebase-config.js` ← **IMPORTANT: Edit with your Firebase credentials first!**
+
+2. **Test Your Setup:**
+   - Open the admin panel on your computer (`https://yourdomain.com/hoteladmin.html`)
+   - Try creating a new info block - you should see a success notification
+   - Try uploading photos to a room - photos now upload to Firebase Storage
+   - Open the website on a different computer/phone
+   - ✅ You should see your info blocks on BOTH devices!
+
+**Photo Uploads:**
+Photos are now uploaded to Firebase Storage when you add them through the admin panel. The system will automatically use Firebase Storage if configured, or fall back to local storage (base64) if Firebase Storage is not available.
 
 ## 🎯 That's It!
 
 Your existing 13 info blocks will **automatically migrate** from localStorage to Firebase the first time you load the page.
 
-## 📋 Files You Need to Upload
-- `admin-info-manager.js` (updated)
-- `info.html` (updated)
-- `hoteladmin.html` (updated)
-- `firebase-config.js` (NEW - you edit this)
+## 📋 Files You Need to Deploy
+- `admin-info-manager.js` (updated - Firebase integration)
+- `info.html` (updated - loads from Firebase)
+- `hoteladmin.html` (updated - toast notifications + Firebase Storage for photos)
+- `admin-styles.css` (updated - toast notification styles)
+- `firebase-config.js` (NEW - **edit with your Firebase credentials**)
 
 Optional files (helpful but not required):
 - `FIREBASE_SETUP.md` (detailed setup guide)
