@@ -82,20 +82,23 @@ const firebaseConfig = {
 
 3. Click **Publish**
 
-### Step 6: Enable Firebase Storage (For Photo Uploads)
+### Step 6: Enable Firebase Storage (For Photo Uploads) ⚠️ CRITICAL
 
 To allow uploading room photos through the admin panel:
 
 1. In Firebase Console, go to **Build** → **Storage** → **Get started**
-2. Choose **Start in test mode** (or production mode with rules below)
+2. Choose **Start in test mode** (we'll add secure rules in the next step)
 3. Click **Next**
 4. Select storage location (same region as your Realtime Database)
 5. Click **Done**
 
-**Configure Storage Security Rules:**
+**Configure Storage Security Rules (REQUIRED):**
+
+⚠️ **This step is CRITICAL** - without these rules, photo uploads will fail with "storage/unauthorized" errors!
 
 1. Go to **Storage** → **Rules** tab
-2. Replace with these rules:
+2. **Delete all existing rules** in the editor
+3. **Copy and paste** these rules exactly:
 
 ```
 rules_version = '2';
@@ -112,10 +115,12 @@ service firebase.storage {
 **What this does:**
 - Anyone can **read/view** photos (needed for public website visitors)
 - Only **authenticated users** can upload photos (admin only)
+- The `request.auth != null` check verifies the user is signed in with Firebase Authentication
 
-3. Click **Publish**
+4. Click **Publish** to save the rules
+5. Wait for the "Rules published successfully" confirmation
 
-**Note:** If Firebase Storage is not configured, the system will fall back to storing photos as base64 in localStorage (not recommended for production due to size limitations).
+**Note:** If Firebase Storage is not configured or rules are not set correctly, photo uploads will fail. The system can fall back to storing photos as base64 in localStorage, but this is not recommended for production due to size limitations.
 
 ### Step 7: Set Up Admin Authentication (Optional but Recommended)
 
@@ -176,6 +181,32 @@ The system will **automatically migrate** your existing 13 info blocks from loca
 - The system uses Firebase as primary storage when available
 - localStorage is only used as a fallback if Firebase fails
 - Clear browser cache if you see stale data
+
+### "storage/unauthorized" error when uploading photos
+**Symptom**: Error message like "Firebase Storage: User does not have permission to access 'rooms/xxxxx.png'"
+
+**Solutions**:
+1. **Check Storage Rules**: Go to Firebase Console → Storage → Rules tab
+   - Verify the rules match the ones in Step 6 exactly
+   - Make sure you clicked "Publish" after updating the rules
+   - Check the "Last published" timestamp is recent
+
+2. **Verify Authentication**: 
+   - Make sure you're logged in to the admin panel
+   - Open browser console (F12) and look for "✓ Firebase authentication successful"
+   - If you see authentication errors, log out and log back in
+
+3. **Check Firebase Auth is Enabled**:
+   - Go to Firebase Console → Authentication → Sign-in method
+   - Make sure "Email/Password" provider is enabled
+   - If not enabled, enable it and try logging in again
+
+4. **Verify Storage Bucket Configuration**:
+   - Open `firebase-config.js`
+   - Check `storageBucket` value matches your Firebase project
+   - Should be like: `hotel-3paardekens.firebasestorage.app`
+
+**See FIX_STORAGE_PERMISSIONS.md for detailed troubleshooting steps.**
 
 ## Cost
 
