@@ -224,8 +224,8 @@ body {
   padding: 16px;
   display: grid;
   /* Columns: handle, preview, content, actions */
-  grid-template-columns: auto auto 1fr auto;
-  gap: 16px;
+  grid-template-columns: 32px 120px minmax(0, 1fr) 140px;
+  gap: 12px;
   align-items: start;
   transition: background-color 120ms ease;
 }
@@ -236,11 +236,20 @@ body {
 
 .room-item-handle {
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
   cursor: grab;
   user-select: none;
   line-height: 1;
   padding-top: 8px;
+  width: 32px;
+  text-align: center;
+  opacity: 0.6;
+  transition: opacity 120ms ease;
+}
+
+.room-item-handle:hover,
+.room-item-handle:focus {
+  opacity: 1;
 }
 
 .room-item-handle:active {
@@ -289,6 +298,7 @@ body {
   display: flex;
   gap: 8px;
   flex-direction: column;
+  width: 140px;
 }
 
 /* Modal/Dialog */
