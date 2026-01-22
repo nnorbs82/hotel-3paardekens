@@ -235,7 +235,7 @@
     async createRoom(roomData) {
       console.log('Creating new room:', roomData.name);
       const rooms = await this.getRooms();
-      const id = this._generateId(roomData.name);
+      const id = await this._generateId(roomData.name);
       
       const newRoom = {
         id,
