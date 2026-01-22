@@ -214,7 +214,8 @@
         return true;
       } catch (error) {
         console.error('Error saving rooms to Firebase:', error);
-        console.error('Error details:', error.message, error.code);
+        if (error.message) console.error('Error message:', error.message);
+        if (error.code) console.error('Error code:', error.code);
         // Fallback to localStorage on error
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms));
@@ -301,8 +302,7 @@
       
       if (filtered.length === rooms.length) return false;
       
-      await this.saveRooms(filtered);
-      return true;
+      return await this.saveRooms(filtered);
     },
 
     /**
