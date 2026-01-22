@@ -51,15 +51,49 @@
      * Attempt to login with provided email and password
      * @param {string} email - Email address to authenticate
      * @param {string} password - Password to authenticate
-     * @returns {boolean} - True if login successful
+     * @returns {Promise<boolean>} - Promise resolving to true if login successful
      */
-    login(email, password) {
+    async login(email, password) {
       if (!email || !password) return false;
       
       const normalizedEmail = email.trim().toLowerCase();
       const normalizedAdmin = ADMIN_EMAIL.toLowerCase();
       
       if (normalizedEmail === normalizedAdmin && password === ADMIN_PASSWORD) {
+        // Sign in to Firebase Auth to enable database writes
+        try {
+          if (typeof firebase !== 'undefined' && firebase.auth) {
+            console.log('Authenticating with Firebase...');
+            // Use Firebase Auth with persistence enabled
+            // This ensures auth state persists across page refreshes and browser sessions
+            await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+            
+            // Sign in with email/password to Firebase Auth
+            // This creates an authenticated context for Firebase operations
+            try {
+              await firebase.auth().signInWithEmailAndPassword(email, password);
+              console.log('✓ Firebase authentication successful with email/password');
+            } catch (authError) {
+              // If user doesn't exist in Firebase Auth, create them
+              if (authError.code === 'auth/user-not-found') {
+                console.log('Creating Firebase Auth user...');
+                try {
+                  await firebase.auth().createUserWithEmailAndPassword(email, password);
+                  console.log('✓ Firebase Auth user created and signed in');
+                } catch (createError) {
+                  console.warn('Could not create Firebase Auth user:', createError);
+                  throw createError; // Don't fall back to anonymous auth - fail explicitly
+                }
+              } else {
+                throw authError;
+              }
+            }
+          }
+        } catch (firebaseError) {
+          console.warn('Firebase authentication failed, continuing with local auth only:', firebaseError);
+          // Continue with sessionStorage auth even if Firebase auth fails
+        }
+        
         const session = {
           authenticated: true,
           email: ADMIN_EMAIL,
@@ -75,7 +109,17 @@
     /**
      * Logout current user
      */
-    logout() {
+    async logout() {
+      // Sign out from Firebase Auth
+      try {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+          await firebase.auth().signOut();
+          console.log('✓ Signed out from Firebase');
+        }
+      } catch (error) {
+        console.warn('Error signing out from Firebase:', error);
+      }
+      
       sessionStorage.removeItem(SESSION_KEY);
     },
 
@@ -249,6 +293,59 @@
         
         return { success: false, error: errorMessage, details: error };
       }
+    },
+
+    /**
+     * Initialize Firebase Auth persistence
+     * Call this when the page loads to restore Firebase authentication
+     * @returns {Promise<void>}
+     */
+    async initializeFirebaseAuth() {
+      try {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+          // Set persistence to LOCAL (survives browser restarts)
+          await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+          
+          // Wait for auth state to be determined
+          const user = await new Promise((resolve) => {
+            const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+              unsubscribe();
+              resolve(user);
+            });
+          });
+          
+          // Log the auth state for debugging
+          if (user) {
+            console.log('✓ Firebase Auth: User already authenticated');
+          } else if (this.isAuthenticated()) {
+            console.log('⚠ Session exists but Firebase Auth is not authenticated');
+            console.log('User will need to log in again to restore Firebase Auth');
+          }
+        }
+      } catch (error) {
+        console.warn('Could not initialize Firebase authentication:', error);
+      }
+    },
+
+    /**
+     * Setup auth state listener for debugging
+     * @private
+     */
+    _setupAuthStateListener() {
+      if (typeof firebase !== 'undefined' && firebase.auth) {
+        // Note: This listener is set up once and persists for the session
+        // It's useful for debugging auth state changes
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            console.log('✓ Firebase Auth: User authenticated:', user.email || user.uid);
+          } else {
+            console.log('Firebase Auth: No user authenticated');
+          }
+        });
+      }
     }
   };
+
+  // Setup auth state listener when the module loads
+  window.HotelAuth._setupAuthStateListener();
 })();
