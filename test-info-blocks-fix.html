@@ -504,16 +504,17 @@
       
       const tests = [];
       
-      // Test 1: Check if console logging is enhanced
+      // Test 1: Check if InfoManager is available with proper error handling
       tests.push({
-        name: 'Enhanced logging',
-        passed: typeof console.log._enhanced !== 'undefined' || true // Our wrapper is in place
+        name: 'InfoManager API available',
+        passed: typeof InfoManager !== 'undefined' && typeof InfoManager.createInfoBlock === 'function'
       });
       
-      // Test 2: Verify localStorage fallback exists
+      // Test 2: Verify Firebase or localStorage fallback is available
       tests.push({
-        name: 'localStorage fallback',
-        passed: localStorage.getItem('hotel3p_info') !== null || true
+        name: 'Storage mechanism available',
+        passed: (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length > 0) || 
+                (typeof localStorage !== 'undefined')
       });
       
       const allPassed = tests.every(t => t.passed);

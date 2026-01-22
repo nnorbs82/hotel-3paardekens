@@ -1300,20 +1300,25 @@
 
           if (currentEditingInfoBlock) {
             const success = await InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
-            if (success !== true) {
-              throw new Error('Update operation did not return success');
+            if (!success) {
+              throw new Error('Failed to update info block');
             }
             showToast('success', 'Info Block Updated', 'Your changes have been saved successfully.');
           } else {
             const newBlock = await InfoManager.createInfoBlock(blockData);
-            if (!newBlock || typeof newBlock !== 'object') {
-              throw new Error('Create operation did not return a valid block');
+            if (!newBlock) {
+              throw new Error('Failed to create info block');
             }
             showToast('success', 'Info Block Created', 'Your new info block has been created successfully.');
           }
 
           // IMPORTANT: Reload blocks BEFORE closing modal to ensure data is displayed
-          await loadInfoBlocks();
+          try {
+            await loadInfoBlocks();
+          } catch (reloadError) {
+            console.error('Error reloading blocks (non-critical):', reloadError);
+            // Don't fail the save operation if reload fails
+          }
           closeModal(infoBlockModal);
         } catch (error) {
           console.error('Error saving info block:', error);
