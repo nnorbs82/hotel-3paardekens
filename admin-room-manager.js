@@ -40,6 +40,7 @@
   const DEFAULT_ROOMS = [
     {
       id: 'single',
+      order: 1,
       name: 'Single Room',
       description: 'Comfortable single room, ideal for short business stays.',
       amenities: [
@@ -64,6 +65,7 @@
     },
     {
       id: 'twin',
+      order: 2,
       name: 'Twin Room',
       description: 'Travelling with a friend? We have you. Twin beds in the middle of the city.',
       amenities: [
@@ -85,6 +87,7 @@
     },
     {
       id: 'double',
+      order: 3,
       name: 'Double Room',
       description: 'Cosy getaway, or just need some extra space? Make it Double!',
       amenities: [
@@ -124,7 +127,8 @@
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
           try {
-            return JSON.parse(stored);
+            const rooms = JSON.parse(stored);
+            return normalizeRooms(rooms);
           } catch (e) {
             console.error('Error parsing stored rooms:', e);
             return DEFAULT_ROOMS;
@@ -143,17 +147,19 @@
         }
         
         // Convert Firebase object to array
-        return Object.keys(data).map(key => ({
+        const rooms = Object.keys(data).map(key => ({
           ...data[key],
           id: key
         }));
+        return normalizeRooms(rooms);
       } catch (error) {
         console.error('Error fetching rooms from Firebase:', error);
         // Fallback to localStorage on error
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
           try {
-            return JSON.parse(stored);
+            const rooms = JSON.parse(stored);
+            return normalizeRooms(rooms);
           } catch (e) {
             console.error('Error parsing localStorage data:', e);
             return DEFAULT_ROOMS;
@@ -253,9 +259,11 @@
       console.log('Creating new room:', roomData.name);
       const rooms = await this.getRooms();
       const id = await this._generateId(roomData.name);
+      const order = rooms.length > 0 ? Math.max(...rooms.map(room => room.order || 0)) + 1 : 1;
       
       const newRoom = {
         id,
+        order,
         name: roomData.name,
         description: roomData.description || '',
         amenities: roomData.amenities || [],
@@ -322,6 +330,36 @@
     },
 
     /**
+     * Reorder rooms
+     * @param {Array} orderedIds - Array of room IDs in the new order
+     * @returns {Promise<boolean>} Promise resolving to true if successful
+     */
+    async reorderRooms(orderedIds) {
+      const rooms = await this.getRooms();
+      
+      // Create a map of id to room
+      const roomMap = {};
+      rooms.forEach(room => {
+        roomMap[room.id] = room;
+      });
+      
+      // Reorder and update order property
+      const reordered = [];
+      for (let index = 0; index < orderedIds.length; index += 1) {
+        const id = orderedIds[index];
+        const room = roomMap[id];
+        if (!room) {
+          console.warn('Room reorder skipped missing ID:', id);
+          return false;
+        }
+        reordered.push({ ...room, order: index + 1 });
+      }
+      
+      await this.saveRooms(reordered);
+      return true;
+    },
+
+    /**
      * Reset rooms to default data
      * @returns {Promise<boolean>} Promise resolving to true if successful
      */
@@ -339,7 +377,7 @@
       if (!stored) return DEFAULT_ROOMS;
       
       try {
-        const rooms = JSON.parse(stored);
+        const rooms = normalizeRooms(JSON.parse(stored));
         if (rooms.length > 0) {
           console.log('Migrating', rooms.length, 'rooms from localStorage to Firebase...');
           await this.saveRooms(rooms);
@@ -382,6 +420,15 @@
       return id;
     }
   };
+
+  function normalizeRooms(rooms) {
+    const normalized = rooms.map((room, index) => ({
+      ...room,
+      order: typeof room.order === 'number' ? room.order : index + 1
+    }));
+    normalized.sort((a, b) => a.order - b.order);
+    return normalized;
+  }
 
   // Icon library for amenities
   window.IconLibrary = {

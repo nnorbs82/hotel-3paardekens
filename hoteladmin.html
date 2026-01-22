@@ -423,6 +423,8 @@
       let selectedIcon = null;
       let deleteCallback = null;
       let draggedPhotoIndex = null;
+      let draggedRoomId = null;
+      let currentRooms = [];
 
       // Initialize
       async function init() {
@@ -568,7 +570,6 @@
       // Load and display rooms
       async function loadRooms() {
         const rooms = await RoomManager.getRooms();
-        roomsContainer.innerHTML = '';
 
         if (rooms.length === 0) {
           emptyState.classList.remove('hidden');
@@ -577,22 +578,35 @@
           emptyState.classList.add('hidden');
           roomsContainer.classList.remove('hidden');
           
-          rooms.forEach(room => {
-            const roomEl = createRoomElement(room);
-            roomsContainer.appendChild(roomEl);
-          });
+          currentRooms = rooms.sort((a, b) => (a.order || 0) - (b.order || 0));
+          renderRoomsList(currentRooms);
         }
+      }
+
+      function renderRoomsList(rooms) {
+        roomsContainer.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+        rooms.forEach(room => {
+          const roomEl = createRoomElement(room);
+          fragment.appendChild(roomEl);
+        });
+        roomsContainer.appendChild(fragment);
       }
 
       // Create room element
       function createRoomElement(room) {
         const div = document.createElement('div');
         div.className = 'room-item';
+        div.draggable = true;
+        div.dataset.id = room.id;
         
         const firstPhoto = room.photos && room.photos.length > 0 ? 
           room.photos.sort((a, b) => a.order - b.order)[0].url : '';
 
         div.innerHTML = `
+          <div class="room-item-handle" title="Drag to reorder" role="button" tabindex="0" aria-label="Drag to reorder room. Use the up and down arrow keys to move.">
+            ⋮⋮
+          </div>
           <div class="room-item-photos">
             ${firstPhoto ? `<img src="${firstPhoto}" alt="${room.name}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: rgba(255,255,255,0.4);">No photo</div>'}
           </div>
@@ -616,8 +630,95 @@
         // Event listeners
         div.querySelector('.btn-edit').addEventListener('click', () => editRoom(room.id));
         div.querySelector('.btn-delete').addEventListener('click', () => deleteRoom(room.id));
+        const dragHandle = div.querySelector('.room-item-handle');
+        dragHandle.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            moveRoomByOffset(room.id, -1, dragHandle);
+          } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            moveRoomByOffset(room.id, 1, dragHandle);
+          }
+        });
+
+        // Drag and drop for reordering
+        div.addEventListener('dragstart', (e) => {
+          draggedRoomId = room.id;
+          div.classList.add('dragging');
+          if (e.dataTransfer) {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', room.id);
+          }
+        });
+
+        div.addEventListener('dragend', () => {
+          div.classList.remove('dragging');
+          draggedRoomId = null;
+        });
+
+        div.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          div.classList.add('drag-over');
+        });
+
+        div.addEventListener('dragleave', () => {
+          div.classList.remove('drag-over');
+        });
+
+        div.addEventListener('drop', (e) => {
+          e.preventDefault();
+          div.classList.remove('drag-over');
+          
+          if (draggedRoomId && draggedRoomId !== room.id) {
+            reorderRooms(draggedRoomId, room.id);
+          }
+        });
 
         return div;
+      }
+
+      function moveRoomByOffset(roomId, offset, focusEl) {
+        const rooms = [...currentRooms];
+        const draggedIndex = rooms.findIndex(room => room.id === roomId);
+        const targetIndex = draggedIndex + offset;
+
+        if (draggedIndex === -1) {
+          console.warn('Cannot move room: room not found.', roomId);
+          return;
+        }
+        if (targetIndex < 0) {
+          console.warn('Cannot move room: already at the top of the list.', roomId);
+          return;
+        }
+        if (targetIndex >= rooms.length) {
+          console.warn('Cannot move room: already at the bottom of the list.', roomId);
+          return;
+        }
+
+        reorderRooms(roomId, rooms[targetIndex].id, focusEl);
+      }
+
+      // Reorder rooms
+      async function reorderRooms(draggedId, targetId, focusEl) {
+        const rooms = [...currentRooms];
+        const draggedIndex = rooms.findIndex(room => room.id === draggedId);
+        const targetIndex = rooms.findIndex(room => room.id === targetId);
+
+        if (draggedIndex === -1 || targetIndex === -1) return;
+
+        // Remove dragged room
+        const [draggedRoom] = rooms.splice(draggedIndex, 1);
+        // Insert at target position
+        rooms.splice(targetIndex, 0, draggedRoom);
+
+        currentRooms = rooms;
+        const orderedIds = rooms.map(room => room.id);
+        await RoomManager.reorderRooms(orderedIds);
+        renderRoomsList(currentRooms);
+        if (focusEl) {
+          const updatedHandle = roomsContainer.querySelector(`[data-id="${draggedId}"] .room-item-handle`);
+          if (updatedHandle) updatedHandle.focus();
+        }
       }
 
       // Open room modal for adding

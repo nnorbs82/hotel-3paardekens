@@ -223,7 +223,8 @@ body {
   border-radius: 12px;
   padding: 16px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  /* Columns: handle, preview, content, actions */
+  grid-template-columns: auto auto 1fr auto;
   gap: 16px;
   align-items: start;
   transition: background-color 120ms ease;
@@ -231,6 +232,19 @@ body {
 
 .room-item:hover {
   background: rgba(255,255,255,0.06);
+}
+
+.room-item-handle {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: grab;
+  user-select: none;
+  line-height: 1;
+  padding-top: 8px;
+}
+
+.room-item-handle:active {
+  cursor: grabbing;
 }
 
 .room-item-photos {
@@ -1132,4 +1146,3 @@ body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
