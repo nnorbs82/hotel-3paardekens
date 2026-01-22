@@ -64,10 +64,32 @@
         try {
           if (typeof firebase !== 'undefined' && firebase.auth) {
             console.log('Authenticating with Firebase...');
-            // Sign in anonymously to Firebase - this gives us an authenticated context
-            // Note: For production, use proper email/password auth with Firebase Authentication
-            await firebase.auth().signInAnonymously();
-            console.log('✓ Firebase authentication successful');
+            // Use Firebase Auth with persistence enabled
+            // This ensures auth state persists across page refreshes and browser sessions
+            await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+            
+            // Sign in with email/password to Firebase Auth
+            // This creates an authenticated context for Firebase operations
+            try {
+              await firebase.auth().signInWithEmailAndPassword(email, password);
+              console.log('✓ Firebase authentication successful with email/password');
+            } catch (authError) {
+              // If user doesn't exist in Firebase Auth, create them
+              if (authError.code === 'auth/user-not-found' || authError.code === 'auth/wrong-password') {
+                console.log('Creating Firebase Auth user...');
+                try {
+                  await firebase.auth().createUserWithEmailAndPassword(email, password);
+                  console.log('✓ Firebase Auth user created and signed in');
+                } catch (createError) {
+                  console.warn('Could not create Firebase Auth user:', createError);
+                  // Fall back to anonymous auth if email/password doesn't work
+                  await firebase.auth().signInAnonymously();
+                  console.log('✓ Using anonymous Firebase authentication as fallback');
+                }
+              } else {
+                throw authError;
+              }
+            }
           }
         } catch (firebaseError) {
           console.warn('Firebase authentication failed, continuing with local auth only:', firebaseError);
@@ -281,21 +303,30 @@
      * @returns {Promise<void>}
      */
     async initializeFirebaseAuth() {
-      // If user has a valid session, ensure Firebase is also authenticated
-      if (this.isAuthenticated()) {
-        try {
-          if (typeof firebase !== 'undefined' && firebase.auth) {
-            const auth = firebase.auth();
-            // Check if already signed in
-            if (!auth.currentUser) {
-              console.log('Restoring Firebase authentication...');
-              await auth.signInAnonymously();
-              console.log('✓ Firebase authentication restored');
-            }
+      try {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+          // Set persistence to LOCAL (survives browser restarts)
+          await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+          
+          // Wait for auth state to be determined
+          const user = await new Promise((resolve) => {
+            const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+              unsubscribe();
+              resolve(user);
+            });
+          });
+          
+          // If user has a valid session but Firebase is not authenticated, re-authenticate
+          if (this.isAuthenticated() && !user) {
+            console.log('Restoring Firebase authentication...');
+            // Try to sign in with the stored credentials
+            // Since we don't store the password, fall back to anonymous auth
+            await firebase.auth().signInAnonymously();
+            console.log('✓ Firebase authentication restored (anonymous)');
           }
-        } catch (error) {
-          console.warn('Could not restore Firebase authentication:', error);
         }
+      } catch (error) {
+        console.warn('Could not initialize Firebase authentication:', error);
       }
     }
   };
