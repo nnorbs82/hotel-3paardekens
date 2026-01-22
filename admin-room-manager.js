@@ -344,16 +344,12 @@
       });
       
       // Reorder and update order property
-      const reordered = orderedIds.map((id, index) => {
-        const room = roomMap[id];
-        if (room) {
-          return {
-            ...room,
-            order: index + 1
-          };
-        }
-        return null;
-      }).filter(room => room !== null);
+      const reordered = orderedIds
+        .flatMap(id => (roomMap[id] ? [roomMap[id]] : []))
+        .map((room, index) => ({
+          ...room,
+          order: index + 1
+        }));
       
       await this.saveRooms(reordered);
       return true;
