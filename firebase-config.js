@@ -12,6 +12,11 @@
   // Firebase configuration
   // Get these values from: https://console.firebase.google.com/
   // Project Settings > General > Your apps > SDK setup and configuration
+  //
+  // SECURITY NOTE: These credentials are safe to expose in client-side code.
+  // Firebase uses security rules to control access, not credential secrecy.
+  // Ensure you configure proper security rules and domain restrictions in
+  // the Firebase Console to prevent unauthorized access.
   const firebaseConfig = {
     apiKey: "AIzaSyD5i8P4OqyjfVZkLQTFiOGDLweFYENgxpM",
     authDomain: "hotel-3paardekens.firebaseapp.com",

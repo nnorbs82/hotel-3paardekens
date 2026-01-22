@@ -352,8 +352,12 @@
             <div class="toast-title">${title}</div>
             <div class="toast-message">${message}</div>
           </div>
-          <button class="toast-close" onclick="this.parentElement.remove()">✕</button>
+          <button class="toast-close">✕</button>
         `;
+        
+        // Add close button event listener (avoiding inline onclick)
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', () => toast.remove());
         
         toastContainer.appendChild(toast);
         
@@ -827,11 +831,34 @@
         showToast('info', 'Uploading Photos', `Uploading ${validFiles.length} photo(s)...`);
         
         try {
+          // Whitelist of allowed image extensions
+          const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+          
           for (const file of validFiles) {
+            // Validate file extension against whitelist
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (!ALLOWED_EXTENSIONS.includes(ext)) {
+              console.warn(`Skipping file with invalid extension: ${file.name}`);
+              continue;
+            }
+            
+            // Double-check MIME type matches extension
+            const validMimeTypes = {
+              'jpg': 'image/jpeg',
+              'jpeg': 'image/jpeg',
+              'png': 'image/png',
+              'webp': 'image/webp',
+              'gif': 'image/gif'
+            };
+            
+            if (!file.type.startsWith('image/') || (validMimeTypes[ext] && file.type !== validMimeTypes[ext] && !(ext === 'jpg' && file.type === 'image/jpeg'))) {
+              console.warn(`File extension/MIME type mismatch: ${file.name} (${file.type})`);
+              continue;
+            }
+            
             // Generate unique filename
             const timestamp = Date.now();
             const randomStr = Math.random().toString(36).substring(2, 9);
-            const ext = file.name.split('.').pop();
             const filename = `rooms/${timestamp}-${randomStr}.${ext}`;
             
             // Upload to Firebase Storage
@@ -1273,18 +1300,16 @@
 
           if (currentEditingInfoBlock) {
             const success = await InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
-            if (success) {
-              showToast('success', 'Info Block Updated', 'Your changes have been saved successfully.');
-            } else {
-              throw new Error('Failed to update info block');
+            if (success !== true) {
+              throw new Error('Update operation did not return success');
             }
+            showToast('success', 'Info Block Updated', 'Your changes have been saved successfully.');
           } else {
             const newBlock = await InfoManager.createInfoBlock(blockData);
-            if (newBlock) {
-              showToast('success', 'Info Block Created', 'Your new info block has been created successfully.');
-            } else {
-              throw new Error('Failed to create info block');
+            if (!newBlock || typeof newBlock !== 'object') {
+              throw new Error('Create operation did not return a valid block');
             }
+            showToast('success', 'Info Block Created', 'Your new info block has been created successfully.');
           }
 
           closeModal(infoBlockModal);
