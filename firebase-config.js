@@ -18,8 +18,6 @@
   // Ensure you configure proper security rules and domain restrictions in
   // the Firebase Console to prevent unauthorized access.
   
-  // Firebase configuration
-  // Get these values from Firebase Console: Project Settings > General > Your apps
   const firebaseConfig = {
     apiKey: "AIzaSyD5i8P4OqyjfVZkLQTFiOGDLweFYENgxpM",
     authDomain: "hotel-3paardekens.firebaseapp.com",
