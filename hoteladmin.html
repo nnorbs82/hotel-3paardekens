@@ -1252,7 +1252,10 @@
         initQuillEditors();
         
         // Set editor content
-        titleQuill.setText(block.title || '');
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = block.title || '';
+        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+        titleQuill.setText(titleText);
         bodyQuill.root.innerHTML = block.body;
         
         openModal(infoBlockModal);
