@@ -288,12 +288,12 @@
         <form id="infoBlockForm">
           <div class="form-group">
             <label id="infoBlockTitleLabel">Title *</label>
-            <div id="infoBlockTitleEditor" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
+            <div id="infoBlockTitleEditor" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel" aria-multiline="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
           </div>
 
           <div class="form-group">
             <label id="infoBlockBodyLabel">Content *</label>
-            <div id="infoBlockBodyEditor" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
+            <div id="infoBlockBodyEditor" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel" aria-multiline="true" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
           </div>
         </form>
       </div>
@@ -1280,14 +1280,14 @@
 
       // Save info block
       btnSaveInfo.addEventListener('click', async () => {
-        const title = titleQuill.getText().trim();
+        const titleText = titleQuill.getText().trim();
         // Title uses plain text while body keeps rich HTML from the editor.
         const body = bodyQuill.root.innerHTML.trim();
 
         // Check if editors are empty (only have <p><br></p> or similar)
         const bodyText = bodyQuill.getText().trim();
 
-        if (!title || !bodyText) {
+        if (!titleText || !bodyText) {
           showToast('error', 'Validation Error', 'Please fill in both the title and content.');
           return;
         }
@@ -1298,7 +1298,7 @@
 
         try {
           const blockData = {
-            title,
+            title: titleText,
             body
           };
 
