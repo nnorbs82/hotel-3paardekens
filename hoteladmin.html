@@ -1252,9 +1252,8 @@
         initQuillEditors();
         
         // Set editor content
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = block.title || '';
-        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+        const parsedTitle = new DOMParser().parseFromString(block.title || '', 'text/html');
+        const titleText = parsedTitle.body.textContent || '';
         titleQuill.setText(titleText);
         bodyQuill.root.innerHTML = block.body;
         
