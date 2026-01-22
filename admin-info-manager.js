@@ -15,7 +15,25 @@
       console.warn('Firebase not available, using localStorage fallback');
       return null;
     }
-    return firebase.database();
+    
+    // Check if Firebase app is initialized
+    if (!firebase.apps || firebase.apps.length === 0) {
+      console.warn('Firebase app not initialized, using localStorage fallback');
+      return null;
+    }
+    
+    try {
+      const db = firebase.database();
+      // Verify database is actually accessible
+      if (!db) {
+        console.warn('Firebase database not accessible, using localStorage fallback');
+        return null;
+      }
+      return db;
+    } catch (error) {
+      console.error('Error accessing Firebase database:', error);
+      return null;
+    }
   }
 
   // Info Manager API
@@ -84,15 +102,21 @@
     /**
      * Save all info blocks to storage
      * @param {Array} blocks - Array of info block objects
-     * @returns {Promise<boolean>} Promise resolving to true if successful
+     * @returns {Promise<boolean>} Promise resolving to true if successful, false on error
      */
     async saveInfoBlocks(blocks) {
       const db = getDatabase();
       
       if (!db) {
         // Fallback to localStorage
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
-        return true;
+        console.log('Using localStorage fallback for saving blocks');
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
+          return true;
+        } catch (error) {
+          console.error('Error saving to localStorage:', error);
+          return false;
+        }
       }
 
       try {
@@ -103,22 +127,39 @@
           dataObject[id] = blockData;
         });
         
+        console.log('Saving info blocks to Firebase...');
         await db.ref(FIREBASE_PATH).set(dataObject);
+        console.log('✓ Info blocks saved successfully to Firebase');
+        
+        // Also save to localStorage as backup
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
+        } catch (lsError) {
+          console.warn('Could not save to localStorage backup:', lsError);
+        }
         return true;
       } catch (error) {
         console.error('Error saving info blocks to Firebase:', error);
+        console.error('Error details:', error.message, error.code);
         // Fallback to localStorage on error
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
-        return false;
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
+          console.log('Saved to localStorage as fallback');
+          return true; // Success via fallback
+        } catch (lsError) {
+          console.error('Failed to save to localStorage fallback:', lsError);
+          return false; // Complete failure
+        }
       }
     },
 
     /**
      * Create a new info block
      * @param {object} blockData - Info block data {title, body}
-     * @returns {Promise<object>} Promise resolving to created info block with generated ID
+     * @returns {Promise<object|null>} Promise resolving to created info block with generated ID, or null on error
      */
     async createInfoBlock(blockData) {
+      console.log('Creating new info block:', blockData.title);
       const blocks = await this.getInfoBlocks();
       const id = this._generateId();
       const order = blocks.length > 0 ? Math.max(...blocks.map(b => b.order)) + 1 : 1;
@@ -133,21 +174,32 @@
       };
 
       blocks.push(newBlock);
-      await this.saveInfoBlocks(blocks);
-      return newBlock;
+      
+      const success = await this.saveInfoBlocks(blocks);
+      if (success) {
+        console.log('✓ Info block created successfully:', id);
+        return newBlock;
+      } else {
+        console.error('Failed to save new info block');
+        return null; // Maintain API contract by returning null on failure
+      }
     },
 
     /**
      * Update an existing info block
      * @param {string} id - Info block ID
      * @param {object} updates - Fields to update
-     * @returns {Promise<boolean>} Promise resolving to true if successful
+     * @returns {Promise<boolean>} Promise resolving to true if successful, false on error
      */
     async updateInfoBlock(id, updates) {
+      console.log('Updating info block:', id);
       const blocks = await this.getInfoBlocks();
       const index = blocks.findIndex(b => b.id === id);
       
-      if (index === -1) return false;
+      if (index === -1) {
+        console.error('Info block not found:', id);
+        return false;
+      }
       
       blocks[index] = {
         ...blocks[index],
@@ -156,8 +208,14 @@
         updatedAt: new Date().toISOString()
       };
       
-      await this.saveInfoBlocks(blocks);
-      return true;
+      const success = await this.saveInfoBlocks(blocks);
+      if (success) {
+        console.log('✓ Info block updated successfully:', id);
+        return true;
+      } else {
+        console.error('Failed to update info block');
+        return false;
+      }
     },
 
     /**
