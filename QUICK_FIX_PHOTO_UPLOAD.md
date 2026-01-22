@@ -18,7 +18,7 @@ Go to: https://console.firebase.google.com/
 - Click **Rules** tab
 
 ### 3. Update Rules
-Delete everything and paste this:
+Delete everything and paste these rules:
 
 ```
 rules_version = '2';
@@ -31,6 +31,11 @@ service firebase.storage {
   }
 }
 ```
+
+**What this does:**
+- `allow read: if true` - Anyone can view photos (needed for website visitors)
+- `allow write: if request.auth != null` - Only logged-in admins can upload
+- `{allPaths=**}` - Applies to all files in the rooms/ folder
 
 ### 4. Publish
 Click the **Publish** button (top right)
