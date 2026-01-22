@@ -344,16 +344,16 @@
       });
       
       // Reorder and update order property
-      const reordered = [];
-      for (let index = 0; index < orderedIds.length; index += 1) {
-        const id = orderedIds[index];
+      const reordered = orderedIds.map((id, index) => {
         const room = roomMap[id];
-        if (!room) {
-          console.warn('Room reorder skipped missing ID:', id);
-          return false;
+        if (room) {
+          return {
+            ...room,
+            order: index + 1
+          };
         }
-        reordered.push({ ...room, order: index + 1 });
-      }
+        return null;
+      }).filter(room => room !== null);
       
       await this.saveRooms(reordered);
       return true;
