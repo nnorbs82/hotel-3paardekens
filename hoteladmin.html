@@ -304,6 +304,13 @@
     </div>
   </div>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  
+  <!-- Firebase Configuration -->
+  <script src="firebase-config.js"></script>
+  
   <script src="admin-auth.js"></script>
   <script src="admin-room-manager.js"></script>
   <script src="admin-info-manager.js"></script>
@@ -976,8 +983,8 @@
       });
 
       // Load and display info blocks
-      function loadInfoBlocks() {
-        const blocks = InfoManager.getInfoBlocks();
+      async function loadInfoBlocks() {
+        const blocks = await InfoManager.getInfoBlocks();
         infoBlocksContainer.innerHTML = '';
 
         if (blocks.length === 0) {
@@ -1072,8 +1079,8 @@
       }
 
       // Reorder info blocks
-      function reorderInfoBlocks(draggedId, targetId) {
-        const blocks = InfoManager.getInfoBlocks();
+      async function reorderInfoBlocks(draggedId, targetId) {
+        const blocks = await InfoManager.getInfoBlocks();
         const draggedIndex = blocks.findIndex(b => b.id === draggedId);
         const targetIndex = blocks.findIndex(b => b.id === targetId);
 
@@ -1086,8 +1093,8 @@
 
         // Get ordered IDs
         const orderedIds = blocks.map(b => b.id);
-        InfoManager.reorderInfoBlocks(orderedIds);
-        loadInfoBlocks();
+        await InfoManager.reorderInfoBlocks(orderedIds);
+        await loadInfoBlocks();
       }
 
       // Open info block modal for adding
@@ -1099,8 +1106,8 @@
       });
 
       // Open info block modal for editing
-      function editInfoBlock(blockId) {
-        const block = InfoManager.getInfoBlock(blockId);
+      async function editInfoBlock(blockId) {
+        const block = await InfoManager.getInfoBlock(blockId);
         if (!block) return;
 
         currentEditingInfoBlock = block.id;
@@ -1115,8 +1122,8 @@
       }
 
       // Delete info block
-      function deleteInfoBlock(blockId) {
-        const block = InfoManager.getInfoBlock(blockId);
+      async function deleteInfoBlock(blockId) {
+        const block = await InfoManager.getInfoBlock(blockId);
         if (!block) return;
 
         // Create a text preview for confirmation
@@ -1125,9 +1132,9 @@
         const titleText = tempDiv.textContent || tempDiv.innerText || '';
 
         confirmMessage.textContent = `Are you sure you want to delete "${titleText}"? This action cannot be undone.`;
-        deleteCallback = () => {
-          if (InfoManager.deleteInfoBlock(blockId)) {
-            loadInfoBlocks();
+        deleteCallback = async () => {
+          if (await InfoManager.deleteInfoBlock(blockId)) {
+            await loadInfoBlocks();
             closeModal(confirmModal);
           }
         };
@@ -1135,7 +1142,7 @@
       }
 
       // Save info block
-      btnSaveInfo.addEventListener('click', () => {
+      btnSaveInfo.addEventListener('click', async () => {
         const title = titleQuill.root.innerHTML.trim();
         const body = bodyQuill.root.innerHTML.trim();
 
@@ -1154,13 +1161,13 @@
         };
 
         if (currentEditingInfoBlock) {
-          InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
+          await InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
         } else {
-          InfoManager.createInfoBlock(blockData);
+          await InfoManager.createInfoBlock(blockData);
         }
 
         closeModal(infoBlockModal);
-        loadInfoBlocks();
+        await loadInfoBlocks();
       });
 
       // Info modal close events
