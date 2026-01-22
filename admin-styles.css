@@ -223,11 +223,11 @@ body {
   border-radius: 12px;
   padding: 16px;
   display: grid;
+  /* Columns: handle, preview, content, actions */
   grid-template-columns: auto auto 1fr auto;
   gap: 16px;
   align-items: start;
   transition: background-color 120ms ease;
-  cursor: move;
 }
 
 .room-item:hover {

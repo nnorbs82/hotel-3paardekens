@@ -344,16 +344,16 @@
       });
       
       // Reorder and update order property
-      const reordered = orderedIds.map((id, index) => {
+      const reordered = [];
+      for (let index = 0; index < orderedIds.length; index += 1) {
+        const id = orderedIds[index];
         const room = roomMap[id];
-        if (room) {
-          return {
-            ...room,
-            order: index + 1
-          };
+        if (!room) {
+          console.warn('Room reorder skipped missing ID:', id);
+          return false;
         }
-        return null;
-      }).filter(room => room !== null);
+        reordered.push({ ...room, order: index + 1 });
+      }
       
       await this.saveRooms(reordered);
       return true;
@@ -426,7 +426,7 @@
       ...room,
       order: typeof room.order === 'number' ? room.order : index + 1
     }));
-    normalized.sort((a, b) => (a.order || 0) - (b.order || 0));
+    normalized.sort((a, b) => a.order - b.order);
     return normalized;
   }
 
