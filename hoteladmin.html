@@ -1312,8 +1312,9 @@
             showToast('success', 'Info Block Created', 'Your new info block has been created successfully.');
           }
 
-          closeModal(infoBlockModal);
+          // IMPORTANT: Reload blocks BEFORE closing modal to ensure data is displayed
           await loadInfoBlocks();
+          closeModal(infoBlockModal);
         } catch (error) {
           console.error('Error saving info block:', error);
           showToast('error', 'Save Failed', 'There was an error saving your info block. Please try again.');

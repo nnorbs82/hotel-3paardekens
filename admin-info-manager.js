@@ -15,7 +15,25 @@
       console.warn('Firebase not available, using localStorage fallback');
       return null;
     }
-    return firebase.database();
+    
+    // Check if Firebase app is initialized
+    if (!firebase.apps || firebase.apps.length === 0) {
+      console.warn('Firebase app not initialized, using localStorage fallback');
+      return null;
+    }
+    
+    try {
+      const db = firebase.database();
+      // Verify database is actually accessible
+      if (!db) {
+        console.warn('Firebase database not accessible, using localStorage fallback');
+        return null;
+      }
+      return db;
+    } catch (error) {
+      console.error('Error accessing Firebase database:', error);
+      return null;
+    }
   }
 
   // Info Manager API
@@ -91,6 +109,7 @@
       
       if (!db) {
         // Fallback to localStorage
+        console.log('Using localStorage fallback for saving blocks');
         localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
         return true;
       }
@@ -103,13 +122,19 @@
           dataObject[id] = blockData;
         });
         
+        console.log('Saving info blocks to Firebase...');
         await db.ref(FIREBASE_PATH).set(dataObject);
+        console.log('✓ Info blocks saved successfully to Firebase');
+        
+        // Also save to localStorage as backup
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
         return true;
       } catch (error) {
         console.error('Error saving info blocks to Firebase:', error);
+        console.error('Error details:', error.message, error.code);
         // Fallback to localStorage on error
         localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks));
-        return false;
+        throw error; // Re-throw to let caller know there was an error
       }
     },
 
@@ -119,6 +144,7 @@
      * @returns {Promise<object>} Promise resolving to created info block with generated ID
      */
     async createInfoBlock(blockData) {
+      console.log('Creating new info block:', blockData.title);
       const blocks = await this.getInfoBlocks();
       const id = this._generateId();
       const order = blocks.length > 0 ? Math.max(...blocks.map(b => b.order)) + 1 : 1;
@@ -133,8 +159,15 @@
       };
 
       blocks.push(newBlock);
-      await this.saveInfoBlocks(blocks);
-      return newBlock;
+      
+      try {
+        await this.saveInfoBlocks(blocks);
+        console.log('✓ Info block created successfully:', id);
+        return newBlock;
+      } catch (error) {
+        console.error('Failed to save new info block:', error);
+        throw error; // Let the caller handle the error
+      }
     },
 
     /**
@@ -144,10 +177,14 @@
      * @returns {Promise<boolean>} Promise resolving to true if successful
      */
     async updateInfoBlock(id, updates) {
+      console.log('Updating info block:', id);
       const blocks = await this.getInfoBlocks();
       const index = blocks.findIndex(b => b.id === id);
       
-      if (index === -1) return false;
+      if (index === -1) {
+        console.error('Info block not found:', id);
+        return false;
+      }
       
       blocks[index] = {
         ...blocks[index],
@@ -156,8 +193,14 @@
         updatedAt: new Date().toISOString()
       };
       
-      await this.saveInfoBlocks(blocks);
-      return true;
+      try {
+        await this.saveInfoBlocks(blocks);
+        console.log('✓ Info block updated successfully:', id);
+        return true;
+      } catch (error) {
+        console.error('Failed to update info block:', error);
+        throw error; // Let the caller handle the error
+      }
     },
 
     /**
