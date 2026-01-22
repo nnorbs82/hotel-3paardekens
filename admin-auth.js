@@ -75,16 +75,14 @@
               console.log('✓ Firebase authentication successful with email/password');
             } catch (authError) {
               // If user doesn't exist in Firebase Auth, create them
-              if (authError.code === 'auth/user-not-found' || authError.code === 'auth/wrong-password') {
+              if (authError.code === 'auth/user-not-found') {
                 console.log('Creating Firebase Auth user...');
                 try {
                   await firebase.auth().createUserWithEmailAndPassword(email, password);
                   console.log('✓ Firebase Auth user created and signed in');
                 } catch (createError) {
                   console.warn('Could not create Firebase Auth user:', createError);
-                  // Fall back to anonymous auth if email/password doesn't work
-                  await firebase.auth().signInAnonymously();
-                  console.log('✓ Using anonymous Firebase authentication as fallback');
+                  throw createError; // Don't fall back to anonymous auth - fail explicitly
                 }
               } else {
                 throw authError;
@@ -316,30 +314,38 @@
             });
           });
           
-          // If user has a valid session but Firebase is not authenticated, re-authenticate
-          if (this.isAuthenticated() && !user) {
-            console.log('Restoring Firebase authentication...');
-            // Try to sign in with the stored credentials
-            // Since we don't store the password, fall back to anonymous auth
-            await firebase.auth().signInAnonymously();
-            console.log('✓ Firebase authentication restored (anonymous)');
+          // Log the auth state for debugging
+          if (user) {
+            console.log('✓ Firebase Auth: User already authenticated');
+          } else if (this.isAuthenticated()) {
+            console.log('⚠ Session exists but Firebase Auth is not authenticated');
+            console.log('User will need to log in again to restore Firebase Auth');
           }
         }
       } catch (error) {
         console.warn('Could not initialize Firebase authentication:', error);
       }
+    },
+
+    /**
+     * Setup auth state listener for debugging
+     * @private
+     */
+    _setupAuthStateListener() {
+      if (typeof firebase !== 'undefined' && firebase.auth) {
+        // Note: This listener is set up once and persists for the session
+        // It's useful for debugging auth state changes
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            console.log('✓ Firebase Auth: User authenticated:', user.email || user.uid);
+          } else {
+            console.log('Firebase Auth: No user authenticated');
+          }
+        });
+      }
     }
   };
 
-  // Initialize Firebase Auth when the module loads
-  // This ensures Firebase auth is restored if the user has an active session
-  if (typeof firebase !== 'undefined' && firebase.auth) {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log('✓ Firebase Auth: User authenticated');
-      } else {
-        console.log('Firebase Auth: No user authenticated');
-      }
-    });
-  }
+  // Setup auth state listener when the module loads
+  window.HotelAuth._setupAuthStateListener();
 })();
