@@ -1,0 +1,43 @@
+rules_version = '2';
+
+// Firebase Storage Security Rules for Hotel 3 Paardekens
+// 
+// These rules control who can read and write files in Firebase Storage.
+// 
+// IMPORTANT: You must deploy these rules to Firebase Console manually:
+// 1. Go to https://console.firebase.google.com/
+// 2. Select your project: hotel-3paardekens
+// 3. Go to Storage → Rules tab
+// 4. Copy and paste these rules
+// 5. Click "Publish" to save
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Rules for room photos stored in the 'rooms/' folder
+    // These photos are uploaded by admin users through the hotel admin panel
+    match /rooms/{fileName} {
+      // Allow anyone to read/view photos (needed for public website visitors)
+      allow read: if true;
+      
+      // Allow authenticated users to upload, update, and delete photos (admin only)
+      // This checks if the user is signed in with Firebase Authentication
+      allow write: if request.auth != null;
+    }
+    
+    // Rules for nested paths within rooms folder (e.g., rooms/subfolder/file.jpg)
+    match /rooms/{allPaths=**} {
+      // Allow anyone to read/view photos
+      allow read: if true;
+      
+      // Allow authenticated users to upload, update, and delete photos
+      allow write: if request.auth != null;
+    }
+    
+    // Default rule: deny all other paths
+    // If you need to add more storage paths, add them above this line
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
