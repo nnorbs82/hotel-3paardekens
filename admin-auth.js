@@ -51,15 +51,29 @@
      * Attempt to login with provided email and password
      * @param {string} email - Email address to authenticate
      * @param {string} password - Password to authenticate
-     * @returns {boolean} - True if login successful
+     * @returns {Promise<boolean>} - Promise resolving to true if login successful
      */
-    login(email, password) {
+    async login(email, password) {
       if (!email || !password) return false;
       
       const normalizedEmail = email.trim().toLowerCase();
       const normalizedAdmin = ADMIN_EMAIL.toLowerCase();
       
       if (normalizedEmail === normalizedAdmin && password === ADMIN_PASSWORD) {
+        // Sign in to Firebase Auth to enable database writes
+        try {
+          if (typeof firebase !== 'undefined' && firebase.auth) {
+            console.log('Authenticating with Firebase...');
+            // Sign in anonymously to Firebase - this gives us an authenticated context
+            // Note: For production, use proper email/password auth with Firebase Authentication
+            await firebase.auth().signInAnonymously();
+            console.log('✓ Firebase authentication successful');
+          }
+        } catch (firebaseError) {
+          console.warn('Firebase authentication failed, continuing with local auth only:', firebaseError);
+          // Continue with sessionStorage auth even if Firebase auth fails
+        }
+        
         const session = {
           authenticated: true,
           email: ADMIN_EMAIL,
@@ -75,7 +89,17 @@
     /**
      * Logout current user
      */
-    logout() {
+    async logout() {
+      // Sign out from Firebase Auth
+      try {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+          await firebase.auth().signOut();
+          console.log('✓ Signed out from Firebase');
+        }
+      } catch (error) {
+        console.warn('Error signing out from Firebase:', error);
+      }
+      
       sessionStorage.removeItem(SESSION_KEY);
     },
 
@@ -249,6 +273,42 @@
         
         return { success: false, error: errorMessage, details: error };
       }
+    },
+
+    /**
+     * Initialize Firebase Auth persistence
+     * Call this when the page loads to restore Firebase authentication
+     * @returns {Promise<void>}
+     */
+    async initializeFirebaseAuth() {
+      // If user has a valid session, ensure Firebase is also authenticated
+      if (this.isAuthenticated()) {
+        try {
+          if (typeof firebase !== 'undefined' && firebase.auth) {
+            const auth = firebase.auth();
+            // Check if already signed in
+            if (!auth.currentUser) {
+              console.log('Restoring Firebase authentication...');
+              await auth.signInAnonymously();
+              console.log('✓ Firebase authentication restored');
+            }
+          }
+        } catch (error) {
+          console.warn('Could not restore Firebase authentication:', error);
+        }
+      }
     }
   };
+
+  // Initialize Firebase Auth when the module loads
+  // This ensures Firebase auth is restored if the user has an active session
+  if (typeof firebase !== 'undefined' && firebase.auth) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('✓ Firebase Auth: User authenticated');
+      } else {
+        console.log('Firebase Auth: No user authenticated');
+      }
+    });
+  }
 })();

@@ -309,6 +309,7 @@
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
   
@@ -424,7 +425,10 @@
       let draggedPhotoIndex = null;
 
       // Initialize
-      function init() {
+      async function init() {
+        // Initialize Firebase Auth first
+        await HotelAuth.initializeFirebaseAuth();
+        
         if (HotelAuth.isAuthenticated()) {
           showDashboard();
         } else {
@@ -447,12 +451,12 @@
       }
 
       // Login form submission
-      loginForm.addEventListener('submit', (e) => {
+      loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
         
-        if (HotelAuth.login(email, password)) {
+        if (await HotelAuth.login(email, password)) {
           loginAlert.classList.add('hidden');
           showDashboard();
         } else {
@@ -553,9 +557,9 @@
       });
 
       // Logout
-      btnLogout.addEventListener('click', () => {
+      btnLogout.addEventListener('click', async () => {
         if (confirm('Are you sure you want to logout?')) {
-          HotelAuth.logout();
+          await HotelAuth.logout();
           showLogin();
           loginForm.reset();
         }
@@ -1107,9 +1111,9 @@
       });
 
       // Logout from info section
-      btnLogoutInfo.addEventListener('click', () => {
+      btnLogoutInfo.addEventListener('click', async () => {
         if (confirm('Are you sure you want to logout?')) {
-          HotelAuth.logout();
+          await HotelAuth.logout();
           showLogin();
           loginForm.reset();
         }
