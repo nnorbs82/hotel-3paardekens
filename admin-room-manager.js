@@ -154,16 +154,41 @@
           console.warn('⚠️ Firebase data is in array format. Converting to object format...');
           roomsData = {};
           let skippedCount = 0;
-          data.forEach((room) => {
-            if (room && room.id) {
-              roomsData[room.id] = room;
+          data.forEach((room, index) => {
+            if (room && typeof room === 'object') {
+              // Use existing id if available, otherwise generate one from name or use index
+              let roomId = room.id;
+              if (!roomId && room.name) {
+                // Generate id from name
+                const generatedId = room.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                roomId = generatedId || `room-${index}`;
+                console.warn(`⚠️ Room at index ${index} missing id, generated from name: ${roomId}`);
+              } else if (!roomId) {
+                // Fallback to index-based id
+                roomId = `room-${index}`;
+                console.warn(`⚠️ Room at index ${index} missing id and name, using: ${roomId}`);
+              }
+              // Ensure unique IDs by checking for collisions and appending a counter
+              let finalRoomId = roomId;
+              let counter = 1;
+              while (roomsData[finalRoomId]) {
+                finalRoomId = `${roomId}-${counter}`;
+                counter++;
+              }
+              if (finalRoomId !== roomId) {
+                console.warn(`⚠️ ID collision detected, using unique id: ${finalRoomId}`);
+              }
+              // Store room data without the id (it becomes the key)
+              // The destructuring safely handles both cases: with or without existing id property
+              const { id, ...roomDataWithoutId } = room;
+              roomsData[finalRoomId] = roomDataWithoutId;
             } else {
               skippedCount++;
-              console.warn('⚠️ Skipped room without valid id:', room);
+              console.warn('⚠️ Skipped invalid room at index:', index, room);
             }
           });
           if (skippedCount > 0) {
-            console.warn(`⚠️ Skipped ${skippedCount} room(s) without valid IDs during conversion`);
+            console.warn(`⚠️ Skipped ${skippedCount} invalid room(s) during conversion`);
           }
           // Save the corrected format back to Firebase
           console.log('Saving corrected format to Firebase...');
