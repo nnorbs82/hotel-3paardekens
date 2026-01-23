@@ -853,7 +853,7 @@
           // Get current language
           const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
           
-          // Get amenity name from multilingual data or fallback to old format
+          // Get amenity name from multilingual data (current lang → English → legacy name → default)
           const amenityName = amenity[currentLang] || amenity.en || amenity.name || 'Amenity';
           
           li.appendChild(iconSpan);
