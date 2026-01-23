@@ -1871,7 +1871,7 @@
 
       btnSaveAbout.addEventListener('click', async () => {
         // Collect data for all languages
-        const multilingualData = {};
+        const aboutData = {};
         let hasError = false;
         
         ['en', 'nl', 'fr'].forEach(lang => {
@@ -1885,12 +1885,9 @@
             hasError = true;
           }
           
-          multilingualData[lang] = {
-            about: {
-              title: titleValue,
-              body: bodyValue
-            },
-            sister: {} // Keep existing sister content
+          aboutData[lang] = {
+            title: titleValue,
+            body: bodyValue
           };
         });
         
@@ -1906,12 +1903,14 @@
           // Get existing content to preserve sister hotel data
           const existing = await SiteContentManager.getAllContent();
           
-          // Merge with new about data
+          // Build complete content with new about data and existing sister data
+          const multilingualData = {};
           ['en', 'nl', 'fr'].forEach(lang => {
-            if (!multilingualData[lang].sister || Object.keys(multilingualData[lang].sister).length === 0) {
-              const existingLang = existing[lang] || existing.en || {};
-              multilingualData[lang].sister = existingLang.sister || {};
-            }
+            const existingLang = existing[lang] || {};
+            multilingualData[lang] = {
+              about: aboutData[lang],
+              sister: existingLang.sister || {}
+            };
           });
           
           const success = await SiteContentManager.saveContent(multilingualData);
@@ -1930,7 +1929,7 @@
 
       btnSaveSister.addEventListener('click', async () => {
         // Collect data for all languages
-        const multilingualData = {};
+        const sisterData = {};
         let hasError = false;
         
         ['en', 'nl', 'fr'].forEach(lang => {
@@ -1948,14 +1947,11 @@
             hasError = true;
           }
           
-          multilingualData[lang] = {
-            about: {}, // Keep existing about content
-            sister: {
-              kicker: kickerValue,
-              titleLine1: line1Value,
-              titleLine2: line2Value,
-              body: bodyValue
-            }
+          sisterData[lang] = {
+            kicker: kickerValue,
+            titleLine1: line1Value,
+            titleLine2: line2Value,
+            body: bodyValue
           };
         });
         
@@ -1971,12 +1967,14 @@
           // Get existing content to preserve about data
           const existing = await SiteContentManager.getAllContent();
           
-          // Merge with new sister data
+          // Build complete content with new sister data and existing about data
+          const multilingualData = {};
           ['en', 'nl', 'fr'].forEach(lang => {
-            if (!multilingualData[lang].about || Object.keys(multilingualData[lang].about).length === 0) {
-              const existingLang = existing[lang] || existing.en || {};
-              multilingualData[lang].about = existingLang.about || {};
-            }
+            const existingLang = existing[lang] || {};
+            multilingualData[lang] = {
+              about: existingLang.about || {},
+              sister: sisterData[lang]
+            };
           });
           
           const success = await SiteContentManager.saveContent(multilingualData);
