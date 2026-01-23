@@ -246,11 +246,29 @@
       const snapshot = await fetchSnapshot(db.ref(FIREBASE_PATH));
       const data = snapshot.val();
       if (!data) {
+        // Check localStorage as fallback when Firebase has no data
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          try {
+            return JSON.parse(stored);
+          } catch (lsError) {
+            console.error('Error parsing localStorage data:', lsError);
+          }
+        }
         return DEFAULT_CONTENT;
       }
       return data;
     } catch (error) {
       console.error('Error fetching site content from Firebase:', error);
+      // Check localStorage as fallback on Firebase error
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (lsError) {
+          console.error('Error parsing localStorage fallback data:', lsError);
+        }
+      }
       return DEFAULT_CONTENT;
     }
   }
