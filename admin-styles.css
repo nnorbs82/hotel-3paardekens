@@ -1268,3 +1268,76 @@ body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+
+/* Language Tabs for Multilingual Editing */
+.language-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0;
+}
+
+.language-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 200ms ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: -2px;
+}
+
+.language-tab:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.language-tab.active {
+  color: #ffffff;
+  border-bottom-color: var(--accent, #B76E79);
+}
+
+.language-tab .flag {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.language-content {
+  display: none;
+}
+
+.language-content.active {
+  display: block;
+}
+
+/* Info message for multilingual editing */
+.multilingual-info {
+  background: rgba(183, 110, 121, 0.15);
+  border: 1px solid rgba(183, 110, 121, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.multilingual-info::before {
+  content: 'ℹ️';
+  flex-shrink: 0;
+}
+
+.multilingual-info p {
+  margin: 0;
+  line-height: 1.5;
+}
