@@ -324,8 +324,8 @@
     
     // Reload info blocks when language changes
     window.addEventListener('languageChanged', function() {
-      if (typeof loadInfoBlocks === 'function') {
-        loadInfoBlocks();
+      if (typeof window.loadInfoBlocks === 'function') {
+        window.loadInfoBlocks();
       }
     });
   </script>
@@ -420,8 +420,8 @@
         }
       }
 
-      // Load and display info blocks
-      async function loadInfoBlocks() {
+      // Load and display info blocks - make it globally accessible
+      window.loadInfoBlocks = async function() {
         const infoBlocks = await getInfoBlocks();
         const container = document.getElementById('infoBlocks');
         const emptyState = document.getElementById('emptyState');
@@ -465,16 +465,16 @@
 
       // Initialize when page loads
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadInfoBlocks);
+        document.addEventListener('DOMContentLoaded', window.loadInfoBlocks);
       } else {
-        loadInfoBlocks();
+        window.loadInfoBlocks();
       }
       
       // Also listen for Firebase real-time updates
       const db = getDatabase();
       if (db) {
         db.ref(FIREBASE_PATH).on('value', () => {
-          loadInfoBlocks();
+          window.loadInfoBlocks();
         });
       }
     })();
