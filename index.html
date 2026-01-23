@@ -1039,6 +1039,13 @@
       }
     }
   </script>
+  <script src="translations.js"></script>
   <script src="assets/nav.js"></script>
+  <script>
+    // Initialize i18n after all scripts are loaded
+    if (window.i18n) {
+      window.i18n.init();
+    }
+  </script>
 </body>
 </html>

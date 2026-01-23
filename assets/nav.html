@@ -8,9 +8,28 @@
   </button>
 
   <div class="menu-links" id="mobileMenu">
-    <a class="pill" href="#aboutus" data-page-index="#aboutus" data-page-rooms="index.html#aboutus" data-page-info="index.html#aboutus">About Us</a>
-    <a class="pill" href="#contact" data-page-index="#contact" data-page-rooms="index.html#contact" data-page-info="index.html#contact">Contact</a>
-    <a class="pill" href="rooms.html" data-page-index="rooms.html" data-page-rooms="rooms.html" data-page-info="rooms.html">Rooms</a>
-    <a class="pill" href="info.html" data-page-index="info.html" data-page-rooms="info.html" data-page-info="info.html">Info</a>
+    <a class="pill" href="#aboutus" data-page-index="#aboutus" data-page-rooms="index.html#aboutus" data-page-info="index.html#aboutus" data-i18n="nav.aboutus">About Us</a>
+    <a class="pill" href="#contact" data-page-index="#contact" data-page-rooms="index.html#contact" data-page-info="index.html#contact" data-i18n="nav.contact">Contact</a>
+    <a class="pill" href="rooms.html" data-page-index="rooms.html" data-page-rooms="rooms.html" data-page-info="rooms.html" data-i18n="nav.rooms">Rooms</a>
+    <a class="pill" href="info.html" data-page-index="info.html" data-page-rooms="info.html" data-page-info="info.html" data-i18n="nav.info">Info</a>
+    <div class="language-selector">
+      <button class="language-btn" id="languageBtn" aria-expanded="false" aria-haspopup="true" aria-label="Select language">
+        <span class="flag" id="currentFlag">🇬🇧</span>
+      </button>
+      <div class="language-dropdown" id="languageDropdown">
+        <button class="language-option" data-lang="nl" aria-label="Nederlands">
+          <span class="flag">🇧🇪</span>
+          <span class="lang-name">Nederlands</span>
+        </button>
+        <button class="language-option" data-lang="en" aria-label="English">
+          <span class="flag">🇬🇧</span>
+          <span class="lang-name">English</span>
+        </button>
+        <button class="language-option" data-lang="fr" aria-label="Français">
+          <span class="flag">🇫🇷</span>
+          <span class="lang-name">Français</span>
+        </button>
+      </div>
+    </div>
   </div>
 </nav>
