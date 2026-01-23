@@ -39,6 +39,11 @@ body {
   gap: 24px;
 }
 
+#adminDashboard {
+  justify-content: flex-start;
+  padding-top: 120px;
+}
+
 .bg::before {
   content: "";
   position: fixed;
@@ -615,6 +620,111 @@ body {
   }
 }
 
+/* Admin Navigation */
+.admin-top-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.admin-top-menu-inner {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.admin-top-menu-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-menu-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-menu-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  #adminDashboard {
+    padding-top: 88px;
+  }
+
+  .admin-top-menu-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-menu-toggle {
+    display: inline-flex;
+  }
+
+  .admin-top-menu-content {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .admin-top-menu-content.is-open {
+    display: flex;
+  }
+
+  .admin-nav {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .admin-nav-btn {
+    text-align: left;
+    width: 100%;
+  }
+
+  .admin-menu-right,
+  .admin-menu-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .admin-menu-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Loading spinner */
 .spinner {
   width: 20px;
@@ -648,9 +758,6 @@ body {
 .admin-nav {
   display: flex;
   gap: 8px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  padding-bottom: 0;
 }
 
 .admin-nav-btn {

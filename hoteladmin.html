@@ -83,29 +83,46 @@
 
   <!-- Admin Dashboard -->
   <div id="adminDashboard" class="bg hidden">
-    <div class="card">
-      <!-- Admin Navigation -->
-      <div class="admin-nav">
-        <button id="btnNavRooms" class="admin-nav-btn active">
-          🏨 Rooms
+    <div id="adminTopMenu" class="admin-top-menu">
+      <div class="admin-top-menu-inner">
+        <button id="btnMenuToggle" class="admin-menu-toggle" type="button" aria-expanded="false" aria-controls="adminMenuContent">
+          ☰ Menu
         </button>
-        <button id="btnNavInfo" class="admin-nav-btn">
-          ℹ️ Info
-        </button>
+        <div id="adminMenuContent" class="admin-top-menu-content">
+          <div class="admin-nav">
+            <button id="btnNavRooms" class="admin-nav-btn active">
+              🏨 Rooms
+            </button>
+            <button id="btnNavInfo" class="admin-nav-btn">
+              ℹ️ Info
+            </button>
+          </div>
+          <div class="admin-menu-right">
+            <div id="roomActions" class="admin-menu-actions">
+              <button id="btnAddRoom" class="btn btn-success">
+                ➕ Add Room
+              </button>
+              <button id="btnLogout" class="btn">
+                🚪 Logout
+              </button>
+            </div>
+            <div id="infoActions" class="admin-menu-actions hidden">
+              <button id="btnAddInfo" class="btn btn-success">
+                ➕ Add Info Block
+              </button>
+              <button id="btnLogoutInfo" class="btn">
+                🚪 Logout
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
+    </div>
+    <div class="card">
       <!-- Room Management Section -->
       <div id="roomManagementSection">
         <div class="admin-header">
           <h1>Room Management</h1>
-          <div class="admin-header-actions">
-            <button id="btnAddRoom" class="btn btn-success">
-              ➕ Add Room
-            </button>
-            <button id="btnLogout" class="btn">
-              🚪 Logout
-            </button>
-          </div>
         </div>
 
         <div id="roomsContainer" class="rooms-list">
@@ -126,14 +143,6 @@
       <div id="infoManagementSection" class="hidden">
         <div class="admin-header">
           <h1>Info Management</h1>
-          <div class="admin-header-actions">
-            <button id="btnAddInfo" class="btn btn-success">
-              ➕ Add Info Block
-            </button>
-            <button id="btnLogoutInfo" class="btn">
-              🚪 Logout
-            </button>
-          </div>
         </div>
 
         <div id="infoBlocksContainer" class="info-blocks-list">
@@ -383,6 +392,11 @@
       const loginAlert = document.getElementById('loginAlert');
       const btnLogout = document.getElementById('btnLogout');
       const btnAddRoom = document.getElementById('btnAddRoom');
+      const adminTopMenu = document.getElementById('adminTopMenu');
+      const btnMenuToggle = document.getElementById('btnMenuToggle');
+      const adminMenuContent = document.getElementById('adminMenuContent');
+      const roomActions = document.getElementById('roomActions');
+      const infoActions = document.getElementById('infoActions');
       const roomsContainer = document.getElementById('roomsContainer');
       const emptyState = document.getElementById('emptyState');
       
@@ -446,9 +460,19 @@
       }
 
       // Show dashboard
+      function updateTopMenuActions() {
+        const isRoomsActive = btnNavRooms.classList.contains('active');
+        roomActions.classList.toggle('hidden', !isRoomsActive);
+        infoActions.classList.toggle('hidden', isRoomsActive);
+      }
+
       function showDashboard() {
         loginScreen.classList.add('hidden');
         adminDashboard.classList.remove('hidden');
+        adminTopMenu.classList.remove('hidden');
+        adminMenuContent.classList.remove('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', 'false');
+        updateTopMenuActions();
         loadRooms();
       }
 
@@ -1210,6 +1234,9 @@
         btnNavInfo.classList.remove('active');
         roomManagementSection.classList.remove('hidden');
         infoManagementSection.classList.add('hidden');
+        updateTopMenuActions();
+        adminMenuContent.classList.remove('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', 'false');
       });
 
       btnNavInfo.addEventListener('click', () => {
@@ -1217,7 +1244,22 @@
         btnNavRooms.classList.remove('active');
         infoManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
+        updateTopMenuActions();
+        adminMenuContent.classList.remove('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', 'false');
         loadInfoBlocks();
+      });
+
+      btnMenuToggle.addEventListener('click', () => {
+        const isOpen = adminMenuContent.classList.toggle('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!adminTopMenu.contains(event.target)) {
+          adminMenuContent.classList.remove('is-open');
+          btnMenuToggle.setAttribute('aria-expanded', 'false');
+        }
       });
 
       // Logout from info section
