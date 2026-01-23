@@ -785,19 +785,21 @@
         <div class="aboutus-grid">
           <div class="aboutus-left" aria-label="About us text">
             <p class="aboutus-kicker">Hotel 3 Paardekens</p>
-            <h2 class="aboutus-title">About Us</h2>
+            <h2 class="aboutus-title" id="aboutusTitle">About Us</h2>
 
             <div class="aboutus-copy">
-              <p>
-                The 33 rooms of the charming Hotel 3 Paardekens were thoroughly renovated and refurbished in 2010.
-                In other words: a 'historical renovation'! Everything is there to welcome you with the comfort of a 3-star hotel.
-                The counter in the reception area exudes the grandeur of the past. You can sit and chat at the bar or relax in one of the cozy armchairs.
-              </p>
+              <div id="aboutusCopyText">
+                <p>
+                  The 33 rooms of the charming Hotel 3 Paardekens were thoroughly renovated and refurbished in 2010.
+                  In other words: a 'historical renovation'! Everything is there to welcome you with the comfort of a 3-star hotel.
+                  The counter in the reception area exudes the grandeur of the past. You can sit and chat at the bar or relax in one of the cozy armchairs.
+                </p>
 
-              <p>
-                The pride and uniqueness of Hotel 3 Paardekens, however, is the sublime glass-enclosed breakfast room on the top floor,
-                with an absolutely impressive view on St Rumbold's Cathedral.
-              </p>
+                <p>
+                  The pride and uniqueness of Hotel 3 Paardekens, however, is the sublime glass-enclosed breakfast room on the top floor,
+                  with an absolutely impressive view on St Rumbold's Cathedral.
+                </p>
+              </div>
 
               <div class="links" aria-label="About us actions">
                 <a class="pill" href="#" id="aboutusBook">Book Now</a>
@@ -835,25 +837,27 @@
           </div>
 
           <div class="sisterhotel-right">
-            <p class="sisterhotel-kicker">Elegance - Comfort - Design</p>
+            <p class="sisterhotel-kicker" id="sisterhotelKicker">Elegance - Comfort - Design</p>
             <h2 class="sisterhotel-title">
-              <span class="title-line1">Discover Our</span>
-              <span class="title-line2">Sister Property</span>
+              <span class="title-line1" id="sisterhotelTitleLine1">Discover Our</span>
+              <span class="title-line2" id="sisterhotelTitleLine2">Sister Property</span>
             </h2>
 
             <div class="sisterhotel-copy">
-              <p>
-                Hotel Elisabeth is a former Hospital dating from the Inter-war Period. It has been respectively transformed in keeping with the existing architecture to a modern and cosy four-star Hotel.
-              </p>
-              <p>
-                It is situated less than 200m walking distance from the heart of Mechelen city and offers 66 stylish and contemporary designed rooms.
-              </p>
-              <p>
-                These rooms provide maximum comfort for guests traveling on business or those wishing to explore the unique Historical City.
-              </p>
-              <p>
-                The Breakfast Room is beautifully light and overlooks a lovely courtyard with olive trees. Parking is located beneath the Hotel.
-              </p>
+              <div id="sisterhotelCopyText">
+                <p>
+                  Hotel Elisabeth is a former Hospital dating from the Inter-war Period. It has been respectively transformed in keeping with the existing architecture to a modern and cosy four-star Hotel.
+                </p>
+                <p>
+                  It is situated less than 200m walking distance from the heart of Mechelen city and offers 66 stylish and contemporary designed rooms.
+                </p>
+                <p>
+                  These rooms provide maximum comfort for guests traveling on business or those wishing to explore the unique Historical City.
+                </p>
+                <p>
+                  The Breakfast Room is beautifully light and overlooks a lovely courtyard with olive trees. Parking is located beneath the Hotel.
+                </p>
+              </div>
 
               <div class="links">
                 <a class="pill" href="https://www.elisabeth-hotel.be/" target="_blank" rel="noopener noreferrer" id="sisterhotelVisit">Visit Hotel Elisabeth</a>
@@ -889,6 +893,10 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="site-content-manager.js"></script>
   <script>
     function formatLocalDate(d) {
       const y = d.getFullYear();
@@ -977,8 +985,59 @@
       });
     }
 
+    function renderParagraphs(container, text) {
+      if (!container) return;
+      const paragraphs = String(text || '')
+        .split(/\n+/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+      container.innerHTML = '';
+      const fragment = document.createDocumentFragment();
+      if (paragraphs.length === 0) return;
+      paragraphs.forEach((line) => {
+        const p = document.createElement('p');
+        p.textContent = line;
+        fragment.appendChild(p);
+      });
+      container.appendChild(fragment);
+    }
+
+    async function loadSiteContent() {
+      if (typeof SiteContentManager === 'undefined') return;
+      try {
+        const content = await SiteContentManager.getContent();
+        const aboutTitle = document.getElementById('aboutusTitle');
+        const aboutCopy = document.getElementById('aboutusCopyText');
+        const sisterKicker = document.getElementById('sisterhotelKicker');
+        const sisterLine1 = document.getElementById('sisterhotelTitleLine1');
+        const sisterLine2 = document.getElementById('sisterhotelTitleLine2');
+        const sisterCopy = document.getElementById('sisterhotelCopyText');
+
+        if (aboutTitle) aboutTitle.textContent = content.about.title;
+        renderParagraphs(aboutCopy, content.about.body);
+        if (sisterKicker) sisterKicker.textContent = content.sister.kicker;
+        if (sisterLine1) sisterLine1.textContent = content.sister.titleLine1;
+        if (sisterLine2) sisterLine2.textContent = content.sister.titleLine2;
+        renderParagraphs(sisterCopy, content.sister.body);
+      } catch (error) {
+        console.error('Error loading site content:', error);
+      }
+    }
+
     document.getElementById('y').textContent = new Date().getFullYear();
     updateBookState();
+    loadSiteContent();
+    if (typeof firebase !== 'undefined' && firebase.database && firebase.apps && firebase.apps.length > 0) {
+      try {
+        const db = firebase.database();
+        const contentRef = db.ref('siteContent');
+        const detachListener = () => contentRef.off('value', loadSiteContent);
+        contentRef.on('value', loadSiteContent);
+        window.addEventListener('pagehide', detachListener);
+      } catch (error) {
+        console.warn('Could not set up site content listener:', error);
+      }
+    }
   </script>
   <script src="assets/nav.js"></script>
 </body>
