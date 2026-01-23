@@ -1918,6 +1918,8 @@
             throw new Error('Save failed');
           }
           showToast('success', 'About Us Updated', 'Your changes have been saved for all languages.');
+          // Reload the content to show the updated data in the form
+          await loadSiteContent('about');
         } catch (error) {
           console.error('Error saving About Us:', error);
           showToast('error', 'Save Failed', 'There was an error saving the About Us text.');
@@ -1982,6 +1984,8 @@
             throw new Error('Save failed');
           }
           showToast('success', 'Sister Hotel Updated', 'Your changes have been saved for all languages.');
+          // Reload the content to show the updated data in the form
+          await loadSiteContent('sister');
         } catch (error) {
           console.error('Error saving Sister Hotel:', error);
           showToast('error', 'Save Failed', 'There was an error saving the Sister Hotel text.');
