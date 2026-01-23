@@ -790,45 +790,55 @@
       if (!roomsGrid) return;
 
       roomsGrid.innerHTML = '';
+      
+      // Get current language from i18n
+      const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
 
       rooms.forEach(room => {
+        // Get language-specific data or fallback to old format
+        const roomData = room[currentLang] || room.en || room;
+        const roomName = roomData.name || 'Unnamed Room';
+        const roomDesc = roomData.description || '';
+        
         const article = document.createElement('article');
         article.className = 'room-card';
-        article.setAttribute('aria-label', room.name);
+        article.setAttribute('aria-label', roomName);
 
         // Create photo slider element
         const sliderDiv = document.createElement('div');
         sliderDiv.className = 'room-slider';
         sliderDiv.tabIndex = 0;
-        sliderDiv.setAttribute('aria-label', `${room.name} photos slider`);
+        sliderDiv.setAttribute('aria-label', `${roomName} photos slider`);
         
         // Store photos data in a way compatible with existing slider code
-        const sortedPhotos = room.photos.sort((a, b) => a.order - b.order);
-        sliderDiv.dataset.room = room.name;
+        const sortedPhotos = room.photos ? room.photos.sort((a, b) => a.order - b.order) : [];
+        sliderDiv.dataset.room = roomName;
         sliderDiv.dataset.photos = JSON.stringify(sortedPhotos.map(p => p.url));
 
         // Create title
         const title = document.createElement('h2');
         title.className = 'room-title';
-        title.textContent = room.name;
+        title.textContent = roomName;
 
         // Create description
         const desc = document.createElement('p');
         desc.className = 'room-desc';
-        desc.textContent = room.description;
+        desc.textContent = roomDesc;
 
         // Create amenities label
         const amenitiesLabel = document.createElement('p');
         amenitiesLabel.className = 'room-desc';
         amenitiesLabel.style.marginTop = '-6px';
-        amenitiesLabel.textContent = 'Amenities include:';
+        amenitiesLabel.setAttribute('data-i18n', 'rooms.amenities');
+        amenitiesLabel.textContent = window.i18n ? window.i18n.t('rooms.amenities') : 'Amenities include:';
 
         // Create amenities list
         const amenitiesList = document.createElement('ul');
         amenitiesList.className = 'amenities';
-        amenitiesList.setAttribute('aria-label', `${room.name} amenities`);
+        amenitiesList.setAttribute('aria-label', `${roomName} amenities`);
 
-        room.amenities.forEach(amenity => {
+        const amenities = room.amenities || [];
+        amenities.forEach(amenity => {
           const li = document.createElement('li');
           
           const iconSpan = document.createElement('span');
@@ -840,8 +850,13 @@
             IconLibrary.getIcon(amenity.icon) : '';
           iconSpan.innerHTML = iconSvg;
           
+          // Translate amenity name if translation exists
+          const amenityKey = `amenity.${amenity.icon}`;
+          const amenityName = (window.i18n && window.i18n.t(amenityKey) !== amenityKey) ? 
+            window.i18n.t(amenityKey) : amenity.name;
+          
           li.appendChild(iconSpan);
-          li.appendChild(document.createTextNode(' ' + amenity.name));
+          li.appendChild(document.createTextNode(' ' + amenityName));
           amenitiesList.appendChild(li);
         });
 
@@ -919,6 +934,13 @@
     if (window.i18n) {
       window.i18n.init();
     }
+    
+    // Reload rooms when language changes
+    window.addEventListener('languageChanged', function() {
+      if (typeof loadRooms === 'function') {
+        loadRooms();
+      }
+    });
   </script>
 </body>
 </html>
