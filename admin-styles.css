@@ -245,7 +245,7 @@ body {
   cursor: grab;
   user-select: none;
   line-height: 1;
-  padding-top: 8px;
+  align-self: center;
   width: 32px;
   text-align: center;
   opacity: 0.6;
