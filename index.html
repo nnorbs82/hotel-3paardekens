@@ -1046,6 +1046,13 @@
     if (window.i18n) {
       window.i18n.init();
     }
+    
+    // Reload site content when language changes
+    window.addEventListener('languageChanged', function() {
+      if (typeof loadSiteContent === 'function') {
+        loadSiteContent();
+      }
+    });
   </script>
 </body>
 </html>
