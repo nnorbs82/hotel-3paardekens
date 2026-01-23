@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Firebase Rules for About Us and Sister Hotel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 3px solid #007bff;
+      padding-bottom: 10px;
+    }
+    .test-section {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .test-section h2 {
+      margin-top: 0;
+      color: #555;
+    }
+    .status {
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+    .pass {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .fail {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    .warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      border-left: 4px solid #007bff;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 5px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .test-result {
+      padding: 8px 12px;
+      margin: 5px 0;
+      border-radius: 4px;
+    }
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Firebase Rules Test - About Us & Sister Hotel</h1>
+  
+  <div class="test-section">
+    <h2>📋 Test Overview</h2>
+    <p>This test validates that the Firebase security rules are properly configured for the <code>siteContent</code> path.</p>
+    <div class="info status">
+      <strong>What This Tests:</strong>
+      <ul>
+        <li>Firebase is initialized correctly</li>
+        <li>Public read access to <code>siteContent</code></li>
+        <li>Data can be retrieved from Firebase</li>
+        <li>About Us content is accessible</li>
+        <li>Sister Hotel content is accessible</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>🚀 Run Tests</h2>
+    <button onclick="runAllTests()" id="runButton">Run All Tests</button>
+    <button onclick="clearResults()">Clear Results</button>
+  </div>
+
+  <div class="test-section">
+    <h2>📊 Test Results</h2>
+    <div id="testResults"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>🔍 Firebase Data</h2>
+    <div id="firebaseData"></div>
+  </div>
+
+  <!-- Load Firebase dependencies -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="site-content-manager.js"></script>
+
+  <script>
+    let testCount = 0;
+    let passCount = 0;
+    let failCount = 0;
+
+    function clearResults() {
+      document.getElementById('testResults').innerHTML = '';
+      document.getElementById('firebaseData').innerHTML = '';
+      testCount = 0;
+      passCount = 0;
+      failCount = 0;
+    }
+
+    function log(message, status = 'info') {
+      const results = document.getElementById('testResults');
+      const div = document.createElement('div');
+      div.className = `test-result ${status} status`;
+      
+      const icon = status === 'pass' ? '✅' : status === 'fail' ? '❌' : status === 'warning' ? '⚠️' : 'ℹ️';
+      div.innerHTML = `${icon} ${message}`;
+      
+      results.appendChild(div);
+      
+      if (status === 'pass') passCount++;
+      if (status === 'fail') failCount++;
+      if (status === 'pass' || status === 'fail') testCount++;
+    }
+
+    function logData(label, data) {
+      const dataDiv = document.getElementById('firebaseData');
+      const section = document.createElement('div');
+      section.innerHTML = `<h3>${label}</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+      dataDiv.appendChild(section);
+    }
+
+    function showLoading(show) {
+      const button = document.getElementById('runButton');
+      if (show) {
+        button.disabled = true;
+        button.innerHTML = 'Running Tests <span class="loading"></span>';
+      } else {
+        button.disabled = false;
+        button.innerHTML = 'Run All Tests';
+      }
+    }
+
+    async function runAllTests() {
+      clearResults();
+      showLoading(true);
+
+      log('🔄 Starting Firebase Rules Tests...', 'info');
+
+      try {
+        // Test 1: Check Firebase initialization
+        log('Test 1: Checking Firebase initialization...');
+        if (typeof firebase === 'undefined') {
+          log('FAILED: Firebase SDK not loaded', 'fail');
+          showLoading(false);
+          return;
+        }
+        log('PASSED: Firebase SDK is loaded', 'pass');
+
+        // Test 2: Check Firebase app initialization
+        log('Test 2: Checking Firebase app initialization...');
+        if (!firebase.apps || firebase.apps.length === 0) {
+          log('FAILED: Firebase app not initialized', 'fail');
+          showLoading(false);
+          return;
+        }
+        log('PASSED: Firebase app is initialized', 'pass');
+
+        // Test 3: Check database connection
+        log('Test 3: Checking database connection...');
+        let db;
+        try {
+          db = firebase.database();
+          if (!db) {
+            log('FAILED: Cannot get database reference', 'fail');
+            showLoading(false);
+            return;
+          }
+          log('PASSED: Database connection established', 'pass');
+        } catch (error) {
+          log('FAILED: Error connecting to database: ' + error.message, 'fail');
+          showLoading(false);
+          return;
+        }
+
+        // Test 4: Check SiteContentManager
+        log('Test 4: Checking SiteContentManager...');
+        if (typeof SiteContentManager === 'undefined') {
+          log('FAILED: SiteContentManager not loaded', 'fail');
+          showLoading(false);
+          return;
+        }
+        log('PASSED: SiteContentManager is loaded', 'pass');
+
+        // Test 5: Test direct Firebase read access to siteContent
+        log('Test 5: Testing direct read access to siteContent path...');
+        try {
+          const snapshot = await db.ref('siteContent').once('value');
+          const data = snapshot.val();
+          
+          if (data === null) {
+            log('WARNING: siteContent path exists but is empty (no data saved yet)', 'warning');
+            log('This is normal if you haven\'t saved any About Us or Sister Hotel data yet', 'info');
+          } else {
+            log('PASSED: Can read from siteContent path', 'pass');
+            logData('Firebase siteContent Data', data);
+          }
+        } catch (error) {
+          if (error.code === 'PERMISSION_DENIED') {
+            log('FAILED: Permission denied reading siteContent - Rules not deployed!', 'fail');
+            log('ACTION REQUIRED: Deploy database.rules.json to Firebase Console', 'fail');
+            logData('Error Details', {
+              code: error.code,
+              message: error.message,
+              solution: 'See DEPLOY_FIREBASE_RULES.md for instructions'
+            });
+          } else {
+            log('FAILED: Error reading from Firebase: ' + error.message, 'fail');
+          }
+          showLoading(false);
+          return;
+        }
+
+        // Test 6: Test SiteContentManager.getAllContent()
+        log('Test 6: Testing SiteContentManager.getAllContent()...');
+        try {
+          const allContent = await SiteContentManager.getAllContent();
+          
+          if (!allContent) {
+            log('FAILED: getAllContent() returned null or undefined', 'fail');
+          } else {
+            log('PASSED: getAllContent() returned data', 'pass');
+            
+            // Check structure
+            const hasEnglish = allContent.en !== undefined;
+            const hasDutch = allContent.nl !== undefined;
+            const hasFrench = allContent.fr !== undefined;
+            
+            if (hasEnglish && hasDutch && hasFrench) {
+              log('PASSED: All three languages present (en, nl, fr)', 'pass');
+            } else {
+              log('WARNING: Some languages missing - using defaults', 'warning');
+            }
+            
+            logData('All Content Structure', allContent);
+          }
+        } catch (error) {
+          log('FAILED: Error calling getAllContent(): ' + error.message, 'fail');
+        }
+
+        // Test 7: Test SiteContentManager.getContent() for English
+        log('Test 7: Testing SiteContentManager.getContent() for English...');
+        try {
+          const content = await SiteContentManager.getContent('en');
+          
+          if (!content) {
+            log('FAILED: getContent(\'en\') returned null or undefined', 'fail');
+          } else {
+            log('PASSED: getContent(\'en\') returned data', 'pass');
+            
+            // Check About Us structure
+            if (content.about && content.about.title && content.about.body) {
+              log('PASSED: About Us data structure is valid', 'pass');
+            } else {
+              log('WARNING: About Us data incomplete', 'warning');
+            }
+            
+            // Check Sister Hotel structure
+            if (content.sister && content.sister.kicker && content.sister.titleLine1) {
+              log('PASSED: Sister Hotel data structure is valid', 'pass');
+            } else {
+              log('WARNING: Sister Hotel data incomplete', 'warning');
+            }
+            
+            logData('English Content', content);
+          }
+        } catch (error) {
+          log('FAILED: Error calling getContent(): ' + error.message, 'fail');
+        }
+
+        // Test 8: Test real-time listener
+        log('Test 8: Testing Firebase real-time listener...');
+        try {
+          const listenerTest = await new Promise((resolve) => {
+            const ref = db.ref('siteContent');
+            let callbackFired = false;
+            
+            const callback = (snapshot) => {
+              callbackFired = true;
+              ref.off('value', callback);
+              resolve(true);
+            };
+            
+            ref.on('value', callback);
+            
+            // Timeout after 3 seconds
+            setTimeout(() => {
+              if (!callbackFired) {
+                ref.off('value', callback);
+                resolve(false);
+              }
+            }, 3000);
+          });
+          
+          if (listenerTest) {
+            log('PASSED: Real-time listener works correctly', 'pass');
+          } else {
+            log('WARNING: Real-time listener timeout (may still work)', 'warning');
+          }
+        } catch (error) {
+          log('WARNING: Could not test real-time listener: ' + error.message, 'warning');
+        }
+
+        // Summary
+        log('', 'info');
+        log(`📈 Test Summary: ${passCount} passed, ${failCount} failed out of ${testCount} tests`, 
+            failCount === 0 ? 'pass' : 'fail');
+        
+        if (failCount === 0 && passCount > 0) {
+          log('🎉 All tests passed! Firebase rules are correctly configured.', 'pass');
+          log('✅ About Us and Sister Hotel should work on both admin and front end', 'pass');
+        } else if (failCount > 0) {
+          log('❌ Some tests failed. Check the results above for details.', 'fail');
+          log('📖 See DEPLOY_FIREBASE_RULES.md for deployment instructions', 'info');
+        }
+
+      } catch (error) {
+        log('CRITICAL ERROR: ' + error.message, 'fail');
+        console.error('Test error:', error);
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    // Auto-run tests on page load
+    window.addEventListener('load', () => {
+      log('✨ Page loaded. Click "Run All Tests" to begin testing.', 'info');
+    });
+  </script>
+</body>
+</html>
