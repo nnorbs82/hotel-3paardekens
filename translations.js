@@ -81,6 +81,36 @@
       en: 'Book Now',
       fr: 'Réserver Maintenant'
     },
+    'index.contact.title': {
+      nl: 'Contact',
+      en: 'Contact Us',
+      fr: 'Contactez-nous'
+    },
+    'index.contact.openmaps': {
+      nl: 'Open in Kaarten',
+      en: 'Open in Maps',
+      fr: 'Ouvrir dans Maps'
+    },
+    'index.booking.title': {
+      nl: 'Controleer Beschikbaarheid',
+      en: 'Check Availability',
+      fr: 'Vérifier les Disponibilités'
+    },
+    'index.booking.checkin': {
+      nl: 'Inchecken',
+      en: 'Check-in',
+      fr: 'Arrivée'
+    },
+    'index.booking.checkout': {
+      nl: 'Uitchecken',
+      en: 'Check-out',
+      fr: 'Départ'
+    },
+    'index.booking.bookroom': {
+      nl: 'Boek een Kamer',
+      en: 'Book a Room',
+      fr: 'Réserver une Chambre'
+    },
     'index.sister.kicker': {
       nl: 'Elegantie - Comfort - Design',
       en: 'Elegance - Comfort - Design',
