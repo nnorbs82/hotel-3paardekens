@@ -385,7 +385,7 @@ body {
 
 .amenity-item {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto auto;
   gap: 12px;
   align-items: center;
   background: rgba(255,255,255,0.03);
