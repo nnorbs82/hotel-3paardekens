@@ -1360,7 +1360,7 @@
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
         btnMenuToggle.setAttribute('aria-expanded', 'false');
-        loadSiteContent();
+        loadSiteContent('about');
       });
 
       btnNavSister.addEventListener('click', () => {
@@ -1375,7 +1375,7 @@
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
         btnMenuToggle.setAttribute('aria-expanded', 'false');
-        loadSiteContent();
+        loadSiteContent('sister');
       });
 
       btnMenuToggle.addEventListener('click', () => {
@@ -1415,15 +1415,19 @@
         }
       });
 
-      async function loadSiteContent() {
+      async function loadSiteContent(section) {
         if (typeof SiteContentManager === 'undefined') return;
         const content = await SiteContentManager.getContent();
-        aboutTitle.value = content.about.title;
-        aboutBody.value = content.about.body;
-        sisterKicker.value = content.sister.kicker;
-        sisterTitleLine1.value = content.sister.titleLine1;
-        sisterTitleLine2.value = content.sister.titleLine2;
-        sisterBody.value = content.sister.body;
+        if (!section || section === 'about') {
+          aboutTitle.value = content.about.title;
+          aboutBody.value = content.about.body;
+        }
+        if (!section || section === 'sister') {
+          sisterKicker.value = content.sister.kicker;
+          sisterTitleLine1.value = content.sister.titleLine1;
+          sisterTitleLine2.value = content.sister.titleLine2;
+          sisterBody.value = content.sister.body;
+        }
       }
 
       btnSaveAbout.addEventListener('click', async () => {

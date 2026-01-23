@@ -1030,7 +1030,9 @@
     if (typeof firebase !== 'undefined' && firebase.database && firebase.apps && firebase.apps.length > 0) {
       try {
         const db = firebase.database();
-        db.ref('siteContent').on('value', loadSiteContent);
+        const contentRef = db.ref('siteContent');
+        contentRef.on('value', loadSiteContent);
+        window.addEventListener('beforeunload', () => contentRef.off('value', loadSiteContent));
       } catch (error) {
         console.warn('Could not set up site content listener:', error);
       }

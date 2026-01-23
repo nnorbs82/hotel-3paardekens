@@ -73,6 +73,13 @@
     };
   }
 
+  async function fetchSnapshot(ref) {
+    if (typeof ref.get === 'function') {
+      return ref.get();
+    }
+    return ref.once('value');
+  }
+
   async function getContent() {
     const db = getDatabase();
 
@@ -89,7 +96,7 @@
     }
 
     try {
-      const snapshot = await db.ref(FIREBASE_PATH).once('value');
+      const snapshot = await fetchSnapshot(db.ref(FIREBASE_PATH));
       const data = snapshot.val();
       if (!data) {
         return normalizeContent(null);
