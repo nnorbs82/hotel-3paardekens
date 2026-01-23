@@ -56,7 +56,7 @@
       en: 'About Us',
       fr: 'À Propos de Nous'
     },
-    'index.contact.title': {
+    'index.contact.hero': {
       nl: 'Contact & Reserveren',
       en: 'Contact & Booking',
       fr: 'Contact & Réservation'
@@ -516,10 +516,9 @@
       const text = t(key);
       
       // Update text content or placeholder based on element type
-      if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-        if (element.placeholder !== undefined) {
-          element.placeholder = text;
-        }
+      if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && 
+          element.hasAttribute('placeholder')) {
+        element.placeholder = text;
       } else {
         element.textContent = text;
       }
