@@ -96,6 +96,12 @@
             <button id="btnNavInfo" class="admin-nav-btn">
               ℹ️ Info
             </button>
+            <button id="btnNavAbout" class="admin-nav-btn">
+              ✨ About Us
+            </button>
+            <button id="btnNavSister" class="admin-nav-btn">
+              🏡 Sister Hotel
+            </button>
           </div>
           <div class="admin-menu-right">
             <div id="roomActions" class="admin-menu-actions">
@@ -111,6 +117,16 @@
                 ➕ Add Info Block
               </button>
               <button id="btnLogoutInfo" class="btn">
+                🚪 Logout
+              </button>
+            </div>
+            <div id="aboutActions" class="admin-menu-actions hidden">
+              <button id="btnLogoutAbout" class="btn">
+                🚪 Logout
+              </button>
+            </div>
+            <div id="sisterActions" class="admin-menu-actions hidden">
+              <button id="btnLogoutSister" class="btn">
                 🚪 Logout
               </button>
             </div>
@@ -157,6 +173,58 @@
             ➕ Add Your First Info Block
           </button>
         </div>
+      </div>
+      
+      <!-- About Us Management Section -->
+      <div id="aboutManagementSection" class="hidden">
+        <div class="admin-header">
+          <h1>About Us</h1>
+          <div class="admin-header-actions">
+            <button id="btnSaveAbout" class="btn btn-primary">
+              💾 Save About Us
+            </button>
+          </div>
+        </div>
+        <form id="aboutForm">
+          <div class="form-group">
+            <label for="aboutTitle">Title</label>
+            <input type="text" id="aboutTitle" name="aboutTitle" placeholder="About Us" />
+          </div>
+          <div class="form-group">
+            <label for="aboutBody">Body</label>
+            <textarea id="aboutBody" name="aboutBody" placeholder="About us text..." rows="8"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <!-- Sister Hotel Management Section -->
+      <div id="sisterManagementSection" class="hidden">
+        <div class="admin-header">
+          <h1>Sister Hotel</h1>
+          <div class="admin-header-actions">
+            <button id="btnSaveSister" class="btn btn-primary">
+              💾 Save Sister Hotel
+            </button>
+          </div>
+        </div>
+        <form id="sisterForm">
+          <div class="form-group">
+            <label for="sisterKicker">Kicker</label>
+            <input type="text" id="sisterKicker" name="sisterKicker" placeholder="Elegance - Comfort - Design" />
+          </div>
+          <div class="form-group">
+            <label for="sisterTitleLine1">Title line 1</label>
+            <input type="text" id="sisterTitleLine1" name="sisterTitleLine1" placeholder="Discover Our" />
+          </div>
+          <div class="form-group">
+            <label for="sisterTitleLine2">Title line 2</label>
+            <input type="text" id="sisterTitleLine2" name="sisterTitleLine2" placeholder="Sister Property" />
+          </div>
+          <div class="form-group">
+            <label for="sisterBody">Body</label>
+            <textarea id="sisterBody" name="sisterBody" placeholder="Sister hotel description..." rows="10"></textarea>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -328,6 +396,7 @@
   <script src="admin-auth.js"></script>
   <script src="admin-room-manager.js"></script>
   <script src="admin-info-manager.js"></script>
+  <script src="site-content-manager.js"></script>
   <script>
     (function() {
       'use strict';
@@ -397,6 +466,8 @@
       const adminMenuContent = document.getElementById('adminMenuContent');
       const roomActions = document.getElementById('roomActions');
       const infoActions = document.getElementById('infoActions');
+      const aboutActions = document.getElementById('aboutActions');
+      const sisterActions = document.getElementById('sisterActions');
       const roomsContainer = document.getElementById('roomsContainer');
       const emptyState = document.getElementById('emptyState');
       
@@ -462,8 +533,13 @@
       // Show dashboard
       function updateTopMenuActions() {
         const isRoomsActive = btnNavRooms.classList.contains('active');
+        const isInfoActive = btnNavInfo.classList.contains('active');
+        const isAboutActive = btnNavAbout.classList.contains('active');
+        const isSisterActive = btnNavSister.classList.contains('active');
         roomActions.classList.toggle('hidden', !isRoomsActive);
-        infoActions.classList.toggle('hidden', isRoomsActive);
+        infoActions.classList.toggle('hidden', !isInfoActive);
+        aboutActions.classList.toggle('hidden', !isAboutActive);
+        sisterActions.classList.toggle('hidden', !isSisterActive);
       }
 
       function showDashboard() {
@@ -1136,12 +1212,26 @@
       // Info Management Elements
       const btnNavRooms = document.getElementById('btnNavRooms');
       const btnNavInfo = document.getElementById('btnNavInfo');
+      const btnNavAbout = document.getElementById('btnNavAbout');
+      const btnNavSister = document.getElementById('btnNavSister');
       const roomManagementSection = document.getElementById('roomManagementSection');
       const infoManagementSection = document.getElementById('infoManagementSection');
+      const aboutManagementSection = document.getElementById('aboutManagementSection');
+      const sisterManagementSection = document.getElementById('sisterManagementSection');
       const btnAddInfo = document.getElementById('btnAddInfo');
       const btnLogoutInfo = document.getElementById('btnLogoutInfo');
       const infoBlocksContainer = document.getElementById('infoBlocksContainer');
       const emptyStateInfo = document.getElementById('emptyStateInfo');
+      const btnLogoutAbout = document.getElementById('btnLogoutAbout');
+      const btnLogoutSister = document.getElementById('btnLogoutSister');
+      const btnSaveAbout = document.getElementById('btnSaveAbout');
+      const btnSaveSister = document.getElementById('btnSaveSister');
+      const aboutTitle = document.getElementById('aboutTitle');
+      const aboutBody = document.getElementById('aboutBody');
+      const sisterKicker = document.getElementById('sisterKicker');
+      const sisterTitleLine1 = document.getElementById('sisterTitleLine1');
+      const sisterTitleLine2 = document.getElementById('sisterTitleLine2');
+      const sisterBody = document.getElementById('sisterBody');
       
       // Info modal elements
       const infoBlockModal = document.getElementById('infoBlockModal');
@@ -1232,8 +1322,12 @@
       btnNavRooms.addEventListener('click', () => {
         btnNavRooms.classList.add('active');
         btnNavInfo.classList.remove('active');
+        btnNavAbout.classList.remove('active');
+        btnNavSister.classList.remove('active');
         roomManagementSection.classList.remove('hidden');
         infoManagementSection.classList.add('hidden');
+        aboutManagementSection.classList.add('hidden');
+        sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
         btnMenuToggle.setAttribute('aria-expanded', 'false');
@@ -1242,12 +1336,46 @@
       btnNavInfo.addEventListener('click', () => {
         btnNavInfo.classList.add('active');
         btnNavRooms.classList.remove('active');
+        btnNavAbout.classList.remove('active');
+        btnNavSister.classList.remove('active');
         infoManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
+        aboutManagementSection.classList.add('hidden');
+        sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
         btnMenuToggle.setAttribute('aria-expanded', 'false');
         loadInfoBlocks();
+      });
+
+      btnNavAbout.addEventListener('click', () => {
+        btnNavAbout.classList.add('active');
+        btnNavRooms.classList.remove('active');
+        btnNavInfo.classList.remove('active');
+        btnNavSister.classList.remove('active');
+        aboutManagementSection.classList.remove('hidden');
+        roomManagementSection.classList.add('hidden');
+        infoManagementSection.classList.add('hidden');
+        sisterManagementSection.classList.add('hidden');
+        updateTopMenuActions();
+        adminMenuContent.classList.remove('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', 'false');
+        loadSiteContent();
+      });
+
+      btnNavSister.addEventListener('click', () => {
+        btnNavSister.classList.add('active');
+        btnNavRooms.classList.remove('active');
+        btnNavInfo.classList.remove('active');
+        btnNavAbout.classList.remove('active');
+        sisterManagementSection.classList.remove('hidden');
+        roomManagementSection.classList.add('hidden');
+        infoManagementSection.classList.add('hidden');
+        aboutManagementSection.classList.add('hidden');
+        updateTopMenuActions();
+        adminMenuContent.classList.remove('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', 'false');
+        loadSiteContent();
       });
 
       btnMenuToggle.addEventListener('click', () => {
@@ -1268,6 +1396,97 @@
           await HotelAuth.logout();
           showLogin();
           loginForm.reset();
+        }
+      });
+
+      btnLogoutAbout.addEventListener('click', async () => {
+        if (confirm('Are you sure you want to logout?')) {
+          await HotelAuth.logout();
+          showLogin();
+          loginForm.reset();
+        }
+      });
+
+      btnLogoutSister.addEventListener('click', async () => {
+        if (confirm('Are you sure you want to logout?')) {
+          await HotelAuth.logout();
+          showLogin();
+          loginForm.reset();
+        }
+      });
+
+      async function loadSiteContent() {
+        if (typeof SiteContentManager === 'undefined') return;
+        const content = await SiteContentManager.getContent();
+        aboutTitle.value = content.about.title;
+        aboutBody.value = content.about.body;
+        sisterKicker.value = content.sister.kicker;
+        sisterTitleLine1.value = content.sister.titleLine1;
+        sisterTitleLine2.value = content.sister.titleLine2;
+        sisterBody.value = content.sister.body;
+      }
+
+      btnSaveAbout.addEventListener('click', async () => {
+        const titleValue = aboutTitle.value.trim();
+        const bodyValue = aboutBody.value.trim();
+
+        if (!titleValue || !bodyValue) {
+          showToast('error', 'Validation Error', 'Please fill in both the title and body.');
+          return;
+        }
+
+        btnSaveAbout.classList.add('loading');
+        btnSaveAbout.disabled = true;
+
+        try {
+          const success = await SiteContentManager.updateContent('about', {
+            title: titleValue,
+            body: bodyValue
+          });
+          if (!success) {
+            throw new Error('Save failed');
+          }
+          showToast('success', 'About Us Updated', 'Your changes have been saved.');
+        } catch (error) {
+          console.error('Error saving About Us:', error);
+          showToast('error', 'Save Failed', 'There was an error saving the About Us text.');
+        } finally {
+          btnSaveAbout.classList.remove('loading');
+          btnSaveAbout.disabled = false;
+        }
+      });
+
+      btnSaveSister.addEventListener('click', async () => {
+        const kickerValue = sisterKicker.value.trim();
+        const line1Value = sisterTitleLine1.value.trim();
+        const line2Value = sisterTitleLine2.value.trim();
+        const bodyValue = sisterBody.value.trim();
+
+        if (!kickerValue || !line1Value || !line2Value || !bodyValue) {
+          showToast('error', 'Validation Error', 'Please fill in all Sister Hotel fields.');
+          return;
+        }
+
+        btnSaveSister.classList.add('loading');
+        btnSaveSister.disabled = true;
+
+        try {
+          const success = await SiteContentManager.updateContent('sister', {
+            kicker: kickerValue,
+            titleLine1: line1Value,
+            titleLine2: line2Value,
+            body: bodyValue
+          });
+          if (!success) {
+            throw new Error('Save failed');
+          }
+          showToast('success', 'Sister Hotel Updated', 'Your changes have been saved.');
+        } catch (error) {
+          console.error('Error saving Sister Hotel:', error);
+          showToast('error', 'Save Failed', 'There was an error saving the Sister Hotel text.');
+        } finally {
+          btnSaveSister.classList.remove('loading');
+          btnSaveSister.disabled = false;
         }
       });
 
