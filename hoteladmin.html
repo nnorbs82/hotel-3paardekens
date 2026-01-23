@@ -1197,7 +1197,10 @@
       });
 
       // Amenity management
+      let editingAmenityIndex = null; // Track if we're editing an existing amenity
+      
       btnAddAmenity.addEventListener('click', () => {
+        editingAmenityIndex = null; // Clear edit mode
         selectedIcon = null;
         
         // Clear all language fields
@@ -1206,6 +1209,10 @@
           if (nameEl) nameEl.value = '';
         });
         
+        // Update modal for add mode
+        amenityModal.querySelector('.modal-title').textContent = 'Add Amenity';
+        btnSaveAmenity.innerHTML = '✓ Add Amenity';
+        
         renderIconPicker();
         
         // Reset language tabs to English
@@ -1213,6 +1220,35 @@
         
         openModal(amenityModal);
       });
+      
+      // Function to open amenity modal in edit mode
+      function openEditAmenityModal(index) {
+        editingAmenityIndex = index;
+        const amenity = currentAmenities[index];
+        
+        // Populate all language fields
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const nameEl = document.getElementById(`amenityName_${lang}`);
+          if (nameEl) {
+            // Support both old format (name) and new format (en/nl/fr)
+            nameEl.value = amenity[lang] || amenity.name || '';
+          }
+        });
+        
+        // Set selected icon
+        selectedIcon = amenity.icon;
+        
+        // Update modal for edit mode
+        amenityModal.querySelector('.modal-title').textContent = 'Edit Amenity';
+        btnSaveAmenity.innerHTML = '✓ Save Changes';
+        
+        renderIconPicker();
+        
+        // Reset language tabs to English
+        resetLanguageTabsToEnglish('amenity');
+        
+        openModal(amenityModal);
+      }
 
       function renderIconPicker() {
         iconPicker.innerHTML = '';
@@ -1266,12 +1302,21 @@
           return;
         }
 
-        currentAmenities.push({ 
+        const amenityData = { 
           en: multilingualData.en,
           nl: multilingualData.nl,
           fr: multilingualData.fr,
           icon: selectedIcon 
-        });
+        };
+        
+        if (editingAmenityIndex !== null) {
+          // Update existing amenity
+          currentAmenities[editingAmenityIndex] = amenityData;
+        } else {
+          // Add new amenity
+          currentAmenities.push(amenityData);
+        }
+        
         renderAmenities();
         closeModal(amenityModal);
       });
@@ -1287,14 +1332,23 @@
           const amenityName = amenity.en || amenity.name || 'Unnamed';
           
           div.innerHTML = `
-            <div class="amenity-icon-preview">${IconLibrary[amenity.icon]}</div>
+            <div class="amenity-icon-preview">${IconLibrary.getIcon(amenity.icon)}</div>
             <span>${amenityName}</span>
-            <button type="button" class="btn btn-small btn-danger" data-index="${index}">
+            <button type="button" class="btn btn-small btn-primary" data-action="edit" data-index="${index}" style="margin-right: 5px;">
+              ✎ Edit
+            </button>
+            <button type="button" class="btn btn-small btn-danger" data-action="delete" data-index="${index}">
               ✕
             </button>
           `;
           
-          div.querySelector('button').addEventListener('click', () => {
+          // Edit button handler
+          div.querySelector('button[data-action="edit"]').addEventListener('click', () => {
+            openEditAmenityModal(index);
+          });
+          
+          // Delete button handler
+          div.querySelector('button[data-action="delete"]').addEventListener('click', () => {
             currentAmenities.splice(index, 1);
             renderAmenities();
           });
