@@ -906,6 +906,11 @@
         div.draggable = true;
         div.dataset.id = room.id;
         
+        // Get data from English or fallback to old format
+        const displayData = room.en || room;
+        const roomName = displayData.name || 'Unnamed Room';
+        const roomDesc = displayData.description || '';
+        
         const firstPhoto = room.photos && room.photos.length > 0 ? 
           room.photos.sort((a, b) => a.order - b.order)[0].url : '';
 
@@ -914,13 +919,13 @@
             ⋮⋮
           </div>
           <div class="room-item-photos">
-            ${firstPhoto ? `<img src="${firstPhoto}" alt="${room.name}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: rgba(255,255,255,0.4);">No photo</div>'}
+            ${firstPhoto ? `<img src="${firstPhoto}" alt="${roomName}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: rgba(255,255,255,0.4);">No photo</div>'}
           </div>
           <div class="room-item-info">
-            <h3 class="room-item-name">${room.name}</h3>
-            <p class="room-item-desc">${room.description}</p>
+            <h3 class="room-item-name">${roomName}</h3>
+            <p class="room-item-desc">${roomDesc}</p>
             <div class="room-item-meta">
-              ${room.amenities.length} amenities • ${room.photos.length} photos
+              ${room.amenities ? room.amenities.length : 0} amenities • ${room.photos ? room.photos.length : 0} photos
             </div>
           </div>
           <div class="room-item-actions">
@@ -1034,6 +1039,15 @@
         currentPhotos = [];
         modalTitle.textContent = 'Add Room';
         roomForm.reset();
+        
+        // Clear all language fields
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const nameEl = document.getElementById(`roomName_${lang}`);
+          const descEl = document.getElementById(`roomDescription_${lang}`);
+          if (nameEl) nameEl.value = '';
+          if (descEl) descEl.value = '';
+        });
+        
         // Set the default booking URL
         document.getElementById('roomBookingUrl').value = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms';
         renderAmenities();
@@ -1051,8 +1065,17 @@
         currentPhotos = [...room.photos];
         
         modalTitle.textContent = 'Edit Room';
-        document.getElementById('roomName').value = room.name;
-        document.getElementById('roomDescription').value = room.description;
+        
+        // Load data for all languages
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const langData = room[lang] || room.en || room; // Fallback for old format
+          const nameEl = document.getElementById(`roomName_${lang}`);
+          const descEl = document.getElementById(`roomDescription_${lang}`);
+          
+          if (nameEl) nameEl.value = langData.name || '';
+          if (descEl) descEl.value = langData.description || '';
+        });
+        
         document.getElementById('roomBookingUrl').value = room.bookingUrl || '';
         
         renderAmenities();
@@ -1065,7 +1088,9 @@
         const room = await RoomManager.getRoom(roomId);
         if (!room) return;
 
-        confirmMessage.textContent = `Are you sure you want to delete "${room.name}"? This action cannot be undone.`;
+        // Get room name from English or first available language
+        const roomName = (room.en && room.en.name) || room.name || 'this room';
+        confirmMessage.textContent = `Are you sure you want to delete "${roomName}"? This action cannot be undone.`;
         deleteCallback = async () => {
           if (await RoomManager.deleteRoom(roomId)) {
             await loadRooms();
@@ -1077,25 +1102,44 @@
 
       // Save room
       btnSaveRoom.addEventListener('click', async () => {
-        const name = document.getElementById('roomName').value.trim();
-        const description = document.getElementById('roomDescription').value.trim();
-        const bookingUrl = document.getElementById('roomBookingUrl').value.trim();
-
-        if (!name || !description) {
-          // Show error feedback
+        // Collect data for all languages
+        const multilingualData = {};
+        let hasError = false;
+        
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const nameEl = document.getElementById(`roomName_${lang}`);
+          const descEl = document.getElementById(`roomDescription_${lang}`);
+          
+          const nameValue = nameEl ? nameEl.value.trim() : '';
+          const descValue = descEl ? descEl.value.trim() : '';
+          
+          if (!nameValue || !descValue) {
+            hasError = true;
+          }
+          
+          multilingualData[lang] = {
+            name: nameValue,
+            description: descValue
+          };
+        });
+        
+        if (hasError) {
           const existingAlert = roomForm.querySelector('.alert');
           if (existingAlert) existingAlert.remove();
           
           const alert = document.createElement('div');
           alert.className = 'alert alert-error';
-          alert.textContent = 'Please fill in all required fields (Name and Description)';
+          alert.textContent = 'Please fill in name and description for all three languages (English, Nederlands, Français)';
           roomForm.insertBefore(alert, roomForm.firstChild);
           return;
         }
 
+        const bookingUrl = document.getElementById('roomBookingUrl').value.trim();
+
         const roomData = {
-          name,
-          description,
+          en: multilingualData.en,
+          nl: multilingualData.nl,
+          fr: multilingualData.fr,
           bookingUrl,
           amenities: currentAmenities,
           photos: currentPhotos
@@ -1828,12 +1872,15 @@
         div.draggable = true;
         div.dataset.id = block.id;
         
+        // Get data from English or fallback to old format
+        const displayData = block.en || block;
+        
         // Create a text preview (strip HTML for preview)
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = block.title;
-        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+        tempDiv.innerHTML = displayData.title || '';
+        const titleText = tempDiv.textContent || tempDiv.innerText || 'Untitled';
         
-        tempDiv.innerHTML = block.body;
+        tempDiv.innerHTML = displayData.body || '';
         const bodyText = tempDiv.textContent || tempDiv.innerText || '';
         const bodyPreview = bodyText.substring(0, 150) + (bodyText.length > 150 ? '...' : '');
 
@@ -1845,7 +1892,7 @@
             <h3 class="info-block-item-title">${titleText}</h3>
             <p class="info-block-item-desc">${bodyPreview}</p>
             <div class="info-block-item-meta">
-              Order: ${block.order}
+              Order: ${block.order || 0}
             </div>
           </div>
           <div class="info-block-item-actions">
@@ -1932,11 +1979,20 @@
         infoModalTitle.textContent = 'Edit Info Block';
         initQuillEditors();
         
-        // Set editor content
-        const parsedTitle = new DOMParser().parseFromString(block.title || '', 'text/html');
-        const titleText = parsedTitle.body.textContent || '';
-        titleQuill.setText(titleText);
-        bodyQuill.root.innerHTML = block.body;
+        // Load content for all languages
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const langData = block[lang] || block.en || block; // Fallback for old format
+          
+          const parsedTitle = new DOMParser().parseFromString(langData.title || '', 'text/html');
+          const titleText = parsedTitle.body.textContent || '';
+          
+          if (titleQuills[lang]) {
+            titleQuills[lang].setText(titleText);
+          }
+          if (bodyQuills[lang]) {
+            bodyQuills[lang].root.innerHTML = langData.body || '';
+          }
+        });
         
         openModal(infoBlockModal);
       }
@@ -1946,10 +2002,11 @@
         const block = await InfoManager.getInfoBlock(blockId);
         if (!block) return;
 
-        // Create a text preview for confirmation
+        // Get title from English or first available language
+        const langData = block.en || block;
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = block.title;
-        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+        tempDiv.innerHTML = langData.title || '';
+        const titleText = tempDiv.textContent || tempDiv.innerText || 'this info block';
 
         confirmMessage.textContent = `Are you sure you want to delete "${titleText}"? This action cannot be undone.`;
         deleteCallback = async () => {
@@ -1963,15 +2020,27 @@
 
       // Save info block
       btnSaveInfo.addEventListener('click', async () => {
-        // Title uses plain text while body keeps rich HTML from the editor.
-        const titleText = titleQuill.getText().trim();
-        const body = bodyQuill.root.innerHTML.trim();
+        // Collect data for all languages
+        const multilingualData = {};
+        let hasError = false;
+        
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const titleText = titleQuills[lang] ? titleQuills[lang].getText().trim() : '';
+          const body = bodyQuills[lang] ? bodyQuills[lang].root.innerHTML.trim() : '';
+          const bodyText = bodyQuills[lang] ? bodyQuills[lang].getText().trim() : '';
+          
+          if (!titleText || !bodyText) {
+            hasError = true;
+          }
+          
+          multilingualData[lang] = {
+            title: titleText,
+            body: body
+          };
+        });
 
-        // Check if editors are empty (only have <p><br></p> or similar)
-        const bodyText = bodyQuill.getText().trim();
-
-        if (!titleText || !bodyText) {
-          showToast('error', 'Validation Error', 'Please fill in both the title and content.');
+        if (hasError) {
+          showToast('error', 'Validation Error', 'Please fill in title and content for all three languages (English, Nederlands, Français).');
           return;
         }
 
@@ -1981,8 +2050,9 @@
 
         try {
           const blockData = {
-            title: titleText,
-            body
+            en: multilingualData.en,
+            nl: multilingualData.nl,
+            fr: multilingualData.fr
           };
 
           if (currentEditingInfoBlock) {
@@ -1990,13 +2060,13 @@
             if (!success) {
               throw new Error('Failed to update info block');
             }
-            showToast('success', 'Info Block Updated', 'Your changes have been saved successfully.');
+            showToast('success', 'Info Block Updated', 'Your changes have been saved for all languages.');
           } else {
             const newBlock = await InfoManager.createInfoBlock(blockData);
             if (!newBlock) {
               throw new Error('Failed to create info block');
             }
-            showToast('success', 'Info Block Created', 'Your new info block has been created successfully.');
+            showToast('success', 'Info Block Created', 'Your new info block has been created for all languages.');
           }
 
           // IMPORTANT: Reload blocks BEFORE closing modal to ensure data is displayed
