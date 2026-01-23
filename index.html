@@ -1031,8 +1031,9 @@
       try {
         const db = firebase.database();
         const contentRef = db.ref('siteContent');
+        const detachListener = () => contentRef.off('value', loadSiteContent);
         contentRef.on('value', loadSiteContent);
-        window.addEventListener('beforeunload', () => contentRef.off('value', loadSiteContent));
+        window.addEventListener('pagehide', detachListener);
       } catch (error) {
         console.warn('Could not set up site content listener:', error);
       }
