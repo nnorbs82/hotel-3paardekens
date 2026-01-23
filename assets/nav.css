@@ -111,3 +111,110 @@
     justify-content: flex-end;
   }
 }
+
+/* Language selector styles */
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 20px;
+  min-width: 48px;
+  justify-content: center;
+}
+
+.language-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(183, 110, 121, 0.6);
+}
+
+.language-btn:focus-visible {
+  outline: 2px solid rgba(183, 110, 121, 0.8);
+  outline-offset: 2px;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(183, 110, 121, 0.6);
+  border-radius: 8px;
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 150px;
+  z-index: 10002;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.language-dropdown.is-open {
+  display: flex;
+}
+
+.language-option {
+  background: transparent;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background 150ms ease;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.language-option:hover {
+  background: rgba(183, 110, 121, 0.3);
+}
+
+.language-option:focus-visible {
+  outline: 2px solid rgba(183, 110, 121, 0.8);
+  outline-offset: -2px;
+}
+
+.language-option .flag {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.language-option .lang-name {
+  flex: 1;
+}
+
+/* Mobile adjustments for language selector */
+@media (max-width: 599px) {
+  .language-selector {
+    width: 100%;
+  }
+
+  .language-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 12px;
+  }
+
+  .language-dropdown {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+  }
+}

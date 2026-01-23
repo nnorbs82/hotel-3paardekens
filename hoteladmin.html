@@ -185,14 +185,61 @@
             </button>
           </div>
         </div>
+        
+        <div class="multilingual-info">
+          <p>Enter content for each language using the tabs below. All three languages must be filled in before saving.</p>
+        </div>
+        
+        <div class="language-tabs" id="aboutLanguageTabs">
+          <button class="language-tab active" data-lang="en" data-section="about">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+          <button class="language-tab" data-lang="nl" data-section="about">
+            <span class="flag">🇧🇪</span>
+            <span>Nederlands</span>
+          </button>
+          <button class="language-tab" data-lang="fr" data-section="about">
+            <span class="flag">🇫🇷</span>
+            <span>Français</span>
+          </button>
+        </div>
+        
         <form id="aboutForm">
-          <div class="form-group">
-            <label for="aboutTitle">Title</label>
-            <input type="text" id="aboutTitle" name="aboutTitle" placeholder="About Us" />
+          <!-- English Content -->
+          <div class="language-content active" data-lang="en" data-section="about">
+            <div class="form-group">
+              <label for="aboutTitle_en">Title (English)</label>
+              <input type="text" id="aboutTitle_en" name="aboutTitle_en" placeholder="About Us" />
+            </div>
+            <div class="form-group">
+              <label for="aboutBody_en">Body (English)</label>
+              <textarea id="aboutBody_en" name="aboutBody_en" placeholder="About us text in English..." rows="8"></textarea>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="aboutBody">Body</label>
-            <textarea id="aboutBody" name="aboutBody" placeholder="About us text..." rows="8"></textarea>
+          
+          <!-- Dutch Content -->
+          <div class="language-content" data-lang="nl" data-section="about">
+            <div class="form-group">
+              <label for="aboutTitle_nl">Titel (Nederlands)</label>
+              <input type="text" id="aboutTitle_nl" name="aboutTitle_nl" placeholder="Over Ons" />
+            </div>
+            <div class="form-group">
+              <label for="aboutBody_nl">Inhoud (Nederlands)</label>
+              <textarea id="aboutBody_nl" name="aboutBody_nl" placeholder="Over ons tekst in het Nederlands..." rows="8"></textarea>
+            </div>
+          </div>
+          
+          <!-- French Content -->
+          <div class="language-content" data-lang="fr" data-section="about">
+            <div class="form-group">
+              <label for="aboutTitle_fr">Titre (Français)</label>
+              <input type="text" id="aboutTitle_fr" name="aboutTitle_fr" placeholder="À Propos de Nous" />
+            </div>
+            <div class="form-group">
+              <label for="aboutBody_fr">Corps (Français)</label>
+              <textarea id="aboutBody_fr" name="aboutBody_fr" placeholder="Texte à propos en français..." rows="8"></textarea>
+            </div>
           </div>
         </form>
       </div>
@@ -207,22 +254,85 @@
             </button>
           </div>
         </div>
+        
+        <div class="multilingual-info">
+          <p>Enter content for each language using the tabs below. All three languages must be filled in before saving.</p>
+        </div>
+        
+        <div class="language-tabs" id="sisterLanguageTabs">
+          <button class="language-tab active" data-lang="en" data-section="sister">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+          <button class="language-tab" data-lang="nl" data-section="sister">
+            <span class="flag">🇧🇪</span>
+            <span>Nederlands</span>
+          </button>
+          <button class="language-tab" data-lang="fr" data-section="sister">
+            <span class="flag">🇫🇷</span>
+            <span>Français</span>
+          </button>
+        </div>
+        
         <form id="sisterForm">
-          <div class="form-group">
-            <label for="sisterKicker">Kicker</label>
-            <input type="text" id="sisterKicker" name="sisterKicker" placeholder="Elegance - Comfort - Design" />
+          <!-- English Content -->
+          <div class="language-content active" data-lang="en" data-section="sister">
+            <div class="form-group">
+              <label for="sisterKicker_en">Kicker (English)</label>
+              <input type="text" id="sisterKicker_en" name="sisterKicker_en" placeholder="Elegance - Comfort - Design" />
+            </div>
+            <div class="form-group">
+              <label for="sisterTitleLine1_en">Title line 1 (English)</label>
+              <input type="text" id="sisterTitleLine1_en" name="sisterTitleLine1_en" placeholder="Discover Our" />
+            </div>
+            <div class="form-group">
+              <label for="sisterTitleLine2_en">Title line 2 (English)</label>
+              <input type="text" id="sisterTitleLine2_en" name="sisterTitleLine2_en" placeholder="Sister Property" />
+            </div>
+            <div class="form-group">
+              <label for="sisterBody_en">Body (English)</label>
+              <textarea id="sisterBody_en" name="sisterBody_en" placeholder="Sister hotel description in English..." rows="10"></textarea>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="sisterTitleLine1">Title line 1</label>
-            <input type="text" id="sisterTitleLine1" name="sisterTitleLine1" placeholder="Discover Our" />
+          
+          <!-- Dutch Content -->
+          <div class="language-content" data-lang="nl" data-section="sister">
+            <div class="form-group">
+              <label for="sisterKicker_nl">Kicker (Nederlands)</label>
+              <input type="text" id="sisterKicker_nl" name="sisterKicker_nl" placeholder="Elegantie - Comfort - Design" />
+            </div>
+            <div class="form-group">
+              <label for="sisterTitleLine1_nl">Titel regel 1 (Nederlands)</label>
+              <input type="text" id="sisterTitleLine1_nl" name="sisterTitleLine1_nl" placeholder="Ontdek Ons" />
+            </div>
+            <div class="form-group">
+              <label for="sisterTitleLine2_nl">Titel regel 2 (Nederlands)</label>
+              <input type="text" id="sisterTitleLine2_nl" name="sisterTitleLine2_nl" placeholder="Zusterhotel" />
+            </div>
+            <div class="form-group">
+              <label for="sisterBody_nl">Inhoud (Nederlands)</label>
+              <textarea id="sisterBody_nl" name="sisterBody_nl" placeholder="Zusterhotel beschrijving in het Nederlands..." rows="10"></textarea>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="sisterTitleLine2">Title line 2</label>
-            <input type="text" id="sisterTitleLine2" name="sisterTitleLine2" placeholder="Sister Property" />
-          </div>
-          <div class="form-group">
-            <label for="sisterBody">Body</label>
-            <textarea id="sisterBody" name="sisterBody" placeholder="Sister hotel description..." rows="10"></textarea>
+          
+          <!-- French Content -->
+          <div class="language-content" data-lang="fr" data-section="sister">
+            <div class="form-group">
+              <label for="sisterKicker_fr">Sous-titre (Français)</label>
+              <input type="text" id="sisterKicker_fr" name="sisterKicker_fr" placeholder="Élégance - Confort - Design" />
+            </div>
+            <div class="form-group">
+              <label for="sisterTitleLine1_fr">Ligne de titre 1 (Français)</label>
+              <input type="text" id="sisterTitleLine1_fr" name="sisterTitleLine1_fr" placeholder="Découvrez Notre" />
+            </div>
+            <div class="form-group">
+              <label for="sisterTitleLine2_fr">Ligne de titre 2 (Français)</label>
+              <input type="text" id="sisterTitleLine2_fr" name="sisterTitleLine2_fr" placeholder="Hôtel Partenaire" />
+            </div>
+            <div class="form-group">
+              <label for="sisterBody_fr">Corps (Français)</label>
+              <textarea id="sisterBody_fr" name="sisterBody_fr" placeholder="Description de l'hôtel partenaire en français..." rows="10"></textarea>
+            </div>
           </div>
         </form>
       </div>
@@ -238,15 +348,63 @@
       </div>
 
       <div class="modal-body">
+        <div class="multilingual-info">
+          <p>Enter room details for each language. The same photos and amenities will be used for all languages.</p>
+        </div>
+        
+        <div class="language-tabs" id="roomLanguageTabs">
+          <button class="language-tab active" data-lang="en" data-section="room">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+          <button class="language-tab" data-lang="nl" data-section="room">
+            <span class="flag">🇧🇪</span>
+            <span>Nederlands</span>
+          </button>
+          <button class="language-tab" data-lang="fr" data-section="room">
+            <span class="flag">🇫🇷</span>
+            <span>Français</span>
+          </button>
+        </div>
+        
         <form id="roomForm">
-          <div class="form-group">
-            <label for="roomName">Room Name *</label>
-            <input type="text" id="roomName" name="name" placeholder="e.g., Deluxe Suite" required />
-          </div>
+          <!-- English Content -->
+          <div class="language-content active" data-lang="en" data-section="room">
+            <div class="form-group">
+              <label for="roomName_en">Room Name (English) *</label>
+              <input type="text" id="roomName_en" name="name_en" placeholder="e.g., Deluxe Suite" required />
+            </div>
 
-          <div class="form-group">
-            <label for="roomDescription">Description *</label>
-            <textarea id="roomDescription" name="description" placeholder="Describe the room..." required></textarea>
+            <div class="form-group">
+              <label for="roomDescription_en">Description (English) *</label>
+              <textarea id="roomDescription_en" name="description_en" placeholder="Describe the room in English..." required></textarea>
+            </div>
+          </div>
+          
+          <!-- Dutch Content -->
+          <div class="language-content" data-lang="nl" data-section="room">
+            <div class="form-group">
+              <label for="roomName_nl">Kamernaam (Nederlands) *</label>
+              <input type="text" id="roomName_nl" name="name_nl" placeholder="bijv., Deluxe Suite" required />
+            </div>
+
+            <div class="form-group">
+              <label for="roomDescription_nl">Beschrijving (Nederlands) *</label>
+              <textarea id="roomDescription_nl" name="description_nl" placeholder="Beschrijf de kamer in het Nederlands..." required></textarea>
+            </div>
+          </div>
+          
+          <!-- French Content -->
+          <div class="language-content" data-lang="fr" data-section="room">
+            <div class="form-group">
+              <label for="roomName_fr">Nom de la Chambre (Français) *</label>
+              <input type="text" id="roomName_fr" name="name_fr" placeholder="par ex., Suite Deluxe" required />
+            </div>
+
+            <div class="form-group">
+              <label for="roomDescription_fr">Description (Français) *</label>
+              <textarea id="roomDescription_fr" name="description_fr" placeholder="Décrivez la chambre en français..." required></textarea>
+            </div>
           </div>
 
           <div class="form-group">
@@ -362,15 +520,63 @@
       </div>
 
       <div class="modal-body">
+        <div class="multilingual-info">
+          <p>Enter info block content for each language using the tabs below.</p>
+        </div>
+        
+        <div class="language-tabs" id="infoLanguageTabs">
+          <button class="language-tab active" data-lang="en" data-section="info">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+          <button class="language-tab" data-lang="nl" data-section="info">
+            <span class="flag">🇧🇪</span>
+            <span>Nederlands</span>
+          </button>
+          <button class="language-tab" data-lang="fr" data-section="info">
+            <span class="flag">🇫🇷</span>
+            <span>Français</span>
+          </button>
+        </div>
+        
         <form id="infoBlockForm">
-          <div class="form-group">
-            <label id="infoBlockTitleLabel">Title *</label>
-            <div id="infoBlockTitleEditor" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel" aria-multiline="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
-          </div>
+          <!-- English Content -->
+          <div class="language-content active" data-lang="en" data-section="info">
+            <div class="form-group">
+              <label id="infoBlockTitleLabel_en">Title (English) *</label>
+              <div id="infoBlockTitleEditor_en" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel_en" aria-multiline="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
+            </div>
 
-          <div class="form-group">
-            <label id="infoBlockBodyLabel">Content *</label>
-            <div id="infoBlockBodyEditor" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel" aria-multiline="true" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
+            <div class="form-group">
+              <label id="infoBlockBodyLabel_en">Content (English) *</label>
+              <div id="infoBlockBodyEditor_en" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel_en" aria-multiline="true" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
+            </div>
+          </div>
+          
+          <!-- Dutch Content -->
+          <div class="language-content" data-lang="nl" data-section="info">
+            <div class="form-group">
+              <label id="infoBlockTitleLabel_nl">Titel (Nederlands) *</label>
+              <div id="infoBlockTitleEditor_nl" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel_nl" aria-multiline="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
+            </div>
+
+            <div class="form-group">
+              <label id="infoBlockBodyLabel_nl">Inhoud (Nederlands) *</label>
+              <div id="infoBlockBodyEditor_nl" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel_nl" aria-multiline="true" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
+            </div>
+          </div>
+          
+          <!-- French Content -->
+          <div class="language-content" data-lang="fr" data-section="info">
+            <div class="form-group">
+              <label id="infoBlockTitleLabel_fr">Titre (Français) *</label>
+              <div id="infoBlockTitleEditor_fr" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel_fr" aria-multiline="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
+            </div>
+
+            <div class="form-group">
+              <label id="infoBlockBodyLabel_fr">Contenu (Français) *</label>
+              <div id="infoBlockBodyEditor_fr" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel_fr" aria-multiline="true" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
+            </div>
           </div>
         </form>
       </div>
@@ -700,6 +906,11 @@
         div.draggable = true;
         div.dataset.id = room.id;
         
+        // Get data from English or fallback to old format
+        const displayData = room.en || room;
+        const roomName = displayData.name || 'Unnamed Room';
+        const roomDesc = displayData.description || '';
+        
         const firstPhoto = room.photos && room.photos.length > 0 ? 
           room.photos.sort((a, b) => a.order - b.order)[0].url : '';
 
@@ -708,13 +919,13 @@
             ⋮⋮
           </div>
           <div class="room-item-photos">
-            ${firstPhoto ? `<img src="${firstPhoto}" alt="${room.name}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: rgba(255,255,255,0.4);">No photo</div>'}
+            ${firstPhoto ? `<img src="${firstPhoto}" alt="${roomName}">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: rgba(255,255,255,0.4);">No photo</div>'}
           </div>
           <div class="room-item-info">
-            <h3 class="room-item-name">${room.name}</h3>
-            <p class="room-item-desc">${room.description}</p>
+            <h3 class="room-item-name">${roomName}</h3>
+            <p class="room-item-desc">${roomDesc}</p>
             <div class="room-item-meta">
-              ${room.amenities.length} amenities • ${room.photos.length} photos
+              ${room.amenities ? room.amenities.length : 0} amenities • ${room.photos ? room.photos.length : 0} photos
             </div>
           </div>
           <div class="room-item-actions">
@@ -828,6 +1039,15 @@
         currentPhotos = [];
         modalTitle.textContent = 'Add Room';
         roomForm.reset();
+        
+        // Clear all language fields
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const nameEl = document.getElementById(`roomName_${lang}`);
+          const descEl = document.getElementById(`roomDescription_${lang}`);
+          if (nameEl) nameEl.value = '';
+          if (descEl) descEl.value = '';
+        });
+        
         // Set the default booking URL
         document.getElementById('roomBookingUrl').value = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms';
         renderAmenities();
@@ -845,8 +1065,17 @@
         currentPhotos = [...room.photos];
         
         modalTitle.textContent = 'Edit Room';
-        document.getElementById('roomName').value = room.name;
-        document.getElementById('roomDescription').value = room.description;
+        
+        // Load data for all languages
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const langData = room[lang] || room.en || room; // Fallback for old format
+          const nameEl = document.getElementById(`roomName_${lang}`);
+          const descEl = document.getElementById(`roomDescription_${lang}`);
+          
+          if (nameEl) nameEl.value = langData.name || '';
+          if (descEl) descEl.value = langData.description || '';
+        });
+        
         document.getElementById('roomBookingUrl').value = room.bookingUrl || '';
         
         renderAmenities();
@@ -859,7 +1088,9 @@
         const room = await RoomManager.getRoom(roomId);
         if (!room) return;
 
-        confirmMessage.textContent = `Are you sure you want to delete "${room.name}"? This action cannot be undone.`;
+        // Get room name from English or first available language
+        const roomName = (room.en && room.en.name) || room.name || 'this room';
+        confirmMessage.textContent = `Are you sure you want to delete "${roomName}"? This action cannot be undone.`;
         deleteCallback = async () => {
           if (await RoomManager.deleteRoom(roomId)) {
             await loadRooms();
@@ -871,25 +1102,44 @@
 
       // Save room
       btnSaveRoom.addEventListener('click', async () => {
-        const name = document.getElementById('roomName').value.trim();
-        const description = document.getElementById('roomDescription').value.trim();
-        const bookingUrl = document.getElementById('roomBookingUrl').value.trim();
-
-        if (!name || !description) {
-          // Show error feedback
+        // Collect data for all languages
+        const multilingualData = {};
+        let hasError = false;
+        
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const nameEl = document.getElementById(`roomName_${lang}`);
+          const descEl = document.getElementById(`roomDescription_${lang}`);
+          
+          const nameValue = nameEl ? nameEl.value.trim() : '';
+          const descValue = descEl ? descEl.value.trim() : '';
+          
+          if (!nameValue || !descValue) {
+            hasError = true;
+          }
+          
+          multilingualData[lang] = {
+            name: nameValue,
+            description: descValue
+          };
+        });
+        
+        if (hasError) {
           const existingAlert = roomForm.querySelector('.alert');
           if (existingAlert) existingAlert.remove();
           
           const alert = document.createElement('div');
           alert.className = 'alert alert-error';
-          alert.textContent = 'Please fill in all required fields (Name and Description)';
+          alert.textContent = 'Please fill in name and description for all three languages (English, Nederlands, Français)';
           roomForm.insertBefore(alert, roomForm.firstChild);
           return;
         }
 
+        const bookingUrl = document.getElementById('roomBookingUrl').value.trim();
+
         const roomData = {
-          name,
-          description,
+          en: multilingualData.en,
+          nl: multilingualData.nl,
+          fr: multilingualData.fr,
           bookingUrl,
           amenities: currentAmenities,
           photos: currentPhotos
@@ -1226,12 +1476,6 @@
       const btnLogoutSister = document.getElementById('btnLogoutSister');
       const btnSaveAbout = document.getElementById('btnSaveAbout');
       const btnSaveSister = document.getElementById('btnSaveSister');
-      const aboutTitle = document.getElementById('aboutTitle');
-      const aboutBody = document.getElementById('aboutBody');
-      const sisterKicker = document.getElementById('sisterKicker');
-      const sisterTitleLine1 = document.getElementById('sisterTitleLine1');
-      const sisterTitleLine2 = document.getElementById('sisterTitleLine2');
-      const sisterBody = document.getElementById('sisterBody');
       
       // Info modal elements
       const infoBlockModal = document.getElementById('infoBlockModal');
@@ -1241,9 +1485,9 @@
       const btnSaveInfo = document.getElementById('btnSaveInfo');
       const infoBlockForm = document.getElementById('infoBlockForm');
 
-      // Quill editors
-      let titleQuill = null;
-      let bodyQuill = null;
+      // Quill editors - one set per language
+      let titleQuills = { en: null, nl: null, fr: null };
+      let bodyQuills = { en: null, nl: null, fr: null };
       let currentEditingInfoBlock = null;
       let draggedInfoBlockId = null;
 
@@ -1260,61 +1504,52 @@
       Size.whitelist = CUSTOM_SIZES;
       Quill.register(Size, true);
 
-      // Initialize Quill editors
+      // Initialize Quill editors for all languages
       function initQuillEditors() {
-        if (titleQuill) {
-          titleQuill.setText('');
-        } else {
-          titleQuill = new Quill('#infoBlockTitleEditor', {
-            theme: 'snow',
-            placeholder: 'Enter title...',
-            modules: {
-              toolbar: [
-                [{ 'font': CUSTOM_FONTS }],
-                [{ 'size': CUSTOM_SIZES }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'script': 'sub'}, { 'script': 'super' }],
-                [{ 'align': [] }],
-                ['blockquote', 'code-block'],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
-                ['link', 'image'],
-                ['clean']
-              ]
-            }
-          });
-        }
+        const toolbarOptions = [
+          [{ 'font': CUSTOM_FONTS }],
+          [{ 'size': CUSTOM_SIZES }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],
+          [{ 'align': [] }],
+          ['blockquote', 'code-block'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
+          ['link', 'image'],
+          ['clean']
+        ];
+        
+        ['en', 'nl', 'fr'].forEach(lang => {
+          if (titleQuills[lang]) {
+            titleQuills[lang].setText('');
+          } else {
+            titleQuills[lang] = new Quill(`#infoBlockTitleEditor_${lang}`, {
+              theme: 'snow',
+              placeholder: 'Enter title...',
+              modules: { toolbar: toolbarOptions }
+            });
+          }
 
-        if (bodyQuill) {
-          bodyQuill.setText('');
-        } else {
-          bodyQuill = new Quill('#infoBlockBodyEditor', {
-            theme: 'snow',
-            placeholder: 'Enter content...',
-            modules: {
-              toolbar: [
-                [{ 'font': CUSTOM_FONTS }],
-                [{ 'size': CUSTOM_SIZES }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'script': 'sub'}, { 'script': 'super' }],
-                [{ 'align': [] }],
-                ['blockquote', 'code-block'],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'indent': '-1'}, { 'indent': '+1' }],
-                ['link', 'image'],
-                ['clean']
-              ]
-            }
-          });
-        }
+          if (bodyQuills[lang]) {
+            bodyQuills[lang].setText('');
+          } else {
+            bodyQuills[lang] = new Quill(`#infoBlockBodyEditor_${lang}`, {
+              theme: 'snow',
+              placeholder: 'Enter content...',
+              modules: { toolbar: toolbarOptions }
+            });
+          }
+        });
       }
 
       function resetInfoBlockEditorColor() {
-        const editors = [titleQuill, bodyQuill];
-        editors.forEach((editor) => {
-          if (!editor) return;
-          editor.setSelection(0, 0, 'silent');
-          editor.format('color', false);
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const editors = [titleQuills[lang], bodyQuills[lang]];
+          editors.forEach((editor) => {
+            if (!editor) return;
+            editor.setSelection(0, 0, 'silent');
+            editor.format('color', false);
+          });
         });
       }
 
@@ -1415,27 +1650,102 @@
         }
       });
 
+      // Language Tab Handling
+      function initLanguageTabs() {
+        const languageTabs = document.querySelectorAll('.language-tab');
+        
+        languageTabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            const section = this.getAttribute('data-section');
+            
+            // Update active tab
+            const sectionTabs = document.querySelectorAll(`.language-tab[data-section="${section}"]`);
+            sectionTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update visible content
+            const contents = document.querySelectorAll(`.language-content[data-section="${section}"]`);
+            contents.forEach(content => {
+              if (content.getAttribute('data-lang') === lang) {
+                content.classList.add('active');
+              } else {
+                content.classList.remove('active');
+              }
+            });
+          });
+        });
+      }
+
+      // Initialize language tabs after DOM is ready
+      initLanguageTabs();
+
       async function loadSiteContent(section) {
         if (typeof SiteContentManager === 'undefined') return;
-        const content = await SiteContentManager.getContent();
+        
+        // Load content for all languages
+        const allContent = await SiteContentManager.getAllContent();
+        
+        // Load About Us content for all languages
         if (!section || section === 'about') {
-          aboutTitle.value = content.about.title;
-          aboutBody.value = content.about.body;
+          ['en', 'nl', 'fr'].forEach(lang => {
+            const langContent = allContent[lang] || allContent.en || {};
+            const aboutContent = langContent.about || {};
+            
+            const titleEl = document.getElementById(`aboutTitle_${lang}`);
+            const bodyEl = document.getElementById(`aboutBody_${lang}`);
+            
+            if (titleEl) titleEl.value = aboutContent.title || '';
+            if (bodyEl) bodyEl.value = aboutContent.body || '';
+          });
         }
+        
+        // Load Sister Hotel content for all languages
         if (!section || section === 'sister') {
-          sisterKicker.value = content.sister.kicker;
-          sisterTitleLine1.value = content.sister.titleLine1;
-          sisterTitleLine2.value = content.sister.titleLine2;
-          sisterBody.value = content.sister.body;
+          ['en', 'nl', 'fr'].forEach(lang => {
+            const langContent = allContent[lang] || allContent.en || {};
+            const sisterContent = langContent.sister || {};
+            
+            const kickerEl = document.getElementById(`sisterKicker_${lang}`);
+            const line1El = document.getElementById(`sisterTitleLine1_${lang}`);
+            const line2El = document.getElementById(`sisterTitleLine2_${lang}`);
+            const bodyEl = document.getElementById(`sisterBody_${lang}`);
+            
+            if (kickerEl) kickerEl.value = sisterContent.kicker || '';
+            if (line1El) line1El.value = sisterContent.titleLine1 || '';
+            if (line2El) line2El.value = sisterContent.titleLine2 || '';
+            if (bodyEl) bodyEl.value = sisterContent.body || '';
+          });
         }
       }
 
       btnSaveAbout.addEventListener('click', async () => {
-        const titleValue = aboutTitle.value.trim();
-        const bodyValue = aboutBody.value.trim();
-
-        if (!titleValue || !bodyValue) {
-          showToast('error', 'Validation Error', 'Please fill in both the title and body.');
+        // Collect data for all languages
+        const multilingualData = {};
+        let hasError = false;
+        
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const titleEl = document.getElementById(`aboutTitle_${lang}`);
+          const bodyEl = document.getElementById(`aboutBody_${lang}`);
+          
+          const titleValue = titleEl ? titleEl.value.trim() : '';
+          const bodyValue = bodyEl ? bodyEl.value.trim() : '';
+          
+          if (!titleValue || !bodyValue) {
+            hasError = true;
+          }
+          
+          multilingualData[lang] = {
+            about: {
+              title: titleValue,
+              body: bodyValue
+            },
+            sister: {} // Keep existing sister content
+          };
+        });
+        
+        if (hasError) {
+          showToast('error', 'Validation Error', 'Please fill in title and body for all three languages (English, Nederlands, Français).');
           return;
         }
 
@@ -1443,14 +1753,22 @@
         btnSaveAbout.disabled = true;
 
         try {
-          const success = await SiteContentManager.updateContent('about', {
-            title: titleValue,
-            body: bodyValue
+          // Get existing content to preserve sister hotel data
+          const existing = await SiteContentManager.getAllContent();
+          
+          // Merge with new about data
+          ['en', 'nl', 'fr'].forEach(lang => {
+            if (!multilingualData[lang].sister || Object.keys(multilingualData[lang].sister).length === 0) {
+              const existingLang = existing[lang] || existing.en || {};
+              multilingualData[lang].sister = existingLang.sister || {};
+            }
           });
+          
+          const success = await SiteContentManager.saveContent(multilingualData);
           if (!success) {
             throw new Error('Save failed');
           }
-          showToast('success', 'About Us Updated', 'Your changes have been saved.');
+          showToast('success', 'About Us Updated', 'Your changes have been saved for all languages.');
         } catch (error) {
           console.error('Error saving About Us:', error);
           showToast('error', 'Save Failed', 'There was an error saving the About Us text.');
@@ -1461,13 +1779,38 @@
       });
 
       btnSaveSister.addEventListener('click', async () => {
-        const kickerValue = sisterKicker.value.trim();
-        const line1Value = sisterTitleLine1.value.trim();
-        const line2Value = sisterTitleLine2.value.trim();
-        const bodyValue = sisterBody.value.trim();
-
-        if (!kickerValue || !line1Value || !line2Value || !bodyValue) {
-          showToast('error', 'Validation Error', 'Please fill in all Sister Hotel fields.');
+        // Collect data for all languages
+        const multilingualData = {};
+        let hasError = false;
+        
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const kickerEl = document.getElementById(`sisterKicker_${lang}`);
+          const line1El = document.getElementById(`sisterTitleLine1_${lang}`);
+          const line2El = document.getElementById(`sisterTitleLine2_${lang}`);
+          const bodyEl = document.getElementById(`sisterBody_${lang}`);
+          
+          const kickerValue = kickerEl ? kickerEl.value.trim() : '';
+          const line1Value = line1El ? line1El.value.trim() : '';
+          const line2Value = line2El ? line2El.value.trim() : '';
+          const bodyValue = bodyEl ? bodyEl.value.trim() : '';
+          
+          if (!kickerValue || !line1Value || !line2Value || !bodyValue) {
+            hasError = true;
+          }
+          
+          multilingualData[lang] = {
+            about: {}, // Keep existing about content
+            sister: {
+              kicker: kickerValue,
+              titleLine1: line1Value,
+              titleLine2: line2Value,
+              body: bodyValue
+            }
+          };
+        });
+        
+        if (hasError) {
+          showToast('error', 'Validation Error', 'Please fill in all Sister Hotel fields for all three languages (English, Nederlands, Français).');
           return;
         }
 
@@ -1475,16 +1818,22 @@
         btnSaveSister.disabled = true;
 
         try {
-          const success = await SiteContentManager.updateContent('sister', {
-            kicker: kickerValue,
-            titleLine1: line1Value,
-            titleLine2: line2Value,
-            body: bodyValue
+          // Get existing content to preserve about data
+          const existing = await SiteContentManager.getAllContent();
+          
+          // Merge with new sister data
+          ['en', 'nl', 'fr'].forEach(lang => {
+            if (!multilingualData[lang].about || Object.keys(multilingualData[lang].about).length === 0) {
+              const existingLang = existing[lang] || existing.en || {};
+              multilingualData[lang].about = existingLang.about || {};
+            }
           });
+          
+          const success = await SiteContentManager.saveContent(multilingualData);
           if (!success) {
             throw new Error('Save failed');
           }
-          showToast('success', 'Sister Hotel Updated', 'Your changes have been saved.');
+          showToast('success', 'Sister Hotel Updated', 'Your changes have been saved for all languages.');
         } catch (error) {
           console.error('Error saving Sister Hotel:', error);
           showToast('error', 'Save Failed', 'There was an error saving the Sister Hotel text.');
@@ -1523,12 +1872,15 @@
         div.draggable = true;
         div.dataset.id = block.id;
         
+        // Get data from English or fallback to old format
+        const displayData = block.en || block;
+        
         // Create a text preview (strip HTML for preview)
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = block.title;
-        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+        tempDiv.innerHTML = displayData.title || '';
+        const titleText = tempDiv.textContent || tempDiv.innerText || 'Untitled';
         
-        tempDiv.innerHTML = block.body;
+        tempDiv.innerHTML = displayData.body || '';
         const bodyText = tempDiv.textContent || tempDiv.innerText || '';
         const bodyPreview = bodyText.substring(0, 150) + (bodyText.length > 150 ? '...' : '');
 
@@ -1540,7 +1892,7 @@
             <h3 class="info-block-item-title">${titleText}</h3>
             <p class="info-block-item-desc">${bodyPreview}</p>
             <div class="info-block-item-meta">
-              Order: ${block.order}
+              Order: ${block.order || 0}
             </div>
           </div>
           <div class="info-block-item-actions">
@@ -1627,11 +1979,20 @@
         infoModalTitle.textContent = 'Edit Info Block';
         initQuillEditors();
         
-        // Set editor content
-        const parsedTitle = new DOMParser().parseFromString(block.title || '', 'text/html');
-        const titleText = parsedTitle.body.textContent || '';
-        titleQuill.setText(titleText);
-        bodyQuill.root.innerHTML = block.body;
+        // Load content for all languages
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const langData = block[lang] || block.en || block; // Fallback for old format
+          
+          const parsedTitle = new DOMParser().parseFromString(langData.title || '', 'text/html');
+          const titleText = parsedTitle.body.textContent || '';
+          
+          if (titleQuills[lang]) {
+            titleQuills[lang].setText(titleText);
+          }
+          if (bodyQuills[lang]) {
+            bodyQuills[lang].root.innerHTML = langData.body || '';
+          }
+        });
         
         openModal(infoBlockModal);
       }
@@ -1641,10 +2002,11 @@
         const block = await InfoManager.getInfoBlock(blockId);
         if (!block) return;
 
-        // Create a text preview for confirmation
+        // Get title from English or first available language
+        const langData = block.en || block;
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = block.title;
-        const titleText = tempDiv.textContent || tempDiv.innerText || '';
+        tempDiv.innerHTML = langData.title || '';
+        const titleText = tempDiv.textContent || tempDiv.innerText || 'this info block';
 
         confirmMessage.textContent = `Are you sure you want to delete "${titleText}"? This action cannot be undone.`;
         deleteCallback = async () => {
@@ -1658,15 +2020,27 @@
 
       // Save info block
       btnSaveInfo.addEventListener('click', async () => {
-        // Title uses plain text while body keeps rich HTML from the editor.
-        const titleText = titleQuill.getText().trim();
-        const body = bodyQuill.root.innerHTML.trim();
+        // Collect data for all languages
+        const multilingualData = {};
+        let hasError = false;
+        
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const titleText = titleQuills[lang] ? titleQuills[lang].getText().trim() : '';
+          const body = bodyQuills[lang] ? bodyQuills[lang].root.innerHTML.trim() : '';
+          const bodyText = bodyQuills[lang] ? bodyQuills[lang].getText().trim() : '';
+          
+          if (!titleText || !bodyText) {
+            hasError = true;
+          }
+          
+          multilingualData[lang] = {
+            title: titleText,
+            body: body
+          };
+        });
 
-        // Check if editors are empty (only have <p><br></p> or similar)
-        const bodyText = bodyQuill.getText().trim();
-
-        if (!titleText || !bodyText) {
-          showToast('error', 'Validation Error', 'Please fill in both the title and content.');
+        if (hasError) {
+          showToast('error', 'Validation Error', 'Please fill in title and content for all three languages (English, Nederlands, Français).');
           return;
         }
 
@@ -1676,8 +2050,9 @@
 
         try {
           const blockData = {
-            title: titleText,
-            body
+            en: multilingualData.en,
+            nl: multilingualData.nl,
+            fr: multilingualData.fr
           };
 
           if (currentEditingInfoBlock) {
@@ -1685,13 +2060,13 @@
             if (!success) {
               throw new Error('Failed to update info block');
             }
-            showToast('success', 'Info Block Updated', 'Your changes have been saved successfully.');
+            showToast('success', 'Info Block Updated', 'Your changes have been saved for all languages.');
           } else {
             const newBlock = await InfoManager.createInfoBlock(blockData);
             if (!newBlock) {
               throw new Error('Failed to create info block');
             }
-            showToast('success', 'Info Block Created', 'Your new info block has been created successfully.');
+            showToast('success', 'Info Block Created', 'Your new info block has been created for all languages.');
           }
 
           // IMPORTANT: Reload blocks BEFORE closing modal to ensure data is displayed
@@ -1724,6 +2099,13 @@
       // Initialize app
       init();
     })();
+  </script>
+  <script src="translations.js"></script>
+  <script>
+    // Initialize i18n for admin panel
+    if (window.i18n) {
+      window.i18n.init();
+    }
   </script>
 </body>
 </html>

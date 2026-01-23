@@ -294,7 +294,7 @@
     </section>
 
     <div class="card">
-      <h1>Information</h1>
+      <h1 data-i18n="info.title">Information</h1>
       
       <div id="infoBlocks">
         <!-- Info blocks will be loaded here -->
@@ -314,7 +314,21 @@
   <!-- Firebase Configuration -->
   <script src="firebase-config.js"></script>
   
+  <script src="translations.js"></script>
   <script src="assets/nav.js"></script>
+  <script>
+    // Initialize i18n after all scripts are loaded
+    if (window.i18n) {
+      window.i18n.init();
+    }
+    
+    // Reload info blocks when language changes
+    window.addEventListener('languageChanged', function() {
+      if (typeof loadInfoBlocks === 'function') {
+        loadInfoBlocks();
+      }
+    });
+  </script>
   <script>
     (function() {
       'use strict';
@@ -420,15 +434,25 @@
         } else {
           emptyState.style.display = 'none';
           
+          // Get current language from i18n
+          const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
+          
           // Sort by order
           infoBlocks.sort((a, b) => a.order - b.order);
           
-          container.innerHTML = infoBlocks.map(block => `
-            <div class="info-block">
-              <h2>${escapeHtml(block.title)}</h2>
-              <div class="info-block-body">${block.body}</div>
-            </div>
-          `).join('');
+          container.innerHTML = infoBlocks.map(block => {
+            // Get language-specific data or fallback to old format
+            const blockData = block[currentLang] || block.en || block;
+            const title = blockData.title || '';
+            const body = blockData.body || '';
+            
+            return `
+              <div class="info-block">
+                <h2>${escapeHtml(title)}</h2>
+                <div class="info-block-body">${body}</div>
+              </div>
+            `;
+          }).join('');
         }
       }
 
