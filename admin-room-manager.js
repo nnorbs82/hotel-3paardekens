@@ -160,20 +160,28 @@
               let roomId = room.id;
               if (!roomId && room.name) {
                 // Generate id from name
-                roomId = room.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || `room-${index}`;
+                const generatedId = room.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                roomId = generatedId || `room-${index}`;
                 console.warn(`⚠️ Room at index ${index} missing id, generated from name: ${roomId}`);
               } else if (!roomId) {
                 // Fallback to index-based id
                 roomId = `room-${index}`;
                 console.warn(`⚠️ Room at index ${index} missing id and name, using: ${roomId}`);
               }
-              // Make sure we have unique ids
-              if (roomsData[roomId]) {
-                roomId = `${roomId}-${index}`;
+              // Ensure unique IDs by checking for collisions and appending a counter
+              let finalRoomId = roomId;
+              let counter = 1;
+              while (roomsData[finalRoomId]) {
+                finalRoomId = `${roomId}-${counter}`;
+                counter++;
+              }
+              if (finalRoomId !== roomId) {
+                console.warn(`⚠️ ID collision detected, using unique id: ${finalRoomId}`);
               }
               // Store room data without the id (it becomes the key)
+              // The destructuring safely handles both cases: with or without existing id property
               const { id, ...roomDataWithoutId } = room;
-              roomsData[roomId] = roomDataWithoutId;
+              roomsData[finalRoomId] = roomDataWithoutId;
             } else {
               skippedCount++;
               console.warn('⚠️ Skipped invalid room at index:', index, room);
