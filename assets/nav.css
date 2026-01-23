@@ -75,7 +75,7 @@
     top: 70px;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.70);
+    background: rgba(0, 0, 0, 0.80);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(183, 110, 121, 0.6);
