@@ -147,8 +147,30 @@
         }
         
         // Convert Firebase object to array
-        const rooms = Object.keys(data).map(key => ({
-          ...data[key],
+        let roomsData = data;
+        
+        // Check if data is in array format (corrupted state) and convert to object
+        if (Array.isArray(data)) {
+          console.warn('⚠️ Firebase data is in array format. Converting to object format...');
+          roomsData = {};
+          data.forEach((room) => {
+            if (room && room.id) {
+              roomsData[room.id] = room;
+            }
+          });
+          // Save the corrected format back to Firebase
+          console.log('Saving corrected format to Firebase...');
+          await db.ref(FIREBASE_PATH).set(roomsData);
+        }
+        
+        // Validate roomsData is an object before using Object.keys
+        if (!roomsData || typeof roomsData !== 'object') {
+          console.error('Invalid data format from Firebase:', roomsData);
+          return await this._migrateFromLocalStorage();
+        }
+        
+        const rooms = Object.keys(roomsData).map(key => ({
+          ...roomsData[key],
           id: key
         }));
         return normalizeRooms(rooms);
@@ -185,6 +207,19 @@
      * @returns {Promise<boolean>} Promise resolving to true if successful, false on error
      */
     async saveRooms(rooms) {
+      // Validate input
+      if (!Array.isArray(rooms)) {
+        console.error('❌ Invalid input: rooms must be an array, received:', typeof rooms);
+        return false;
+      }
+      
+      // Validate each room has required properties
+      const invalidRooms = rooms.filter(room => !room.id || typeof room.id !== 'string');
+      if (invalidRooms.length > 0) {
+        console.error('❌ Invalid rooms found (missing or invalid id):', invalidRooms);
+        return false;
+      }
+      
       const db = getDatabase();
       
       if (!db) {
@@ -204,10 +239,16 @@
         const dataObject = {};
         rooms.forEach(room => {
           const { id, ...roomData } = room;
+          // Ensure photos is always an array
+          if (roomData.photos && !Array.isArray(roomData.photos)) {
+            console.warn(`⚠️ Photos for room ${id} is not an array, converting...`);
+            roomData.photos = Object.values(roomData.photos);
+          }
           dataObject[id] = roomData;
         });
         
         console.log('Saving rooms to Firebase...');
+        console.log('Data structure:', Object.keys(dataObject));
         await db.ref(FIREBASE_PATH).set(dataObject);
         console.log('✓ Rooms saved successfully to Firebase');
         
@@ -418,10 +459,28 @@
   };
 
   function normalizeRooms(rooms) {
-    const normalized = rooms.map((room, index) => ({
-      ...room,
-      order: typeof room.order === 'number' ? room.order : index + 1
-    }));
+    const normalized = rooms.map((room, index) => {
+      // Ensure photos is always an array
+      let photos = room.photos || [];
+      if (!Array.isArray(photos)) {
+        console.warn(`⚠️ Converting photos for room ${room.id} from object to array`);
+        photos = Object.values(photos);
+      }
+      
+      // Ensure amenities is always an array
+      let amenities = room.amenities || [];
+      if (!Array.isArray(amenities)) {
+        console.warn(`⚠️ Converting amenities for room ${room.id} from object to array`);
+        amenities = Object.values(amenities);
+      }
+      
+      return {
+        ...room,
+        photos,
+        amenities,
+        order: typeof room.order === 'number' ? room.order : index + 1
+      };
+    });
     normalized.sort((a, b) => a.order - b.order);
     return normalized;
   }
