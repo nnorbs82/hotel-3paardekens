@@ -153,18 +153,25 @@
         if (Array.isArray(data)) {
           console.warn('⚠️ Firebase data is in array format. Converting to object format...');
           roomsData = {};
+          let skippedCount = 0;
           data.forEach((room) => {
             if (room && room.id) {
               roomsData[room.id] = room;
+            } else {
+              skippedCount++;
+              console.warn('⚠️ Skipped room without valid id:', room);
             }
           });
+          if (skippedCount > 0) {
+            console.warn(`⚠️ Skipped ${skippedCount} room(s) without valid IDs during conversion`);
+          }
           // Save the corrected format back to Firebase
           console.log('Saving corrected format to Firebase...');
           await db.ref(FIREBASE_PATH).set(roomsData);
         }
         
-        // Validate roomsData is an object before using Object.keys
-        if (!roomsData || typeof roomsData !== 'object') {
+        // Validate roomsData is an object (not null, not array) before using Object.keys
+        if (!roomsData || typeof roomsData !== 'object' || Array.isArray(roomsData)) {
           console.error('Invalid data format from Firebase:', roomsData);
           return await this._migrateFromLocalStorage();
         }
