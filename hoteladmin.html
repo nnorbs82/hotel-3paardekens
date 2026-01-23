@@ -1332,7 +1332,7 @@
           const amenityName = amenity.en || amenity.name || 'Unnamed';
           
           div.innerHTML = `
-            <div class="amenity-icon-preview">${IconLibrary[amenity.icon]}</div>
+            <div class="amenity-icon-preview">${IconLibrary.getIcon(amenity.icon)}</div>
             <span>${amenityName}</span>
             <button type="button" class="btn btn-small btn-primary" data-action="edit" data-index="${index}" style="margin-right: 5px;">
               ✎ Edit
