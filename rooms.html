@@ -850,10 +850,11 @@
             IconLibrary.getIcon(amenity.icon) : '';
           iconSpan.innerHTML = iconSvg;
           
-          // Translate amenity name if translation exists
-          const amenityKey = `amenity.${amenity.icon}`;
-          const amenityName = (window.i18n && window.i18n.t(amenityKey) !== amenityKey) ? 
-            window.i18n.t(amenityKey) : amenity.name;
+          // Get current language
+          const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
+          
+          // Get amenity name from multilingual data or fallback to old format
+          const amenityName = amenity[currentLang] || amenity.en || amenity.name || 'Amenity';
           
           li.appendChild(iconSpan);
           li.appendChild(document.createTextNode(' ' + amenityName));

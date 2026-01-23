@@ -459,7 +459,7 @@
 
   <!-- Amenity Editor Modal -->
   <div id="amenityModal" class="modal-overlay">
-    <div class="modal-card" style="max-width: 600px;">
+    <div class="modal-card" style="max-width: 700px;">
       <div class="modal-header">
         <h2 class="modal-title">Add Amenity</h2>
         <button class="modal-close" id="amenityModalClose" type="button">✕</button>
@@ -467,14 +467,48 @@
 
       <div class="modal-body">
         <div class="form-group">
-          <label for="amenityName">Amenity Name *</label>
-          <input type="text" id="amenityName" placeholder="e.g., King Size Bed" required />
-        </div>
-
-        <div class="form-group">
           <label>Select Icon *</label>
           <div id="iconPicker" class="icon-picker">
             <!-- Icons will be loaded here -->
+          </div>
+        </div>
+
+        <div class="language-tabs" id="amenityLanguageTabs">
+          <button class="language-tab active" data-lang="en" data-section="amenity">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+          </button>
+          <button class="language-tab" data-lang="nl" data-section="amenity">
+            <span class="flag">🇧🇪</span>
+            <span>Nederlands</span>
+          </button>
+          <button class="language-tab" data-lang="fr" data-section="amenity">
+            <span class="flag">🇫🇷</span>
+            <span>Français</span>
+          </button>
+        </div>
+
+        <!-- English Content -->
+        <div class="language-content active" data-lang="en" data-section="amenity">
+          <div class="form-group">
+            <label for="amenityName_en">Amenity Name (English) *</label>
+            <input type="text" id="amenityName_en" placeholder="e.g., King Size Bed" required />
+          </div>
+        </div>
+
+        <!-- Dutch Content -->
+        <div class="language-content" data-lang="nl" data-section="amenity">
+          <div class="form-group">
+            <label for="amenityName_nl">Voorziening Naam (Nederlands) *</label>
+            <input type="text" id="amenityName_nl" placeholder="bijv., Kingsize Bed" required />
+          </div>
+        </div>
+
+        <!-- French Content -->
+        <div class="language-content" data-lang="fr" data-section="amenity">
+          <div class="form-group">
+            <label for="amenityName_fr">Nom de l'Équipement (Français) *</label>
+            <input type="text" id="amenityName_fr" placeholder="par ex., Lit King Size" required />
           </div>
         </div>
       </div>
@@ -691,7 +725,6 @@
       const btnAddAmenity = document.getElementById('btnAddAmenity');
       const btnCancelAmenity = document.getElementById('btnCancelAmenity');
       const btnSaveAmenity = document.getElementById('btnSaveAmenity');
-      const amenityName = document.getElementById('amenityName');
       const amenitiesList = document.getElementById('amenitiesList');
       const iconPicker = document.getElementById('iconPicker');
       
@@ -1166,8 +1199,18 @@
       // Amenity management
       btnAddAmenity.addEventListener('click', () => {
         selectedIcon = null;
-        amenityName.value = '';
+        
+        // Clear all language fields
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const nameEl = document.getElementById(`amenityName_${lang}`);
+          if (nameEl) nameEl.value = '';
+        });
+        
         renderIconPicker();
+        
+        // Reset language tabs to English
+        resetLanguageTabsToEnglish('amenity');
+        
         openModal(amenityModal);
       });
 
@@ -1196,21 +1239,39 @@
       }
 
       btnSaveAmenity.addEventListener('click', () => {
-        const name = amenityName.value.trim();
+        // Collect data for all languages
+        const multilingualData = {};
+        let hasError = false;
         
-        if (!name || !selectedIcon) {
+        ['en', 'nl', 'fr'].forEach(lang => {
+          const nameEl = document.getElementById(`amenityName_${lang}`);
+          const nameValue = nameEl ? nameEl.value.trim() : '';
+          
+          if (!nameValue) {
+            hasError = true;
+          }
+          
+          multilingualData[lang] = nameValue;
+        });
+        
+        if (hasError || !selectedIcon) {
           // Show error feedback
           const existingAlert = amenityModal.querySelector('.modal-body .alert');
           if (existingAlert) existingAlert.remove();
           
           const alert = document.createElement('div');
           alert.className = 'alert alert-error';
-          alert.textContent = 'Please enter an amenity name and select an icon';
-          amenityModal.querySelector('.modal-body').insertBefore(alert, amenityModal.querySelector('.form-group'));
+          alert.textContent = 'Please enter amenity name for all three languages and select an icon';
+          amenityModal.querySelector('.modal-body').insertBefore(alert, amenityModal.querySelector('.language-tabs'));
           return;
         }
 
-        currentAmenities.push({ name, icon: selectedIcon });
+        currentAmenities.push({ 
+          en: multilingualData.en,
+          nl: multilingualData.nl,
+          fr: multilingualData.fr,
+          icon: selectedIcon 
+        });
         renderAmenities();
         closeModal(amenityModal);
       });
@@ -1221,9 +1282,13 @@
         currentAmenities.forEach((amenity, index) => {
           const div = document.createElement('div');
           div.className = 'amenity-item';
+          
+          // Get the amenity name - support both old format (name) and new format (en/nl/fr)
+          const amenityName = amenity.en || amenity.name || 'Unnamed';
+          
           div.innerHTML = `
             <div class="amenity-icon-preview">${IconLibrary[amenity.icon]}</div>
-            <span>${amenity.name}</span>
+            <span>${amenityName}</span>
             <button type="button" class="btn btn-small btn-danger" data-index="${index}">
               ✕
             </button>
