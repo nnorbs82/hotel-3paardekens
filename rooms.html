@@ -492,7 +492,7 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 6px;
+      margin-top: auto;
     }
 
     footer { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,0.7); }
@@ -870,7 +870,8 @@
         bookLink.href = room.bookingUrl || 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms';
         bookLink.target = '_blank';
         bookLink.rel = 'noopener noreferrer';
-        bookLink.textContent = 'View Room';
+        bookLink.setAttribute('data-i18n', 'rooms.viewroom');
+        bookLink.textContent = window.i18n ? window.i18n.t('rooms.viewroom') : 'View Room';
         
         actions.appendChild(bookLink);
 
