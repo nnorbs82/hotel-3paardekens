@@ -1052,6 +1052,10 @@
         document.getElementById('roomBookingUrl').value = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms';
         renderAmenities();
         renderPhotos();
+        
+        // Reset language tabs to English
+        resetLanguageTabsToEnglish('room');
+        
         openModal(roomModal);
       });
 
@@ -1080,6 +1084,10 @@
         
         renderAmenities();
         renderPhotos();
+        
+        // Reset language tabs to English
+        resetLanguageTabsToEnglish('room');
+        
         openModal(roomModal);
       }
 
@@ -1677,6 +1685,29 @@
         });
       }
 
+      // Helper function to reset language tabs to English for a given section
+      function resetLanguageTabsToEnglish(section) {
+        // Reset tabs to English
+        const sectionTabs = document.querySelectorAll(`.language-tab[data-section="${section}"]`);
+        sectionTabs.forEach(tab => {
+          if (tab.getAttribute('data-lang') === 'en') {
+            tab.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+          }
+        });
+        
+        // Reset content visibility to English
+        const contents = document.querySelectorAll(`.language-content[data-section="${section}"]`);
+        contents.forEach(content => {
+          if (content.getAttribute('data-lang') === 'en') {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
+      }
+
       // Initialize language tabs after DOM is ready
       initLanguageTabs();
 
@@ -1967,6 +1998,10 @@
         infoModalTitle.textContent = 'Add Info Block';
         initQuillEditors();
         resetInfoBlockEditorColor();
+        
+        // Reset language tabs to English
+        resetLanguageTabsToEnglish('info');
+        
         openModal(infoBlockModal);
       });
 
@@ -1993,6 +2028,9 @@
             bodyQuills[lang].root.innerHTML = langData.body || '';
           }
         });
+        
+        // Reset language tabs to English
+        resetLanguageTabsToEnglish('info');
         
         openModal(infoBlockModal);
       }
