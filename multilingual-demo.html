@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multilingual Admin Panel Demo</title>
+  <link rel="stylesheet" href="http://localhost:8080/admin-styles.css">
+  <style>
+    body {
+      padding: 20px;
+      background: linear-gradient(to bottom, #1a1a2e, #16213e);
+      min-height: 100vh;
+    }
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      border-radius: 12px;
+    }
+    .demo-section {
+      margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      color: #fff;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <h1>Hotel 3 Paardekens - Multilingual Admin Panel</h1>
+    
+    <!-- About Us Section Demo -->
+    <div class="demo-section">
+      <h2>About Us - Multilingual Editing</h2>
+      <div class="multilingual-info">
+        <p>Enter content for each language using the tabs below. All three languages must be filled in before saving.</p>
+      </div>
+      
+      <div class="language-tabs">
+        <button class="language-tab active" data-lang="en">
+          <span class="flag">🇬🇧</span>
+          <span>English</span>
+        </button>
+        <button class="language-tab" data-lang="nl">
+          <span class="flag">🇧🇪</span>
+          <span>Nederlands</span>
+        </button>
+        <button class="language-tab" data-lang="fr">
+          <span class="flag">🇫🇷</span>
+          <span>Français</span>
+        </button>
+      </div>
+      
+      <form>
+        <div class="language-content active" data-lang="en">
+          <div class="form-group">
+            <label>Title (English)</label>
+            <input type="text" placeholder="About Us" value="About Us">
+          </div>
+          <div class="form-group">
+            <label>Body (English)</label>
+            <textarea rows="4" placeholder="About us text in English...">The 33 rooms of the charming Hotel 3 Paardekens...</textarea>
+          </div>
+        </div>
+        
+        <div class="language-content" data-lang="nl">
+          <div class="form-group">
+            <label>Titel (Nederlands)</label>
+            <input type="text" placeholder="Over Ons" value="Over Ons">
+          </div>
+          <div class="form-group">
+            <label>Inhoud (Nederlands)</label>
+            <textarea rows="4" placeholder="Over ons tekst in het Nederlands...">De 33 kamers van het charmante Hotel 3 Paardekens...</textarea>
+          </div>
+        </div>
+        
+        <div class="language-content" data-lang="fr">
+          <div class="form-group">
+            <label>Titre (Français)</label>
+            <input type="text" placeholder="À Propos de Nous" value="À Propos de Nous">
+          </div>
+          <div class="form-group">
+            <label>Corps (Français)</label>
+            <textarea rows="4" placeholder="Texte à propos en français...">Les 33 chambres du charmant Hôtel 3 Paardekens...</textarea>
+          </div>
+        </div>
+      </form>
+      
+      <div style="margin-top: 20px;">
+        <button class="btn btn-primary">💾 Save About Us</button>
+      </div>
+    </div>
+    
+    <!-- Room Editor Demo -->
+    <div class="demo-section">
+      <h2>Room Editor - Multilingual Editing</h2>
+      <div class="multilingual-info">
+        <p>Enter room details for each language. The same photos and amenities will be used for all languages.</p>
+      </div>
+      
+      <div class="language-tabs">
+        <button class="language-tab active" data-lang="en">
+          <span class="flag">🇬🇧</span>
+          <span>English</span>
+        </button>
+        <button class="language-tab" data-lang="nl">
+          <span class="flag">🇧🇪</span>
+          <span>Nederlands</span>
+        </button>
+        <button class="language-tab" data-lang="fr">
+          <span class="flag">🇫🇷</span>
+          <span>Français</span>
+        </button>
+      </div>
+      
+      <form>
+        <div class="language-content active" data-lang="en">
+          <div class="form-group">
+            <label>Room Name (English) *</label>
+            <input type="text" placeholder="e.g., Deluxe Suite" value="Double Room">
+          </div>
+          <div class="form-group">
+            <label>Description (English) *</label>
+            <textarea rows="3" placeholder="Describe the room in English...">Cosy getaway, or just need some extra space? Make it Double!</textarea>
+          </div>
+        </div>
+        
+        <div class="language-content" data-lang="nl">
+          <div class="form-group">
+            <label>Kamernaam (Nederlands) *</label>
+            <input type="text" placeholder="bijv., Deluxe Suite" value="Tweepersoonskamer">
+          </div>
+          <div class="form-group">
+            <label>Beschrijving (Nederlands) *</label>
+            <textarea rows="3" placeholder="Beschrijf de kamer in het Nederlands...">Gezellig uitje, of gewoon wat extra ruimte nodig? Maak er een dubbele van!</textarea>
+          </div>
+        </div>
+        
+        <div class="language-content" data-lang="fr">
+          <div class="form-group">
+            <label>Nom de la Chambre (Français) *</label>
+            <input type="text" placeholder="par ex., Suite Deluxe" value="Chambre Double">
+          </div>
+          <div class="form-group">
+            <label>Description (Français) *</label>
+            <textarea rows="3" placeholder="Décrivez la chambre en français...">Escapade confortable ou besoin d'espace supplémentaire ? Optez pour une double !</textarea>
+          </div>
+        </div>
+      </form>
+      
+      <div style="margin-top: 20px;">
+        <button class="btn btn-primary">💾 Save Room</button>
+        <button class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Simple tab switching for demo
+    document.querySelectorAll('.language-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const section = this.closest('.demo-section');
+        const lang = this.getAttribute('data-lang');
+        
+        // Update active tab
+        section.querySelectorAll('.language-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update visible content
+        section.querySelectorAll('.language-content').forEach(content => {
+          if (content.getAttribute('data-lang') === lang) {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
