@@ -7,6 +7,7 @@
   <meta name="description" content="Hotel 3 Paardekens - Contact details" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="assets/nav.css">
+  <link rel="stylesheet" href="assets/footer.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -520,34 +521,6 @@
       }
     }
 
-    /* Contact section */
-    #contact.card {
-      width: 100%;
-      max-width: none;
-      border-radius: 0;
-
-      background: linear-gradient(
-        90deg,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,var(--band-fade-alpha)) 50%,
-        rgba(0,0,0,0) 100%
-      );
-
-      border: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-
-      padding: clamp(26px, 5vw, 46px);
-
-      scroll-margin-top: 90px;
-    }
-
-    #contact .contact-inner {
-      width: min(720px, 92%);
-      margin: 0 auto;
-    }
-
     .menubar .pill {
       gap: 8px;
       border-radius: 10px;
@@ -867,30 +840,10 @@
         </div>
       </div>
     </section>
-
-    <!-- Contact is last -->
-    <section id="contact" class="card" aria-label="Contact details">
-      <div class="contact-inner">
-        <h1 data-i18n="index.contact.title">Contact Us</h1>
-
-        <p class="lines">
-          Begijnenstraat 3<br />
-          2800 Mechelen<br />
-          <strong>TEL</strong> +32 15 342 713<br />
-          <strong>FAX</strong> +32 15 342 715<br />
-          <a href="mailto:info@3paardekens.be">info@3paardekens.be</a><br />
-          <a href="https://www.3paardekens.com" target="_blank" rel="noopener noreferrer">www.3paardekens.com</a>
-        </p>
-
-        <div class="links" aria-label="Quick actions">
-          <a class="pill" href="mailto:info@3paardekens.be" data-i18n="index.contact.email">Email</a>
-          <a class="pill" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer" data-i18n="index.contact.openmaps">Open in Maps</a>
-        </div>
-
-        <footer>© <span id="y"></span> Hotel 3 Paardekens</footer>
-      </div>
-    </section>
   </main>
+
+  <!-- Footer -->
+  <div id="footerContainer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -1024,11 +977,11 @@
       }
     }
 
-    document.getElementById('y').textContent = new Date().getFullYear();
     updateBookState();
   </script>
   <script src="translations.js"></script>
   <script src="assets/nav.js"></script>
+  <script src="assets/footer.js"></script>
   <script>
     // Initialize i18n after all scripts are loaded
     if (window.i18n) {

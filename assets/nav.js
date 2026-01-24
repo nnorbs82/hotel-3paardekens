@@ -160,9 +160,24 @@
       }
     });
 
-    // Close menu on link click
+    // Close menu on link click and handle smooth scroll for #contact
     links.forEach(link => {
-      link.addEventListener('click', closeMenu);
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        // If this is the contact link (hash-only), smooth scroll to footer
+        if (href === '#contact') {
+          e.preventDefault();
+          closeMenu();
+          
+          const contactElement = document.getElementById('contact');
+          if (contactElement) {
+            contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else {
+          closeMenu();
+        }
+      });
     });
 
     // Close menu on Escape key

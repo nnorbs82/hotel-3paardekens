@@ -6,6 +6,7 @@
   <title>Hotel 3 Paardekens - Rooms</title>
   <meta name="description" content="Hotel 3 Paardekens - Rooms overview" />
   <link rel="stylesheet" href="assets/nav.css">
+  <link rel="stylesheet" href="assets/footer.css">
   <style>
     :root {
       --card-bg: rgba(0, 0, 0, 0.55);
@@ -494,8 +495,6 @@
       flex-wrap: wrap;
       margin-top: auto;
     }
-
-    footer { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,0.7); }
   </style>
 </head>
 
@@ -513,10 +512,11 @@
       <div class="rooms-grid" id="roomsGrid" aria-label="Room types">
         <!-- Rooms will be dynamically loaded here -->
       </div>
-
-      <footer>© <span id="y"></span> Hotel 3 Paardekens</footer>
     </section>
   </main>
+
+  <!-- Footer -->
+  <div id="footerContainer"></div>
 
   <!-- Popup overlay (large slideshow) -->
   <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
@@ -532,10 +532,6 @@
       <div class="popup-thumbs-row" id="popupThumbsRow"></div>
     </div>
   </div>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
   
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -931,6 +927,7 @@
   </script>
   <script src="translations.js"></script>
   <script src="assets/nav.js"></script>
+  <script src="assets/footer.js"></script>
   <script>
     // Initialize i18n after all scripts are loaded
     if (window.i18n) {
