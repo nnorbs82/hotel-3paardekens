@@ -1026,7 +1026,21 @@
 
     document.getElementById('y').textContent = new Date().getFullYear();
     updateBookState();
-    loadSiteContent();
+  </script>
+  <script src="translations.js"></script>
+  <script src="assets/nav.js"></script>
+  <script>
+    // Initialize i18n after all scripts are loaded
+    if (window.i18n) {
+      window.i18n.init();
+    }
+    
+    // Load site content after i18n is initialized so language preference is available
+    if (typeof loadSiteContent === 'function') {
+      loadSiteContent();
+    }
+    
+    // Set up Firebase listener for live updates
     if (typeof firebase !== 'undefined' && firebase.database && firebase.apps && firebase.apps.length > 0) {
       try {
         const db = firebase.database();
@@ -1037,14 +1051,6 @@
       } catch (error) {
         console.warn('Could not set up site content listener:', error);
       }
-    }
-  </script>
-  <script src="translations.js"></script>
-  <script src="assets/nav.js"></script>
-  <script>
-    // Initialize i18n after all scripts are loaded
-    if (window.i18n) {
-      window.i18n.init();
     }
     
     // Reload site content when language changes
