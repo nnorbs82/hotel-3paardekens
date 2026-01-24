@@ -3,8 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hotel 3 Paardekens - Rooms</title>
-  <meta name="description" content="Hotel 3 Paardekens - Rooms overview" />
+  
+  <!-- Primary Meta Tags -->
+  <title>Our Rooms | Hotel 3 Paardekens Mechelen</title>
+  <meta name="description" content="Explore our 33 beautifully renovated rooms at Hotel 3 Paardekens. Comfortable 3-star accommodation in historic Mechelen with modern amenities. Check availability and book online." />
+  <meta name="keywords" content="Hotel rooms Mechelen, Hotel 3 Paardekens rooms, accommodation Mechelen, book hotel room Mechelen, 3-star rooms Belgium" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#B76E79" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.3paardekens.com/rooms.html" />
+  
+  <!-- Multi-language Support (hreflang) -->
+  <link rel="alternate" hreflang="en" href="https://www.3paardekens.com/rooms.html?lang=en" />
+  <link rel="alternate" hreflang="nl" href="https://www.3paardekens.com/rooms.html?lang=nl" />
+  <link rel="alternate" hreflang="fr" href="https://www.3paardekens.com/rooms.html?lang=fr" />
+  <link rel="alternate" hreflang="x-default" href="https://www.3paardekens.com/rooms.html" />
+  
+  <!-- Geographic Meta Tags -->
+  <meta name="geo.region" content="BE-VAN" />
+  <meta name="geo.placename" content="Mechelen" />
+  <meta name="geo.position" content="51.0259;4.4777" />
+  <meta name="ICBM" content="51.0259, 4.4777" />
+  
+  <!-- Open Graph Tags for Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Our Rooms | Hotel 3 Paardekens Mechelen" />
+  <meta property="og:description" content="Explore our 33 beautifully renovated rooms at Hotel 3 Paardekens. Comfortable 3-star accommodation in historic Mechelen with modern amenities." />
+  <meta property="og:url" content="https://www.3paardekens.com/rooms.html" />
+  <meta property="og:image" content="https://www.3paardekens.com/assets/3plogo.png" />
+  <meta property="og:site_name" content="Hotel 3 Paardekens" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="nl_BE" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Our Rooms | Hotel 3 Paardekens Mechelen" />
+  <meta name="twitter:description" content="Explore our 33 beautifully renovated rooms at Hotel 3 Paardekens. Comfortable 3-star accommodation in historic Mechelen with modern amenities." />
+  <meta name="twitter:image" content="https://www.3paardekens.com/assets/3plogo.png" />
   <link rel="stylesheet" href="assets/nav.css">
   <link rel="stylesheet" href="assets/footer.css">
   <style>
@@ -940,6 +977,79 @@
         loadRooms();
       }
     });
+  </script>
+  
+  <!-- Structured Data (JSON-LD) for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Hotel",
+    "name": "Hotel 3 Paardekens",
+    "description": "Historic 3-star hotel in the heart of Mechelen, Belgium with 33 renovated rooms and rooftop breakfast with cathedral views",
+    "image": "https://www.3paardekens.com/assets/3plogo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Begijnenstraat 3",
+      "addressLocality": "Mechelen",
+      "postalCode": "2800",
+      "addressCountry": "BE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.0259,
+      "longitude": 4.4777
+    },
+    "telephone": "+32 15 342 713",
+    "email": "info@3paardekens.be",
+    "url": "https://www.3paardekens.com",
+    "starRating": {
+      "@type": "Rating",
+      "ratingValue": "3"
+    },
+    "priceRange": "$$",
+    "checkinTime": "14:00",
+    "checkoutTime": "11:00",
+    "numberOfRooms": "33",
+    "amenityFeature": [
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Free WiFi"
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Breakfast"
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "Rooftop Breakfast Room"
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "City Center Location"
+      }
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.3paardekens.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Rooms",
+        "item": "https://www.3paardekens.com/rooms.html"
+      }
+    ]
+  }
   </script>
 </body>
 </html>
