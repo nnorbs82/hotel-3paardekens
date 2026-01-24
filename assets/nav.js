@@ -17,6 +17,11 @@
         menubar.innerHTML = html;
         initNav();
         initLanguageSelector();
+        
+        // Translate the newly inserted navigation elements
+        if (window.i18n) {
+          window.i18n.translatePage();
+        }
       })
       .catch(err => console.error('Failed to load navigation:', err));
   }
