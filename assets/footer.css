@@ -206,6 +206,18 @@
   letter-spacing: 0.3px;
 }
 
+@media (min-width: 769px) and (max-width: 1150px) {
+  .footer-content {
+    grid-template-columns: 90px 1.3fr 1fr 1fr;
+    gap: 14px;
+  }
+
+  .footer-brand-logo {
+    width: 80px;
+    height: 80px;
+  }
+}
+
 /* Responsive Layout */
 @media (max-width: 768px) {
   .footer-content {
