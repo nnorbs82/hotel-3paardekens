@@ -257,7 +257,17 @@
         
         // Check if DOMPurify is available
         if (typeof DOMPurify !== 'undefined') {
-          return DOMPurify.sanitize(text, {
+          // Add a hook to enforce rel="noopener noreferrer" on all target="_blank" links
+          // This prevents reverse tabnabbing attacks
+          DOMPurify.addHook('afterSanitizeAttributes', function(node) {
+            if (node.tagName === 'A' && node.hasAttribute('target')) {
+              if (node.getAttribute('target') === '_blank') {
+                node.setAttribute('rel', 'noopener noreferrer');
+              }
+            }
+          });
+          
+          const sanitized = DOMPurify.sanitize(text, {
             // Only allow tags that Quill editor produces and are safe for FAQ content
             ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup'],
             // Allow safe attributes
@@ -265,7 +275,14 @@
             // Add style attribute for Quill's inline formatting (font-size, color, etc.)
             // DOMPurify automatically sanitizes CSS to block dangerous properties
             ADD_ATTR: ['style'],
+            // Only allow safe protocols in links
+            ALLOW_UNKNOWN_PROTOCOLS: false,
           });
+          
+          // Remove the hook after sanitization to avoid side effects
+          DOMPurify.removeAllHooks();
+          
+          return sanitized;
         }
         
         // Fallback: if DOMPurify is not available, escape HTML for safety
