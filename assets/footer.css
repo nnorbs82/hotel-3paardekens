@@ -16,7 +16,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   
-  padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px) clamp(24px, 3vw, 32px);
+  padding: clamp(20px, 3vw, 30px) clamp(20px, 4vw, 40px) clamp(14px, 2vw, 20px);
   margin: 0;
   
   /* Ensure footer is at the bottom */
@@ -33,17 +33,28 @@
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(32px, 5vw, 48px);
-  margin-bottom: clamp(32px, 4vw, 48px);
+  grid-template-columns: 120px 1.4fr 1fr 1fr;
+  gap: clamp(18px, 3vw, 28px);
+  margin-bottom: clamp(18px, 2vw, 24px);
   text-align: left;
+  align-items: start;
 }
 
 /* Footer Brand Section */
 .footer-brand {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+}
+
+.footer-brand a {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.footer-brand-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
 
 .footer-logo {
@@ -67,7 +78,7 @@
 .footer-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 
 .footer-section-title {
@@ -84,7 +95,7 @@
 .footer-contact {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .footer-contact-item {
@@ -119,7 +130,7 @@
 .footer-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .footer-button {
@@ -184,7 +195,7 @@
 
 /* Footer Bottom */
 .footer-bottom {
-  padding-top: clamp(24px, 3vw, 32px);
+  padding-top: clamp(12px, 2vw, 16px);
   border-top: 1px solid rgba(255,255,255,0.08);
   text-align: center;
 }
@@ -225,21 +236,5 @@
 
   .footer-text-link {
     width: auto;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .footer-actions {
-    grid-column: 1 / -1;
-    align-items: center;
-  }
-  
-  .footer-buttons {
-    flex-direction: row;
-    justify-content: center;
   }
 }
