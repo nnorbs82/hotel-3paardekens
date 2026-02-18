@@ -15,6 +15,10 @@ Go to [Firebase Console](https://console.firebase.google.com/) → **Realtime Da
       ".read": true,
       ".write": "auth != null"
     },
+    "faqBlocks": {
+      ".read": true,
+      ".write": "auth != null"
+    },
     "rooms": {
       ".read": true,
       ".write": "auth != null"
@@ -24,7 +28,7 @@ Go to [Firebase Console](https://console.firebase.google.com/) → **Realtime Da
 ```
 
 **What this does:**
-- Anyone can **read** both info blocks and rooms (needed for public website visitors)
+- Anyone can **read** info blocks, FAQ blocks, and rooms (needed for public website visitors)
 - Only **authenticated users** can write/update/delete (admin only)
 
 **After updating:**
