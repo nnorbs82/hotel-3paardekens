@@ -62,8 +62,14 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    
+    // Set default consent mode for GDPR compliance
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied'
+    });
+    
     gtag('config', 'G-MX66JGB1Z9', {
-      'anonymize_ip': true,
       'cookie_flags': 'SameSite=None;Secure'
     });
   </script>

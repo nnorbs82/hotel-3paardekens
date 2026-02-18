@@ -31,9 +31,9 @@
       // Show cookie settings button
       showCookieSettingsButton();
       
-      // Load analytics if consented
+      // Grant analytics consent if previously consented
       if (consentState.analytics) {
-        loadGoogleAnalytics();
+        grantAnalyticsConsent();
       }
     }
     
@@ -265,7 +265,7 @@
     consentState.analytics = true;
     consentState.marketing = true;
     saveConsent();
-    loadGoogleAnalytics();
+    grantAnalyticsConsent();
     hideBanner();
     hideModal();
     showCookieSettingsButton();
@@ -299,9 +299,9 @@
     
     saveConsent();
     
-    // Load analytics if consented
+    // Grant analytics consent if consented
     if (consentState.analytics) {
-      loadGoogleAnalytics();
+      grantAnalyticsConsent();
     }
     
     hideBanner();
@@ -310,11 +310,27 @@
   }
 
   /**
+   * Grant analytics consent using Google Consent Mode
+   */
+  function grantAnalyticsConsent() {
+    // Update consent status to grant analytics
+    if (window.gtag) {
+      window.gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+    }
+  }
+
+  /**
    * Load Google Analytics script
+   * Note: This function is kept for backward compatibility but is no longer used
+   * since GA is now loaded directly in the HTML head for verification purposes.
    */
   function loadGoogleAnalytics() {
     // Check if already loaded
     if (window.gtag || document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`)) {
+      // If GA is already loaded, just grant consent
+      grantAnalyticsConsent();
       return;
     }
     
@@ -330,7 +346,6 @@
     window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', GA_ID, {
-      'anonymize_ip': true, // GDPR compliance: anonymize IP addresses
       'cookie_flags': 'SameSite=None;Secure'
     });
   }
