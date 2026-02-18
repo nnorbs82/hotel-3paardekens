@@ -472,6 +472,83 @@
       nl: 'Selecteer taal',
       en: 'Select language',
       fr: 'Sélectionner la langue'
+    },
+
+    // Cookie consent
+    'cookie.banner.title': {
+      nl: 'Cookie toestemming',
+      en: 'Cookie consent',
+      fr: 'Consentement aux cookies'
+    },
+    'cookie.accept.all': {
+      nl: 'Accepteer alle cookies',
+      en: 'Accept all cookies',
+      fr: 'Accepter tous les cookies'
+    },
+    'cookie.reject.all': {
+      nl: 'Weiger alle cookies',
+      en: 'Reject all cookies',
+      fr: 'Refuser tous les cookies'
+    },
+    'cookie.customize': {
+      nl: 'Pas cookies aan',
+      en: 'Customize cookies',
+      fr: 'Personnaliser les cookies'
+    },
+    'cookie.settings': {
+      nl: 'Cookie-instellingen',
+      en: 'Cookie Settings',
+      fr: 'Paramètres des cookies'
+    },
+    'cookie.preferences.title': {
+      nl: 'Cookie voorkeuren',
+      en: 'Cookie Preferences',
+      fr: 'Préférences des cookies'
+    },
+    'cookie.preferences.description': {
+      nl: 'We gebruiken cookies om uw ervaring op onze website te verbeteren. U kunt kiezen welke soorten cookies u wilt toestaan.',
+      en: 'We use cookies to improve your experience on our website. You can choose which types of cookies to allow.',
+      fr: 'Nous utilisons des cookies pour améliorer votre expérience sur notre site web. Vous pouvez choisir les types de cookies à autoriser.'
+    },
+    'cookie.necessary.title': {
+      nl: 'Noodzakelijke cookies',
+      en: 'Necessary Cookies',
+      fr: 'Cookies nécessaires'
+    },
+    'cookie.necessary.description': {
+      nl: 'Deze cookies zijn essentieel voor het correct functioneren van de website. Ze maken basisfuncties mogelijk zoals paginanavigatie, authenticatie en toegang tot beveiligde gebieden. De website kan niet functioneren zonder deze cookies.',
+      en: 'These cookies are essential for the website to function properly. They enable basic features like page navigation, authentication, and access to secure areas. The website cannot function without these cookies.',
+      fr: 'Ces cookies sont essentiels au bon fonctionnement du site web. Ils permettent des fonctionnalités de base comme la navigation, l\'authentification et l\'accès aux zones sécurisées. Le site web ne peut pas fonctionner sans ces cookies.'
+    },
+    'cookie.analytics.title': {
+      nl: 'Analytische cookies',
+      en: 'Analytics Cookies',
+      fr: 'Cookies analytiques'
+    },
+    'cookie.analytics.description': {
+      nl: 'Deze cookies helpen ons te begrijpen hoe bezoekers omgaan met onze website door anoniem informatie te verzamelen en te rapporteren. We gebruiken Google Analytics om paginaweergaven en gebruikersgedrag te volgen om onze service te verbeteren.',
+      en: 'These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously. We use Google Analytics to track page views and user behavior to improve our service.',
+      fr: 'Ces cookies nous aident à comprendre comment les visiteurs interagissent avec notre site web en collectant et en rapportant des informations de manière anonyme. Nous utilisons Google Analytics pour suivre les pages vues et le comportement des utilisateurs afin d\'améliorer notre service.'
+    },
+    'cookie.marketing.title': {
+      nl: 'Marketingcookies',
+      en: 'Marketing Cookies',
+      fr: 'Cookies marketing'
+    },
+    'cookie.marketing.description': {
+      nl: 'Deze cookies worden gebruikt om bezoekers op verschillende websites te volgen en relevante advertenties weer te geven. Momenteel gebruiken we geen marketingcookies, maar deze optie is beschikbaar voor toekomstig gebruik.',
+      en: 'These cookies are used to track visitors across websites and display relevant advertisements. We currently do not use marketing cookies, but this option is available for future use.',
+      fr: 'Ces cookies sont utilisés pour suivre les visiteurs sur différents sites web et afficher des publicités pertinentes. Nous n\'utilisons actuellement pas de cookies marketing, mais cette option est disponible pour une utilisation future.'
+    },
+    'cookie.always.on': {
+      nl: 'Altijd aan',
+      en: 'Always On',
+      fr: 'Toujours activé'
+    },
+    'cookie.save.preferences': {
+      nl: 'Voorkeuren opslaan',
+      en: 'Save Preferences',
+      fr: 'Enregistrer les préférences'
     }
   };
 

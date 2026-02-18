@@ -80,26 +80,21 @@
     banner.className = 'cookie-banner';
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-labelledby', 'cookie-banner-title');
-    banner.setAttribute('aria-describedby', 'cookie-banner-description');
     
     banner.innerHTML = `
       <div class="cookie-banner-content">
         <div class="cookie-banner-text">
-          <h3 id="cookie-banner-title" data-i18n="cookie.banner.title">We Value Your Privacy</h3>
-          <p id="cookie-banner-description" data-i18n="cookie.banner.description">
-            We use cookies to enhance your browsing experience and analyze our traffic. 
-            You can choose which cookies you want to accept.
-          </p>
+          <h3 id="cookie-banner-title" data-i18n="cookie.banner.title">Cookie consent</h3>
         </div>
         <div class="cookie-banner-actions">
           <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary" data-i18n="cookie.accept.all">
-            Accept All
+            Accept all cookies
           </button>
           <button id="cookie-reject-all" class="cookie-btn cookie-btn-secondary" data-i18n="cookie.reject.all">
-            Reject All
+            Reject all cookies
           </button>
           <button id="cookie-customize" class="cookie-btn cookie-btn-tertiary" data-i18n="cookie.customize">
-            Customize
+            Customize cookies
           </button>
         </div>
       </div>
