@@ -259,10 +259,9 @@
         if (typeof DOMPurify !== 'undefined') {
           // Define the hook function so we can remove it specifically later
           const linkSecurityHook = function(node) {
-            if (node.tagName === 'A' && node.hasAttribute('target')) {
-              if (node.getAttribute('target') === '_blank') {
-                node.setAttribute('rel', 'noopener noreferrer');
-              }
+            // Enforce rel="noopener noreferrer" on all target="_blank" links to prevent reverse tabnabbing
+            if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
+              node.setAttribute('rel', 'noopener noreferrer');
             }
           };
           
@@ -276,8 +275,6 @@
             // Allow safe attributes including style for Quill's inline formatting
             // DOMPurify automatically sanitizes CSS to block dangerous properties
             ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'style'],
-            // Only allow safe protocols in links
-            ALLOW_UNKNOWN_PROTOCOLS: false,
           });
           
           // Remove only our specific hook function to avoid affecting other parts of the application
