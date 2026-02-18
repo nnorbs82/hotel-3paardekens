@@ -103,6 +103,9 @@
             <button id="btnNavInfo" class="admin-nav-btn">
               ℹ️ Info
             </button>
+            <button id="btnNavFaq" class="admin-nav-btn">
+              ❓ FAQs
+            </button>
             <button id="btnNavAbout" class="admin-nav-btn">
               ✨ About Us
             </button>
@@ -124,6 +127,14 @@
                 ➕ Add Info Block
               </button>
               <button id="btnLogoutInfo" class="btn">
+                🚪 Logout
+              </button>
+            </div>
+            <div id="faqActions" class="admin-menu-actions hidden">
+              <button id="btnAddFaq" class="btn btn-success">
+                ➕ Add FAQ Block
+              </button>
+              <button id="btnLogoutFaq" class="btn">
                 🚪 Logout
               </button>
             </div>
@@ -178,6 +189,26 @@
           <p class="empty-state-desc">Create your first info block to get started</p>
           <button class="btn btn-success" onclick="document.getElementById('btnAddInfo').click()">
             ➕ Add Your First Info Block
+          </button>
+        </div>
+      </div>
+
+      <!-- FAQ Management Section -->
+      <div id="faqManagementSection" class="hidden">
+        <div class="admin-header">
+          <h1>FAQ Management</h1>
+        </div>
+
+        <div id="faqBlocksContainer" class="info-blocks-list">
+          <!-- FAQ blocks will be loaded here -->
+        </div>
+
+        <div id="emptyStateFaq" class="empty-state hidden">
+          <div class="empty-state-icon">❓</div>
+          <h2 class="empty-state-title">No FAQ Blocks Yet</h2>
+          <p class="empty-state-desc">Create your first FAQ block to get started</p>
+          <button class="btn btn-success" onclick="document.getElementById('btnAddFaq').click()">
+            ➕ Add Your First FAQ Block
           </button>
         </div>
       </div>
@@ -643,6 +674,7 @@
   <script src="admin-auth.js"></script>
   <script src="admin-room-manager.js"></script>
   <script src="admin-info-manager.js"></script>
+  <script src="admin-faq-manager.js"></script>
   <script src="site-content-manager.js"></script>
   <script>
     (function() {
@@ -713,6 +745,7 @@
       const adminMenuContent = document.getElementById('adminMenuContent');
       const roomActions = document.getElementById('roomActions');
       const infoActions = document.getElementById('infoActions');
+      const faqActions = document.getElementById('faqActions');
       const aboutActions = document.getElementById('aboutActions');
       const sisterActions = document.getElementById('sisterActions');
       const roomsContainer = document.getElementById('roomsContainer');
@@ -780,10 +813,12 @@
       function updateTopMenuActions() {
         const isRoomsActive = btnNavRooms.classList.contains('active');
         const isInfoActive = btnNavInfo.classList.contains('active');
+        const isFaqActive = btnNavFaq.classList.contains('active');
         const isAboutActive = btnNavAbout.classList.contains('active');
         const isSisterActive = btnNavSister.classList.contains('active');
         roomActions.classList.toggle('hidden', !isRoomsActive);
         infoActions.classList.toggle('hidden', !isInfoActive);
+        faqActions.classList.toggle('hidden', !isFaqActive);
         aboutActions.classList.toggle('hidden', !isAboutActive);
         sisterActions.classList.toggle('hidden', !isSisterActive);
       }
@@ -1596,16 +1631,22 @@
       // Info Management Elements
       const btnNavRooms = document.getElementById('btnNavRooms');
       const btnNavInfo = document.getElementById('btnNavInfo');
+      const btnNavFaq = document.getElementById('btnNavFaq');
       const btnNavAbout = document.getElementById('btnNavAbout');
       const btnNavSister = document.getElementById('btnNavSister');
       const roomManagementSection = document.getElementById('roomManagementSection');
       const infoManagementSection = document.getElementById('infoManagementSection');
+      const faqManagementSection = document.getElementById('faqManagementSection');
       const aboutManagementSection = document.getElementById('aboutManagementSection');
       const sisterManagementSection = document.getElementById('sisterManagementSection');
       const btnAddInfo = document.getElementById('btnAddInfo');
+      const btnAddFaq = document.getElementById('btnAddFaq');
       const btnLogoutInfo = document.getElementById('btnLogoutInfo');
+      const btnLogoutFaq = document.getElementById('btnLogoutFaq');
       const infoBlocksContainer = document.getElementById('infoBlocksContainer');
       const emptyStateInfo = document.getElementById('emptyStateInfo');
+      const faqBlocksContainer = document.getElementById('faqBlocksContainer');
+      const emptyStateFaq = document.getElementById('emptyStateFaq');
       const btnLogoutAbout = document.getElementById('btnLogoutAbout');
       const btnLogoutSister = document.getElementById('btnLogoutSister');
       const btnSaveAbout = document.getElementById('btnSaveAbout');
@@ -1624,6 +1665,7 @@
       let bodyQuills = { en: null, nl: null, fr: null };
       let currentEditingInfoBlock = null;
       let draggedInfoBlockId = null;
+      let activeContentType = 'info';
 
       // Define font and size options as constants to avoid duplication
       const CUSTOM_FONTS = ['roboto', 'open-sans', 'lato', 'montserrat', 'playfair', 'merriweather', 'raleway', 'poppins', 'crimson', 'libre-baskerville', 'oswald', 'source-sans', 'pt-serif', 'ubuntu', 'nunito'];
@@ -1691,10 +1733,12 @@
       btnNavRooms.addEventListener('click', () => {
         btnNavRooms.classList.add('active');
         btnNavInfo.classList.remove('active');
+        btnNavFaq.classList.remove('active');
         btnNavAbout.classList.remove('active');
         btnNavSister.classList.remove('active');
         roomManagementSection.classList.remove('hidden');
         infoManagementSection.classList.add('hidden');
+        faqManagementSection.classList.add('hidden');
         aboutManagementSection.classList.add('hidden');
         sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
@@ -1703,12 +1747,33 @@
       });
 
       btnNavInfo.addEventListener('click', () => {
+        activeContentType = 'info';
         btnNavInfo.classList.add('active');
         btnNavRooms.classList.remove('active');
+        btnNavFaq.classList.remove('active');
         btnNavAbout.classList.remove('active');
         btnNavSister.classList.remove('active');
         infoManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
+        faqManagementSection.classList.add('hidden');
+        aboutManagementSection.classList.add('hidden');
+        sisterManagementSection.classList.add('hidden');
+        updateTopMenuActions();
+        adminMenuContent.classList.remove('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', 'false');
+        loadInfoBlocks();
+      });
+
+      btnNavFaq.addEventListener('click', () => {
+        activeContentType = 'faq';
+        btnNavFaq.classList.add('active');
+        btnNavRooms.classList.remove('active');
+        btnNavInfo.classList.remove('active');
+        btnNavAbout.classList.remove('active');
+        btnNavSister.classList.remove('active');
+        faqManagementSection.classList.remove('hidden');
+        roomManagementSection.classList.add('hidden');
+        infoManagementSection.classList.add('hidden');
         aboutManagementSection.classList.add('hidden');
         sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
@@ -1721,10 +1786,12 @@
         btnNavAbout.classList.add('active');
         btnNavRooms.classList.remove('active');
         btnNavInfo.classList.remove('active');
+        btnNavFaq.classList.remove('active');
         btnNavSister.classList.remove('active');
         aboutManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
         infoManagementSection.classList.add('hidden');
+        faqManagementSection.classList.add('hidden');
         sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
@@ -1736,10 +1803,12 @@
         btnNavSister.classList.add('active');
         btnNavRooms.classList.remove('active');
         btnNavInfo.classList.remove('active');
+        btnNavFaq.classList.remove('active');
         btnNavAbout.classList.remove('active');
         sisterManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
         infoManagementSection.classList.add('hidden');
+        faqManagementSection.classList.add('hidden');
         aboutManagementSection.classList.add('hidden');
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
@@ -1761,6 +1830,14 @@
 
       // Logout from info section
       btnLogoutInfo.addEventListener('click', async () => {
+        if (confirm('Are you sure you want to logout?')) {
+          await HotelAuth.logout();
+          showLogin();
+          loginForm.reset();
+        }
+      });
+
+      btnLogoutFaq.addEventListener('click', async () => {
         if (confirm('Are you sure you want to logout?')) {
           await HotelAuth.logout();
           showLogin();
@@ -2002,24 +2079,63 @@
         }
       });
 
+      function getActiveContentConfig() {
+        if (activeContentType === 'faq') {
+          return {
+            manager: FAQManager,
+            container: faqBlocksContainer,
+            emptyState: emptyStateFaq,
+            singular: 'FAQ Block',
+            singularLower: 'FAQ block',
+            sectionKey: 'info',
+            methods: {
+              getBlocks: 'getFAQBlocks',
+              getBlock: 'getFAQBlock',
+              reorderBlocks: 'reorderFAQBlocks',
+              deleteBlock: 'deleteFAQBlock',
+              updateBlock: 'updateFAQBlock',
+              createBlock: 'createFAQBlock'
+            }
+          };
+        }
+
+        return {
+          manager: InfoManager,
+          container: infoBlocksContainer,
+          emptyState: emptyStateInfo,
+          singular: 'Info Block',
+          singularLower: 'info block',
+          sectionKey: 'info',
+          methods: {
+            getBlocks: 'getInfoBlocks',
+            getBlock: 'getInfoBlock',
+            reorderBlocks: 'reorderInfoBlocks',
+            deleteBlock: 'deleteInfoBlock',
+            updateBlock: 'updateInfoBlock',
+            createBlock: 'createInfoBlock'
+          }
+        };
+      }
+
       // Load and display info blocks
       async function loadInfoBlocks() {
-        const blocks = await InfoManager.getInfoBlocks();
-        infoBlocksContainer.innerHTML = '';
+        const contentConfig = getActiveContentConfig();
+        const blocks = await contentConfig.manager[contentConfig.methods.getBlocks]();
+        contentConfig.container.innerHTML = '';
 
         if (blocks.length === 0) {
-          emptyStateInfo.classList.remove('hidden');
-          infoBlocksContainer.classList.add('hidden');
+          contentConfig.emptyState.classList.remove('hidden');
+          contentConfig.container.classList.add('hidden');
         } else {
-          emptyStateInfo.classList.add('hidden');
-          infoBlocksContainer.classList.remove('hidden');
+          contentConfig.emptyState.classList.add('hidden');
+          contentConfig.container.classList.remove('hidden');
           
           // Sort by order
           blocks.sort((a, b) => a.order - b.order);
           
           blocks.forEach(block => {
             const blockEl = createInfoBlockElement(block);
-            infoBlocksContainer.appendChild(blockEl);
+            contentConfig.container.appendChild(blockEl);
           });
         }
       }
@@ -2103,7 +2219,8 @@
 
       // Reorder info blocks
       async function reorderInfoBlocks(draggedId, targetId) {
-        const blocks = await InfoManager.getInfoBlocks();
+        const contentConfig = getActiveContentConfig();
+        const blocks = await contentConfig.manager[contentConfig.methods.getBlocks]();
         const draggedIndex = blocks.findIndex(b => b.id === draggedId);
         const targetIndex = blocks.findIndex(b => b.id === targetId);
 
@@ -2116,30 +2233,35 @@
 
         // Get ordered IDs
         const orderedIds = blocks.map(b => b.id);
-        await InfoManager.reorderInfoBlocks(orderedIds);
+        await contentConfig.manager[contentConfig.methods.reorderBlocks](orderedIds);
         await loadInfoBlocks();
       }
 
       // Open info block modal for adding
-      btnAddInfo.addEventListener('click', () => {
+      function openAddContentBlockModal() {
+        const contentConfig = getActiveContentConfig();
         currentEditingInfoBlock = null;
-        infoModalTitle.textContent = 'Add Info Block';
+        infoModalTitle.textContent = `Add ${contentConfig.singular}`;
         initQuillEditors();
         resetInfoBlockEditorColor();
         
         // Reset language tabs to English
-        resetLanguageTabsToEnglish('info');
+        resetLanguageTabsToEnglish(contentConfig.sectionKey);
         
         openModal(infoBlockModal);
-      });
+      }
+
+      btnAddInfo.addEventListener('click', openAddContentBlockModal);
+      btnAddFaq.addEventListener('click', openAddContentBlockModal);
 
       // Open info block modal for editing
       async function editInfoBlock(blockId) {
-        const block = await InfoManager.getInfoBlock(blockId);
+        const contentConfig = getActiveContentConfig();
+        const block = await contentConfig.manager[contentConfig.methods.getBlock](blockId);
         if (!block) return;
 
         currentEditingInfoBlock = block.id;
-        infoModalTitle.textContent = 'Edit Info Block';
+        infoModalTitle.textContent = `Edit ${contentConfig.singular}`;
         initQuillEditors();
         
         // Load content for all languages
@@ -2158,25 +2280,26 @@
         });
         
         // Reset language tabs to English
-        resetLanguageTabsToEnglish('info');
+        resetLanguageTabsToEnglish(contentConfig.sectionKey);
         
         openModal(infoBlockModal);
       }
 
       // Delete info block
       async function deleteInfoBlock(blockId) {
-        const block = await InfoManager.getInfoBlock(blockId);
+        const contentConfig = getActiveContentConfig();
+        const block = await contentConfig.manager[contentConfig.methods.getBlock](blockId);
         if (!block) return;
 
         // Get title from English or first available language
         const langData = block.en || block;
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = langData.title || '';
-        const titleText = tempDiv.textContent || tempDiv.innerText || 'this info block';
+        const titleText = tempDiv.textContent || tempDiv.innerText || `this ${contentConfig.singularLower}`;
 
         confirmMessage.textContent = `Are you sure you want to delete "${titleText}"? This action cannot be undone.`;
         deleteCallback = async () => {
-          if (await InfoManager.deleteInfoBlock(blockId)) {
+          if (await contentConfig.manager[contentConfig.methods.deleteBlock](blockId)) {
             await loadInfoBlocks();
             closeModal(confirmModal);
           }
@@ -2186,6 +2309,7 @@
 
       // Save info block
       btnSaveInfo.addEventListener('click', async () => {
+        const contentConfig = getActiveContentConfig();
         // Collect data for all languages
         const multilingualData = {};
         let validationError = '';
@@ -2226,15 +2350,15 @@
           const blockData = { ...multilingualData };
 
           if (currentEditingInfoBlock) {
-            const success = await InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
+            const success = await contentConfig.manager[contentConfig.methods.updateBlock](currentEditingInfoBlock, blockData);
             if (!success) {
-              throw new Error('Failed to update info block');
+              throw new Error(`Failed to update ${contentConfig.singularLower}`);
             }
             showToast('success', 'Info Block Updated', 'Your changes have been saved.');
           } else {
-            const newBlock = await InfoManager.createInfoBlock(blockData);
+            const newBlock = await contentConfig.manager[contentConfig.methods.createBlock](blockData);
             if (!newBlock) {
-              throw new Error('Failed to create info block');
+              throw new Error(`Failed to create ${contentConfig.singularLower}`);
             }
             showToast('success', 'Info Block Created', 'Your new info block has been created. You can add Dutch and French translations later.');
           }
@@ -2248,8 +2372,8 @@
           }
           closeModal(infoBlockModal);
         } catch (error) {
-          console.error('Error saving info block:', error);
-          showToast('error', 'Save Failed', 'There was an error saving your info block. Please try again.');
+          console.error(`Error saving ${contentConfig.singularLower}:`, error);
+          showToast('error', 'Save Failed', `There was an error saving your ${contentConfig.singularLower}. Please try again.`);
         } finally {
           // Remove loading state
           btnSaveInfo.classList.remove('loading');

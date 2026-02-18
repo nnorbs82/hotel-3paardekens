@@ -4,6 +4,10 @@
       ".read": true,
       ".write": "auth != null"
     },
+    "faqBlocks": {
+      ".read": true,
+      ".write": "auth != null"
+    },
     "rooms": {
       ".read": true,
       ".write": "auth != null"
