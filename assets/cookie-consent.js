@@ -323,8 +323,9 @@
 
   /**
    * Load Google Analytics script
-   * Note: This function is kept for backward compatibility but is no longer used
-   * since GA is now loaded directly in the HTML head for verification purposes.
+   * Note: GA is now loaded directly in the HTML head for verification purposes.
+   * This function is kept for backward compatibility and will grant consent if GA is already loaded,
+   * or load GA dynamically if it's not present (fallback behavior).
    */
   function loadGoogleAnalytics() {
     // Check if already loaded
