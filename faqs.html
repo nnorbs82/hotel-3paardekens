@@ -290,8 +290,11 @@
           return sanitized;
         }
         
-        // Fallback: if DOMPurify is not available, escape HTML for safety
-        return escapeHtml(text).replace(/\n/g, '<br>');
+        // Fallback: if DOMPurify is not available, convert rich text to plain text safely
+        const parser = new DOMParser();
+        const firstPass = parser.parseFromString(text, 'text/html').body.textContent || '';
+        const plainText = parser.parseFromString(firstPass, 'text/html').body.textContent || firstPass;
+        return escapeHtml(plainText).replace(/\n/g, '<br>');
       }
 
       async function getFaqBlocks() {

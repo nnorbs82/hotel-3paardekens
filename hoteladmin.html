@@ -2354,13 +2354,13 @@
             if (!success) {
               throw new Error(`Failed to update ${contentConfig.singularLower}`);
             }
-            showToast('success', 'Info Block Updated', 'Your changes have been saved.');
+            showToast('success', `${contentConfig.singular} Updated`, `Your ${contentConfig.singularLower} has been saved.`);
           } else {
             const newBlock = await contentConfig.manager[contentConfig.methods.createBlock](blockData);
             if (!newBlock) {
               throw new Error(`Failed to create ${contentConfig.singularLower}`);
             }
-            showToast('success', 'Info Block Created', 'Your new info block has been created. You can add Dutch and French translations later.');
+            showToast('success', `${contentConfig.singular} Created`, `Your new ${contentConfig.singularLower} has been created. You can add Dutch and French translations later.`);
           }
 
           // IMPORTANT: Reload blocks BEFORE closing modal to ensure data is displayed
