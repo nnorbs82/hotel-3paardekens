@@ -250,21 +250,21 @@
 
       function formatBody(text) {
         // Sanitize HTML to allow safe formatting while preventing XSS
-        // DOMPurify allows safe HTML tags like <p>, <strong>, <em>, <span> with style attributes
-        // while removing potentially malicious content like <script>, <iframe>, event handlers, etc.
+        // Uses DOMPurify with a minimal whitelist approach for maximum security
+        // Allows inline styles for Quill editor formatting (font-size, color, background-color)
+        // DOMPurify's built-in CSS sanitizer blocks dangerous CSS properties
         if (!text) return '';
         
         // Check if DOMPurify is available
         if (typeof DOMPurify !== 'undefined') {
           return DOMPurify.sanitize(text, {
-            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre', 'sub', 'sup'],
+            // Only allow tags that Quill editor produces and are safe for FAQ content
+            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup'],
+            // Allow safe attributes
             ALLOWED_ATTR: ['href', 'target', 'rel', 'class'],
-            // Allow style attribute but DOMPurify will only allow safe CSS properties by default
-            // It blocks dangerous properties like 'expression', 'behavior', etc.
+            // Add style attribute for Quill's inline formatting (font-size, color, etc.)
+            // DOMPurify automatically sanitizes CSS to block dangerous properties
             ADD_ATTR: ['style'],
-            // Explicitly forbid event handler attributes
-            FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover', 'onfocus', 'onblur'],
-            FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'base', 'link', 'meta', 'style'],
           });
         }
         
