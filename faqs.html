@@ -261,7 +261,14 @@
           const linkSecurityHook = function(node) {
             // Enforce rel="noopener noreferrer" on all target="_blank" links to prevent reverse tabnabbing
             if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
-              node.setAttribute('rel', 'noopener noreferrer');
+              const existingRel = node.getAttribute('rel') || '';
+              const relValues = existingRel.split(/\s+/).filter(v => v);
+              
+              // Add noopener and noreferrer if not already present
+              if (!relValues.includes('noopener')) relValues.push('noopener');
+              if (!relValues.includes('noreferrer')) relValues.push('noreferrer');
+              
+              node.setAttribute('rel', relValues.join(' '));
             }
           };
           
