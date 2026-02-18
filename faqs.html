@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQs | Hotel 3 Paardekens</title>
+  <meta name="description" content="Frequently asked questions for Hotel 3 Paardekens." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="assets/nav.css">
+  <link rel="stylesheet" href="assets/footer.css">
+  <style>
+    :root {
+      --card-bg: rgba(0, 0, 0, 0.15);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.85);
+      --shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --accent: #B76E79;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: #000;
+    }
+    .bg {
+      min-height: 100vh;
+      background: none;
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      padding: 28px;
+    }
+    .bg::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+        url("assets/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    .bg.with-menubar { padding-top: calc(70px + 50px + 28px); }
+    .card {
+      width: min(980px, 100%);
+      background: var(--card-bg);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 40px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .menubar.card {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 9999;
+      height: 70px;
+      min-height: 70px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    h1 {
+      margin: 0 0 20px;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 500;
+      text-align: center;
+    }
+    .faq-list {
+      display: grid;
+      gap: 14px;
+    }
+    .faq-item {
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 12px;
+      background: rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 20px;
+      font-size: clamp(16px, 2.2vw, 18px);
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      color: var(--accent);
+      font-size: 24px;
+      line-height: 1;
+      transition: transform 140ms ease;
+    }
+    .faq-item[open] summary::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding: 16px 20px 20px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: clamp(15px, 2vw, 17px);
+    }
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px 20px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <main class="bg with-menubar">
+    <section class="card menubar" id="menubar" aria-label="Menu bar"></section>
+
+    <div class="card">
+      <h1>FAQs</h1>
+      <div id="faqBlocks" class="faq-list"></div>
+      <div id="emptyState" class="empty-state" style="display: none;">No FAQs available yet.</div>
+    </div>
+  </main>
+
+  <div id="footerContainer"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="translations.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/footer.js"></script>
+  <script>
+    if (window.i18n) {
+      window.i18n.init();
+    }
+
+    (function() {
+      'use strict';
+
+      const STORAGE_KEY = 'hotel3p_faq';
+      const FIREBASE_PATH = 'faqBlocks';
+
+      function getDatabase() {
+        if (typeof firebase === 'undefined' || !firebase.database) return null;
+        if (!firebase.apps || firebase.apps.length === 0) return null;
+        try {
+          return firebase.database();
+        } catch (_) {
+          return null;
+        }
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text || '';
+        return div.innerHTML;
+      }
+
+      function formatBody(text) {
+        return escapeHtml(text).replace(/\n/g, '<br>');
+      }
+
+      async function getFaqBlocks() {
+        const db = getDatabase();
+        if (!db) {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          } catch (_) {
+            return [];
+          }
+        }
+
+        try {
+          const snapshot = await db.ref(FIREBASE_PATH).once('value');
+          const data = snapshot.val();
+          if (!data) return [];
+          return Object.keys(data).map(key => ({ ...data[key], id: key })).sort((a, b) => a.order - b.order);
+        } catch (_) {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          } catch (_) {
+            return [];
+          }
+        }
+      }
+
+      window.loadFAQBlocks = async function() {
+        const blocks = await getFaqBlocks();
+        const container = document.getElementById('faqBlocks');
+        const emptyState = document.getElementById('emptyState');
+        if (!container || !emptyState) return;
+
+        if (!blocks.length) {
+          container.innerHTML = '';
+          emptyState.style.display = 'block';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
+        container.innerHTML = blocks.map(block => {
+          const blockData = block[currentLang] || block.en || block;
+          return `
+            <details class="faq-item">
+              <summary>${escapeHtml(blockData.title || '')}</summary>
+              <div class="faq-answer">${formatBody(blockData.body || '')}</div>
+            </details>
+          `;
+        }).join('');
+      };
+
+      window.addEventListener('languageChanged', window.loadFAQBlocks);
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.loadFAQBlocks);
+      } else {
+        window.loadFAQBlocks();
+      }
+
+      const db = getDatabase();
+      if (db) {
+        db.ref(FIREBASE_PATH).on('value', window.loadFAQBlocks);
+      }
+    })();
+  </script>
+</body>
+</html>
