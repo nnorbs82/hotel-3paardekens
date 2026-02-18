@@ -88,13 +88,13 @@
         </div>
         <div class="cookie-banner-actions">
           <button id="cookie-accept-all" class="cookie-btn cookie-btn-primary" data-i18n="cookie.accept.all">
-            Accept All
+            Accept all cookies
           </button>
           <button id="cookie-reject-all" class="cookie-btn cookie-btn-secondary" data-i18n="cookie.reject.all">
-            Reject All
+            Reject all cookies
           </button>
           <button id="cookie-customize" class="cookie-btn cookie-btn-tertiary" data-i18n="cookie.customize">
-            Customize
+            Customize cookies
           </button>
         </div>
       </div>
