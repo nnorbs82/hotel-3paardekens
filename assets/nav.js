@@ -121,6 +121,10 @@
     else if (pathname.match(/\/?info(\/|\.html?)?$/i)) {
       currentPage = 'info';
     }
+    // Treat legal/FAQ pages like info page for menu behavior
+    else if (pathname.match(/\/?(terms-and-conditions|privacy-policy|faqs)(\/|\.html?)?$/i)) {
+      currentPage = 'info';
+    }
     // Fallback: check for #rooms element (unique to rooms.html)
     else if (document.getElementById('rooms')) {
       currentPage = 'rooms';
