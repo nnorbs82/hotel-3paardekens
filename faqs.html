@@ -246,7 +246,9 @@
       }
 
       function formatBody(text) {
-        return escapeHtml(text).replace(/\n/g, '<br>');
+        // Don't escape HTML since Quill editor saves rich text as HTML
+        // Just return the text as-is to allow formatting
+        return text || '';
       }
 
       async function getFaqBlocks() {
