@@ -214,7 +214,9 @@
 
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js" 
+          integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb" 
+          crossorigin="anonymous"></script>
   <script src="firebase-config.js"></script>
   <script src="translations.js"></script>
   <script src="assets/nav.js"></script>
@@ -255,8 +257,14 @@
         // Check if DOMPurify is available
         if (typeof DOMPurify !== 'undefined') {
           return DOMPurify.sanitize(text, {
-            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-            ALLOWED_ATTR: ['style', 'href', 'target', 'rel']
+            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre', 'sub', 'sup'],
+            ALLOWED_ATTR: ['href', 'target', 'rel', 'class'],
+            // Allow style attribute but DOMPurify will only allow safe CSS properties by default
+            // It blocks dangerous properties like 'expression', 'behavior', etc.
+            ADD_ATTR: ['style'],
+            // Explicitly forbid event handler attributes
+            FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover', 'onfocus', 'onblur'],
+            FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'base', 'link', 'meta', 'style'],
           });
         }
         
