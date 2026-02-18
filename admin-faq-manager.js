@@ -175,15 +175,14 @@
      * @returns {Promise<object|null>} Promise resolving to created FAQ block with generated ID, or null on error
      */
     async createFAQBlock(blockData) {
-      console.log('Creating new FAQ block:', blockData.title);
+      console.log('Creating new FAQ block:', blockData?.en?.title || blockData?.title || 'untitled');
       const blocks = await this.getFAQBlocks();
       const id = this._generateId();
       const order = blocks.length > 0 ? Math.max(...blocks.map(b => b.order)) + 1 : 1;
       
       const newBlock = {
         id,
-        title: blockData.title,
-        body: blockData.body || '',
+        ...(blockData || {}),
         order,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
