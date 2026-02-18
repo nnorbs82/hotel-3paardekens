@@ -290,14 +290,10 @@
           return sanitized;
         }
         
-        // Fallback: if DOMPurify is not available, strip tags safely to avoid showing raw HTML
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = text;
-        let plainText = tempDiv.textContent || tempDiv.innerText || '';
-        if (/<\/?[a-z][\s\S]*>/i.test(plainText)) {
-          tempDiv.innerHTML = plainText;
-          plainText = tempDiv.textContent || tempDiv.innerText || plainText;
-        }
+        // Fallback: if DOMPurify is not available, convert rich text to plain text safely
+        const parser = new DOMParser();
+        const firstPass = parser.parseFromString(text, 'text/html').body.textContent || '';
+        const plainText = parser.parseFromString(firstPass, 'text/html').body.textContent || firstPass;
         return escapeHtml(plainText).replace(/\n/g, '<br>');
       }
 
