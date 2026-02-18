@@ -282,8 +282,8 @@
             ALLOW_UNKNOWN_PROTOCOLS: false,
           });
           
-          // Remove only our specific hook to avoid affecting other parts of the application
-          DOMPurify.removeHook('afterSanitizeAttributes');
+          // Remove only our specific hook function to avoid affecting other parts of the application
+          DOMPurify.removeHook('afterSanitizeAttributes', linkSecurityHook);
           
           return sanitized;
         }
