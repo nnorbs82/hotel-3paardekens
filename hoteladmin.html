@@ -562,7 +562,7 @@
 
       <div class="modal-body">
         <div class="multilingual-info">
-          <p>Enter info block content for each language using the tabs below.</p>
+          <p>Enter info block content using the tabs below. English title and content are required; Dutch and French can be added later.</p>
         </div>
         
         <div class="language-tabs" id="infoLanguageTabs">
@@ -597,12 +597,12 @@
           <!-- Dutch Content -->
           <div class="language-content" data-lang="nl" data-section="info">
             <div class="form-group">
-              <label id="infoBlockTitleLabel_nl">Titel (Nederlands) *</label>
+              <label id="infoBlockTitleLabel_nl">Titel (Nederlands)</label>
               <div id="infoBlockTitleEditor_nl" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel_nl" aria-multiline="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
             </div>
 
             <div class="form-group">
-              <label id="infoBlockBodyLabel_nl">Inhoud (Nederlands) *</label>
+              <label id="infoBlockBodyLabel_nl">Inhoud (Nederlands)</label>
               <div id="infoBlockBodyEditor_nl" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel_nl" aria-multiline="true" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
             </div>
           </div>
@@ -610,12 +610,12 @@
           <!-- French Content -->
           <div class="language-content" data-lang="fr" data-section="info">
             <div class="form-group">
-              <label id="infoBlockTitleLabel_fr">Titre (Français) *</label>
+              <label id="infoBlockTitleLabel_fr">Titre (Français)</label>
               <div id="infoBlockTitleEditor_fr" role="textbox" tabindex="0" aria-labelledby="infoBlockTitleLabel_fr" aria-multiline="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 60px;"></div>
             </div>
 
             <div class="form-group">
-              <label id="infoBlockBodyLabel_fr">Contenu (Français) *</label>
+              <label id="infoBlockBodyLabel_fr">Contenu (Français)</label>
               <div id="infoBlockBodyEditor_fr" role="textbox" tabindex="0" aria-labelledby="infoBlockBodyLabel_fr" aria-multiline="true" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; min-height: 300px;"></div>
             </div>
           </div>
@@ -2188,25 +2188,33 @@
       btnSaveInfo.addEventListener('click', async () => {
         // Collect data for all languages
         const multilingualData = {};
-        let hasError = false;
+        let validationError = '';
         
         ['en', 'nl', 'fr'].forEach(lang => {
           const titleText = titleQuills[lang] ? titleQuills[lang].getText().trim() : '';
           const body = bodyQuills[lang] ? bodyQuills[lang].root.innerHTML.trim() : '';
           const bodyText = bodyQuills[lang] ? bodyQuills[lang].getText().trim() : '';
           
-          if (!titleText || !bodyText) {
-            hasError = true;
+          if (lang === 'en' && (!titleText || !bodyText)) {
+            validationError = 'Please fill in title and content for English.';
+            return;
           }
-          
-          multilingualData[lang] = {
-            title: titleText,
-            body: body
-          };
+
+          if (lang !== 'en' && (titleText || bodyText) && (!titleText || !bodyText)) {
+            validationError = 'For Dutch and French, please fill in both title and content or leave both empty.';
+            return;
+          }
+
+          if (titleText && bodyText) {
+            multilingualData[lang] = {
+              title: titleText,
+              body: body
+            };
+          }
         });
 
-        if (hasError) {
-          showToast('error', 'Validation Error', 'Please fill in title and content for all three languages (English, Nederlands, Français).');
+        if (validationError) {
+          showToast('error', 'Validation Error', validationError);
           return;
         }
 
@@ -2215,24 +2223,20 @@
         btnSaveInfo.disabled = true;
 
         try {
-          const blockData = {
-            en: multilingualData.en,
-            nl: multilingualData.nl,
-            fr: multilingualData.fr
-          };
+          const blockData = { ...multilingualData };
 
           if (currentEditingInfoBlock) {
             const success = await InfoManager.updateInfoBlock(currentEditingInfoBlock, blockData);
             if (!success) {
               throw new Error('Failed to update info block');
             }
-            showToast('success', 'Info Block Updated', 'Your changes have been saved for all languages.');
+            showToast('success', 'Info Block Updated', 'Your changes have been saved.');
           } else {
             const newBlock = await InfoManager.createInfoBlock(blockData);
             if (!newBlock) {
               throw new Error('Failed to create info block');
             }
-            showToast('success', 'Info Block Created', 'Your new info block has been created for all languages.');
+            showToast('success', 'Info Block Created', 'Your new info block has been created. You can add Dutch and French translations later.');
           }
 
           // IMPORTANT: Reload blocks BEFORE closing modal to ensure data is displayed
