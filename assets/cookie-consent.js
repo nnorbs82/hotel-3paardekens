@@ -318,14 +318,20 @@
       window.gtag('consent', 'update', {
         'analytics_storage': 'granted'
       });
+    } else {
+      // GA should be loaded inline in HTML, but log a warning if it's not available
+      console.warn('Google Analytics (gtag) is not available. Consent cannot be granted.');
     }
   }
 
   /**
    * Load Google Analytics script
-   * Note: GA is now loaded directly in the HTML head for verification purposes.
-   * This function is kept for backward compatibility and will grant consent if GA is already loaded,
-   * or load GA dynamically if it's not present (fallback behavior).
+   * Note: GA is now loaded directly in the HTML head for Google verification purposes.
+   * This function is kept for backward compatibility and serves as a fallback:
+   * - If GA is already loaded (normal case): grants consent and returns
+   * - If GA is not loaded (edge cases like development builds, custom configurations, 
+   *   or pages without the inline script): loads GA dynamically
+   * This ensures analytics works even if the inline script is missing.
    */
   function loadGoogleAnalytics() {
     // Check if already loaded
