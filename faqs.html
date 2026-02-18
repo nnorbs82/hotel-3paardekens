@@ -273,11 +273,9 @@
           const sanitized = DOMPurify.sanitize(text, {
             // Only allow tags that Quill editor produces and are safe for FAQ content
             ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup'],
-            // Allow safe attributes
-            ALLOWED_ATTR: ['href', 'target', 'rel', 'class'],
-            // Add style attribute for Quill's inline formatting (font-size, color, etc.)
+            // Allow safe attributes including style for Quill's inline formatting
             // DOMPurify automatically sanitizes CSS to block dangerous properties
-            ADD_ATTR: ['style'],
+            ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'style'],
             // Only allow safe protocols in links
             ALLOW_UNKNOWN_PROTOCOLS: false,
           });
