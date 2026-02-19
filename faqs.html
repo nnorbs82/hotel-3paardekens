@@ -275,21 +275,18 @@
         function linkifyUrls(html) {
           const container = document.createElement('div');
           container.innerHTML = html;
-          const urlRegex = /(https?:\/\/[^\s<>"']+)/gi;
           const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
           const textNodes = [];
 
           let node;
           while ((node = walker.nextNode())) {
             if (node.parentElement && node.parentElement.closest('a')) continue;
-            if (urlRegex.test(node.textContent || '')) {
-              textNodes.push(node);
-            }
-            urlRegex.lastIndex = 0;
+            textNodes.push(node);
           }
 
           textNodes.forEach(textNode => {
             const text = textNode.textContent || '';
+            const urlRegex = /(https?:\/\/[^\s<>"']+)/gi;
             const fragment = document.createDocumentFragment();
             let lastIndex = 0;
             let match;
@@ -315,7 +312,6 @@
             }
 
             textNode.parentNode.replaceChild(fragment, textNode);
-            urlRegex.lastIndex = 0;
           });
 
           return container.innerHTML;
