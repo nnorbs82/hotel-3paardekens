@@ -272,6 +272,55 @@
       }
 
       function formatBody(text) {
+        function linkifyUrls(html) {
+          const container = document.createElement('div');
+          container.innerHTML = html;
+          const urlRegex = /(https?:\/\/[^\s<>"']+)/gi;
+          const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+          const textNodes = [];
+
+          let node;
+          while ((node = walker.nextNode())) {
+            if (node.parentElement && node.parentElement.closest('a')) continue;
+            if (urlRegex.test(node.textContent || '')) {
+              textNodes.push(node);
+            }
+            urlRegex.lastIndex = 0;
+          }
+
+          textNodes.forEach(textNode => {
+            const text = textNode.textContent || '';
+            const fragment = document.createDocumentFragment();
+            let lastIndex = 0;
+            let match;
+
+            while ((match = urlRegex.exec(text)) !== null) {
+              const url = match[0];
+              if (match.index > lastIndex) {
+                fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+              }
+
+              const link = document.createElement('a');
+              link.href = url;
+              link.textContent = url;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              fragment.appendChild(link);
+
+              lastIndex = match.index + url.length;
+            }
+
+            if (lastIndex < text.length) {
+              fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+            }
+
+            textNode.parentNode.replaceChild(fragment, textNode);
+            urlRegex.lastIndex = 0;
+          });
+
+          return container.innerHTML;
+        }
+
         // Sanitize HTML to allow safe formatting while preventing XSS
         // Uses DOMPurify with a minimal whitelist approach for maximum security
         // Allows inline styles for Quill editor formatting (font-size, color, background-color)
@@ -310,14 +359,14 @@
           // Remove only our specific hook function to avoid affecting other parts of the application
           DOMPurify.removeHook('afterSanitizeAttributes', linkSecurityHook);
           
-          return sanitized;
+          return linkifyUrls(sanitized);
         }
         
         // Fallback: if DOMPurify is not available, convert rich text to plain text safely
         const parser = new DOMParser();
         const firstPass = parser.parseFromString(text, 'text/html').body.textContent || '';
         const plainText = parser.parseFromString(firstPass, 'text/html').body.textContent || firstPass;
-        return escapeHtml(plainText).replace(/\n/g, '<br>');
+        return linkifyUrls(escapeHtml(plainText).replace(/\n/g, '<br>'));
       }
 
       async function getFaqBlocks() {
