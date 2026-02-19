@@ -214,6 +214,10 @@
       line-height: 1.7;
       font-size: clamp(15px, 2vw, 17px);
     }
+    .faq-answer a,
+    .faq-answer a:visited {
+      color: var(--accent);
+    }
     .empty-state {
       text-align: center;
       padding: 40px 20px 20px;
@@ -360,9 +364,11 @@
         }
         
         // Fallback: if DOMPurify is not available, convert rich text to plain text safely
-        // while preserving safe link destinations in text form for linkification
+        // while preserving safe link destinations and hyperlink text
         const parser = new DOMParser();
         const parsed = parser.parseFromString(text, 'text/html');
+        const preservedLinks = [];
+        let preservedLinkIndex = 0;
         parsed.body.querySelectorAll('a[href]').forEach(anchor => {
           const rawHref = (anchor.getAttribute('href') || '').trim();
           const normalizedHref = rawHref.toLowerCase().startsWith('www.') ? `https://${rawHref}` : rawHref;
@@ -374,13 +380,25 @@
             return;
           }
 
-          const replacementText = linkText && linkText !== rawHref && linkText !== normalizedHref
-            ? `${linkText} ${normalizedHref}`
-            : normalizedHref;
-          anchor.replaceWith(parsed.createTextNode(replacementText));
+          const token = `__FAQ_LINK_${preservedLinkIndex++}__`;
+          preservedLinks.push({
+            token,
+            href: normalizedHref,
+            text: linkText || normalizedHref
+          });
+          anchor.replaceWith(parsed.createTextNode(token));
         });
         const plainText = parsed.body.textContent || '';
-        return linkifyUrls(escapeHtml(plainText).replace(/\n/g, '<br>'));
+        let fallbackHtml = linkifyUrls(escapeHtml(plainText).replace(/\n/g, '<br>'));
+
+        preservedLinks.forEach(link => {
+          const safeHref = escapeHtml(link.href);
+          const safeText = escapeHtml(link.text);
+          const anchorHtml = `<a href="${safeHref}" target="_blank" rel="noopener noreferrer">${safeText}</a>`;
+          fallbackHtml = fallbackHtml.replace(link.token, anchorHtml);
+        });
+
+        return fallbackHtml;
       }
 
       async function getFaqBlocks() {
