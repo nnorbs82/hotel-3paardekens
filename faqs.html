@@ -286,19 +286,20 @@
 
           textNodes.forEach(textNode => {
             const text = textNode.textContent || '';
-            const urlRegex = /(https?:\/\/[^\s<>"']+)/gi;
+            const urlRegex = /(https?:\/\/[^\s<>"']+|www\.[^\s<>"']+)/gi;
             const fragment = document.createDocumentFragment();
             let lastIndex = 0;
             let match;
 
             while ((match = urlRegex.exec(text)) !== null) {
               const url = match[0];
+              const href = url.toLowerCase().startsWith('www.') ? `https://${url}` : url;
               if (match.index > lastIndex) {
                 fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
               }
 
               const link = document.createElement('a');
-              link.href = url;
+              link.href = href;
               link.textContent = url;
               link.target = '_blank';
               link.rel = 'noopener noreferrer';
@@ -359,9 +360,26 @@
         }
         
         // Fallback: if DOMPurify is not available, convert rich text to plain text safely
+        // while preserving safe link destinations in text form for linkification
         const parser = new DOMParser();
-        const firstPass = parser.parseFromString(text, 'text/html').body.textContent || '';
-        const plainText = parser.parseFromString(firstPass, 'text/html').body.textContent || firstPass;
+        const parsed = parser.parseFromString(text, 'text/html');
+        parsed.body.querySelectorAll('a[href]').forEach(anchor => {
+          const rawHref = (anchor.getAttribute('href') || '').trim();
+          const normalizedHref = rawHref.toLowerCase().startsWith('www.') ? `https://${rawHref}` : rawHref;
+          const isSafeHref = /^(https?:\/\/|mailto:|tel:)/i.test(normalizedHref);
+          const linkText = (anchor.textContent || '').trim();
+
+          if (!isSafeHref) {
+            anchor.replaceWith(parsed.createTextNode(linkText));
+            return;
+          }
+
+          const replacementText = linkText && linkText !== rawHref && linkText !== normalizedHref
+            ? `${linkText} ${normalizedHref}`
+            : normalizedHref;
+          anchor.replaceWith(parsed.createTextNode(replacementText));
+        });
+        const plainText = parsed.body.textContent || '';
         return linkifyUrls(escapeHtml(plainText).replace(/\n/g, '<br>'));
       }
 
