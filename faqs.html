@@ -399,7 +399,6 @@
           return linkifyUrls(sanitized);
         }
         
-        // Fallback if DOMPurify is not available
         const parser = new DOMParser();
         const parsed = parser.parseFromString(text, 'text/html');
         const preservedLinks = [];
