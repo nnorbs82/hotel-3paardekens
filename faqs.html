@@ -373,47 +373,33 @@
 
         // Sanitize HTML to allow safe formatting while preventing XSS
         // Uses DOMPurify with a minimal whitelist approach for maximum security
-        // Allows inline styles for Quill editor formatting (font-size, color, background-color)
-        // DOMPurify's built-in CSS sanitizer blocks dangerous CSS properties
         if (!text) return '';
         
         // Check if DOMPurify is available
         if (typeof DOMPurify !== 'undefined') {
-          // Define the hook function so we can remove it specifically later
           const linkSecurityHook = function(node) {
-            // Enforce rel="noopener noreferrer" on all target="_blank" links to prevent reverse tabnabbing
             if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
               const existingRel = node.getAttribute('rel') || '';
               const relValues = existingRel.split(/\s+/).filter(v => v);
-              
-              // Add noopener and noreferrer if not already present
               if (!relValues.includes('noopener')) relValues.push('noopener');
               if (!relValues.includes('noreferrer')) relValues.push('noreferrer');
-              
               node.setAttribute('rel', relValues.join(' '));
             }
           };
           
-          // Add hook to enforce rel="noopener noreferrer" on all target="_blank" links
-          // This prevents reverse tabnabbing attacks
           DOMPurify.addHook('afterSanitizeAttributes', linkSecurityHook);
           
           const sanitized = DOMPurify.sanitize(text, {
-            // Only allow tags that Quill editor produces and are safe for FAQ content
             ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup'],
-            // Allow safe attributes including style for Quill's inline formatting
-            // DOMPurify automatically sanitizes CSS to block dangerous properties
             ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'style'],
           });
           
-          // Remove only our specific hook function to avoid affecting other parts of the application
           DOMPurify.removeHook('afterSanitizeAttributes', linkSecurityHook);
           
           return linkifyUrls(sanitized);
         }
         
-        // Fallback: if DOMPurify is not available, convert rich text to plain text safely
-        // while preserving safe link destinations and hyperlink text
+        // Fallback if DOMPurify is not available
         const parser = new DOMParser();
         const parsed = parser.parseFromString(text, 'text/html');
         const preservedLinks = [];
