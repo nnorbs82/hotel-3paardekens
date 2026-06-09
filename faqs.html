@@ -214,9 +214,58 @@
       line-height: 1.7;
       font-size: clamp(15px, 2vw, 17px);
     }
+    .faq-answer p {
+      margin: 0 0 12px 0;
+    }
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+    .faq-answer ul,
+    .faq-answer ol {
+      margin: 12px 0;
+      padding-left: 24px;
+    }
+    .faq-answer li {
+      margin: 6px 0;
+    }
+    .faq-answer strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .faq-answer em {
+      font-style: italic;
+    }
+    .faq-answer u {
+      text-decoration: underline;
+    }
+    .faq-answer blockquote {
+      margin: 12px 0;
+      padding-left: 16px;
+      border-left: 3px solid var(--accent);
+      opacity: 0.9;
+    }
+    .faq-answer code {
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    .faq-answer pre {
+      background: rgba(255,255,255,0.08);
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      margin: 12px 0;
+    }
     .faq-answer a,
     .faq-answer a:visited {
       color: var(--accent);
+    }
+    .faq-answer a:hover {
+      text-decoration: underline;
     }
     .empty-state {
       text-align: center;
