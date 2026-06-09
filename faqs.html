@@ -214,6 +214,24 @@
       line-height: 1.7;
       font-size: clamp(15px, 2vw, 17px);
     }
+    .faq-answer h1,
+    .faq-answer h2,
+    .faq-answer h3,
+    .faq-answer h4,
+    .faq-answer h5,
+    .faq-answer h6 {
+      color: var(--text);
+      margin: 16px 0 8px;
+      line-height: 1.3;
+      font-weight: 600;
+      text-align: left;
+    }
+    .faq-answer h1 { font-size: 1.45em; }
+    .faq-answer h2 { font-size: 1.3em; }
+    .faq-answer h3 { font-size: 1.18em; }
+    .faq-answer h4,
+    .faq-answer h5,
+    .faq-answer h6 { font-size: 1.05em; }
     .faq-answer p {
       margin: 0 0 12px 0;
     }
@@ -390,13 +408,14 @@
           DOMPurify.addHook('afterSanitizeAttributes', linkSecurityHook);
           
           const sanitized = DOMPurify.sanitize(text, {
-            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup'],
+            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
             ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'style'],
           });
+          const sanitizedWithBreaks = sanitized.replace(/\n/g, '<br>');
           
           DOMPurify.removeHook('afterSanitizeAttributes', linkSecurityHook);
           
-          return linkifyUrls(sanitized);
+          return linkifyUrls(sanitizedWithBreaks);
         }
         
         const parser = new DOMParser();
