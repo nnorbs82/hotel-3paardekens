@@ -213,7 +213,6 @@
       color: var(--muted);
       line-height: 1.7;
       font-size: clamp(15px, 2vw, 17px);
-      overflow-wrap: anywhere;
     }
     .faq-answer h1,
     .faq-answer h2,
@@ -233,36 +232,7 @@
     .faq-answer h4,
     .faq-answer h5,
     .faq-answer h6 { font-size: 1.05em; }
-    .faq-answer > :first-child { margin-top: 0; }
-    .faq-answer > :last-child { margin-bottom: 0; }
-    .faq-answer .ql-align-center { text-align: center; }
-    .faq-answer .ql-align-right { text-align: right; }
-    .faq-answer .ql-align-justify { text-align: justify; }
-    .faq-answer .ql-indent-1 { padding-left: 3em; }
-    .faq-answer .ql-indent-2 { padding-left: 6em; }
-    .faq-answer .ql-indent-3 { padding-left: 9em; }
-    .faq-answer .ql-indent-4 { padding-left: 12em; }
-    .faq-answer .ql-indent-5 { padding-left: 15em; }
-    .faq-answer .ql-indent-6 { padding-left: 18em; }
-    .faq-answer .ql-indent-7 { padding-left: 21em; }
-    .faq-answer .ql-indent-8 { padding-left: 24em; }
-    .faq-answer .ql-font-roboto { font-family: Roboto, sans-serif; }
-    .faq-answer .ql-font-open-sans { font-family: 'Open Sans', sans-serif; }
-    .faq-answer .ql-font-lato { font-family: Lato, sans-serif; }
-    .faq-answer .ql-font-montserrat { font-family: Montserrat, sans-serif; }
-    .faq-answer .ql-font-playfair { font-family: 'Playfair Display', serif; }
-    .faq-answer .ql-font-merriweather { font-family: Merriweather, serif; }
-    .faq-answer .ql-font-raleway { font-family: Raleway, sans-serif; }
-    .faq-answer .ql-font-poppins { font-family: Poppins, sans-serif; }
-    .faq-answer .ql-font-crimson { font-family: 'Crimson Text', serif; }
-    .faq-answer .ql-font-libre-baskerville { font-family: 'Libre Baskerville', serif; }
-    .faq-answer .ql-font-oswald { font-family: Oswald, sans-serif; }
-    .faq-answer .ql-font-source-sans { font-family: 'Source Sans Pro', sans-serif; }
-    .faq-answer .ql-font-pt-serif { font-family: 'PT Serif', serif; }
-    .faq-answer .ql-font-ubuntu { font-family: Ubuntu, sans-serif; }
-    .faq-answer .ql-font-nunito { font-family: Nunito, sans-serif; }
-    .faq-answer p,
-    .faq-answer div {
+    .faq-answer p {
       margin: 0 0 12px 0;
     }
     .faq-answer p:last-child {
@@ -578,11 +548,11 @@
           
           DOMPurify.addHook('afterSanitizeAttributes', linkSecurityHook);
           
-          const sanitized = DOMPurify.sanitize(normalizedText, {
-            ALLOWED_TAGS: FAQ_ALLOWED_TAGS,
-            ALLOWED_ATTR: FAQ_ALLOWED_ATTRS,
+          const sanitized = DOMPurify.sanitize(text, {
+            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+            ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'style'],
           });
-          const sanitizedWithBreaks = preserveSanitizedLineBreaks(sanitized);
+          const sanitizedWithBreaks = sanitized.replace(/\n/g, '<br>');
           
           DOMPurify.removeHook('afterSanitizeAttributes', linkSecurityHook);
           
