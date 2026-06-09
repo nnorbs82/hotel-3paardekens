@@ -213,8 +213,56 @@
       color: var(--muted);
       line-height: 1.7;
       font-size: clamp(15px, 2vw, 17px);
+      overflow-wrap: anywhere;
     }
-    .faq-answer p {
+    .faq-answer h1,
+    .faq-answer h2,
+    .faq-answer h3,
+    .faq-answer h4,
+    .faq-answer h5,
+    .faq-answer h6 {
+      color: var(--text);
+      margin: 16px 0 8px;
+      line-height: 1.3;
+      font-weight: 600;
+      text-align: left;
+    }
+    .faq-answer h1 { font-size: 1.45em; }
+    .faq-answer h2 { font-size: 1.3em; }
+    .faq-answer h3 { font-size: 1.18em; }
+    .faq-answer h4,
+    .faq-answer h5,
+    .faq-answer h6 { font-size: 1.05em; }
+    .faq-answer > :first-child { margin-top: 0; }
+    .faq-answer > :last-child { margin-bottom: 0; }
+    .faq-answer .ql-align-center { text-align: center; }
+    .faq-answer .ql-align-right { text-align: right; }
+    .faq-answer .ql-align-justify { text-align: justify; }
+    .faq-answer .ql-indent-1 { padding-left: 3em; }
+    .faq-answer .ql-indent-2 { padding-left: 6em; }
+    .faq-answer .ql-indent-3 { padding-left: 9em; }
+    .faq-answer .ql-indent-4 { padding-left: 12em; }
+    .faq-answer .ql-indent-5 { padding-left: 15em; }
+    .faq-answer .ql-indent-6 { padding-left: 18em; }
+    .faq-answer .ql-indent-7 { padding-left: 21em; }
+    .faq-answer .ql-indent-8 { padding-left: 24em; }
+    .faq-answer .ql-font-roboto { font-family: Roboto, sans-serif; }
+    .faq-answer .ql-font-open-sans { font-family: 'Open Sans', sans-serif; }
+    .faq-answer .ql-font-lato { font-family: Lato, sans-serif; }
+    .faq-answer .ql-font-montserrat { font-family: Montserrat, sans-serif; }
+    .faq-answer .ql-font-playfair { font-family: 'Playfair Display', serif; }
+    .faq-answer .ql-font-merriweather { font-family: Merriweather, serif; }
+    .faq-answer .ql-font-raleway { font-family: Raleway, sans-serif; }
+    .faq-answer .ql-font-poppins { font-family: Poppins, sans-serif; }
+    .faq-answer .ql-font-crimson { font-family: 'Crimson Text', serif; }
+    .faq-answer .ql-font-libre-baskerville { font-family: 'Libre Baskerville', serif; }
+    .faq-answer .ql-font-oswald { font-family: Oswald, sans-serif; }
+    .faq-answer .ql-font-source-sans { font-family: 'Source Sans Pro', sans-serif; }
+    .faq-answer .ql-font-pt-serif { font-family: 'PT Serif', serif; }
+    .faq-answer .ql-font-ubuntu { font-family: Ubuntu, sans-serif; }
+    .faq-answer .ql-font-nunito { font-family: Nunito, sans-serif; }
+    .faq-answer p,
+    .faq-answer div {
       margin: 0 0 12px 0;
     }
     .faq-answer p:last-child {
@@ -324,6 +372,145 @@
         return div.innerHTML;
       }
 
+      const FAQ_ALLOWED_TAGS = ['p', 'div', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+      const FAQ_ALLOWED_ATTRS = ['href', 'target', 'rel', 'class', 'style'];
+      const FAQ_BLOCK_TAGS = new Set(['p', 'div', 'section', 'article', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']);
+
+      function decodeHtmlEntities(value) {
+        if (!value || !/[&][a-zA-Z#0-9]+;/.test(value)) return value || '';
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = value;
+        return textarea.value;
+      }
+
+      function isSafeUrl(value) {
+        return /^(https?:\/\/|mailto:|tel:)/i.test(value);
+      }
+
+      function normalizeHref(rawHref) {
+        const href = (rawHref || '').trim();
+        return href.toLowerCase().startsWith('www.') ? `https://${href}` : href;
+      }
+
+      function sanitizeInlineStyle(styleValue) {
+        const allowedProperties = new Set([
+          'background-color',
+          'color',
+          'font-family',
+          'font-size',
+          'text-align'
+        ]);
+
+        return (styleValue || '')
+          .split(';')
+          .map(rule => rule.trim())
+          .filter(rule => {
+            const separatorIndex = rule.indexOf(':');
+            if (separatorIndex === -1) return false;
+            const property = rule.slice(0, separatorIndex).trim().toLowerCase();
+            const value = rule.slice(separatorIndex + 1).trim().toLowerCase();
+            return allowedProperties.has(property) &&
+              !value.includes('url(') &&
+              !value.includes('expression(') &&
+              !value.includes('javascript:');
+          })
+          .join('; ');
+      }
+
+      function appendSanitizedChildren(sourceNode, targetNode) {
+        Array.from(sourceNode.childNodes).forEach(child => {
+          const sanitizedChild = sanitizeFallbackNode(child);
+          if (sanitizedChild) targetNode.appendChild(sanitizedChild);
+        });
+      }
+
+      function sanitizeFallbackNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return document.createTextNode(node.textContent || '');
+        }
+
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          return document.createTextNode('');
+        }
+
+        const tagName = node.tagName.toLowerCase();
+        if (!FAQ_ALLOWED_TAGS.includes(tagName)) {
+          const fragment = document.createDocumentFragment();
+          appendSanitizedChildren(node, fragment);
+          if (FAQ_BLOCK_TAGS.has(tagName)) {
+            fragment.appendChild(document.createElement('br'));
+          }
+          return fragment;
+        }
+
+        const safeElement = document.createElement(tagName);
+        FAQ_ALLOWED_ATTRS.forEach(attr => {
+          if (!node.hasAttribute(attr)) return;
+
+          const value = node.getAttribute(attr) || '';
+          if (attr === 'href') {
+            const normalizedHref = normalizeHref(value);
+            if (isSafeUrl(normalizedHref)) safeElement.setAttribute('href', normalizedHref);
+            return;
+          }
+
+          if (attr === 'target') {
+            if (value === '_blank') safeElement.setAttribute('target', '_blank');
+            return;
+          }
+
+          if (attr === 'rel') {
+            safeElement.setAttribute('rel', value.replace(/[^a-zA-Z0-9_\- ]/g, ''));
+            return;
+          }
+
+          if (attr === 'class') {
+            const safeClass = value.split(/\s+/).filter(className => /^[a-zA-Z0-9_-]+$/.test(className)).join(' ');
+            if (safeClass) safeElement.setAttribute('class', safeClass);
+            return;
+          }
+
+          if (attr === 'style') {
+            const safeStyle = sanitizeInlineStyle(value);
+            if (safeStyle) safeElement.setAttribute('style', safeStyle);
+          }
+        });
+
+        if (tagName === 'a') {
+          const href = safeElement.getAttribute('href');
+          if (!href) {
+            const fragment = document.createDocumentFragment();
+            appendSanitizedChildren(node, fragment);
+            return fragment;
+          }
+
+          if (safeElement.getAttribute('target') === '_blank') {
+            safeElement.setAttribute('rel', 'noopener noreferrer');
+          }
+        }
+
+        appendSanitizedChildren(node, safeElement);
+        return safeElement;
+      }
+
+      function sanitizeFaqHtmlFallback(html) {
+        const parser = new DOMParser();
+        const parsed = parser.parseFromString(html, 'text/html');
+        const container = document.createElement('div');
+        appendSanitizedChildren(parsed.body, container);
+        return container.innerHTML;
+      }
+
+      function normalizeStoredFaqBody(text) {
+        const value = text || '';
+        const decoded = decodeHtmlEntities(value);
+        return /<\/?[a-z][\s\S]*>/i.test(decoded) ? decoded : value;
+      }
+
+      function preserveSanitizedLineBreaks(html) {
+        return html.replace(/\n/g, '<br>');
+      }
+
       function formatBody(text) {
         function linkifyUrls(html) {
           const container = document.createElement('div');
@@ -374,6 +561,8 @@
         // Sanitize HTML to allow safe formatting while preventing XSS
         // Uses DOMPurify with a minimal whitelist approach for maximum security
         if (!text) return '';
+
+        const normalizedText = normalizeStoredFaqBody(text);
         
         // Check if DOMPurify is available
         if (typeof DOMPurify !== 'undefined') {
@@ -389,50 +578,19 @@
           
           DOMPurify.addHook('afterSanitizeAttributes', linkSecurityHook);
           
-          const sanitized = DOMPurify.sanitize(text, {
-            ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'span', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'sub', 'sup'],
-            ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'style'],
+          const sanitized = DOMPurify.sanitize(normalizedText, {
+            ALLOWED_TAGS: FAQ_ALLOWED_TAGS,
+            ALLOWED_ATTR: FAQ_ALLOWED_ATTRS,
           });
+          const sanitizedWithBreaks = preserveSanitizedLineBreaks(sanitized);
           
           DOMPurify.removeHook('afterSanitizeAttributes', linkSecurityHook);
           
-          return linkifyUrls(sanitized);
+          return linkifyUrls(sanitizedWithBreaks);
         }
         
-        const parser = new DOMParser();
-        const parsed = parser.parseFromString(text, 'text/html');
-        const preservedLinks = [];
-        let preservedLinkIndex = 0;
-        parsed.body.querySelectorAll('a[href]').forEach(anchor => {
-          const rawHref = (anchor.getAttribute('href') || '').trim();
-          const normalizedHref = rawHref.toLowerCase().startsWith('www.') ? `https://${rawHref}` : rawHref;
-          const isSafeHref = /^(https?:\/\/|mailto:|tel:)/i.test(normalizedHref);
-          const linkText = (anchor.textContent || '').trim();
-
-          if (!isSafeHref) {
-            anchor.replaceWith(parsed.createTextNode(linkText));
-            return;
-          }
-
-          const token = `__FAQ_LINK_${preservedLinkIndex++}__`;
-          preservedLinks.push({
-            token,
-            href: normalizedHref,
-            text: linkText || normalizedHref
-          });
-          anchor.replaceWith(parsed.createTextNode(token));
-        });
-        const plainText = parsed.body.textContent || '';
-        let fallbackHtml = linkifyUrls(escapeHtml(plainText).replace(/\n/g, '<br>'));
-
-        preservedLinks.forEach(link => {
-          const safeHref = escapeHtml(link.href);
-          const safeText = escapeHtml(link.text);
-          const anchorHtml = `<a href="${safeHref}" target="_blank" rel="noopener noreferrer">${safeText}</a>`;
-          fallbackHtml = fallbackHtml.replace(link.token, anchorHtml);
-        });
-
-        return fallbackHtml;
+        const sanitized = sanitizeFaqHtmlFallback(normalizedText);
+        return linkifyUrls(preserveSanitizedLineBreaks(sanitized));
       }
 
       async function getFaqBlocks() {
