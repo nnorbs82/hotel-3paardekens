@@ -106,6 +106,9 @@
             <button id="btnNavFaq" class="admin-nav-btn">
               ❓ FAQs
             </button>
+            <button id="btnNavAppleFaq" class="admin-nav-btn">
+              🍎 Apple FAQs
+            </button>
             <button id="btnNavAbout" class="admin-nav-btn">
               ✨ About Us
             </button>
@@ -135,6 +138,14 @@
                 ➕ Add FAQ Block
               </button>
               <button id="btnLogoutFaq" class="btn">
+                🚪 Logout
+              </button>
+            </div>
+            <div id="appleFaqActions" class="admin-menu-actions hidden">
+              <button id="btnAddAppleFaq" class="btn btn-success">
+                ➕ Add Apple FAQ Block
+              </button>
+              <button id="btnLogoutAppleFaq" class="btn">
                 🚪 Logout
               </button>
             </div>
@@ -209,6 +220,26 @@
           <p class="empty-state-desc">Create your first FAQ block to get started</p>
           <button class="btn btn-success" onclick="document.getElementById('btnAddFaq').click()">
             ➕ Add Your First FAQ Block
+          </button>
+        </div>
+      </div>
+
+      <!-- Apple Wallet FAQ Management Section -->
+      <div id="appleFaqManagementSection" class="hidden">
+        <div class="admin-header">
+          <h1>Apple FAQ Management</h1>
+        </div>
+
+        <div id="appleFaqBlocksContainer" class="info-blocks-list">
+          <!-- Apple FAQ blocks will be loaded here -->
+        </div>
+
+        <div id="emptyStateAppleFaq" class="empty-state hidden">
+          <div class="empty-state-icon">🍎</div>
+          <h2 class="empty-state-title">No Apple FAQ Blocks Yet</h2>
+          <p class="empty-state-desc">Create your first Apple FAQ block to get started</p>
+          <button class="btn btn-success" onclick="document.getElementById('btnAddAppleFaq').click()">
+            ➕ Add Your First Apple FAQ Block
           </button>
         </div>
       </div>
@@ -675,6 +706,7 @@
   <script src="admin-room-manager.js"></script>
   <script src="admin-info-manager.js"></script>
   <script src="admin-faq-manager.js"></script>
+  <script src="admin-apple-faq-manager.js"></script>
   <script src="site-content-manager.js"></script>
   <script>
     (function() {
@@ -746,6 +778,7 @@
       const roomActions = document.getElementById('roomActions');
       const infoActions = document.getElementById('infoActions');
       const faqActions = document.getElementById('faqActions');
+      const appleFaqActions = document.getElementById('appleFaqActions');
       const aboutActions = document.getElementById('aboutActions');
       const sisterActions = document.getElementById('sisterActions');
       const roomsContainer = document.getElementById('roomsContainer');
@@ -814,11 +847,13 @@
         const isRoomsActive = btnNavRooms.classList.contains('active');
         const isInfoActive = btnNavInfo.classList.contains('active');
         const isFaqActive = btnNavFaq.classList.contains('active');
+        const isAppleFaqActive = btnNavAppleFaq.classList.contains('active');
         const isAboutActive = btnNavAbout.classList.contains('active');
         const isSisterActive = btnNavSister.classList.contains('active');
         roomActions.classList.toggle('hidden', !isRoomsActive);
         infoActions.classList.toggle('hidden', !isInfoActive);
         faqActions.classList.toggle('hidden', !isFaqActive);
+        appleFaqActions.classList.toggle('hidden', !isAppleFaqActive);
         aboutActions.classList.toggle('hidden', !isAboutActive);
         sisterActions.classList.toggle('hidden', !isSisterActive);
       }
@@ -1632,21 +1667,27 @@
       const btnNavRooms = document.getElementById('btnNavRooms');
       const btnNavInfo = document.getElementById('btnNavInfo');
       const btnNavFaq = document.getElementById('btnNavFaq');
+      const btnNavAppleFaq = document.getElementById('btnNavAppleFaq');
       const btnNavAbout = document.getElementById('btnNavAbout');
       const btnNavSister = document.getElementById('btnNavSister');
       const roomManagementSection = document.getElementById('roomManagementSection');
       const infoManagementSection = document.getElementById('infoManagementSection');
       const faqManagementSection = document.getElementById('faqManagementSection');
+      const appleFaqManagementSection = document.getElementById('appleFaqManagementSection');
       const aboutManagementSection = document.getElementById('aboutManagementSection');
       const sisterManagementSection = document.getElementById('sisterManagementSection');
       const btnAddInfo = document.getElementById('btnAddInfo');
       const btnAddFaq = document.getElementById('btnAddFaq');
+      const btnAddAppleFaq = document.getElementById('btnAddAppleFaq');
       const btnLogoutInfo = document.getElementById('btnLogoutInfo');
       const btnLogoutFaq = document.getElementById('btnLogoutFaq');
+      const btnLogoutAppleFaq = document.getElementById('btnLogoutAppleFaq');
       const infoBlocksContainer = document.getElementById('infoBlocksContainer');
       const emptyStateInfo = document.getElementById('emptyStateInfo');
       const faqBlocksContainer = document.getElementById('faqBlocksContainer');
       const emptyStateFaq = document.getElementById('emptyStateFaq');
+      const appleFaqBlocksContainer = document.getElementById('appleFaqBlocksContainer');
+      const emptyStateAppleFaq = document.getElementById('emptyStateAppleFaq');
       const btnLogoutAbout = document.getElementById('btnLogoutAbout');
       const btnLogoutSister = document.getElementById('btnLogoutSister');
       const btnSaveAbout = document.getElementById('btnSaveAbout');
@@ -1734,11 +1775,13 @@
         btnNavRooms.classList.add('active');
         btnNavInfo.classList.remove('active');
         btnNavFaq.classList.remove('active');
+        btnNavAppleFaq.classList.remove('active');
         btnNavAbout.classList.remove('active');
         btnNavSister.classList.remove('active');
         roomManagementSection.classList.remove('hidden');
         infoManagementSection.classList.add('hidden');
         faqManagementSection.classList.add('hidden');
+        appleFaqManagementSection.classList.add('hidden');
         aboutManagementSection.classList.add('hidden');
         sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
@@ -1751,11 +1794,13 @@
         btnNavInfo.classList.add('active');
         btnNavRooms.classList.remove('active');
         btnNavFaq.classList.remove('active');
+        btnNavAppleFaq.classList.remove('active');
         btnNavAbout.classList.remove('active');
         btnNavSister.classList.remove('active');
         infoManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
         faqManagementSection.classList.add('hidden');
+        appleFaqManagementSection.classList.add('hidden');
         aboutManagementSection.classList.add('hidden');
         sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
@@ -1769,11 +1814,33 @@
         btnNavFaq.classList.add('active');
         btnNavRooms.classList.remove('active');
         btnNavInfo.classList.remove('active');
+        btnNavAppleFaq.classList.remove('active');
         btnNavAbout.classList.remove('active');
         btnNavSister.classList.remove('active');
         faqManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
         infoManagementSection.classList.add('hidden');
+        appleFaqManagementSection.classList.add('hidden');
+        aboutManagementSection.classList.add('hidden');
+        sisterManagementSection.classList.add('hidden');
+        updateTopMenuActions();
+        adminMenuContent.classList.remove('is-open');
+        btnMenuToggle.setAttribute('aria-expanded', 'false');
+        loadInfoBlocks();
+      });
+
+      btnNavAppleFaq.addEventListener('click', () => {
+        activeContentType = 'appleFaq';
+        btnNavAppleFaq.classList.add('active');
+        btnNavRooms.classList.remove('active');
+        btnNavInfo.classList.remove('active');
+        btnNavFaq.classList.remove('active');
+        btnNavAbout.classList.remove('active');
+        btnNavSister.classList.remove('active');
+        appleFaqManagementSection.classList.remove('hidden');
+        roomManagementSection.classList.add('hidden');
+        infoManagementSection.classList.add('hidden');
+        faqManagementSection.classList.add('hidden');
         aboutManagementSection.classList.add('hidden');
         sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
@@ -1787,11 +1854,13 @@
         btnNavRooms.classList.remove('active');
         btnNavInfo.classList.remove('active');
         btnNavFaq.classList.remove('active');
+        btnNavAppleFaq.classList.remove('active');
         btnNavSister.classList.remove('active');
         aboutManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
         infoManagementSection.classList.add('hidden');
         faqManagementSection.classList.add('hidden');
+        appleFaqManagementSection.classList.add('hidden');
         sisterManagementSection.classList.add('hidden');
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
@@ -1804,11 +1873,13 @@
         btnNavRooms.classList.remove('active');
         btnNavInfo.classList.remove('active');
         btnNavFaq.classList.remove('active');
+        btnNavAppleFaq.classList.remove('active');
         btnNavAbout.classList.remove('active');
         sisterManagementSection.classList.remove('hidden');
         roomManagementSection.classList.add('hidden');
         infoManagementSection.classList.add('hidden');
         faqManagementSection.classList.add('hidden');
+        appleFaqManagementSection.classList.add('hidden');
         aboutManagementSection.classList.add('hidden');
         updateTopMenuActions();
         adminMenuContent.classList.remove('is-open');
@@ -1838,6 +1909,14 @@
       });
 
       btnLogoutFaq.addEventListener('click', async () => {
+        if (confirm('Are you sure you want to logout?')) {
+          await HotelAuth.logout();
+          showLogin();
+          loginForm.reset();
+        }
+      });
+
+      btnLogoutAppleFaq.addEventListener('click', async () => {
         if (confirm('Are you sure you want to logout?')) {
           await HotelAuth.logout();
           showLogin();
@@ -2080,6 +2159,25 @@
       });
 
       function getActiveContentConfig() {
+        if (activeContentType === 'appleFaq') {
+          return {
+            manager: AppleFAQManager,
+            container: appleFaqBlocksContainer,
+            emptyState: emptyStateAppleFaq,
+            singular: 'Apple FAQ Block',
+            singularLower: 'Apple FAQ block',
+            sectionKey: 'info',
+            methods: {
+              getBlocks: 'getFAQBlocks',
+              getBlock: 'getFAQBlock',
+              reorderBlocks: 'reorderFAQBlocks',
+              deleteBlock: 'deleteFAQBlock',
+              updateBlock: 'updateFAQBlock',
+              createBlock: 'createFAQBlock'
+            }
+          };
+        }
+
         if (activeContentType === 'faq') {
           return {
             manager: FAQManager,
@@ -2253,6 +2351,7 @@
 
       btnAddInfo.addEventListener('click', openAddContentBlockModal);
       btnAddFaq.addEventListener('click', openAddContentBlockModal);
+      btnAddAppleFaq.addEventListener('click', openAddContentBlockModal);
 
       // Open info block modal for editing
       async function editInfoBlock(blockId) {

@@ -8,6 +8,10 @@
       ".read": true,
       ".write": "auth != null"
     },
+    "appleFaqBlocks": {
+      ".read": true,
+      ".write": "auth != null"
+    },
     "rooms": {
       ".read": true,
       ".write": "auth != null"
