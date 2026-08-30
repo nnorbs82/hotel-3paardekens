@@ -1,0 +1,15 @@
+{
+  "id": "twin",
+  "order": 2,
+  "name": "Twin Room",
+  "strapline": "Two beds, one central address",
+  "description": "Travelling with a friend? We have you. Twin beds in the middle of the city.",
+  "amenities": ["Twin beds", "TV", "Private bathroom", "City view", "Coffee/tea maker", "Heating", "Wardrobe"],
+  "gallery": [
+    "/images/legacy/rooms/Twin/1.jpg",
+    "/images/legacy/rooms/Twin/2.jpg",
+    "/images/legacy/rooms/Twin/3.jpg",
+    "/images/legacy/rooms/Twin/4.jpg"
+  ],
+  "bookingUrl": "https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
+}

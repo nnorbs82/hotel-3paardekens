@@ -1,0 +1,18 @@
+{
+  "id": "single",
+  "order": 1,
+  "name": "Single Room",
+  "strapline": "Simple comfort for one",
+  "description": "Comfortable single room, ideal for short business stays.",
+  "amenities": ["Single bed", "TV", "Private bathroom", "City view", "Coffee/tea maker", "Heating", "Wardrobe"],
+  "gallery": [
+    "/images/legacy/rooms/Single/1.jpg",
+    "/images/legacy/rooms/Single/2.jpg",
+    "/images/legacy/rooms/Single/3.jpg",
+    "/images/legacy/rooms/Single/4.jpg",
+    "/images/legacy/rooms/Single/5.jpg",
+    "/images/legacy/rooms/Single/6.jpg",
+    "/images/legacy/rooms/Single/7.jpg"
+  ],
+  "bookingUrl": "https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
+}

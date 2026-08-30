@@ -1,0 +1,136 @@
+media:
+  - name: room_images
+    label: Room photography
+    input: Rooms
+    output: /images/legacy/rooms
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: hotel_images
+    label: Hotel photography
+    input: aboutus
+    output: /images/legacy/about
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: uploads
+    label: New website uploads
+    input: v2/public/images/uploads
+    output: /images/uploads
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+
+content:
+  - name: hotel
+    label: Hotel content
+    type: group
+    items:
+      - name: site
+        label: Homepage & hotel details
+        type: file
+        path: v2/content/site.json
+        format: json
+        fields:
+          - name: hotelName
+            label: Hotel name
+            type: string
+            required: true
+          - name: locationLine
+            label: Location line
+            type: string
+          - name: heroTitle
+            label: Homepage headline
+            type: string
+            required: true
+          - name: heroText
+            label: Homepage introduction
+            type: text
+          - name: aboutEyebrow
+            label: About section eyebrow
+            type: string
+          - name: aboutTitle
+            label: About section title
+            type: string
+          - name: aboutBody
+            label: About section text
+            type: text
+          - name: breakfastTitle
+            label: Breakfast title
+            type: string
+          - name: breakfastText
+            label: Breakfast text
+            type: text
+          - name: address
+            label: Address
+            type: string
+          - name: phone
+            label: Telephone
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: bookingUrl
+            label: Mews booking URL
+            type: string
+          - name: sisterHotelName
+            label: Sister hotel name
+            type: string
+          - name: sisterHotelText
+            label: Sister hotel description
+            type: text
+          - name: sisterHotelUrl
+            label: Sister hotel URL
+            type: string
+
+      - name: rooms
+        label: Rooms
+        type: collection
+        path: v2/content/rooms
+        format: json
+        filename: "{id}.json"
+        subfolders: false
+        view:
+          primary: name
+          fields: [name, order]
+          sort: [order, name]
+          default:
+            sort: order
+            order: asc
+        fields:
+          - name: id
+            label: Internal ID
+            type: string
+            required: true
+            readonly: true
+          - name: order
+            label: Display order
+            type: number
+            required: true
+          - name: name
+            label: Room name
+            type: string
+            required: true
+          - name: strapline
+            label: Short heading
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: amenities
+            label: Amenities
+            type: string
+            list: true
+          - name: gallery
+            label: Gallery
+            type: image
+            options:
+              media: room_images
+              multiple:
+                max: 20
+              unique: true
+              extensions: [jpg, jpeg, png, webp]
+          - name: bookingUrl
+            label: Booking URL
+            type: string
+
+settings:
+  commit:
+    message: "content: update {collection}"
