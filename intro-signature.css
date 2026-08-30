@@ -50,7 +50,7 @@
   height: auto;
   aspect-ratio: 16 / 9;
   right: -34%;
-  bottom: 0;
+  bottom: -100px;
   object-fit: cover;
   border: 8px solid #eee7db;
   box-shadow: 0 20px 44px rgba(27,25,20,.16);
@@ -148,6 +148,7 @@
   .intro-image-small {
     width: 84%;
     right: -31%;
+    bottom: -90px;
   }
 }
 
@@ -161,6 +162,7 @@
   .intro-image-small {
     width: 82%;
     right: -29%;
+    bottom: -80px;
   }
   .intro-copy .section-title { font-size: clamp(46px, 6vw, 64px); }
 }
@@ -177,6 +179,7 @@
   .intro-image-small {
     width: 78%;
     right: -25%;
+    bottom: -70px;
   }
 }
 
@@ -191,6 +194,7 @@
   .intro-image-small {
     width: 76%;
     right: -22%;
+    bottom: -60px;
     border-width: 6px;
   }
   .intro-copy {
