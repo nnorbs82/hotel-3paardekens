@@ -42,14 +42,14 @@
   box-shadow: 0 24px 58px rgba(27,25,20,.15);
 }
 
-/* Preserve the overlap relationship, but scale both images up together. */
+/* Larger secondary image, still anchored to the same lower-right overlap. */
 .intro-image-small {
   position: absolute;
   z-index: 2;
-  width: 58%;
+  width: 86%;
   height: auto;
   aspect-ratio: 16 / 9;
-  right: -42px;
+  right: -34%;
   bottom: 0;
   object-fit: cover;
   border: 8px solid #eee7db;
@@ -145,6 +145,10 @@
     grid-template-columns: 410px minmax(0,1fr);
     gap: 62px;
   }
+  .intro-image-small {
+    width: 84%;
+    right: -31%;
+  }
 }
 
 @media (max-width: 940px) {
@@ -154,7 +158,10 @@
     grid-template-columns: 370px minmax(0,1fr);
     gap: 50px;
   }
-  .intro-image-small { right: -28px; width: 59%; }
+  .intro-image-small {
+    width: 82%;
+    right: -29%;
+  }
   .intro-copy .section-title { font-size: clamp(46px, 6vw, 64px); }
 }
 
@@ -167,6 +174,10 @@
     width: min(86%, 470px);
     margin: 0 auto;
   }
+  .intro-image-small {
+    width: 78%;
+    right: -25%;
+  }
 }
 
 @media (max-width: 680px) {
@@ -178,8 +189,8 @@
     padding-bottom: 62px;
   }
   .intro-image-small {
-    width: 61%;
-    right: -9%;
+    width: 76%;
+    right: -22%;
     border-width: 6px;
   }
   .intro-copy {
