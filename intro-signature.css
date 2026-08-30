@@ -1,7 +1,8 @@
 /* Compact editorial About section - homepage only */
 .intro {
   position: relative;
-  overflow: hidden;
+  z-index: 2;
+  overflow: visible;
   padding: 74px 0 88px;
   background: #eee7db;
   border-top: 1px solid rgba(28,28,25,.08);
@@ -20,7 +21,7 @@
 .intro-grid {
   display: grid;
   grid-template-columns: 470px minmax(0, 1fr);
-  gap: clamp(72px, 7vw, 112px);
+  gap: clamp(84px, 7.5vw, 118px);
   align-items: center;
   min-height: 0;
 }
@@ -42,18 +43,22 @@
   box-shadow: 0 24px 58px rgba(27,25,20,.15);
 }
 
-/* Larger secondary image, still anchored to the same lower-right overlap. */
+/*
+ * The secondary image now grows mainly to the left and bridges the About/Rooms
+ * boundary. This keeps it away from the copy while giving it the same deliberate
+ * cross-surface feeling as the breakfast feature card.
+ */
 .intro-image-small {
   position: absolute;
-  z-index: 2;
-  width: 86%;
+  z-index: 4;
+  width: 96%;
   height: auto;
   aspect-ratio: 16 / 9;
-  right: -34%;
-  bottom: -100px;
+  right: -8%;
+  bottom: -220px;
   object-fit: cover;
   border: 8px solid #eee7db;
-  box-shadow: 0 20px 44px rgba(27,25,20,.16);
+  box-shadow: 0 24px 52px rgba(27,25,20,.20);
 }
 
 .intro-image-wrap::after {
@@ -62,6 +67,7 @@
 
 .intro-copy {
   position: relative;
+  z-index: 5;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -120,6 +126,13 @@
   border-color: var(--bronze-dark);
 }
 
+/* Make room in the following dark section for the bridging image. */
+.rooms-section {
+  position: relative;
+  z-index: 1;
+  padding-top: 242px;
+}
+
 /* Subtle entrance only - no large movement. */
 @media (prefers-reduced-motion: no-preference) {
   .intro .intro-image-main,
@@ -143,13 +156,14 @@
   .intro .container { width: min(100% - 56px, 1080px); }
   .intro-grid {
     grid-template-columns: 410px minmax(0,1fr);
-    gap: 62px;
+    gap: 72px;
   }
   .intro-image-small {
-    width: 84%;
-    right: -31%;
-    bottom: -90px;
+    width: 94%;
+    right: -6%;
+    bottom: -195px;
   }
+  .rooms-section { padding-top: 220px; }
 }
 
 @media (max-width: 940px) {
@@ -157,44 +171,49 @@
   .intro .container { width: min(100% - 48px, 900px); }
   .intro-grid {
     grid-template-columns: 370px minmax(0,1fr);
-    gap: 50px;
+    gap: 58px;
   }
   .intro-image-small {
-    width: 82%;
-    right: -29%;
-    bottom: -80px;
+    width: 92%;
+    right: -4%;
+    bottom: -170px;
   }
   .intro-copy .section-title { font-size: clamp(46px, 6vw, 64px); }
+  .rooms-section { padding-top: 200px; }
 }
 
+/* Once the layout stacks, keep the image inside the About composition so it cannot cover copy. */
 @media (max-width: 760px) {
+  .intro { overflow: hidden; }
   .intro-grid {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 70px;
   }
   .intro-image-wrap {
     width: min(86%, 470px);
     margin: 0 auto;
+    padding-bottom: 118px;
   }
   .intro-image-small {
-    width: 78%;
-    right: -25%;
-    bottom: -70px;
+    width: 82%;
+    right: -8%;
+    bottom: -58px;
   }
+  .rooms-section { padding-top: 122px; }
 }
 
 @media (max-width: 680px) {
   .intro { padding: 58px 0 70px; }
   .intro .container { width: calc(100% - 34px); }
-  .intro-grid { gap: 44px; }
+  .intro-grid { gap: 62px; }
   .intro-image-wrap {
     width: min(88%, 420px);
-    padding-bottom: 62px;
+    padding-bottom: 105px;
   }
   .intro-image-small {
-    width: 76%;
-    right: -22%;
-    bottom: -60px;
+    width: 80%;
+    right: -5%;
+    bottom: -48px;
     border-width: 6px;
   }
   .intro-copy {
