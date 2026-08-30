@@ -1,163 +1,112 @@
-/* Signature editorial About section - homepage only */
+/* Compact editorial About section - homepage only */
 .intro {
   position: relative;
-  isolation: isolate;
   overflow: hidden;
-  padding: 86px 0 98px;
-  background: #ded4c4;
-  border-top: 1px solid rgba(28,28,25,.09);
+  padding: 72px 0 84px;
+  background: #eee7db;
+  border-top: 1px solid rgba(28,28,25,.08);
+  border-bottom: 1px solid rgba(28,28,25,.08);
 }
 
-.intro::before {
-  content: '33';
-  position: absolute;
-  z-index: -1;
-  left: -1.5vw;
-  top: -24px;
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(190px, 27vw, 390px);
-  line-height: .8;
-  letter-spacing: -.085em;
-  color: rgba(28,28,25,.045);
-  pointer-events: none;
-}
-
+.intro::before,
 .intro::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: rgba(28,28,25,.11);
+  display: none;
 }
 
 .intro .container {
-  width: min(1280px, calc(100% - 72px));
+  width: min(1120px, calc(100% - 72px));
 }
 
 .intro-grid {
-  position: relative;
-  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: clamp(64px, 8vw, 118px);
   align-items: center;
   min-height: 0;
 }
 
 .intro-image-wrap {
-  grid-column: 1 / 8;
   position: relative;
-  z-index: 1;
-  padding: 0 0 44px;
+  width: 100%;
+  padding: 0 0 64px;
 }
 
-/* Preserve the uploaded cathedral image exactly - no cropping. */
+/* Keep the uploaded cathedral image at its natural portrait ratio. */
 .intro-image-main {
   position: relative;
   inset: auto;
-  display: block;
-  width: 58%;
+  width: 100%;
   height: auto;
-  aspect-ratio: auto;
   object-fit: contain;
-  object-position: center;
-  box-shadow: 0 26px 60px rgba(27,25,20,.15);
+  display: block;
+  box-shadow: 0 22px 52px rgba(27,25,20,.14);
 }
 
-/* The secondary hotel image begins around the lower quarter of the cathedral image. */
+/* Small breakfast-room image overlaps only the lower edge of the cathedral photo. */
 .intro-image-small {
   position: absolute;
-  z-index: 3;
-  right: 2%;
-  top: 70%;
-  width: 44%;
+  z-index: 2;
+  width: 56%;
   height: auto;
   aspect-ratio: 16 / 9;
+  right: -38px;
+  bottom: 0;
   object-fit: cover;
-  border: 8px solid #ded4c4;
-  box-shadow: 0 22px 48px rgba(27,25,20,.16);
+  border: 7px solid #eee7db;
+  box-shadow: 0 18px 40px rgba(27,25,20,.15);
 }
 
 .intro-image-wrap::after {
-  content: '33';
-  position: absolute;
-  z-index: 5;
-  right: 8%;
-  top: 7%;
-  width: 78px;
-  height: 78px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: #171713;
-  color: #fff;
-  font-family: var(--serif);
-  font-size: 39px;
-  font-weight: 500;
-  line-height: 1;
-  box-shadow: 0 15px 36px rgba(20,18,14,.22);
+  display: none;
 }
 
 .intro-copy {
-  grid-column: 6 / 13;
   position: relative;
-  z-index: 4;
-  align-self: center;
-  margin-left: 10px;
-  padding: clamp(40px, 4.4vw, 58px) clamp(38px, 4.2vw, 58px);
-  background: rgba(247,243,235,.975);
-  box-shadow: 0 26px 68px rgba(27,25,20,.14);
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  max-width: 650px;
 }
 
 .intro-copy::before {
   content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1px;
-  height: 100%;
+  display: block;
+  width: 42px;
+  height: 1px;
+  margin-bottom: 22px;
   background: var(--bronze);
 }
 
 .intro-copy .eyebrow {
-  max-width: 430px;
   margin-bottom: 18px;
   color: var(--bronze-dark);
 }
 
 .intro-copy .section-title {
-  max-width: 600px;
-  font-size: clamp(48px, 4.9vw, 72px);
-  line-height: .92;
-  letter-spacing: -.043em;
+  max-width: 620px;
+  font-size: clamp(48px, 4.7vw, 72px);
+  line-height: .94;
+  letter-spacing: -.04em;
 }
 
 .intro-copy .lead {
-  position: relative;
-  max-width: 535px;
-  margin: 27px 0 28px;
-  padding-left: 22px;
+  max-width: 590px;
+  margin: 26px 0 28px;
+  padding: 0;
+  color: #575249;
   font-size: 17px;
-  line-height: 1.67;
-  color: #555148;
+  line-height: 1.72;
 }
 
 .intro-copy .lead::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: .55em;
-  bottom: .55em;
-  width: 1px;
-  background: rgba(28,28,25,.22);
+  display: none;
 }
 
 .intro-copy .btn-dark {
   border: 0;
   min-height: auto;
-  padding: 0 0 7px;
+  padding: 0 0 6px;
   border-bottom: 1px solid var(--ink);
   background: transparent;
   color: var(--ink);
@@ -165,54 +114,67 @@
 }
 
 .intro-copy .btn-dark:hover {
-  transform: translateX(5px);
+  transform: translateX(4px);
   background: transparent;
   color: var(--bronze-dark);
   border-color: var(--bronze-dark);
 }
 
+/* Subtle entrance only - no large movement. */
 @media (prefers-reduced-motion: no-preference) {
   .intro .intro-image-main,
   .intro .intro-image-small,
-  .intro .intro-copy,
-  .intro .intro-image-wrap::after {
+  .intro .intro-copy {
     opacity: 0;
-    transition: opacity .8s ease, transform .9s cubic-bezier(.2,.7,.2,1);
+    transform: translateY(16px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
   }
-  .intro .intro-image-main { transform: translateY(26px); }
-  .intro .intro-image-small { transform: translate(24px, 18px); transition-delay: .1s; }
-  .intro .intro-copy { transform: translateX(34px); transition-delay: .15s; }
-  .intro .intro-image-wrap::after { transform: scale(.88); transition-delay: .24s; }
+  .intro .intro-image-small { transition-delay: .08s; }
+  .intro .intro-copy { transition-delay: .12s; }
   .intro.is-visible .intro-image-main,
   .intro.is-visible .intro-image-small,
-  .intro.is-visible .intro-copy,
-  .intro.is-visible .intro-image-wrap::after {
+  .intro.is-visible .intro-copy {
     opacity: 1;
     transform: none;
   }
 }
 
-@media (max-width: 980px) {
-  .intro { padding: 78px 0 92px; }
-  .intro .container { width: min(100% - 48px, 900px); }
-  .intro-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); align-items: start; }
-  .intro-image-wrap { grid-column: 1 / 7; padding-bottom: 70px; }
-  .intro-image-main { width: 62%; }
-  .intro-image-small { width: 43%; right: 0; top: 71%; }
-  .intro-image-wrap::after { right: 4%; }
-  .intro-copy { grid-column: 3 / 9; margin: -35px 0 0; padding: 46px 44px; }
+@media (max-width: 940px) {
+  .intro { padding: 68px 0 76px; }
+  .intro .container { width: min(100% - 48px, 820px); }
+  .intro-grid {
+    grid-template-columns: 300px minmax(0,1fr);
+    gap: 52px;
+  }
+  .intro-image-small { right: -24px; width: 58%; }
+  .intro-copy .section-title { font-size: clamp(46px, 6vw, 64px); }
 }
 
 @media (max-width: 680px) {
-  .intro { padding: 66px 0 78px; }
-  .intro::before { top: 18px; left: -8vw; font-size: 56vw; }
+  .intro { padding: 58px 0 68px; }
   .intro .container { width: calc(100% - 34px); }
-  .intro-grid { display: block; }
-  .intro-image-wrap { width: 100%; padding-bottom: 74px; }
-  .intro-image-main { width: 70%; }
-  .intro-image-small { right: 0; top: 72%; width: 50%; border-width: 6px; }
-  .intro-image-wrap::after { width: 66px; height: 66px; right: 4%; top: 5%; font-size: 33px; }
-  .intro-copy { width: calc(100% - 18px); margin: -14px 0 0 auto; padding: 38px 27px 42px; }
-  .intro-copy .section-title { font-size: clamp(46px, 13vw, 64px); }
-  .intro-copy .lead { font-size: 16px; padding-left: 20px; margin: 24px 0 25px; }
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 46px;
+  }
+  .intro-image-wrap {
+    width: min(78%, 340px);
+    margin: 0 auto;
+    padding-bottom: 52px;
+  }
+  .intro-image-small {
+    width: 58%;
+    right: -12%;
+    border-width: 6px;
+  }
+  .intro-copy {
+    max-width: 560px;
+  }
+  .intro-copy .section-title {
+    font-size: clamp(46px, 13vw, 62px);
+  }
+  .intro-copy .lead {
+    font-size: 16px;
+    margin: 22px 0 25px;
+  }
 }
