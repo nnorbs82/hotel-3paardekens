@@ -29,56 +29,48 @@ content:
         path: v2/content/site.json
         format: json
         fields:
-          - name: hotelName
-            label: Hotel name
-            type: string
-            required: true
-          - name: locationLine
-            label: Location line
-            type: string
-          - name: heroTitle
-            label: Homepage headline
-            type: string
-            required: true
-          - name: heroText
-            label: Homepage introduction
-            type: text
-          - name: aboutEyebrow
-            label: About section eyebrow
-            type: string
-          - name: aboutTitle
-            label: About section title
-            type: string
-          - name: aboutBody
-            label: About section text
-            type: text
-          - name: breakfastTitle
-            label: Breakfast title
-            type: string
-          - name: breakfastText
-            label: Breakfast text
-            type: text
-          - name: address
-            label: Address
-            type: string
-          - name: phone
-            label: Telephone
-            type: string
-          - name: email
-            label: Email
-            type: string
-          - name: bookingUrl
-            label: Mews booking URL
-            type: string
-          - name: sisterHotelName
-            label: Sister hotel name
-            type: string
-          - name: sisterHotelText
-            label: Sister hotel description
-            type: text
-          - name: sisterHotelUrl
-            label: Sister hotel URL
-            type: string
+          - { name: hotelName, label: Hotel name, type: string, required: true }
+          - { name: address, label: Address, type: string }
+          - { name: phone, label: Telephone, type: string }
+          - { name: email, label: Email, type: string }
+          - { name: bookingUrl, label: Mews booking URL, type: string }
+          - { name: sisterHotelName, label: Sister hotel name, type: string }
+          - { name: sisterHotelUrl, label: Sister hotel URL, type: string }
+          - { name: heroTitle_en, label: "Homepage headline - English", type: string }
+          - { name: heroText_en, label: "Homepage introduction - English", type: text }
+          - { name: aboutTitle_en, label: "About title - English", type: string }
+          - { name: aboutBody_en, label: "About text - English", type: text }
+          - { name: breakfastTitle_en, label: "Breakfast title - English", type: string }
+          - { name: breakfastText_en, label: "Breakfast text - English", type: text }
+          - { name: sisterHotelText_en, label: "Sister hotel text - English", type: text }
+          - { name: heroTitle_nl, label: "Homepage headline - Dutch", type: string }
+          - { name: heroText_nl, label: "Homepage introduction - Dutch", type: text }
+          - { name: aboutTitle_nl, label: "About title - Dutch", type: string }
+          - { name: aboutBody_nl, label: "About text - Dutch", type: text }
+          - { name: breakfastTitle_nl, label: "Breakfast title - Dutch", type: string }
+          - { name: breakfastText_nl, label: "Breakfast text - Dutch", type: text }
+          - { name: sisterHotelText_nl, label: "Sister hotel text - Dutch", type: text }
+          - { name: heroTitle_fr, label: "Homepage headline - French", type: string }
+          - { name: heroText_fr, label: "Homepage introduction - French", type: text }
+          - { name: aboutTitle_fr, label: "About title - French", type: string }
+          - { name: aboutBody_fr, label: "About text - French", type: text }
+          - { name: breakfastTitle_fr, label: "Breakfast title - French", type: string }
+          - { name: breakfastText_fr, label: "Breakfast text - French", type: text }
+          - { name: sisterHotelText_fr, label: "Sister hotel text - French", type: text }
+          - { name: heroTitle_es, label: "Homepage headline - Spanish", type: string }
+          - { name: heroText_es, label: "Homepage introduction - Spanish", type: text }
+          - { name: aboutTitle_es, label: "About title - Spanish", type: string }
+          - { name: aboutBody_es, label: "About text - Spanish", type: text }
+          - { name: breakfastTitle_es, label: "Breakfast title - Spanish", type: string }
+          - { name: breakfastText_es, label: "Breakfast text - Spanish", type: text }
+          - { name: sisterHotelText_es, label: "Sister hotel text - Spanish", type: text }
+          - { name: heroTitle_de, label: "Homepage headline - German", type: string }
+          - { name: heroText_de, label: "Homepage introduction - German", type: text }
+          - { name: aboutTitle_de, label: "About title - German", type: string }
+          - { name: aboutBody_de, label: "About text - German", type: text }
+          - { name: breakfastTitle_de, label: "Breakfast title - German", type: string }
+          - { name: breakfastText_de, label: "Breakfast text - German", type: text }
+          - { name: sisterHotelText_de, label: "Sister hotel text - German", type: text }
 
       - name: rooms
         label: Rooms
@@ -88,48 +80,88 @@ content:
         filename: "{id}.json"
         subfolders: false
         view:
-          primary: name
-          fields: [name, order]
-          sort: [order, name]
-          default:
-            sort: order
-            order: asc
+          primary: name_en
+          fields: [name_en, order]
+          sort: [order, name_en]
+          default: { sort: order, order: asc }
         fields:
-          - name: id
-            label: Internal ID
-            type: string
-            required: true
-            readonly: true
-          - name: order
-            label: Display order
-            type: number
-            required: true
-          - name: name
-            label: Room name
-            type: string
-            required: true
-          - name: strapline
-            label: Short heading
-            type: string
-          - name: description
-            label: Description
-            type: text
-          - name: amenities
-            label: Amenities
-            type: string
-            list: true
+          - { name: id, label: Internal ID, type: string, required: true, readonly: true }
+          - { name: order, label: Display order, type: number, required: true }
+          - { name: name_en, label: "Room name - English", type: string, required: true }
+          - { name: strapline_en, label: "Short heading - English", type: string }
+          - { name: description_en, label: "Description - English", type: text }
+          - { name: amenities_en, label: "Amenities - English", type: string, list: true }
+          - { name: name_nl, label: "Room name - Dutch", type: string }
+          - { name: strapline_nl, label: "Short heading - Dutch", type: string }
+          - { name: description_nl, label: "Description - Dutch", type: text }
+          - { name: amenities_nl, label: "Amenities - Dutch", type: string, list: true }
+          - { name: name_fr, label: "Room name - French", type: string }
+          - { name: strapline_fr, label: "Short heading - French", type: string }
+          - { name: description_fr, label: "Description - French", type: text }
+          - { name: amenities_fr, label: "Amenities - French", type: string, list: true }
+          - { name: name_es, label: "Room name - Spanish", type: string }
+          - { name: strapline_es, label: "Short heading - Spanish", type: string }
+          - { name: description_es, label: "Description - Spanish", type: text }
+          - { name: amenities_es, label: "Amenities - Spanish", type: string, list: true }
+          - { name: name_de, label: "Room name - German", type: string }
+          - { name: strapline_de, label: "Short heading - German", type: string }
+          - { name: description_de, label: "Description - German", type: text }
+          - { name: amenities_de, label: "Amenities - German", type: string, list: true }
           - name: gallery
             label: Gallery
             type: image
             options:
               media: room_images
-              multiple:
-                max: 20
+              multiple: { max: 20 }
               unique: true
               extensions: [jpg, jpeg, png, webp]
-          - name: bookingUrl
-            label: Booking URL
-            type: string
+          - { name: bookingUrl, label: Booking URL, type: string }
+
+      - name: general_faqs
+        label: General FAQs
+        type: file
+        path: v2/content/faqs/general.json
+        format: json
+        fields:
+          - name: entries
+            label: FAQ entries
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string }
+              - { name: question_en, label: "Question - English", type: string }
+              - { name: answer_en, label: "Answer - English", type: text }
+              - { name: question_nl, label: "Question - Dutch", type: string }
+              - { name: answer_nl, label: "Answer - Dutch", type: text }
+              - { name: question_fr, label: "Question - French", type: string }
+              - { name: answer_fr, label: "Answer - French", type: text }
+              - { name: question_es, label: "Question - Spanish", type: string }
+              - { name: answer_es, label: "Answer - Spanish", type: text }
+              - { name: question_de, label: "Question - German", type: string }
+              - { name: answer_de, label: "Answer - German", type: text }
+
+      - name: apple_wallet_faqs
+        label: Apple Wallet FAQs
+        type: file
+        path: v2/content/faqs/apple-wallet.json
+        format: json
+        fields:
+          - name: entries
+            label: Apple Wallet FAQ entries
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string }
+              - { name: question_en, label: "Question - English", type: string }
+              - { name: answer_en, label: "Answer - English", type: text }
+              - { name: question_nl, label: "Question - Dutch", type: string }
+              - { name: answer_nl, label: "Answer - Dutch", type: text }
+              - { name: question_fr, label: "Question - French", type: string }
+              - { name: answer_fr, label: "Answer - French", type: text }
+              - { name: question_es, label: "Question - Spanish", type: string }
+              - { name: answer_es, label: "Answer - Spanish", type: text }
+              - { name: question_de, label: "Question - German", type: string }
+              - { name: answer_de, label: "Answer - German", type: text }
 
 settings:
   commit:

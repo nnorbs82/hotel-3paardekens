@@ -4,155 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rooms | Hotel 3 Paardekens Mechelen</title>
-  <meta name="description" content="Explore Single, Twin and Double rooms at Hotel 3 Paardekens in central Mechelen.">
+  <meta name="description" content="Explore Single, Twin, Double and Double Deluxe rooms at Hotel 3 Paardekens in central Mechelen.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="preview-site.css">
+  <link rel="icon" href="favicon.ico"><link rel="stylesheet" href="preview-site.css">
 </head>
 <body>
   <header class="site-header" aria-label="Main navigation">
     <div class="header-shade" aria-hidden="true"></div>
     <div class="container-wide header-inner">
-      <a class="brand" href="index.html" aria-label="Hotel 3 Paardekens home">
-        <img src="assets/3plogo.png" alt="Hotel 3 Paardekens">
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="rooms.html" class="active">Rooms</a>
-        <a href="index.html#breakfast">Breakfast</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#location">Location</a>
-        <a href="faqs.html">FAQ</a>
-        <a href="index.html#contact">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <button class="lang" type="button" aria-label="Language selector">EN <span aria-hidden="true">⌄</span></button>
-        <a class="btn btn-filled header-book" href="#" data-book>Book now</a>
-        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"></button>
-      </div>
+      <a class="brand" href="index.html" aria-label="Hotel 3 Paardekens home"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"></a>
+      <nav class="nav" aria-label="Primary"><a href="index.html" data-i18n="nav.home">Home</a><a href="rooms.html" class="active" data-i18n="nav.rooms">Rooms</a><a href="index.html#breakfast" data-i18n="nav.breakfast">Breakfast</a><a href="index.html#about" data-i18n="nav.about">About</a><a href="index.html#location" data-i18n="nav.location">Location</a><a href="faqs.html" data-i18n="nav.faq">FAQ</a><a href="index.html#contact" data-i18n="nav.contact">Contact</a></nav>
+      <div class="header-actions"><div class="language-switcher"><button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span><span aria-hidden="true">⌄</span></button><div class="lang-menu" role="menu"><button type="button" data-lang-option="nl">Nederlands</button><button type="button" data-lang-option="en">English</button><button type="button" data-lang-option="fr">Français</button><button type="button" data-lang-option="es">Español</button><button type="button" data-lang-option="de">Deutsch</button></div></div><a class="btn btn-filled header-book" href="#" data-book data-i18n="nav.book">Book now</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"></button></div>
     </div>
   </header>
 
   <main>
-    <section class="rooms-hero">
-      <div class="rooms-hero-media"><img src="Rooms/Double/5.jpg" alt="Hotel 3 Paardekens room"></div>
-      <div class="container-wide rooms-hero-content">
-        <p class="eyebrow">Hotel 3 Paardekens · Mechelen</p>
-        <h1 class="display">Rooms made for<br>city stays.</h1>
-        <p>Single, Twin and Double rooms in the historic centre of Mechelen.</p>
-      </div>
-    </section>
+    <section class="rooms-hero"><div class="rooms-hero-media"><img src="Rooms/Double/5.jpg" alt="Hotel 3 Paardekens room"></div><div class="container-wide rooms-hero-content"><p class="eyebrow">Hotel 3 Paardekens · Mechelen</p><h1 class="display" data-i18n="rooms.hero">Rooms made for city stays.</h1><p data-i18n="rooms.heroBody">Single, Twin, Double and Double Deluxe rooms in the historic centre of Mechelen.</p></div></section>
 
-    <div class="container booking-shell" aria-label="Check availability">
-      <form class="booking-bar" onsubmit="return false;">
-        <div class="booking-field"><label for="preview-checkin">Check-in</label><input id="preview-checkin" type="date"></div>
-        <div class="booking-field"><label for="preview-checkout">Check-out</label><input id="preview-checkout" type="date"></div>
-        <button id="preview-book" class="booking-submit" type="submit">Check availability</button>
-      </form>
-    </div>
+    <div class="container booking-shell" aria-label="Check availability"><form class="booking-bar" onsubmit="return false;"><div class="booking-field"><label for="preview-checkin" data-i18n="booking.checkin">Check-in</label><input id="preview-checkin" type="date"></div><div class="booking-field"><label for="preview-checkout" data-i18n="booking.checkout">Check-out</label><input id="preview-checkout" type="date"></div><button id="preview-book" class="booking-submit" type="submit" data-i18n="booking.check">Check availability</button></form></div>
 
-    <section class="rooms-intro">
-      <div class="container rooms-intro-grid">
-        <p class="eyebrow">Choose your room</p>
-        <p class="lead">Each category is presented with its real Hotel 3 Paardekens photography. Click any image to open the full gallery and browse the room at full size.</p>
-      </div>
-    </section>
+    <section class="rooms-intro"><div class="container rooms-intro-grid"><p class="eyebrow" data-i18n="rooms.choose">Choose your room</p><p class="lead" data-i18n="rooms.intro">Each category is presented with real Hotel 3 Paardekens photography. Click any image to open the full gallery and browse the room at full size.</p></div></section>
 
     <section class="room-showcases">
-      <article class="room-showcase" id="single" data-gallery='["Rooms/Single/1.jpg","Rooms/Single/2.jpg","Rooms/Single/3.jpg","Rooms/Single/4.jpg","Rooms/Single/5.jpg","Rooms/Single/6.jpg","Rooms/Single/7.jpg"]' data-room-name="Single Room">
-        <div class="container-wide room-showcase-grid">
-          <div class="room-gallery-panel">
-            <button class="room-feature-image gallery-trigger" type="button" data-gallery-open="0" aria-label="Open Single Room gallery">
-              <img src="Rooms/Single/1.jpg" alt="Single Room at Hotel 3 Paardekens">
-              <span class="view-gallery">View all 7 photos</span>
-            </button>
-            <div class="room-thumbnails" aria-label="Single Room photo previews">
-              <button class="gallery-trigger" type="button" data-gallery-open="1"><img src="Rooms/Single/2.jpg" alt="Single Room photo 2"></button>
-              <button class="gallery-trigger" type="button" data-gallery-open="2"><img src="Rooms/Single/3.jpg" alt="Single Room photo 3"></button>
-              <button class="gallery-trigger" type="button" data-gallery-open="3"><img src="Rooms/Single/4.jpg" alt="Single Room photo 4"></button>
-              <button class="gallery-trigger gallery-more" type="button" data-gallery-open="4"><img src="Rooms/Single/5.jpg" alt="Single Room photo 5"><span>+3</span></button>
-            </div>
-          </div>
-          <div class="room-detail">
-            <p class="eyebrow">For one guest</p>
-            <h2 class="display">Single Room</h2>
-            <p class="room-description">Comfortable single room, ideal for short business stays and solo city visits.</p>
-            <div class="room-rule"></div>
-            <h3>Room features</h3>
-            <ul class="amenities"><li>Single bed</li><li>TV</li><li>Private bathroom</li><li>City view</li><li>Coffee / tea maker</li><li>Heating</li><li>Wardrobe</li></ul>
-            <div class="room-actions"><a class="btn btn-filled" href="#" data-book>Check availability</a><button class="text-link gallery-trigger" type="button" data-gallery-open="0">View gallery →</button></div>
-          </div>
-        </div>
+      <article class="room-showcase" id="single" data-room-id="single" data-gallery='["Rooms/Single/1.jpg","Rooms/Single/2.jpg","Rooms/Single/3.jpg","Rooms/Single/4.jpg","Rooms/Single/5.jpg","Rooms/Single/6.jpg","Rooms/Single/7.jpg"]' data-room-name="Single Room">
+        <div class="container-wide room-showcase-grid"><div class="room-gallery-panel"><button class="room-feature-image gallery-trigger" type="button" data-gallery-open="0"><img src="Rooms/Single/1.jpg" alt="Single Room at Hotel 3 Paardekens"><span class="view-gallery" data-i18n="rooms.gallery">View gallery</span></button><div class="room-thumbnails"><button class="gallery-trigger" type="button" data-gallery-open="1"><img src="Rooms/Single/2.jpg" alt="Single Room photo 2"></button><button class="gallery-trigger" type="button" data-gallery-open="2"><img src="Rooms/Single/3.jpg" alt="Single Room photo 3"></button><button class="gallery-trigger" type="button" data-gallery-open="3"><img src="Rooms/Single/4.jpg" alt="Single Room photo 4"></button><button class="gallery-trigger gallery-more" type="button" data-gallery-open="4"><img src="Rooms/Single/5.jpg" alt="Single Room photo 5"><span>+3</span></button></div></div><div class="room-detail"><p class="eyebrow" data-room-role="strapline">For one guest</p><h2 class="display" data-room-role="name">Single Room</h2><p class="room-description" data-room-role="description">Comfortable single room, ideal for short business stays and solo city visits.</p><div class="room-rule"></div><h3 data-i18n="rooms.features">Room features</h3><ul class="amenities" data-room-role="amenities"><li>Single bed</li><li>TV</li><li>Private bathroom</li><li>City view</li><li>Coffee / tea maker</li><li>Heating</li><li>Wardrobe</li></ul><div class="room-actions"><a class="btn btn-filled" href="#" data-book data-i18n="rooms.check">Check availability</a><button class="text-link gallery-trigger" type="button" data-gallery-open="0" data-i18n="rooms.gallery">View gallery</button></div></div></div>
       </article>
 
-      <article class="room-showcase room-showcase-alt" id="twin" data-gallery='["Rooms/Twin/1.jpg","Rooms/Twin/2.jpg","Rooms/Twin/3.jpg","Rooms/Twin/4.jpg"]' data-room-name="Twin Room">
-        <div class="container-wide room-showcase-grid">
-          <div class="room-gallery-panel">
-            <button class="room-feature-image gallery-trigger" type="button" data-gallery-open="0" aria-label="Open Twin Room gallery">
-              <img src="Rooms/Twin/1.jpg" alt="Twin Room at Hotel 3 Paardekens">
-              <span class="view-gallery">View all 4 photos</span>
-            </button>
-            <div class="room-thumbnails" aria-label="Twin Room photo previews">
-              <button class="gallery-trigger" type="button" data-gallery-open="1"><img src="Rooms/Twin/2.jpg" alt="Twin Room photo 2"></button>
-              <button class="gallery-trigger" type="button" data-gallery-open="2"><img src="Rooms/Twin/3.jpg" alt="Twin Room photo 3"></button>
-              <button class="gallery-trigger" type="button" data-gallery-open="3"><img src="Rooms/Twin/4.jpg" alt="Twin Room photo 4"></button>
-            </div>
-          </div>
-          <div class="room-detail">
-            <p class="eyebrow">Two separate beds</p>
-            <h2 class="display">Twin Room</h2>
-            <p class="room-description">Travelling with a friend or colleague? Two separate beds in the middle of the city.</p>
-            <div class="room-rule"></div>
-            <h3>Room features</h3>
-            <ul class="amenities"><li>Twin beds</li><li>TV</li><li>Private bathroom</li><li>City view</li><li>Coffee / tea maker</li><li>Heating</li><li>Wardrobe</li></ul>
-            <div class="room-actions"><a class="btn btn-filled" href="#" data-book>Check availability</a><button class="text-link gallery-trigger" type="button" data-gallery-open="0">View gallery →</button></div>
-          </div>
-        </div>
+      <article class="room-showcase room-showcase-alt" id="twin" data-room-id="twin" data-gallery='["Rooms/Twin/1.jpg","Rooms/Twin/2.jpg","Rooms/Twin/3.jpg","Rooms/Twin/4.jpg"]' data-room-name="Twin Room">
+        <div class="container-wide room-showcase-grid"><div class="room-gallery-panel"><button class="room-feature-image gallery-trigger" type="button" data-gallery-open="0"><img src="Rooms/Twin/1.jpg" alt="Twin Room at Hotel 3 Paardekens"><span class="view-gallery" data-i18n="rooms.gallery">View gallery</span></button><div class="room-thumbnails" style="grid-template-columns:repeat(3,1fr)"><button class="gallery-trigger" type="button" data-gallery-open="1"><img src="Rooms/Twin/2.jpg" alt="Twin Room photo 2"></button><button class="gallery-trigger" type="button" data-gallery-open="2"><img src="Rooms/Twin/3.jpg" alt="Twin Room photo 3"></button><button class="gallery-trigger" type="button" data-gallery-open="3"><img src="Rooms/Twin/4.jpg" alt="Twin Room photo 4"></button></div></div><div class="room-detail"><p class="eyebrow" data-room-role="strapline">Two separate beds</p><h2 class="display" data-room-role="name">Twin Room</h2><p class="room-description" data-room-role="description">Travelling with a friend or colleague? Two separate beds in the middle of the city.</p><div class="room-rule"></div><h3 data-i18n="rooms.features">Room features</h3><ul class="amenities" data-room-role="amenities"><li>Twin beds</li><li>TV</li><li>Private bathroom</li><li>City view</li><li>Coffee / tea maker</li><li>Heating</li><li>Wardrobe</li></ul><div class="room-actions"><a class="btn btn-filled" href="#" data-book data-i18n="rooms.check">Check availability</a><button class="text-link gallery-trigger" type="button" data-gallery-open="0" data-i18n="rooms.gallery">View gallery</button></div></div></div>
       </article>
 
-      <article class="room-showcase" id="double" data-gallery='["Rooms/Double/1.jpg","Rooms/Double/2.jpg","Rooms/Double/3.jpg","Rooms/Double/4.jpg","Rooms/Double/5.jpg","Rooms/Double/6.jpg","Rooms/Double/7.jpg","Rooms/Double/8.jpg"]' data-room-name="Double Room">
-        <div class="container-wide room-showcase-grid">
-          <div class="room-gallery-panel">
-            <button class="room-feature-image gallery-trigger" type="button" data-gallery-open="0" aria-label="Open Double Room gallery">
-              <img src="Rooms/Double/1.jpg" alt="Double Room at Hotel 3 Paardekens">
-              <span class="view-gallery">View all 8 photos</span>
-            </button>
-            <div class="room-thumbnails" aria-label="Double Room photo previews">
-              <button class="gallery-trigger" type="button" data-gallery-open="1"><img src="Rooms/Double/2.jpg" alt="Double Room photo 2"></button>
-              <button class="gallery-trigger" type="button" data-gallery-open="2"><img src="Rooms/Double/3.jpg" alt="Double Room photo 3"></button>
-              <button class="gallery-trigger" type="button" data-gallery-open="3"><img src="Rooms/Double/4.jpg" alt="Double Room photo 4"></button>
-              <button class="gallery-trigger gallery-more" type="button" data-gallery-open="4"><img src="Rooms/Double/5.jpg" alt="Double Room photo 5"><span>+4</span></button>
-            </div>
-          </div>
-          <div class="room-detail">
-            <p class="eyebrow">For two guests</p>
-            <h2 class="display">Double Room</h2>
-            <p class="room-description">A cosy city stay for two, with a double bed and a little more room to settle in.</p>
-            <div class="room-rule"></div>
-            <h3>Room features</h3>
-            <ul class="amenities"><li>Double bed</li><li>TV</li><li>Private bathroom</li><li>City view</li><li>Coffee / tea maker</li><li>Heating</li><li>Wardrobe</li></ul>
-            <div class="room-actions"><a class="btn btn-filled" href="#" data-book>Check availability</a><button class="text-link gallery-trigger" type="button" data-gallery-open="0">View gallery →</button></div>
-          </div>
-        </div>
+      <article class="room-showcase" id="double" data-room-id="double" data-gallery='["Rooms/Double/1.jpg","Rooms/Double/2.jpg","Rooms/Double/3.jpg","Rooms/Double/4.jpg"]' data-room-name="Double Room">
+        <div class="container-wide room-showcase-grid"><div class="room-gallery-panel"><button class="room-feature-image gallery-trigger" type="button" data-gallery-open="0"><img src="Rooms/Double/1.jpg" alt="Double Room at Hotel 3 Paardekens"><span class="view-gallery" data-i18n="rooms.gallery">View gallery</span></button><div class="room-thumbnails" style="grid-template-columns:repeat(3,1fr)"><button class="gallery-trigger" type="button" data-gallery-open="1"><img src="Rooms/Double/2.jpg" alt="Double Room photo 2"></button><button class="gallery-trigger" type="button" data-gallery-open="2"><img src="Rooms/Double/3.jpg" alt="Double Room photo 3"></button><button class="gallery-trigger" type="button" data-gallery-open="3"><img src="Rooms/Double/4.jpg" alt="Double Room photo 4"></button></div></div><div class="room-detail"><p class="eyebrow" data-room-role="strapline">For two guests</p><h2 class="display" data-room-role="name">Double Room</h2><p class="room-description" data-room-role="description">A cosy city stay for two, with a double bed and room to settle in.</p><div class="room-rule"></div><h3 data-i18n="rooms.features">Room features</h3><ul class="amenities" data-room-role="amenities"><li>Double bed</li><li>TV</li><li>Private bathroom</li><li>City view</li><li>Coffee / tea maker</li><li>Heating</li><li>Wardrobe</li></ul><div class="room-actions"><a class="btn btn-filled" href="#" data-book data-i18n="rooms.check">Check availability</a><button class="text-link gallery-trigger" type="button" data-gallery-open="0" data-i18n="rooms.gallery">View gallery</button></div></div></div>
+      </article>
+
+      <article class="room-showcase room-showcase-alt" id="double-deluxe" data-room-id="double-deluxe" data-gallery='["Rooms/Double/5.jpg","Rooms/Double/6.jpg","Rooms/Double/7.jpg","Rooms/Double/8.jpg"]' data-room-name="Double Deluxe">
+        <div class="container-wide room-showcase-grid"><div class="room-gallery-panel"><button class="room-feature-image gallery-trigger" type="button" data-gallery-open="0"><img src="Rooms/Double/5.jpg" alt="Double Deluxe Room at Hotel 3 Paardekens"><span class="view-gallery" data-i18n="rooms.gallery">View gallery</span></button><div class="room-thumbnails" style="grid-template-columns:repeat(3,1fr)"><button class="gallery-trigger" type="button" data-gallery-open="1"><img src="Rooms/Double/6.jpg" alt="Double Deluxe photo 2"></button><button class="gallery-trigger" type="button" data-gallery-open="2"><img src="Rooms/Double/7.jpg" alt="Double Deluxe photo 3"></button><button class="gallery-trigger" type="button" data-gallery-open="3"><img src="Rooms/Double/8.jpg" alt="Double Deluxe photo 4"></button></div></div><div class="room-detail"><p class="eyebrow" data-room-role="strapline">A little more space</p><h2 class="display" data-room-role="name">Double Deluxe</h2><p class="room-description" data-room-role="description">The same comfortable Double experience with a little extra space.</p><div class="room-rule"></div><h3 data-i18n="rooms.features">Room features</h3><ul class="amenities" data-room-role="amenities"><li>Double bed</li><li>More spacious room</li><li>TV</li><li>Private bathroom</li><li>City view</li><li>Coffee / tea maker</li><li>Heating</li><li>Wardrobe</li></ul><div class="room-actions"><a class="btn btn-filled" href="#" data-book data-i18n="rooms.check">Check availability</a><button class="text-link gallery-trigger" type="button" data-gallery-open="0" data-i18n="rooms.gallery">View gallery</button></div></div></div>
       </article>
     </section>
 
-    <section class="rooms-cta">
-      <div class="container rooms-cta-inner"><p class="eyebrow">Ready for Mechelen?</p><h2 class="display">Choose your dates.<br>We'll take care of the room.</h2><a class="btn btn-filled" href="#" data-book>Book your stay</a></div>
-    </section>
+    <section class="rooms-cta"><div class="container rooms-cta-inner"><p class="eyebrow" data-i18n="rooms.ctaEyebrow">Ready for Mechelen?</p><h2 class="display" data-i18n="rooms.ctaTitle">Choose your dates. We'll take care of the room.</h2><a class="btn btn-filled" href="#" data-book data-i18n="rooms.ctaButton">Book your stay</a></div></section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"><p>A historic 3-star hotel in the centre of Mechelen, Belgium.</p></div>
-        <div class="footer-col"><h3>Explore</h3><a href="index.html">Home</a><a href="rooms.html">Rooms</a><a href="index.html#breakfast">Breakfast</a><a href="index.html#location">Location</a></div>
-        <div class="footer-col"><h3>Contact</h3><a href="tel:+3215342713">+32 15 342 713</a><a href="mailto:info@3paardekens.be">info@3paardekens.be</a><p>Begijnenstraat 3<br>2800 Mechelen</p></div>
-        <div class="footer-col"><h3>Booking</h3><a href="#" data-book>Book direct</a><a href="privacy-policy.html">Privacy</a><a href="terms-and-conditions.html">Terms</a></div>
-      </div>
-      <div class="footer-bottom"><span>© Hotel 3 Paardekens</span><span>Preview redesign - not the production website</span></div>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"><p data-i18n="footer.short">A historic 3-star hotel in the centre of Mechelen, Belgium.</p></div><div class="footer-col"><h3 data-i18n="footer.explore">Explore</h3><a href="index.html" data-i18n="nav.home">Home</a><a href="rooms.html" data-i18n="nav.rooms">Rooms</a><a href="index.html#breakfast" data-i18n="nav.breakfast">Breakfast</a><a href="index.html#location" data-i18n="nav.location">Location</a></div><div class="footer-col"><h3 data-i18n="footer.help">Help</h3><a href="faqs.html" data-i18n="footer.generalFaq">General FAQs</a><a href="apple-wallet-faqs.html" data-i18n="footer.walletFaq">Apple Wallet FAQs</a><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy</a><a href="cookie-policy.html" data-i18n="footer.cookies">Cookie policy</a></div><div class="footer-col"><h3 data-i18n="footer.booking">Booking</h3><a href="#" data-book data-i18n="footer.direct">Book direct</a><a href="tel:+3215342713">+32 15 342 713</a><a href="mailto:info@3paardekens.be">info@3paardekens.be</a><a href="terms-and-conditions.html" data-i18n="footer.terms">Terms</a></div></div><div class="footer-bottom"><span>© Hotel 3 Paardekens</span><span>Preview redesign - not the production website</span></div></div></footer>
   <script src="preview-site.js"></script>
 </body>
 </html>

@@ -1,18 +1,14 @@
 {
-  "id": "single",
-  "order": 1,
-  "name": "Single Room",
-  "strapline": "Simple comfort for one",
-  "description": "Comfortable single room, ideal for short business stays.",
-  "amenities": ["Single bed", "TV", "Private bathroom", "City view", "Coffee/tea maker", "Heating", "Wardrobe"],
-  "gallery": [
-    "/images/legacy/rooms/Single/1.jpg",
-    "/images/legacy/rooms/Single/2.jpg",
-    "/images/legacy/rooms/Single/3.jpg",
-    "/images/legacy/rooms/Single/4.jpg",
-    "/images/legacy/rooms/Single/5.jpg",
-    "/images/legacy/rooms/Single/6.jpg",
-    "/images/legacy/rooms/Single/7.jpg"
-  ],
-  "bookingUrl": "https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
+  "id":"single","order":1,
+  "name":"Single Room","name_en":"Single Room","name_nl":"Eenpersoonskamer","name_fr":"Chambre Simple","name_es":"Habitación Individual","name_de":"Einzelzimmer",
+  "strapline":"Simple comfort for one","strapline_en":"Simple comfort for one","strapline_nl":"Comfort voor één","strapline_fr":"Le confort pour une personne","strapline_es":"Comodidad para una persona","strapline_de":"Komfort für eine Person",
+  "description":"Comfortable single room, ideal for short business stays.","description_en":"Comfortable single room, ideal for short business stays and solo city visits.","description_nl":"Comfortabele eenpersoonskamer, ideaal voor korte zakenverblijven en individuele citytrips.","description_fr":"Chambre simple confortable, idéale pour les courts séjours professionnels et les visites de Malines en solo.","description_es":"Habitación individual confortable, ideal para estancias de negocios cortas y visitas a Malinas en solitario.","description_de":"Komfortables Einzelzimmer, ideal für kurze Geschäftsaufenthalte und Städtereisen allein.",
+  "amenities":["Single bed","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
+  "amenities_en":["Single bed","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
+  "amenities_nl":["Eenpersoonsbed","TV","Privébadkamer","Uitzicht op de stad","Koffie- en theefaciliteiten","Verwarming","Kledingkast"],
+  "amenities_fr":["Lit simple","TV","Salle de bain privée","Vue sur la ville","Café et thé","Chauffage","Armoire"],
+  "amenities_es":["Cama individual","TV","Baño privado","Vistas a la ciudad","Café y té","Calefacción","Armario"],
+  "amenities_de":["Einzelbett","TV","Eigenes Badezimmer","Stadtblick","Kaffee- und Teezubereitung","Heizung","Kleiderschrank"],
+  "gallery":["/images/legacy/rooms/Single/1.jpg","/images/legacy/rooms/Single/2.jpg","/images/legacy/rooms/Single/3.jpg","/images/legacy/rooms/Single/4.jpg","/images/legacy/rooms/Single/5.jpg","/images/legacy/rooms/Single/6.jpg","/images/legacy/rooms/Single/7.jpg"],
+  "bookingUrl":"https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
 }

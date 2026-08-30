@@ -1,15 +1,14 @@
 {
-  "id": "twin",
-  "order": 2,
-  "name": "Twin Room",
-  "strapline": "Two beds, one central address",
-  "description": "Travelling with a friend? We have you. Twin beds in the middle of the city.",
-  "amenities": ["Twin beds", "TV", "Private bathroom", "City view", "Coffee/tea maker", "Heating", "Wardrobe"],
-  "gallery": [
-    "/images/legacy/rooms/Twin/1.jpg",
-    "/images/legacy/rooms/Twin/2.jpg",
-    "/images/legacy/rooms/Twin/3.jpg",
-    "/images/legacy/rooms/Twin/4.jpg"
-  ],
-  "bookingUrl": "https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
+  "id":"twin","order":2,
+  "name":"Twin Room","name_en":"Twin Room","name_nl":"Twin Kamer","name_fr":"Chambre Twin","name_es":"Habitación Twin","name_de":"Twin-Zimmer",
+  "strapline":"Two beds, one central address","strapline_en":"Two beds, one central address","strapline_nl":"Twee bedden, één centraal adres","strapline_fr":"Deux lits, une adresse centrale","strapline_es":"Dos camas, una ubicación céntrica","strapline_de":"Zwei Betten, eine zentrale Adresse",
+  "description":"Travelling with a friend? We have you. Twin beds in the middle of the city.","description_en":"Travelling with a friend or colleague? Two separate beds in the middle of the city.","description_nl":"Reist u met een vriend of collega? Twee aparte bedden midden in de stad.","description_fr":"Vous voyagez avec un ami ou un collègue ? Deux lits séparés au cœur de la ville.","description_es":"¿Viajas con un amigo o compañero? Dos camas separadas en pleno centro de la ciudad.","description_de":"Reisen Sie mit einem Freund oder Kollegen? Zwei getrennte Betten mitten in der Stadt.",
+  "amenities":["Twin beds","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
+  "amenities_en":["Twin beds","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
+  "amenities_nl":["Twee aparte bedden","TV","Privébadkamer","Uitzicht op de stad","Koffie- en theefaciliteiten","Verwarming","Kledingkast"],
+  "amenities_fr":["Deux lits séparés","TV","Salle de bain privée","Vue sur la ville","Café et thé","Chauffage","Armoire"],
+  "amenities_es":["Dos camas separadas","TV","Baño privado","Vistas a la ciudad","Café y té","Calefacción","Armario"],
+  "amenities_de":["Zwei getrennte Betten","TV","Eigenes Badezimmer","Stadtblick","Kaffee- und Teezubereitung","Heizung","Kleiderschrank"],
+  "gallery":["/images/legacy/rooms/Twin/1.jpg","/images/legacy/rooms/Twin/2.jpg","/images/legacy/rooms/Twin/3.jpg","/images/legacy/rooms/Twin/4.jpg"],
+  "bookingUrl":"https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
 }
