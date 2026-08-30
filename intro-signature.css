@@ -3,7 +3,7 @@
   position: relative;
   z-index: 2;
   overflow: visible;
-  padding: 64px 0 0;
+  padding: 64px 0 50px;
   background: #eee7db;
   border-top: 1px solid rgba(28,28,25,.08);
   border-bottom: 1px solid rgba(28,28,25,.08);
@@ -47,9 +47,8 @@
  * Exact desktop relationship requested:
  * - left edge begins one third into the cathedral image
  * - top edge begins about 20% up from the cathedral image's bottom
- * - with this portrait/landscape pairing, the cathedral bottom lands almost
- *   exactly through the middle of the second image, so half remains above the
- *   section boundary and half hangs into the Rooms section below.
+ * - the whole image group is shifted down with the new 50px section breathing room,
+ *   preserving the same relationship to the section boundary below.
  */
 .intro-image-small {
   position: absolute;
@@ -59,7 +58,7 @@
   aspect-ratio: 16 / 9;
   left: 33%;
   right: auto;
-  top: 80%;
+  top: calc(80% + 50px);
   bottom: auto;
   object-fit: cover;
   border: 8px solid #eee7db;
@@ -172,13 +171,13 @@
   .intro-image-small {
     width: 100%;
     left: 33%;
-    top: 80%;
+    top: calc(80% + 50px);
   }
   .rooms-section { padding-top: 165px; }
 }
 
 @media (max-width: 940px) {
-  .intro { padding: 60px 0 0; }
+  .intro { padding: 60px 0 50px; }
   .intro .container { width: min(100% - 48px, 900px); }
   .intro-grid {
     grid-template-columns: 350px minmax(0,1fr);
@@ -187,7 +186,7 @@
   .intro-image-small {
     width: 98%;
     left: 32%;
-    top: 80%;
+    top: calc(80% + 50px);
   }
   .intro-copy .section-title { font-size: clamp(44px, 5.6vw, 60px); }
   .rooms-section { padding-top: 155px; }
