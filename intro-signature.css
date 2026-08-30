@@ -2,7 +2,7 @@
 .intro {
   position: relative;
   overflow: hidden;
-  padding: 72px 0 84px;
+  padding: 74px 0 88px;
   background: #eee7db;
   border-top: 1px solid rgba(28,28,25,.08);
   border-bottom: 1px solid rgba(28,28,25,.08);
@@ -14,13 +14,13 @@
 }
 
 .intro .container {
-  width: min(1120px, calc(100% - 72px));
+  width: min(1260px, calc(100% - 72px));
 }
 
 .intro-grid {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: clamp(64px, 8vw, 118px);
+  grid-template-columns: 470px minmax(0, 1fr);
+  gap: clamp(72px, 7vw, 112px);
   align-items: center;
   min-height: 0;
 }
@@ -28,7 +28,7 @@
 .intro-image-wrap {
   position: relative;
   width: 100%;
-  padding: 0 0 64px;
+  padding: 0 0 76px;
 }
 
 /* Keep the uploaded cathedral image at its natural portrait ratio. */
@@ -39,21 +39,21 @@
   height: auto;
   object-fit: contain;
   display: block;
-  box-shadow: 0 22px 52px rgba(27,25,20,.14);
+  box-shadow: 0 24px 58px rgba(27,25,20,.15);
 }
 
-/* Small breakfast-room image overlaps only the lower edge of the cathedral photo. */
+/* Preserve the overlap relationship, but scale both images up together. */
 .intro-image-small {
   position: absolute;
   z-index: 2;
-  width: 56%;
+  width: 58%;
   height: auto;
   aspect-ratio: 16 / 9;
-  right: -38px;
+  right: -42px;
   bottom: 0;
   object-fit: cover;
-  border: 7px solid #eee7db;
-  box-shadow: 0 18px 40px rgba(27,25,20,.15);
+  border: 8px solid #eee7db;
+  box-shadow: 0 20px 44px rgba(27,25,20,.16);
 }
 
 .intro-image-wrap::after {
@@ -139,32 +139,47 @@
   }
 }
 
-@media (max-width: 940px) {
-  .intro { padding: 68px 0 76px; }
-  .intro .container { width: min(100% - 48px, 820px); }
+@media (max-width: 1100px) {
+  .intro .container { width: min(100% - 56px, 1080px); }
   .intro-grid {
-    grid-template-columns: 300px minmax(0,1fr);
-    gap: 52px;
+    grid-template-columns: 410px minmax(0,1fr);
+    gap: 62px;
   }
-  .intro-image-small { right: -24px; width: 58%; }
+}
+
+@media (max-width: 940px) {
+  .intro { padding: 68px 0 78px; }
+  .intro .container { width: min(100% - 48px, 900px); }
+  .intro-grid {
+    grid-template-columns: 370px minmax(0,1fr);
+    gap: 50px;
+  }
+  .intro-image-small { right: -28px; width: 59%; }
   .intro-copy .section-title { font-size: clamp(46px, 6vw, 64px); }
 }
 
-@media (max-width: 680px) {
-  .intro { padding: 58px 0 68px; }
-  .intro .container { width: calc(100% - 34px); }
+@media (max-width: 760px) {
   .intro-grid {
     grid-template-columns: 1fr;
-    gap: 46px;
+    gap: 50px;
   }
   .intro-image-wrap {
-    width: min(78%, 340px);
+    width: min(86%, 470px);
     margin: 0 auto;
-    padding-bottom: 52px;
+  }
+}
+
+@media (max-width: 680px) {
+  .intro { padding: 58px 0 70px; }
+  .intro .container { width: calc(100% - 34px); }
+  .intro-grid { gap: 44px; }
+  .intro-image-wrap {
+    width: min(88%, 420px);
+    padding-bottom: 62px;
   }
   .intro-image-small {
-    width: 58%;
-    right: -12%;
+    width: 61%;
+    right: -9%;
     border-width: 6px;
   }
   .intro-copy {
