@@ -4,11 +4,11 @@
   const mewsBase = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6';
   const languageMap = { nl:'nl-NL', en:'en-GB', fr:'fr-FR', es:'es-ES', de:'de-DE' };
   const copy = {
-    nl:{ guests:'Gasten', adults:'Volwassenen', adultHint:'13 jaar en ouder', children:'Kinderen', childHint:'0-12 jaar', adultOne:'volwassene', adultMany:'volwassenen', childOne:'kind', childMany:'kinderen' },
-    en:{ guests:'Guests', adults:'Adults', adultHint:'13 years and older', children:'Children', childHint:'0-12 years', adultOne:'adult', adultMany:'adults', childOne:'child', childMany:'children' },
-    fr:{ guests:'Personnes', adults:'Adultes', adultHint:'13 ans et plus', children:'Enfants', childHint:'0-12 ans', adultOne:'adulte', adultMany:'adultes', childOne:'enfant', childMany:'enfants' },
-    es:{ guests:'Huéspedes', adults:'Adultos', adultHint:'13 años o más', children:'Niños', childHint:'0-12 años', adultOne:'adulto', adultMany:'adultos', childOne:'niño', childMany:'niños' },
-    de:{ guests:'Gäste', adults:'Erwachsene', adultHint:'Ab 13 Jahren', children:'Kinder', childHint:'0-12 Jahre', adultOne:'Erwachsener', adultMany:'Erwachsene', childOne:'Kind', childMany:'Kinder' }
+    nl:{ guests:'Gasten', adults:'Volwassenen', adultHint:'', children:'Kinderen', childHint:'', adultOne:'volwassene', adultMany:'volwassenen', childOne:'kind', childMany:'kinderen' },
+    en:{ guests:'Guests', adults:'Adults', adultHint:'', children:'Children', childHint:'', adultOne:'adult', adultMany:'adults', childOne:'child', childMany:'children' },
+    fr:{ guests:'Personnes', adults:'Adultes', adultHint:'', children:'Enfants', childHint:'', adultOne:'adulte', adultMany:'adultes', childOne:'enfant', childMany:'enfants' },
+    es:{ guests:'Huéspedes', adults:'Adultos', adultHint:'', children:'Niños', childHint:'', adultOne:'adulto', adultMany:'adultos', childOne:'niño', childMany:'niños' },
+    de:{ guests:'Gäste', adults:'Erwachsene', adultHint:'', children:'Kinder', childHint:'', adultOne:'Erwachsener', adultMany:'Erwachsene', childOne:'Kind', childMany:'Kinder' }
   };
 
   let adults = 2;
@@ -38,10 +38,7 @@
       field.dataset.enhancedDate = 'true';
       field.classList.add('booking-date-field');
 
-      field.addEventListener('click', event => {
-        if (event.target === input) return openDatePicker(input);
-        openDatePicker(input);
-      });
+      field.addEventListener('click', () => openDatePicker(input));
 
       input.addEventListener('keydown', event => {
         if (event.key !== 'Enter' && event.key !== ' ') return;
@@ -90,7 +87,7 @@
       </button>
       <div class="guest-popover" role="dialog" aria-label="Guest selection">
         <div class="guest-row">
-          <div class="guest-row-copy"><strong data-guest-copy="adults">Adults</strong><span data-guest-copy="adultHint">13 years and older</span></div>
+          <div class="guest-row-copy"><strong data-guest-copy="adults">Adults</strong><span data-guest-copy="adultHint"></span></div>
           <div class="guest-stepper">
             <button type="button" data-guest-action="adults-minus" aria-label="Remove adult">−</button>
             <span class="guest-count" data-guest-count="adults">2</span>
@@ -98,7 +95,7 @@
           </div>
         </div>
         <div class="guest-row">
-          <div class="guest-row-copy"><strong data-guest-copy="children">Children</strong><span data-guest-copy="childHint">0-12 years</span></div>
+          <div class="guest-row-copy"><strong data-guest-copy="children">Children</strong><span data-guest-copy="childHint"></span></div>
           <div class="guest-stepper">
             <button type="button" data-guest-action="children-minus" aria-label="Remove child">−</button>
             <span class="guest-count" data-guest-count="children">0</span>
