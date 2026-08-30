@@ -1,0 +1,47 @@
+---
+interface Props {
+  site: {
+    hotelName: string;
+    address: string;
+    phone: string;
+    email: string;
+    bookingUrl: string;
+  };
+}
+
+const { site } = Astro.props;
+---
+
+<footer class="site-footer" id="contact">
+  <div class="shell footer-grid">
+    <div class="footer-brand">
+      <p class="eyebrow">Mechelen, Belgium</p>
+      <h2>{site.hotelName}</h2>
+      <p>A historic city hotel with one of Mechelen's most memorable breakfast views.</p>
+    </div>
+
+    <div class="footer-column">
+      <p class="footer-label">Visit</p>
+      <address>{site.address}</address>
+      <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </div>
+
+    <div class="footer-column">
+      <p class="footer-label">Explore</p>
+      <a href="/rooms">Rooms</a>
+      <a href="/#breakfast">Breakfast</a>
+      <a href="/#location">Location</a>
+      <a href="/privacy-policy.html">Privacy</a>
+    </div>
+
+    <div class="footer-column footer-cta">
+      <p class="footer-label">Stay with us</p>
+      <a class="footer-book" href={site.bookingUrl} target="_blank" rel="noopener noreferrer">Book direct <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="shell footer-bottom">
+    <span>© {new Date().getFullYear()} Hotel 3 Paardekens</span>
+    <span>Historic Mechelen · Belgium</span>
+  </div>
+</footer>

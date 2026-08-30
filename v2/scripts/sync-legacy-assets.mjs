@@ -1,6 +1,7 @@
-import { cp, copyFile, mkdir, rm } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { cp, copyFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
+import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const projectDir = resolve(scriptDir, '..');
@@ -16,6 +17,28 @@ async function copyAsset(source, destination) {
   await copyFile(source, destination);
 }
 
+async function optimizeJpegs(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = join(directory, entry.name);
+    if (entry.isDirectory()) {
+      await optimizeJpegs(fullPath);
+      continue;
+    }
+
+    const extension = extname(entry.name).toLowerCase();
+    if (extension !== '.jpg' && extension !== '.jpeg') continue;
+
+    const temporaryPath = `${fullPath}.optimized.jpg`;
+    await sharp(fullPath)
+      .rotate()
+      .resize({ width: 2400, height: 2400, fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: 82, progressive: true, mozjpeg: true })
+      .toFile(temporaryPath);
+    await rename(temporaryPath, fullPath);
+  }
+}
+
 await rm(generatedDir, { recursive: true, force: true });
 await mkdir(generatedDir, { recursive: true });
 
@@ -28,4 +51,6 @@ await Promise.all([
   copyAsset(join(repoRoot, 'favicon.ico'), join(projectDir, 'public', 'favicon.ico'))
 ]);
 
-console.log('Synced existing Hotel 3 Paardekens assets into the v2 build.');
+await optimizeJpegs(generatedDir);
+
+console.log('Synced and optimized existing Hotel 3 Paardekens assets into the v2 build.');
