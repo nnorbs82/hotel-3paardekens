@@ -195,6 +195,7 @@
 
       field.addEventListener('click', event => {
         if (event.target.closest('.calendar-popover') || event.target.closest('.booking-date-toggle')) return;
+        event.stopPropagation();
         openCalendar(state);
       });
 
