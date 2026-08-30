@@ -3,7 +3,7 @@
   position: relative;
   z-index: 2;
   overflow: visible;
-  padding: 64px 0 30px;
+  padding: 64px 0 0;
   background: #eee7db;
   border-top: 1px solid rgba(28,28,25,.08);
   border-bottom: 1px solid rgba(28,28,25,.08);
@@ -21,7 +21,7 @@
 .intro-grid {
   display: grid;
   grid-template-columns: 470px minmax(0, 1fr);
-  gap: clamp(96px, 8vw, 126px);
+  gap: clamp(160px, 11vw, 180px);
   align-items: center;
   min-height: 0;
 }
@@ -44,19 +44,22 @@
 }
 
 /*
- * Anchor the second image to the tower image itself. Its top edge sits around
- * two-thirds down the tower photo, which means the lower third of the tower
- * remains visibly overlapped. The image grows to the left, away from the copy,
- * and its lower edge is free to continue into the Rooms section.
+ * Exact desktop relationship requested:
+ * - left edge begins one third into the cathedral image
+ * - top edge begins about 20% up from the cathedral image's bottom
+ * - with this portrait/landscape pairing, the cathedral bottom lands almost
+ *   exactly through the middle of the second image, so half remains above the
+ *   section boundary and half hangs into the Rooms section below.
  */
 .intro-image-small {
   position: absolute;
   z-index: 4;
-  width: 118%;
+  width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  right: 4%;
-  top: 64%;
+  left: 33%;
+  right: auto;
+  top: 80%;
   bottom: auto;
   object-fit: cover;
   border: 8px solid #eee7db;
@@ -67,7 +70,7 @@
   display: none;
 }
 
-/* The copy gets its own clear column and always sits above the image layer. */
+/* The larger gap is the safety zone - the image never needs to sit under the copy. */
 .intro-copy {
   position: relative;
   z-index: 6;
@@ -75,7 +78,7 @@
   padding: 0;
   background: transparent;
   box-shadow: none;
-  max-width: 620px;
+  max-width: 610px;
 }
 
 .intro-copy::before {
@@ -93,14 +96,14 @@
 }
 
 .intro-copy .section-title {
-  max-width: 600px;
+  max-width: 590px;
   font-size: clamp(48px, 4.7vw, 72px);
   line-height: .94;
   letter-spacing: -.04em;
 }
 
 .intro-copy .lead {
-  max-width: 570px;
+  max-width: 560px;
   margin: 26px 0 28px;
   padding: 0;
   color: #575249;
@@ -129,14 +132,11 @@
   border-color: var(--bronze-dark);
 }
 
-/*
- * Reserve empty dark space for the part of the second image that crosses the
- * section boundary. The Rooms heading therefore begins below the image.
- */
+/* Half the second image hangs into this dark area; the heading starts below it. */
 .rooms-section {
   position: relative;
   z-index: 1;
-  padding-top: 220px;
+  padding-top: 180px;
 }
 
 .rooms-section .section-head {
@@ -164,34 +164,33 @@
 }
 
 @media (max-width: 1100px) {
-  .intro { padding-bottom: 34px; }
   .intro .container { width: min(100% - 56px, 1080px); }
   .intro-grid {
     grid-template-columns: 410px minmax(0,1fr);
-    gap: 82px;
+    gap: 145px;
   }
   .intro-image-small {
-    width: 112%;
-    right: 3%;
-    top: 64%;
+    width: 100%;
+    left: 33%;
+    top: 80%;
   }
-  .rooms-section { padding-top: 205px; }
+  .rooms-section { padding-top: 165px; }
 }
 
 @media (max-width: 940px) {
-  .intro { padding: 60px 0 44px; }
+  .intro { padding: 60px 0 0; }
   .intro .container { width: min(100% - 48px, 900px); }
   .intro-grid {
-    grid-template-columns: 370px minmax(0,1fr);
-    gap: 66px;
+    grid-template-columns: 350px minmax(0,1fr);
+    gap: 125px;
   }
   .intro-image-small {
-    width: 106%;
-    right: 2%;
-    top: 65%;
+    width: 98%;
+    left: 32%;
+    top: 80%;
   }
-  .intro-copy .section-title { font-size: clamp(46px, 6vw, 64px); }
-  .rooms-section { padding-top: 185px; }
+  .intro-copy .section-title { font-size: clamp(44px, 5.6vw, 60px); }
+  .rooms-section { padding-top: 155px; }
 }
 
 /* Once the layout stacks, keep both images together and keep all copy clear. */
@@ -211,7 +210,8 @@
   }
   .intro-image-small {
     width: 88%;
-    right: -3%;
+    left: 20%;
+    right: auto;
     top: 66%;
   }
   .rooms-section { padding-top: 122px; }
@@ -227,7 +227,8 @@
   }
   .intro-image-small {
     width: 86%;
-    right: -2%;
+    left: 18%;
+    right: auto;
     top: 66%;
     border-width: 6px;
   }
