@@ -9,6 +9,6 @@
   "amenities_fr":["Lit double","TV","Salle de bain privée","Vue sur la ville","Café et thé","Chauffage","Armoire"],
   "amenities_es":["Cama doble","TV","Baño privado","Vistas a la ciudad","Café y té","Calefacción","Armario"],
   "amenities_de":["Doppelbett","TV","Eigenes Badezimmer","Stadtblick","Kaffee- und Teezubereitung","Heizung","Kleiderschrank"],
-  "gallery":["/images/legacy/rooms/Double/1.jpg","/images/legacy/rooms/Double/2.jpg","/images/legacy/rooms/Double/3.jpg","/images/legacy/rooms/Double/4.jpg"],
+  "gallery":["/images/legacy/rooms/Double/4.jpg","/images/legacy/rooms/Double/1.jpg","/images/legacy/rooms/Double/2.jpg","/images/legacy/rooms/Double/3.jpg"],
   "bookingUrl":"https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
 }
