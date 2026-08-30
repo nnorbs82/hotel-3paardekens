@@ -1,4 +1,4 @@
-/* Enhanced booking bar - dates and guest selection */
+/* Enhanced booking bar - custom calendar and guest selection */
 .booking-bar{
   grid-template-columns:1fr 1fr 1.08fr 1.28fr;
   overflow:visible;
@@ -19,12 +19,12 @@
 
 .booking-date-field:hover,
 .booking-guest-field:hover,
-.booking-date-field:focus-within,
+.booking-date-field.is-open,
 .booking-guest-field.is-open{
   background:#fbf7ef;
 }
 
-.booking-date-field:focus-within,
+.booking-date-field.is-open,
 .booking-guest-field.is-open{
   box-shadow:inset 0 -2px 0 var(--bronze);
 }
@@ -41,30 +41,19 @@
   text-transform:uppercase;
 }
 
-.booking-field input[type="date"]{
-  width:100%;
-  min-height:34px;
-  padding:0;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:var(--ink);
-  cursor:pointer;
-  font-family:var(--serif);
-  font-size:22px;
-  font-weight:500;
-  letter-spacing:.005em;
-  line-height:1.2;
+/* The native date input remains in the DOM only as the value Mews receives. */
+.booking-field input.booking-native-date{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  margin:0!important;
+  padding:0!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
 }
 
-.booking-field input[type="date"]::-webkit-calendar-picker-indicator{
-  width:18px;
-  height:18px;
-  margin-left:8px;
-  opacity:.52;
-  cursor:pointer;
-}
-
+.booking-date-toggle,
 .booking-guest-toggle{
   width:100%;
   min-height:34px;
@@ -79,16 +68,30 @@
   justify-content:space-between;
   gap:12px;
   text-align:left;
-  font-family:var(--serif);
-  font-size:22px;
-  font-weight:500;
-  line-height:1.2;
 }
 
+.booking-date-toggle:focus-visible,
 .booking-guest-toggle:focus-visible{
   outline:1px solid var(--bronze);
   outline-offset:5px;
 }
+
+.booking-date-value,
+.booking-guest-toggle{
+  font-family:"Times New Roman",Times,serif;
+  font-size:22px;
+  font-weight:400;
+  line-height:1.2;
+}
+
+.booking-date-icon{
+  flex:none;
+  width:18px;
+  height:18px;
+  color:var(--ink-soft);
+  opacity:.72;
+}
+.booking-date-icon svg{display:block;width:100%;height:100%}
 
 .guest-chevron{
   flex:none;
@@ -103,9 +106,182 @@
   transform:rotate(180deg) translateY(1px);
 }
 
+/* CUSTOM CALENDAR */
+.calendar-popover{
+  position:absolute;
+  z-index:95;
+  left:-1px;
+  top:calc(100% + 12px);
+  width:min(650px,calc(100vw - 36px));
+  padding:0;
+  background:#fffdf8;
+  border:1px solid rgba(28,28,25,.12);
+  box-shadow:0 30px 75px rgba(20,18,14,.20);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-8px);
+  transition:opacity .18s ease,transform .18s ease,visibility .18s ease;
+  cursor:default;
+}
+
+.booking-date-field[data-calendar-side="checkout"] .calendar-popover{
+  left:auto;
+  right:-1px;
+}
+
+.booking-date-field.is-open .calendar-popover{
+  opacity:1;
+  visibility:visible;
+  transform:none;
+}
+
+.calendar-toolbar{
+  min-height:58px;
+  display:grid;
+  grid-template-columns:46px 1fr 46px;
+  align-items:center;
+  border-bottom:1px solid rgba(28,28,25,.09);
+}
+
+.calendar-toolbar-title{
+  text-align:center;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+.calendar-nav{
+  width:46px;
+  height:46px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  font-family:"Times New Roman",Times,serif;
+  font-size:28px;
+  line-height:1;
+  transition:background .18s ease,color .18s ease;
+}
+.calendar-nav:hover{background:var(--paper-deep);color:var(--bronze-dark)}
+.calendar-nav:focus-visible{outline:1px solid var(--bronze);outline-offset:-3px}
+
+.calendar-months{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+}
+
+.calendar-month{
+  min-width:0;
+  padding:22px 24px 24px;
+}
+.calendar-month + .calendar-month{border-left:1px solid rgba(28,28,25,.09)}
+
+.calendar-month-name{
+  margin:0 0 18px;
+  text-align:center;
+  font-family:var(--serif);
+  font-size:23px;
+  font-weight:500;
+  line-height:1;
+  letter-spacing:-.01em;
+}
+
+.calendar-weekdays,
+.calendar-days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  align-items:center;
+}
+
+.calendar-weekdays{
+  margin-bottom:7px;
+}
+.calendar-weekdays span{
+  min-width:0;
+  text-align:center;
+  color:#8a8479;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.calendar-day,
+.calendar-day-empty{
+  position:relative;
+  width:38px;
+  height:38px;
+  justify-self:center;
+}
+
+.calendar-day{
+  border:0;
+  padding:0;
+  background:transparent;
+  color:var(--ink);
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  font-family:"Times New Roman",Times,serif;
+  font-size:17px;
+  font-weight:400;
+  line-height:1;
+  transition:background .14s ease,color .14s ease,box-shadow .14s ease;
+}
+
+.calendar-day:hover:not(:disabled):not(.is-start):not(.is-end){
+  background:#eee6d9;
+}
+
+.calendar-day.is-today:not(.is-start):not(.is-end){
+  box-shadow:inset 0 0 0 1px rgba(128,91,57,.5);
+}
+
+.calendar-day.is-in-range:not(.is-start):not(.is-end){
+  background:#f0e8dc;
+  color:var(--ink);
+}
+
+.calendar-day.is-start,
+.calendar-day.is-end{
+  background:var(--ink);
+  color:#fff;
+  box-shadow:0 5px 14px rgba(28,28,25,.18);
+}
+
+.calendar-day:disabled{
+  color:#c7c1b7;
+  cursor:not-allowed;
+  background:transparent;
+  box-shadow:none;
+}
+
+.calendar-day:focus-visible{
+  outline:1px solid var(--bronze);
+  outline-offset:2px;
+}
+
+.calendar-footer{
+  min-height:46px;
+  padding:13px 24px;
+  border-top:1px solid rgba(28,28,25,.09);
+  color:var(--ink-soft);
+  font-size:10px;
+  letter-spacing:.04em;
+  display:flex;
+  align-items:center;
+}
+
+/* GUESTS */
 .guest-popover{
   position:absolute;
-  z-index:80;
+  z-index:90;
   left:-1px;
   top:calc(100% + 12px);
   width:340px;
@@ -134,23 +310,17 @@
   padding:15px 0;
 }
 
-.guest-row + .guest-row{
-  border-top:1px solid var(--line);
-}
+.guest-row + .guest-row{border-top:1px solid var(--line)}
 
 .guest-row-copy strong{
   display:block;
-  margin:0 0 2px;
+  margin:0;
   font-family:var(--sans);
   font-size:13px;
   font-weight:600;
 }
 
-.guest-row-copy span{
-  display:block;
-  color:var(--ink-soft);
-  font-size:11px;
-}
+.guest-row-copy span:empty{display:none}
 
 .guest-stepper{
   display:flex;
@@ -180,16 +350,13 @@
   border-color:rgba(28,28,25,.28);
 }
 
-.guest-stepper button:disabled{
-  opacity:.28;
-  cursor:not-allowed;
-}
+.guest-stepper button:disabled{opacity:.28;cursor:not-allowed}
 
 .guest-count{
   min-width:18px;
   text-align:center;
-  font-size:14px;
-  font-weight:600;
+  font-family:"Times New Roman",Times,serif;
+  font-size:16px;
 }
 
 .booking-submit{
@@ -198,45 +365,42 @@
 }
 
 @media(max-width:900px){
-  .booking-bar{
-    grid-template-columns:1fr 1fr;
-  }
-  .booking-field:nth-child(2){
-    border-right:0;
-  }
-  .booking-guest-field{
-    border-top:1px solid var(--line);
-  }
-  .booking-submit{
-    min-height:70px;
-    border-top:1px solid rgba(28,28,25,.05);
-  }
-  .guest-popover{
-    left:auto;
-    right:0;
+  .booking-bar{grid-template-columns:1fr 1fr}
+  .booking-field:nth-child(2){border-right:0}
+  .booking-guest-field{border-top:1px solid var(--line)}
+  .booking-submit{min-height:70px;border-top:1px solid rgba(28,28,25,.05)}
+  .guest-popover{left:auto;right:0}
+}
+
+@media(max-width:760px){
+  .calendar-months{grid-template-columns:1fr}
+  .calendar-month:nth-child(n+2){display:none}
+  .calendar-month + .calendar-month{border-left:0}
+  .calendar-popover,
+  .booking-date-field[data-calendar-side="checkout"] .calendar-popover{
+    left:0;
+    right:auto;
+    width:min(390px,calc(100vw - 36px));
   }
 }
 
 @media(max-width:600px){
-  .booking-bar{
-    grid-template-columns:1fr;
-  }
+  .booking-bar{grid-template-columns:1fr}
   .booking-field{
     min-height:72px;
     border-right:0;
     border-bottom:1px solid var(--line);
   }
-  .booking-guest-field{
-    border-top:0;
-  }
-  .booking-submit{
-    min-height:68px;
-    border-top:0;
-  }
-  .guest-popover{
+  .booking-guest-field{border-top:0}
+  .booking-submit{min-height:68px;border-top:0}
+  .guest-popover{left:0;right:auto;width:100%;max-width:none}
+  .calendar-popover,
+  .booking-date-field[data-calendar-side="checkout"] .calendar-popover{
     left:0;
     right:auto;
     width:100%;
     max-width:none;
   }
+  .calendar-month{padding:20px 16px 22px}
+  .calendar-day,.calendar-day-empty{width:40px;height:40px}
 }
