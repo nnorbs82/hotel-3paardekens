@@ -4,41 +4,6 @@
   signatureSheet.href = 'intro-signature.css';
   document.head.appendChild(signatureSheet);
 
-  // Load the exact St Rumbold's Cathedral image supplied for the redesign.
-  // Keep the existing hotel image visible unless the cathedral image has loaded successfully.
-  const introMainImage = document.querySelector('.intro-image-main');
-  if (introMainImage) {
-    const cathedralParts = [
-      'assets/cathedral-image/part-01.txt',
-      'assets/cathedral-image/part-02.txt',
-      'assets/cathedral-image/part-03.txt',
-      'assets/cathedral-image/part-04.txt',
-      'assets/cathedral-image/part-05.txt',
-      'assets/cathedral-image/part-06.txt'
-    ];
-
-    Promise.all(cathedralParts.map(async (url) => {
-      const response = await fetch(url, { cache: 'force-cache' });
-      if (!response.ok) throw new Error(`Failed to load ${url}`);
-      return response.text();
-    }))
-      .then((parts) => {
-        const base64 = parts.join('').replace(/\s/g, '');
-        const cathedralImage = new Image();
-        cathedralImage.onload = () => {
-          introMainImage.src = cathedralImage.src;
-          introMainImage.alt = "St Rumbold's Cathedral in Mechelen";
-        };
-        cathedralImage.onerror = () => {
-          console.error('Cathedral image data could not be decoded. Keeping the existing hotel image.');
-        };
-        cathedralImage.src = `data:image/jpeg;base64,${base64}`;
-      })
-      .catch((error) => {
-        console.error('Cathedral image could not be loaded. Keeping the existing hotel image.', error);
-      });
-  }
-
   // Keep the signature section compact and in proportion with the hero and rooms sections.
   const introScale = document.createElement('style');
   introScale.textContent = `
