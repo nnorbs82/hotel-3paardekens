@@ -3,7 +3,7 @@
   position: relative;
   z-index: 2;
   overflow: visible;
-  padding: 74px 0 88px;
+  padding: 64px 0 30px;
   background: #eee7db;
   border-top: 1px solid rgba(28,28,25,.08);
   border-bottom: 1px solid rgba(28,28,25,.08);
@@ -21,7 +21,7 @@
 .intro-grid {
   display: grid;
   grid-template-columns: 470px minmax(0, 1fr);
-  gap: clamp(84px, 7.5vw, 118px);
+  gap: clamp(96px, 8vw, 126px);
   align-items: center;
   min-height: 0;
 }
@@ -29,10 +29,10 @@
 .intro-image-wrap {
   position: relative;
   width: 100%;
-  padding: 0 0 76px;
+  padding: 0;
 }
 
-/* Keep the uploaded cathedral image at its natural portrait ratio. */
+/* Keep the uploaded cathedral image at its natural ratio - never crop it. */
 .intro-image-main {
   position: relative;
   inset: auto;
@@ -44,18 +44,20 @@
 }
 
 /*
- * The secondary image now grows mainly to the left and bridges the About/Rooms
- * boundary. This keeps it away from the copy while giving it the same deliberate
- * cross-surface feeling as the breakfast feature card.
+ * Anchor the second image to the tower image itself. Its top edge sits around
+ * two-thirds down the tower photo, which means the lower third of the tower
+ * remains visibly overlapped. The image grows to the left, away from the copy,
+ * and its lower edge is free to continue into the Rooms section.
  */
 .intro-image-small {
   position: absolute;
   z-index: 4;
-  width: 96%;
+  width: 118%;
   height: auto;
   aspect-ratio: 16 / 9;
-  right: -8%;
-  bottom: -220px;
+  right: 4%;
+  top: 64%;
+  bottom: auto;
   object-fit: cover;
   border: 8px solid #eee7db;
   box-shadow: 0 24px 52px rgba(27,25,20,.20);
@@ -65,14 +67,15 @@
   display: none;
 }
 
+/* The copy gets its own clear column and always sits above the image layer. */
 .intro-copy {
   position: relative;
-  z-index: 5;
+  z-index: 6;
   margin: 0;
   padding: 0;
   background: transparent;
   box-shadow: none;
-  max-width: 650px;
+  max-width: 620px;
 }
 
 .intro-copy::before {
@@ -90,14 +93,14 @@
 }
 
 .intro-copy .section-title {
-  max-width: 620px;
+  max-width: 600px;
   font-size: clamp(48px, 4.7vw, 72px);
   line-height: .94;
   letter-spacing: -.04em;
 }
 
 .intro-copy .lead {
-  max-width: 590px;
+  max-width: 570px;
   margin: 26px 0 28px;
   padding: 0;
   color: #575249;
@@ -126,11 +129,19 @@
   border-color: var(--bronze-dark);
 }
 
-/* Make room in the following dark section for the bridging image. */
+/*
+ * Reserve empty dark space for the part of the second image that crosses the
+ * section boundary. The Rooms heading therefore begins below the image.
+ */
 .rooms-section {
   position: relative;
   z-index: 1;
-  padding-top: 242px;
+  padding-top: 220px;
+}
+
+.rooms-section .section-head {
+  position: relative;
+  z-index: 2;
 }
 
 /* Subtle entrance only - no large movement. */
@@ -153,67 +164,71 @@
 }
 
 @media (max-width: 1100px) {
+  .intro { padding-bottom: 34px; }
   .intro .container { width: min(100% - 56px, 1080px); }
   .intro-grid {
     grid-template-columns: 410px minmax(0,1fr);
-    gap: 72px;
+    gap: 82px;
   }
   .intro-image-small {
-    width: 94%;
-    right: -6%;
-    bottom: -195px;
+    width: 112%;
+    right: 3%;
+    top: 64%;
   }
-  .rooms-section { padding-top: 220px; }
+  .rooms-section { padding-top: 205px; }
 }
 
 @media (max-width: 940px) {
-  .intro { padding: 68px 0 78px; }
+  .intro { padding: 60px 0 44px; }
   .intro .container { width: min(100% - 48px, 900px); }
   .intro-grid {
     grid-template-columns: 370px minmax(0,1fr);
-    gap: 58px;
+    gap: 66px;
   }
   .intro-image-small {
-    width: 92%;
-    right: -4%;
-    bottom: -170px;
+    width: 106%;
+    right: 2%;
+    top: 65%;
   }
   .intro-copy .section-title { font-size: clamp(46px, 6vw, 64px); }
-  .rooms-section { padding-top: 200px; }
+  .rooms-section { padding-top: 185px; }
 }
 
-/* Once the layout stacks, keep the image inside the About composition so it cannot cover copy. */
+/* Once the layout stacks, keep both images together and keep all copy clear. */
 @media (max-width: 760px) {
-  .intro { overflow: hidden; }
+  .intro {
+    overflow: hidden;
+    padding-bottom: 62px;
+  }
   .intro-grid {
     grid-template-columns: 1fr;
-    gap: 70px;
+    gap: 92px;
   }
   .intro-image-wrap {
     width: min(86%, 470px);
     margin: 0 auto;
-    padding-bottom: 118px;
+    padding-bottom: 128px;
   }
   .intro-image-small {
-    width: 82%;
-    right: -8%;
-    bottom: -58px;
+    width: 88%;
+    right: -3%;
+    top: 66%;
   }
   .rooms-section { padding-top: 122px; }
 }
 
 @media (max-width: 680px) {
-  .intro { padding: 58px 0 70px; }
+  .intro { padding: 54px 0 66px; }
   .intro .container { width: calc(100% - 34px); }
-  .intro-grid { gap: 62px; }
+  .intro-grid { gap: 82px; }
   .intro-image-wrap {
     width: min(88%, 420px);
-    padding-bottom: 105px;
+    padding-bottom: 116px;
   }
   .intro-image-small {
-    width: 80%;
-    right: -5%;
-    bottom: -48px;
+    width: 86%;
+    right: -2%;
+    top: 66%;
     border-width: 6px;
   }
   .intro-copy {
