@@ -146,7 +146,7 @@
       image:[
         `${PROD_ORIGIN}/optimized/assets/background-social.jpg`,
         `${PROD_ORIGIN}/assets/3paardekens-breakfast.webp`,
-        `${PROD_ORIGIN}/Rooms/Double/6.jpg`
+        `${PROD_ORIGIN}/optimized/Rooms/Double/6.webp`
       ],
       logo:`${PROD_ORIGIN}/assets/3plogo.png`,
       telephone:'+32 15 342 713',
