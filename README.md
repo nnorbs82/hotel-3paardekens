@@ -1,43 +1,65 @@
-# Hotel 3 Paardekens
+# Hotel 3 Paardekens Website
 
-Website for Hotel 3 Paardekens with admin panel for room management.
+This repository contains the website for Hotel 3 Paardekens in Mechelen, Belgium.
 
-## 🚨 Data Not Syncing Across Browsers?
+## Current website workflow
 
-If info blocks and rooms are only visible in the browser where you created them:
-1. **Open `firebase-diagnostics.html`** in your browser
-2. **Run diagnostics** to identify the issue
-3. **Follow the fix instructions** provided
+The redesigned website is maintained as a static site with Git-backed content editing:
 
-See **[QUICK_FIX_GUIDE.md](QUICK_FIX_GUIDE.md)** for the complete troubleshooting guide.
+- **GitHub** stores the website source, content and hotel photography.
+- **Pages CMS** provides the non-code editing interface for hotel content, room descriptions, amenities, room galleries, Hotel Info and Wallet FAQs.
+- **Cloudflare Pages** builds and serves the website and automatically creates preview deployments from the `redesign` branch.
+- **Mews** remains the booking engine and source of reservation availability.
 
-## 🚀 Just Updated EmailJS Configuration?
+No Firebase database or Firebase admin panel is required by the redesigned public website.
 
-If you just verified your EmailJS configuration values, see **[NEXT_STEPS.md](NEXT_STEPS.md)** for what to do next.
+## Branches
 
-## Documentation
+- `main` - current production website until the redesign is formally approved for launch.
+- `redesign` - current redesigned website and Cloudflare preview branch.
 
-- **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Complete testing guide for password reset functionality with new EmailJS key
-- **[EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)** - Modern, visually appealing email template with styled buttons and responsive design
-- **[NEXT_STEPS.md](NEXT_STEPS.md)** - What to do after updating EmailJS configuration
-- **[EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md)** - Complete checklist to verify EmailJS configuration is correct
-- **[EMAIL_SETUP.md](EMAIL_SETUP.md)** - Email configuration setup guide
-- **[TROUBLESHOOTING_PASSWORD_RESET.md](TROUBLESHOOTING_PASSWORD_RESET.md)** - Detailed troubleshooting guide for password reset issues
+Do not merge `redesign` into `main` until the production cutover has been approved.
 
-## Quick Start
+## Editing content with Pages CMS
 
-1. Open `index.html` for the main hotel website
-2. Open `hoteladmin.html` for the admin panel
-3. Admin credentials: `rev.management@groupdaedalus.be` / `Hotel3Paardekens2024!`
+1. Sign in to Pages CMS with GitHub.
+2. Open `nnorbs82/hotel-3paardekens`.
+3. Select the `redesign` branch while the redesign is still in preview.
+4. Edit the relevant content section and save.
+5. Pages CMS commits the change to GitHub.
+6. Cloudflare Pages automatically creates an updated preview deployment.
 
-## Password Reset Configuration
+The Pages CMS configuration is stored in `.pages.yml`.
 
-The password reset functionality uses EmailJS with an improved modern email template. 
+## CMS-managed content
 
-**NEW EmailJS Public Key**: `MEiKFhBHfwDzT-xz1`
+Current editable content includes:
 
-### Quick Start Testing
-1. **Testing Guide**: See [TESTING_GUIDE.md](TESTING_GUIDE.md) for complete step-by-step testing instructions
-2. **Email Template**: See [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md) for a modern, responsive email template with styled buttons
-3. **Verification**: Review [EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md) to verify your EmailJS account settings
-4. **Troubleshooting**: If issues persist, see [TROUBLESHOOTING_PASSWORD_RESET.md](TROUBLESHOOTING_PASSWORD_RESET.md) for detailed troubleshooting
+- Homepage and hotel details
+- Room names, descriptions and amenities in supported languages
+- Room gallery images and image order
+- Hotel information sections
+- Google Wallet FAQs
+- Apple Wallet FAQs
+
+Structured content is stored under `v2/content/`.
+
+## Room photography
+
+Room photography is stored in the repository under `Rooms/`. The first image in a room's CMS Gallery is used as that room's lead image on the redesigned website. Gallery ordering therefore controls both the visible lead image and the full room gallery.
+
+Only genuine Hotel 3 Paardekens photography should be used on the public hotel website.
+
+## Booking
+
+The website sends guests to the Hotel 3 Paardekens Mews Distributor for availability and booking. The redesigned booking bar and custom calendar are maintained in the root website files.
+
+## Preview and production
+
+The redesign remains `noindex` while it is being reviewed on Cloudflare preview deployments. Search-engine indexing, canonical URLs, sitemap/robots production settings and final analytics behaviour should be validated as part of the production launch checklist.
+
+## Security
+
+Never commit passwords, private API keys, service-account credentials or other secrets to this repository. Public client identifiers should still be documented only where they are genuinely required.
+
+Legacy credentials that were previously committed must be treated as compromised and rotated at the relevant service, because removing them from the latest version does not remove them from Git history.
