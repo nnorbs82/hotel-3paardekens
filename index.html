@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="preview-site.css">
   <link rel="stylesheet" href="booking-enhanced.css">
   <link rel="stylesheet" href="modern-home.css">
+  <link rel="stylesheet" href="intro-signature.css">
 </head>
 <body>
   <header class="site-header" aria-label="Main navigation">
@@ -40,7 +41,7 @@
 
   <main>
     <section class="hero">
-      <div class="hero-media"><img src="assets/background.jpg" alt="Hotel 3 Paardekens in Mechelen"></div>
+      <div class="hero-media"><img fetchpriority="high" decoding="async" src="assets/background.jpg" alt="Hotel 3 Paardekens in Mechelen"></div>
       <div class="container-wide hero-layout">
         <div class="hero-content">
           <p class="eyebrow">Hotel 3 Paardekens · Mechelen</p>
@@ -61,7 +62,7 @@
 
     <section class="intro" id="about">
       <div class="container intro-grid">
-        <div class="intro-image-wrap"><img class="intro-image-main" src="assets/st-rumbolds-mechelen.webp" alt="St Rumbold's Cathedral in Mechelen"><img class="intro-image-small" src="aboutus/aboutus1.jpg" alt="Hotel 3 Paardekens detail"></div>
+        <div class="intro-image-wrap"><img loading="lazy" decoding="async"  class="intro-image-main" src="assets/st-rumbolds-mechelen.webp" alt="St Rumbold's Cathedral in Mechelen"><img loading="lazy" decoding="async"  class="intro-image-small" src="aboutus/aboutus1.jpg" alt="Hotel 3 Paardekens detail"></div>
         <div class="intro-copy">
           <p class="eyebrow" data-i18n="about.eyebrow">Historic Mechelen · Contemporary comfort</p>
           <h2 class="display section-title" data-i18n="about.title" data-site-field="aboutTitle">A small hotel with a very special point of view.</h2>
@@ -78,10 +79,10 @@
           <p class="lead" data-i18n="homeRooms.body">All rooms share the same central location and hotel character. Choose the category that best fits the way you want to experience Mechelen.</p>
         </div>
         <div class="rooms-grid">
-          <a class="room-card" href="rooms.html#single" data-room-id="single"><img src="Rooms/Single/1.jpg" alt="Single Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">For one</span><p class="room-name" data-room-role="name">Single Room</p><p data-room-role="description">Comfortable and uncomplicated for a city or business stay.</p></div></a>
-          <a class="room-card" href="rooms.html#twin" data-room-id="twin"><img src="Rooms/Twin/1.jpg" alt="Twin Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">Two beds</span><p class="room-name" data-room-role="name">Twin Room</p><p data-room-role="description">Two separate beds in the centre of Mechelen.</p></div></a>
-          <a class="room-card" href="rooms.html#double" data-room-id="double"><img src="Rooms/Double/4.jpg" alt="Double Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">For two</span><p class="room-name" data-room-role="name">Double Room</p><p data-room-role="description">A cosy city stay for two, with a double bed.</p></div></a>
-          <a class="room-card" href="rooms.html#double-deluxe" data-room-id="double-deluxe"><img src="Rooms/Double/6.jpg" alt="Double Deluxe Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">More space</span><p class="room-name" data-room-role="name">Double Deluxe</p><p data-room-role="description">The Double experience with a little extra room.</p></div></a>
+          <a class="room-card" href="rooms.html#single" data-room-id="single"><img loading="lazy" decoding="async"  src="Rooms/Single/1.jpg" alt="Single Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">For one</span><p class="room-name" data-room-role="name">Single Room</p><p data-room-role="description">Comfortable and uncomplicated for a city or business stay.</p></div></a>
+          <a class="room-card" href="rooms.html#twin" data-room-id="twin"><img loading="lazy" decoding="async"  src="Rooms/Twin/1.jpg" alt="Twin Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">Two beds</span><p class="room-name" data-room-role="name">Twin Room</p><p data-room-role="description">Two separate beds in the centre of Mechelen.</p></div></a>
+          <a class="room-card" href="rooms.html#double" data-room-id="double"><img loading="lazy" decoding="async"  src="Rooms/Double/4.jpg" alt="Double Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">For two</span><p class="room-name" data-room-role="name">Double Room</p><p data-room-role="description">A cosy city stay for two, with a double bed.</p></div></a>
+          <a class="room-card" href="rooms.html#double-deluxe" data-room-id="double-deluxe"><img loading="lazy" decoding="async"  src="Rooms/Double/6.jpg" alt="Double Deluxe Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">More space</span><p class="room-name" data-room-role="name">Double Deluxe</p><p data-room-role="description">The Double experience with a little extra room.</p></div></a>
         </div>
         <div class="rooms-link"><a class="btn btn-light" href="rooms.html" data-i18n="homeRooms.button">Explore rooms & galleries</a></div>
       </div>
@@ -89,7 +90,7 @@
 
     <section class="breakfast-modern reveal" id="breakfast">
       <div class="breakfast-modern-media">
-        <img src="assets/3paardekens-breakfast.webp" alt="Hotel 3 Paardekens top-floor breakfast room">
+        <img loading="lazy" decoding="async"  src="assets/3paardekens-breakfast.webp" alt="Hotel 3 Paardekens top-floor breakfast room">
         <div class="breakfast-modern-caption"><span data-i18n="breakfast.eyebrow">The top floor</span><span>St Rumbold's Cathedral · Mechelen</span></div>
       </div>
       <div class="container-wide breakfast-modern-layout">
@@ -117,7 +118,7 @@
             <div class="location-list modern-list"><div class="location-item"><span data-i18n="location.centre">Historic centre</span><span data-i18n="location.doorstep">On your doorstep</span></div><div class="location-item"><span data-i18n="location.cathedral">St Rumbold's Cathedral</span><span data-i18n="location.central">Central Mechelen</span></div><div class="location-item"><span data-i18n="location.address">Address</span><span>Begijnenstraat 3, 2800 Mechelen</span></div></div>
             <a class="location-map-link" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a>
           </div>
-          <a class="location-photo" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer" aria-label="Open Hotel 3 Paardekens in Google Maps"><img src="assets/background.jpg" alt="Hotel 3 Paardekens in Mechelen"><span>Historic centre</span></a>
+          <a class="location-photo" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer" aria-label="Open Hotel 3 Paardekens in Google Maps"><img loading="lazy" decoding="async" src="assets/background.jpg" alt="Hotel 3 Paardekens in Mechelen"><span>Historic centre</span></a>
         </div>
       </div>
     </section>
@@ -125,7 +126,7 @@
     <section class="sister-modern reveal">
       <div class="sister-marquee" aria-hidden="true">HOTEL ELISABETH · MECHELEN · HOTEL ELISABETH · MECHELEN ·</div>
       <div class="container-wide sister-modern-stage">
-        <div class="sister-modern-image"><img src="elisabeth/sisterhotel.jpg" alt="Hotel Elisabeth Mechelen"></div>
+        <div class="sister-modern-image"><img loading="lazy" decoding="async"  src="elisabeth/sisterhotel.jpg" alt="Hotel Elisabeth Mechelen"></div>
         <div class="sister-modern-card">
           <span class="feature-index">02</span>
           <p class="eyebrow" data-i18n="sister.eyebrow">Our sister property</p>
@@ -138,9 +139,9 @@
 
     <section class="cta-modern reveal" id="contact">
       <div class="cta-modern-images" aria-hidden="true">
-        <div class="cta-photo cta-photo-one"><img src="Rooms/Double/6.jpg" alt=""></div>
-        <div class="cta-photo cta-photo-two"><img src="Rooms/Twin/2.jpg" alt=""></div>
-        <div class="cta-photo cta-photo-three"><img src="Rooms/Single/3.jpg" alt=""></div>
+        <div class="cta-photo cta-photo-one"><img loading="lazy" decoding="async"  src="Rooms/Double/6.jpg" alt=""></div>
+        <div class="cta-photo cta-photo-two"><img loading="lazy" decoding="async"  src="Rooms/Twin/2.jpg" alt=""></div>
+        <div class="cta-photo cta-photo-three"><img loading="lazy" decoding="async"  src="Rooms/Single/3.jpg" alt=""></div>
       </div>
       <div class="container cta-modern-copy">
         <p class="eyebrow" data-i18n="cta.eyebrow">Your stay in Mechelen</p>

@@ -1,0 +1,239 @@
+{
+  "generated_by": "one-time performance QA",
+  "images": [
+    {
+      "path": "assets/background.jpg",
+      "format": "JPEG",
+      "width": 5472,
+      "height": 3648,
+      "bytes": 10738345,
+      "estimated_webp_q88_bytes": 2045400,
+      "estimated_saving_percent": 81.0
+    },
+    {
+      "path": "aboutus/aboutus2.jpg",
+      "format": "JPEG",
+      "width": 3399,
+      "height": 5098,
+      "bytes": 8603591,
+      "estimated_webp_q88_bytes": 1423700,
+      "estimated_saving_percent": 83.5
+    },
+    {
+      "path": "Rooms/Double/7.jpg",
+      "format": "JPEG",
+      "width": 3000,
+      "height": 2000,
+      "bytes": 1746667,
+      "estimated_webp_q88_bytes": 630330,
+      "estimated_saving_percent": 63.9
+    },
+    {
+      "path": "Rooms/Double/6.jpg",
+      "format": "JPEG",
+      "width": 3000,
+      "height": 2000,
+      "bytes": 1730973,
+      "estimated_webp_q88_bytes": 586398,
+      "estimated_saving_percent": 66.1
+    },
+    {
+      "path": "Rooms/Twin/3.jpg",
+      "format": "JPEG",
+      "width": 3000,
+      "height": 2000,
+      "bytes": 1642758,
+      "estimated_webp_q88_bytes": 457380,
+      "estimated_saving_percent": 72.2
+    },
+    {
+      "path": "Rooms/Twin/1.jpg",
+      "format": "JPEG",
+      "width": 3000,
+      "height": 2000,
+      "bytes": 1298605,
+      "estimated_webp_q88_bytes": 368614,
+      "estimated_saving_percent": 71.6
+    },
+    {
+      "path": "Rooms/Double/5.jpg",
+      "format": "JPEG",
+      "width": 3000,
+      "height": 2000,
+      "bytes": 1246564,
+      "estimated_webp_q88_bytes": 682840,
+      "estimated_saving_percent": 45.2
+    },
+    {
+      "path": "aboutus/aboutus3.jpg",
+      "format": "JPEG",
+      "width": 3000,
+      "height": 2000,
+      "bytes": 1246564,
+      "estimated_webp_q88_bytes": 682840,
+      "estimated_saving_percent": 45.2
+    },
+    {
+      "path": "assets/st-rumbolds-mechelen.webp",
+      "format": "WEBP",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 580392,
+      "estimated_webp_q88_bytes": null,
+      "estimated_saving_percent": null
+    },
+    {
+      "path": "Rooms/Double/8.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 578170,
+      "estimated_webp_q88_bytes": 211962,
+      "estimated_saving_percent": 63.3
+    },
+    {
+      "path": "Rooms/Twin/4.jpg",
+      "format": "JPEG",
+      "width": 800,
+      "height": 1067,
+      "bytes": 472880,
+      "estimated_webp_q88_bytes": 170824,
+      "estimated_saving_percent": 63.9
+    },
+    {
+      "path": "Rooms/Single/4.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 471992,
+      "estimated_webp_q88_bytes": 140946,
+      "estimated_saving_percent": 70.1
+    },
+    {
+      "path": "Rooms/Single/7.jpg",
+      "format": "JPEG",
+      "width": 800,
+      "height": 1107,
+      "bytes": 468725,
+      "estimated_webp_q88_bytes": 165398,
+      "estimated_saving_percent": 64.7
+    },
+    {
+      "path": "assets/3paardekens-breakfast.webp",
+      "format": "WEBP",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 462536,
+      "estimated_webp_q88_bytes": null,
+      "estimated_saving_percent": null
+    },
+    {
+      "path": "Rooms/Single/3.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 457690,
+      "estimated_webp_q88_bytes": 125546,
+      "estimated_saving_percent": 72.6
+    },
+    {
+      "path": "Rooms/Double/1.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 457198,
+      "estimated_webp_q88_bytes": 115342,
+      "estimated_saving_percent": 74.8
+    },
+    {
+      "path": "Rooms/Double/2.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 446109,
+      "estimated_webp_q88_bytes": 122422,
+      "estimated_saving_percent": 72.6
+    },
+    {
+      "path": "Rooms/Single/6.jpg",
+      "format": "JPEG",
+      "width": 1000,
+      "height": 750,
+      "bytes": 436721,
+      "estimated_webp_q88_bytes": 157270,
+      "estimated_saving_percent": 64.0
+    },
+    {
+      "path": "Rooms/Single/5.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 436065,
+      "estimated_webp_q88_bytes": 120466,
+      "estimated_saving_percent": 72.4
+    },
+    {
+      "path": "Rooms/Single/1.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 398975,
+      "estimated_webp_q88_bytes": 93814,
+      "estimated_saving_percent": 76.5
+    },
+    {
+      "path": "Rooms/Single/2.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 395786,
+      "estimated_webp_q88_bytes": 83512,
+      "estimated_saving_percent": 78.9
+    },
+    {
+      "path": "Rooms/Double/4.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 393691,
+      "estimated_webp_q88_bytes": 79666,
+      "estimated_saving_percent": 79.8
+    },
+    {
+      "path": "Rooms/Twin/2.jpg",
+      "format": "JPEG",
+      "width": 2000,
+      "height": 1333,
+      "bytes": 386830,
+      "estimated_webp_q88_bytes": 91640,
+      "estimated_saving_percent": 76.3
+    },
+    {
+      "path": "Rooms/Double/3.jpg",
+      "format": "JPEG",
+      "width": 1200,
+      "height": 900,
+      "bytes": 370447,
+      "estimated_webp_q88_bytes": 80030,
+      "estimated_saving_percent": 78.4
+    },
+    {
+      "path": "aboutus/aboutus1.jpg",
+      "format": "JPEG",
+      "width": 1086,
+      "height": 724,
+      "bytes": 251990,
+      "estimated_webp_q88_bytes": 100930,
+      "estimated_saving_percent": 59.9
+    },
+    {
+      "path": "elisabeth/sisterhotel.jpg",
+      "format": "JPEG",
+      "width": 610,
+      "height": 518,
+      "bytes": 77708,
+      "estimated_webp_q88_bytes": 72178,
+      "estimated_saving_percent": 7.1
+    }
+  ]
+}

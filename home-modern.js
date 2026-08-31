@@ -1,8 +1,4 @@
 (() => {
-  const signatureSheet = document.createElement('link');
-  signatureSheet.rel = 'stylesheet';
-  signatureSheet.href = 'intro-signature.css';
-  document.head.appendChild(signatureSheet);
 
   const items = document.querySelectorAll('.reveal, .intro');
   if (!items.length) return;
