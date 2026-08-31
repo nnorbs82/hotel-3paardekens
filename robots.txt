@@ -1,13 +1,7 @@
 # robots.txt for Hotel 3 Paardekens
-# https://www.3paardekens.com/robots.txt
+# Canonical production host: https://3paardekens.com/
 
 User-agent: *
 Allow: /
-Disallow: /hoteladmin.html
-Disallow: /firebase-diagnostics.html
-Disallow: /admin-*
-Disallow: /test-*
-Disallow: /demo-*
 
-# Sitemap location
-Sitemap: https://www.3paardekens.com/sitemap.xml
+Sitemap: https://3paardekens.com/sitemap.xml
