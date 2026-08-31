@@ -108,7 +108,7 @@
   const applySocialMeta = (language, title, description) => {
     if (!isProduction()) return;
     const canonical = productionUrl(language);
-    const image = `${PROD_ORIGIN}/assets/background.jpg`;
+    const image = `${PROD_ORIGIN}/optimized/assets/background-social.jpg`;
 
     upsertMeta('og-type',{property:'og:type',content:'website'});
     upsertMeta('og-site-name',{property:'og:site_name',content:'Hotel 3 Paardekens'});
@@ -144,7 +144,7 @@
       url:PROD_ORIGIN,
       description,
       image:[
-        `${PROD_ORIGIN}/assets/background.jpg`,
+        `${PROD_ORIGIN}/optimized/assets/background-social.jpg`,
         `${PROD_ORIGIN}/assets/3paardekens-breakfast.webp`,
         `${PROD_ORIGIN}/Rooms/Double/6.jpg`
       ],

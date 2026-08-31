@@ -1,14 +1,26 @@
 (() => {
   'use strict';
 
-  const normalizeRoomImage = value => {
+  const IMAGE_MAP_FILE = 'optimized/image-map.json';
+  let imageMapPromise = null;
+
+  const getImageMap = () => {
+    if (!imageMapPromise) {
+      imageMapPromise = fetch(IMAGE_MAP_FILE, { cache: 'no-store' })
+        .then(response => response.ok ? response.json() : {})
+        .catch(() => ({}));
+    }
+    return imageMapPromise;
+  };
+
+  const normalizeRoomImage = (value, imageMap = {}) => {
     let src = String(value || '').trim();
     if (!src) return '';
     if (/^(https?:)?\/\//i.test(src) || src.startsWith('data:')) return src;
     src = src.replace(/^\/?images\/legacy\/rooms\//i, '/Rooms/');
-    if (/^\/?Rooms\//.test(src)) return src.startsWith('/') ? src : `/${src}`;
-    if (src.startsWith('/')) return src;
-    return `/${src.replace(/^\.?\//, '')}`;
+    if (/^\/?Rooms\//.test(src)) src = src.startsWith('/') ? src : `/${src}`;
+    else if (!src.startsWith('/')) src = `/${src.replace(/^\.?\//, '')}`;
+    return imageMap[src] || src;
   };
 
   const localizedName = data => {
@@ -26,7 +38,6 @@
 
   const updateShowcase = (root, gallery, name) => {
     if (!root.classList.contains('room-showcase') || !gallery.length) return;
-
     root.dataset.gallery = JSON.stringify(gallery);
     root.dataset.roomName = name;
 
@@ -38,7 +49,6 @@
 
     const thumbnails = root.querySelector('.room-thumbnails');
     if (!thumbnails) return;
-
     const buttons = [...thumbnails.querySelectorAll('.gallery-trigger')];
     const remaining = gallery.slice(1);
     thumbnails.hidden = remaining.length === 0;
@@ -51,7 +61,6 @@
       button.classList.remove('gallery-more');
       const oldBadge = button.querySelector('span');
       if (oldBadge) oldBadge.remove();
-
       if (index >= remaining.length) {
         button.hidden = true;
         return;
@@ -79,6 +88,7 @@
     const roots = [...document.querySelectorAll('[data-room-id]')];
     if (!roots.length) return;
     const ids = [...new Set(roots.map(root => root.dataset.roomId).filter(Boolean))];
+    const imageMap = await getImageMap();
 
     await Promise.all(ids.map(async id => {
       try {
@@ -86,7 +96,7 @@
         if (!response.ok) return;
         const data = await response.json();
         const gallery = Array.isArray(data.gallery)
-          ? data.gallery.map(normalizeRoomImage).filter(Boolean)
+          ? data.gallery.map(value => normalizeRoomImage(value, imageMap)).filter(Boolean)
           : [];
         if (!gallery.length) return;
         const name = localizedName(data);
