@@ -1,14 +1,71 @@
 {
-  "id":"double","order":3,
-  "name":"Double Room","name_en":"Double Room","name_nl":"Tweepersoonskamer","name_fr":"Chambre Double","name_es":"Habitación Doble","name_de":"Doppelzimmer",
-  "strapline":"A cosy city stay for two","strapline_en":"A cosy city stay for two","strapline_nl":"Een gezellig stadsverblijf voor twee","strapline_fr":"Un séjour en ville confortable à deux","strapline_es":"Una estancia acogedora para dos","strapline_de":"Ein gemütlicher Stadtaufenthalt zu zweit",
-  "description":"Cosy getaway, or just need some extra space? Make it Double!","description_en":"A cosy city stay for two, with a double bed and room to settle in.","description_nl":"Een gezellige kamer voor twee met een tweepersoonsbed en voldoende ruimte om comfortabel te verblijven.","description_fr":"Une chambre agréable pour deux, avec un lit double et suffisamment d’espace pour s’installer confortablement.","description_es":"Una habitación acogedora para dos, con cama doble y espacio suficiente para instalarse cómodamente.","description_de":"Ein gemütliches Zimmer für zwei mit Doppelbett und ausreichend Platz für einen angenehmen Aufenthalt.",
-  "amenities":["Double bed","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
-  "amenities_en":["Double bed","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
-  "amenities_nl":["Tweepersoonsbed","TV","Privébadkamer","Uitzicht op de stad","Koffie- en theefaciliteiten","Verwarming","Kledingkast"],
-  "amenities_fr":["Lit double","TV","Salle de bain privée","Vue sur la ville","Café et thé","Chauffage","Armoire"],
-  "amenities_es":["Cama doble","TV","Baño privado","Vistas a la ciudad","Café y té","Calefacción","Armario"],
-  "amenities_de":["Doppelbett","TV","Eigenes Badezimmer","Stadtblick","Kaffee- und Teezubereitung","Heizung","Kleiderschrank"],
-  "gallery":["/images/legacy/rooms/Double/4.jpg","/images/legacy/rooms/Double/1.jpg","/images/legacy/rooms/Double/2.jpg","/images/legacy/rooms/Double/3.jpg"],
-  "bookingUrl":"https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
+  "id": "double",
+  "order": 3,
+  "name_en": "Double Room",
+  "strapline_en": "A cosy city stay for two",
+  "description_en": "A cosy city stay for two, with a double bed and room to settle in.",
+  "amenities_en": [
+    "Double bed",
+    "TV",
+    "Private bathroom",
+    "City view",
+    "Coffee/tea maker",
+    "Heating",
+    "Wardrobe"
+  ],
+  "name_nl": "Tweepersoonskamer",
+  "strapline_nl": "Een gezellig stadsverblijf voor twee",
+  "description_nl": "Een gezellige kamer voor twee met een tweepersoonsbed en voldoende ruimte om comfortabel te verblijven.",
+  "amenities_nl": [
+    "Tweepersoonsbed",
+    "TV",
+    "Privébadkamer",
+    "Uitzicht op de stad",
+    "Koffie- en theefaciliteiten",
+    "Verwarming",
+    "Kledingkast"
+  ],
+  "name_fr": "Chambre Double",
+  "strapline_fr": "Un séjour en ville confortable à deux",
+  "description_fr": "Une chambre agréable pour deux, avec un lit double et suffisamment d’espace pour s’installer confortablement.",
+  "amenities_fr": [
+    "Lit double",
+    "TV",
+    "Salle de bain privée",
+    "Vue sur la ville",
+    "Café et thé",
+    "Chauffage",
+    "Armoire"
+  ],
+  "name_es": "Habitación Doble",
+  "strapline_es": "Una estancia acogedora para dos",
+  "description_es": "Una habitación acogedora para dos, con cama doble y espacio suficiente para instalarse cómodamente.",
+  "amenities_es": [
+    "Cama doble",
+    "TV",
+    "Baño privado",
+    "Vistas a la ciudad",
+    "Café y té",
+    "Calefacción",
+    "Armario"
+  ],
+  "name_de": "Doppelzimmer",
+  "strapline_de": "Ein gemütlicher Stadtaufenthalt zu zweit",
+  "description_de": "Ein gemütliches Zimmer für zwei mit Doppelbett und ausreichend Platz für einen angenehmen Aufenthalt.",
+  "amenities_de": [
+    "Doppelbett",
+    "TV",
+    "Eigenes Badezimmer",
+    "Stadtblick",
+    "Kaffee- und Teezubereitung",
+    "Heizung",
+    "Kleiderschrank"
+  ],
+  "gallery": [
+    "/images/legacy/rooms/Double/1.jpg",
+    "/images/legacy/rooms/Double/4.jpg",
+    "/images/legacy/rooms/Double/2.jpg",
+    "/images/legacy/rooms/Double/3.jpg"
+  ],
+  "bookingUrl": "https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
 }
