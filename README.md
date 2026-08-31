@@ -56,7 +56,7 @@ The website sends guests to the Hotel 3 Paardekens Mews Distributor for availabi
 
 ## Preview and production
 
-The redesign remains `noindex` while it is being reviewed on Cloudflare preview deployments. Search-engine indexing, canonical URLs, sitemap/robots production settings and final analytics behaviour should be validated as part of the production launch checklist.
+The redesign remains `noindex` while it is being reviewed on Cloudflare preview deployments. Search-engine indexing is enabled only during the final production launch switch. The production SEO layer uses the canonical apex domain `https://3paardekens.com`, five language variants, hreflang, sitemap entries, social metadata and Hotel structured data.
 
 ## Security
 
