@@ -1,43 +1,22 @@
-# Hotel 3 Paardekens
+# Hotel 3 Paardekens Website
 
-Website for Hotel 3 Paardekens with admin panel for room management.
+This branch contains the current production version of the Hotel 3 Paardekens website.
 
-## 🚨 Data Not Syncing Across Browsers?
+## Production branch
 
-If info blocks and rooms are only visible in the browser where you created them:
-1. **Open `firebase-diagnostics.html`** in your browser
-2. **Run diagnostics** to identify the issue
-3. **Follow the fix instructions** provided
+- `main` is the current live website until the redesigned site is formally approved and merged.
+- The newer website is being developed and reviewed on the `redesign` branch.
 
-See **[QUICK_FIX_GUIDE.md](QUICK_FIX_GUIDE.md)** for the complete troubleshooting guide.
+## Legacy admin system
 
-## 🚀 Just Updated EmailJS Configuration?
+The current production version includes the older Firebase-based administration workflow. Operational credentials are intentionally not stored in this repository.
 
-If you just verified your EmailJS configuration values, see **[NEXT_STEPS.md](NEXT_STEPS.md)** for what to do next.
+If access to the legacy admin system is required, use the authorised Firebase Authentication account or reset access through the relevant service. Never commit passwords, private API keys or other secrets to GitHub.
 
-## Documentation
+## Security
 
-- **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Complete testing guide for password reset functionality with new EmailJS key
-- **[EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md)** - Modern, visually appealing email template with styled buttons and responsive design
-- **[NEXT_STEPS.md](NEXT_STEPS.md)** - What to do after updating EmailJS configuration
-- **[EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md)** - Complete checklist to verify EmailJS configuration is correct
-- **[EMAIL_SETUP.md](EMAIL_SETUP.md)** - Email configuration setup guide
-- **[TROUBLESHOOTING_PASSWORD_RESET.md](TROUBLESHOOTING_PASSWORD_RESET.md)** - Detailed troubleshooting guide for password reset issues
+Any credentials that were previously committed to this public repository must be treated as compromised and rotated at the relevant service. Removing a value from the current README does not remove it from Git history.
 
-## Quick Start
+## Redesign
 
-1. Open `index.html` for the main hotel website
-2. Open `hoteladmin.html` for the admin panel
-3. Admin credentials: `rev.management@groupdaedalus.be` / `Hotel3Paardekens2024!`
-
-## Password Reset Configuration
-
-The password reset functionality uses EmailJS with an improved modern email template. 
-
-**NEW EmailJS Public Key**: `MEiKFhBHfwDzT-xz1`
-
-### Quick Start Testing
-1. **Testing Guide**: See [TESTING_GUIDE.md](TESTING_GUIDE.md) for complete step-by-step testing instructions
-2. **Email Template**: See [EMAIL_TEMPLATE.md](EMAIL_TEMPLATE.md) for a modern, responsive email template with styled buttons
-3. **Verification**: Review [EMAILJS_VERIFICATION_CHECKLIST.md](EMAILJS_VERIFICATION_CHECKLIST.md) to verify your EmailJS account settings
-4. **Troubleshooting**: If issues persist, see [TROUBLESHOOTING_PASSWORD_RESET.md](TROUBLESHOOTING_PASSWORD_RESET.md) for detailed troubleshooting
+The `redesign` branch uses Pages CMS, GitHub and Cloudflare Pages for the new content-management and deployment workflow. It does not rely on the legacy Firebase admin panel for public website content.
