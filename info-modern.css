@@ -1,0 +1,31 @@
+/* Redesigned hotel information page */
+.info-hero{position:relative;min-height:62svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--dark);color:#fff}
+.info-hero-media{position:absolute;inset:0}.info-hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 46%}.info-hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,8,.68) 0%,rgba(10,10,8,.20) 38%,rgba(10,10,8,.72) 100%),linear-gradient(90deg,rgba(10,10,8,.66),rgba(10,10,8,.12) 70%)}
+.info-hero-content{position:relative;z-index:2;padding:180px 0 92px}.info-hero .eyebrow{color:rgba(255,255,255,.74)}.info-hero h1{max-width:900px;font-size:clamp(68px,8vw,116px)}.info-hero .lead{max-width:660px;margin:26px 0 0;color:rgba(255,255,255,.78)}
+.info-main{padding:96px 0 138px;background:var(--paper)}.info-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:clamp(65px,8vw,120px);align-items:start}.info-index{position:sticky;top:132px;border-top:1px solid var(--ink);padding-top:20px}.info-index-title{margin:0 0 18px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}.info-index-links{display:grid}.info-index a{display:grid;grid-template-columns:26px 1fr;gap:9px;padding:11px 0;border-bottom:1px solid var(--line);text-decoration:none;font-size:12px;line-height:1.45;color:var(--ink-soft);transition:color .18s ease,padding-left .18s ease}.info-index a span:first-child{font-family:var(--serif);font-size:16px;color:var(--bronze-dark);line-height:1.1}.info-index a:hover{color:var(--ink);padding-left:4px}
+.info-blocks{border-top:1px solid var(--line)}.info-block{display:grid;grid-template-columns:78px minmax(0,1fr);gap:30px;padding:56px 0 62px;border-bottom:1px solid var(--line);scroll-margin-top:125px}.info-block-number{font-family:var(--serif);font-size:34px;line-height:1;color:var(--bronze);padding-top:7px}.info-block-content h2{margin:0 0 24px;font-family:var(--serif);font-size:clamp(40px,4.6vw,62px);font-weight:500;letter-spacing:-.035em;line-height:.98}.info-block-body{max-width:780px;color:var(--ink-soft);font-size:16px;line-height:1.8}.info-block-body p{margin:0 0 18px}.info-block-body p:last-child{margin-bottom:0}.info-block-body h3{margin:31px 0 13px;color:var(--ink);font-family:var(--serif);font-size:29px;font-weight:500;line-height:1.15}.info-block-body h4{margin:27px 0 10px;color:var(--ink);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}.info-block-body ul,.info-block-body ol{margin:15px 0 20px;padding-left:21px}.info-block-body li{margin:7px 0;padding-left:4px}.info-block-body strong{color:var(--ink);font-weight:600}.info-block-body a{color:var(--bronze-dark);text-decoration-thickness:1px;text-underline-offset:4px}.info-block-body blockquote{margin:27px 0;padding:2px 0 2px 22px;border-left:1px solid var(--bronze);font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.45}.info-empty{padding:60px 0;border-top:1px solid var(--line);color:var(--ink-soft)}
+
+/* Legacy Firebase blocks sometimes contain inline white text from the old dark page. Override only text colours so their formatting remains intact. */
+.info-block-body,
+.info-block-body p,
+.info-block-body li,
+.info-block-body span,
+.info-block-body div,
+.info-block-body em,
+.info-block-body small,
+.info-block-body font{color:var(--ink-soft)!important}
+.info-block-body h1,
+.info-block-body h2,
+.info-block-body h3,
+.info-block-body h4,
+.info-block-body h5,
+.info-block-body h6,
+.info-block-body strong,
+.info-block-body b,
+.info-block-body blockquote{color:var(--ink)!important}
+.info-block-body a,
+.info-block-body a *{color:var(--bronze-dark)!important}
+
+.info-cta{background:var(--dark);color:#fff;padding:86px 0}.info-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:48px}.info-cta h2{max-width:720px;font-size:clamp(46px,5.5vw,76px)}.info-cta .eyebrow{color:rgba(255,255,255,.64)}
+@media(max-width:940px){.info-hero{min-height:56svh}.info-hero-content{padding:160px 0 82px}.info-main{padding:78px 0 110px}.info-layout{grid-template-columns:1fr;gap:48px}.info-index{position:relative;top:auto}.info-index-links{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:26px}.info-block{grid-template-columns:64px minmax(0,1fr)}}
+@media(max-width:680px){.info-hero{min-height:52svh}.info-hero-content{padding:145px 0 68px}.info-hero h1{font-size:clamp(58px,16vw,82px)}.info-main{padding:62px 0 88px}.info-index-links{grid-template-columns:1fr}.info-block{grid-template-columns:1fr;gap:13px;padding:42px 0 48px}.info-block-number{font-size:27px}.info-block-content h2{font-size:clamp(40px,12vw,56px)}.info-block-body{font-size:15px}.info-cta{padding:68px 0}.info-cta-inner{align-items:flex-start;flex-direction:column;gap:28px}}

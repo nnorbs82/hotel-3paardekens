@@ -1,0 +1,144 @@
+{
+  "entries": [
+    {
+      "id": "info-1769097216995-ymmouk8a9",
+      "order": 1,
+      "title_en": "WIFI",
+      "body_en": "<p><strong class=\"ql-font-raleway\">Network:</strong><span class=\"ql-font-raleway\">&nbsp;Hotel 3P</span></p><p><strong class=\"ql-font-raleway\">Password:</strong><span class=\"ql-font-raleway\">&nbsp;2800Mechelen</span></p>",
+      "title_nl": "WIFI",
+      "body_nl": "<p>Netwerk: Hotel 3P</p><p>Paswoord: 2800Mechelen</p>",
+      "title_fr": "WIFI",
+      "body_fr": "<p><strong style=\"color: rgb(255, 255, 255);\">Réseau :</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;Hotel 3P</span></p><p><strong style=\"color: rgb(255, 255, 255);\">Mot de passe :</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;2800Mechelen</span></p>"
+    },
+    {
+      "id": "info-1769097258608-wp3hg9ous",
+      "order": 2,
+      "title_en": "BREAKFAST",
+      "body_en": "<p><span style=\"color: rgb(255, 255, 255);\">You can find our breakfast room - with a unique view of the majestic&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">St. Rumbold’s Tower</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;- on the&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">3rd floor</strong><span style=\"color: rgb(255, 255, 255);\">.</span></p>",
+      "title_nl": "ONTBIJTEN",
+      "body_nl": "<p>Je vindt onze ontbijtzaal, met uniek zicht op de majestueuze Sint-Rombouts Toren, op de</p><p>3de verdieping.</p>",
+      "title_fr": "PETIT-DÉJEUNER",
+      "body_fr": "<p><span style=\"color: rgb(255, 255, 255);\">Vous trouverez notre salle de petit-déjeuner - avec une vue unique sur la majestueuse&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">tour Saint-Rombaut</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;- au&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">3e étage</strong><span style=\"color: rgb(255, 255, 255);\">.</span></p>"
+    },
+    {
+      "id": "info-1769097455667-m3ty9xd82",
+      "order": 3,
+      "title_en": "DISCOVER MECHELEN",
+      "body_en": "<p><a href=\"https://visit.mechelen.be\" target=\"_blank\" style=\"color: rgb(255, 255, 255);\">Click here to discover Mechelen</a></p>",
+      "title_nl": "ONTDEK MECHELEN",
+      "body_nl": "<p><a href=\"https://visit.mechelen.be\" target=\"_blank\">https://visit.mechelen.be</a></p>",
+      "title_fr": "DÉCOUVRIR MECHELEN",
+      "body_fr": "<p><a href=\"https://visit.mechelen.be\" target=\"_blank\" style=\"color: rgb(255, 255, 255);\">https://visit.mechelen.be</a></p>"
+    },
+    {
+      "id": "info-1769108440112-t84qi4nmg",
+      "order": 4,
+      "title_en": "BAR KLAK",
+      "body_en": "<p>Enjoy a delicious cup of coffee, a tasty cocktail, a cosy aperitif, a typical Mechelen beer, or a bite to eat - all in the shadow of St. Rumbold’s Tower at the Schoenmarkt!</p><p><br></p><p>Quote found somewhere:</p><p>“Super bar... in an old cap shop, friendly staff, good service, perfect terrace... in the morning a great stop for a coffee…”</p>",
+      "title_nl": "BAR KLAK",
+      "body_nl": "<p>Da’s heerlijk genieten van een heerlijke kop koffie, een lekkere cocktail, een gezellige apero</p><p>een typisch Mechels bier of een lekkere hap, in de schaduw van de Sint-Romboutstoren op</p><p>de Schoenmarkt!</p><p><br></p><p>Van ergens gelezen: ”Super bar...in een oud klakkenwinkeltje, vriendelijke bediening, goede</p><p>service perfect terras.... in de ochtend lekkere stop voor een koffie…</p>",
+      "title_fr": "BAR KLAK",
+      "body_fr": "<p>Venez profiter d’un délicieux café, d’un excellent cocktail, d’un apéritif convivial, d’une bière typique de Malines, ou d’un bon encas - le tout à l’ombre de la tour Saint-Rombaut, sur la place du Schoenmarkt !</p><p>Citation lue quelque part :</p><p><br></p><p>« Super bar... dans une ancienne boutique de chapeaux, personnel sympathique, bon service, terrasse parfaite... le matin, arrêt idéal pour un café… »</p>"
+    },
+    {
+      "id": "info-1769108462321-lunxrm1uv",
+      "order": 5,
+      "title_en": "L'ARTISTA",
+      "body_en": "<p><strong>The best Italian restaurant in town! Right next door to your hotel!</strong></p><p><br></p><p>L’Artista is an authentic Italian restaurant. The kitchen and menu were created from A to Z by&nbsp;<strong>Marisa Salis</strong>. Marisa’s passion is everywhere! The restaurant has an open kitchen, a cosy lounge, and a spacious terrace.</p><p><br></p><p>L’Artista also functions as a gallery for young talent. Dozens of artworks are displayed throughout the restaurant, on loan from the art academy in Mechelen. The heart of this super cosy restaurant is the beautiful wood-fired oven, where the pizzas are perfectly baked. You can sit and watch it happen!</p>",
+      "title_nl": "L'ARTISTA",
+      "body_nl": "<p>Dé beste Italiaan in town! Nààst de deur van je hotel!</p><p><br></p><p>L’artista is een authentiek Italiaans restaurant. De keuken en het menu werd van a tot z</p><p>samengesteld door Marisa Salis. Aan Marisa’s geen gebrek! Het restaurant beschikt over</p><p>een open keuken, een gezellige lounge en ruim terras. L’artista doet fungeert ook als galerij</p><p>voor jong talent. </p><p><br></p><p>Zo staan er tientallen kunstwerken over de ruimte verspreid die het</p><p>restaurant in bruikleen heeft van de kunstacademie te Mechelen. Hart van dit supergezellige</p><p>restaurantje is de prachtige houtoven, waarin de pizza’s perfect worden bereid. Je zit er bij</p><p>en je kijkt ernaar!</p>",
+      "title_fr": "L'ARTISTA",
+      "body_fr": "<p><strong>Le meilleur restaurant italien en ville ! Juste à côté de votre hôtel !</strong></p><p><br></p><p>L’Artista est un restaurant italien authentique. La cuisine et le menu ont été composés de A à Z par&nbsp;<strong>Marisa Salis</strong>. La passion de Marisa est partout ! Le restaurant dispose d’une cuisine ouverte, d’un salon cosy et d’une grande terrasse.</p><p><br></p><p>L’Artista fait également office de galerie pour jeunes talents : des dizaines d’œuvres d’art sont exposées dans tout l’établissement, prêtées par l’Académie des Beaux-Arts de Malines. Le cœur de ce restaurant ultra chaleureux est son magnifique four à bois, où les pizzas sont parfaitement préparées. Vous pouvez les regarder cuire sous vos yeux !</p>"
+    },
+    {
+      "id": "info-1769108479102-68xvuss4r",
+      "order": 6,
+      "title_en": "BABY COT",
+      "body_en": "<p>For&nbsp;<strong>€10 per night</strong>, we can provide a baby cot. Please request this at reception using the form below.<span class=\"ql-cursor\">﻿﻿</span></p>",
+      "title_nl": "BABYBEDJE",
+      "body_nl": "<p>Voor €10/nacht hebben wij voor jou een babybedje beschikbaar. Vraag deze aan bij de</p><p>receptie via onderstaand formulier.<span class=\"ql-cursor\">﻿﻿</span></p>",
+      "title_fr": "LIT BÉBÉ",
+      "body_fr": "<p><span style=\"color: rgb(255, 255, 255);\">Pour&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">10 € / nuit</strong><span style=\"color: rgb(255, 255, 255);\">, nous pouvons mettre un lit bébé à votre disposition.</span></p><p><span style=\"color: rgb(255, 255, 255);\">Veuillez en faire la demande à la réception via le formulaire ci-dessous.</span><span class=\"ql-cursor\">﻿﻿</span></p>"
+    },
+    {
+      "id": "info-1769108515563-gpn44u6so",
+      "order": 7,
+      "title_en": "PAYMENTS",
+      "body_en": "<p><span style=\"color: rgb(255, 255, 255);\">We accept&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">Maestro, American Express, Visa, and Mastercard</strong><span style=\"color: rgb(255, 255, 255);\">.</span></p><p><span style=\"color: rgb(255, 255, 255);\">We do&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">not accept cash</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;or foreign currencies.</span></p>",
+      "title_nl": "BETALINGEN",
+      "body_nl": "<p>Wij aanvaarden Maestro, American Express, Visa en Mastercard. </p><p>Wij accepteren geen cash en buitenlandse valuta.</p>",
+      "title_fr": "PAIEMENTS",
+      "body_fr": "<p><span style=\"color: rgb(255, 255, 255);\">Nous acceptons&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">Maestro, American Express, Visa et Mastercard</strong><span style=\"color: rgb(255, 255, 255);\">.</span></p><p><span style=\"color: rgb(255, 255, 255);\">Nous n’acceptons&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">pas d’espèces</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;ni de devises étrangères.</span></p>"
+    },
+    {
+      "id": "info-1769108665721-jxsmqfg8b",
+      "order": 8,
+      "title_en": "PHARMACY",
+      "body_en": "<p>The nearest pharmacy is:</p><p><br></p><p><strong>IJzerenleen 25</strong></p><p><strong>2800 Mechelen</strong></p><p><br></p><p><strong>Opening hours:</strong></p><ul><li>Fri - Mon: 9:30 - 12:30 / 13:00 - 18:00</li><li>Sat: 9:00 - 17:00</li><li>Sun: closed</li></ul><p><br></p><p>If you need a pharmacy outside these hours, please visit:</p><p><a href=\"https://apothekers-mechelen.be/\" target=\"_blank\">https://apothekers-mechelen.be/</a></p>",
+      "title_nl": "APOTHEEK",
+      "body_nl": "<p>De dichtstbijzijnde apotheek is </p><p><br></p><p>IJzerenleen 25</p><p>2800 Mechelen</p><p><br></p><p>Geopend:</p><p>vri - maa: 9u30 – 12u30 /13u00 – 18u00</p><p>zat: 9u00 – 17u00</p><p>zon: gesloten</p><p><br></p><p>Heb je buiten deze tijdstippen een apotheek nodig, bezoek onderstaande website</p><p><a href=\"https://apothekers-mechelen.be/\" target=\"_blank\">https://apothekers-mechelen.be/</a></p>",
+      "title_fr": "PHARMACIE",
+      "body_fr": "<p>La pharmacie la plus proche est :</p><p><br></p><p><strong>IJzerenleen 25</strong></p><p><strong>2800 Mechelen</strong></p><p><br></p><p><strong>Horaires d’ouverture :</strong></p><ul><li>Ven - Lun : 9h30 - 12h30 / 13h00 - 18h00</li><li>Sam : 9h00 - 17h00</li><li>Dim : fermé</li></ul><p><br></p><p>Si vous avez besoin d’une pharmacie en dehors de ces horaires, consultez :</p><p><a href=\"https://apothekers-mechelen.be/\" target=\"_blank\">https://apothekers-mechelen.be/</a></p>"
+    },
+    {
+      "id": "info-1769108694216-tmowsxf3l",
+      "order": 9,
+      "title_en": "DOCTOR",
+      "body_en": "<p><span style=\"color: rgb(255, 255, 255);\">If you need medical assistance, please contact reception.</span></p><p><span style=\"color: rgb(255, 255, 255);\">For urgent emergencies, call&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">112</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;and inform reception as well so they can guide the emergency services.</span></p>",
+      "title_nl": "DOKTER",
+      "body_nl": "<p>Heb je medische zorg nodig, neem dan contact op met de receptie. Voor acute zorg bel je 112 en informeer je ook de receptie zodat zij de nooddiensten kunnen begeleiden.</p>",
+      "title_fr": "MÉDECIN",
+      "body_fr": "<p><span style=\"color: rgb(255, 255, 255);\">Si vous avez besoin d’une assistance médicale, veuillez contacter la réception.</span></p><p><span style=\"color: rgb(255, 255, 255);\">En cas d’urgence, appelez le&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">112</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;et informez également la réception afin qu’elle puisse guider les services de secours.</span></p>"
+    },
+    {
+      "id": "info-1769108728305-u6s2lr0c5",
+      "order": 10,
+      "title_en": "FIRE",
+      "body_en": "<p>In case of fire or smoke, stay calm and leave the hotel as quickly as possible, but in an orderly manner. On the door of your room you will find a floor plan showing the nearest emergency exits.</p><p><br></p><p><strong>Do NOT use the elevators.</strong></p><p>Follow the instructions given by the hotel staff and/or the fire brigade.</p>",
+      "title_nl": "BRAND",
+      "body_nl": "<p>Bij brand of rookvorming, blijf kalm en verlaat zo spoedig mogelijk, maar op een rustige manier het hotel. Op de deur van je kamer vind je een plattegrond met daarop de dichtstbijzijnde nooduitgangen. Gebruik de liften NIET. Volg de aanwijzingen van het hotel en / of de brandweer op.</p>",
+      "title_fr": "INCENDIE",
+      "body_fr": "<p>En cas d’incendie ou de fumée, gardez votre calme et quittez l’hôtel le plus rapidement possible, de manière ordonnée. Sur la porte de votre chambre se trouve un plan indiquant les sorties de secours les plus proches.</p><p><br></p><p><strong>N’utilisez PAS les ascenseurs.</strong></p><p>Suivez les instructions du personnel de l’hôtel et/ou des pompiers.</p>"
+    },
+    {
+      "id": "info-1769108752299-zuttpopg0",
+      "order": 11,
+      "title_en": "NO SMOKING",
+      "body_en": "<p>Smoking is strictly prohibited in the rooms and in all common areas. Smoking is only permitted outside, in the designated smoking areas on the street.</p><p><br></p><p>In case of violation, we reserve the right to charge&nbsp;<strong>€250 cleaning costs</strong>.</p>",
+      "title_nl": "NIET ROKEN",
+      "body_nl": "<p>Roken is zowel in de kamers als in de gemeenschappelijke ruimtes ten strengste verboden.</p><p>Roken is alleen buiten toegestaan, in de aangewezen rookgebieden op de straat. Wij nemen het recht om bij overtreding van het rookverbod € 250 schoonmaakkosten in rekening te</p><p>brengen.</p>",
+      "title_fr": "INTERDICTION DE FUMER",
+      "body_fr": "<p>Il est strictement interdit de fumer dans les chambres et dans tous les espaces communs. Il est uniquement permis de fumer à l’extérieur, dans les zones fumeurs prévues dans la rue.</p><p><br></p><p>En cas d’infraction, nous nous réservons le droit de facturer&nbsp;<strong>250 € de frais de nettoyage</strong>.</p>"
+    },
+    {
+      "id": "info-1769108776835-0fll25o5g",
+      "order": 12,
+      "title_en": "MAINTENANCE",
+      "body_en": "<p>We are happy to help!</p><p><br></p><p>If you experience any issues in your hotel room or have questions about how something works, we are here to assist you. You can call reception directly for urgent matters or fill in the form below.</p>",
+      "title_nl": "ONDERHOUD",
+      "body_nl": "<p>Wij helpen je graag!</p><p><br></p><p>Mocht je problemen ondervinden in je hotelkamer of vragen hebben over hoe iets werkt, dan helpen we je graag. Je kan de receptie direct bellen voor dringende zaken of het onderstaand formulier invullen.</p>",
+      "title_fr": "ENTRETIEN",
+      "body_fr": "<p>Nous sommes heureux de vous aider !</p><p><br></p><p>Si vous rencontrez un problème dans votre chambre ou si vous avez des questions sur le fonctionnement de quelque chose, nous sommes là pour vous assister. Vous pouvez appeler directement la réception en cas d’urgence ou remplir le formulaire ci-dessous.</p>"
+    },
+    {
+      "id": "info-1769108850410-mjyhmwa88",
+      "order": 13,
+      "title_en": "HOUSE RULES",
+      "body_en": "<p>Below you will find the most important house rules that apply inside the hotel.</p><p>We kindly ask you to respect these rules.</p><p><br></p><h3>GENERAL RULES</h3><p><br></p><ul><li>All instructions from hotel staff related to house rules must be followed. Complaints can be reported to management.</li><li>In case of fire, stay calm. Report fire to reception and/or activate the nearest fire alarm.</li><li>In case of a general fire alarm, immediately leave the building.</li><li>Never use the elevators in case of fire.</li><li>Upon check-in, a valid ID must be shown. Check-in is allowed from the age of&nbsp;<strong>18</strong>.</li><li>Cameras are installed in various places in the hotel. Anyone who stays in the hotel agrees to being recorded. In case of emergencies and/or incidents, footage may be provided to authorities.</li><li>Lost and found items must be handed in at reception.</li><li>The hotel is not responsible for loss or theft of your belongings.</li><li>The hotel does not make its location available for purposes other than those defined in our policy. Therefore, it is prohibited to trade goods, deal in stolen goods, or offer services. The cost of a prepaid room will not be refunded.</li><li>Management, the owner of this location and/or persons working for the hotel cannot be held liable for any injury and/or material or immaterial damage suffered by visitors.</li></ul><p><br></p><h3>IT IS FORBIDDEN TO</h3><p><br></p><ul><li>Use emergency exits as normal entrances/exits.</li><li>Take hotel property outside the building.</li><li>Intentionally damage hotel property (guests may be held liable for repair and/or replacement costs).</li><li>Use, consume, trade, or possess drugs. If detected, the police and judicial authorities will be involved.</li><li>Use laughing gas (nitrous oxide) in the hotel without explicit permission from management.</li><li>Cause disturbance to other guests, e.g. loud music, inappropriate behaviour or any form of noise.</li><li>Stay in the room with more persons than the number of beds available in the room.</li><li>Receive paying guests in the room for sexual activities.</li><li>Smoke in the room. If we determine that smoking has occurred, we are obliged to charge&nbsp;<strong>€250 cleaning costs</strong>. If the fire alarm is triggered due to smoking in the room, the fire brigade’s call-out cost of&nbsp;<strong>€275</strong>&nbsp;will be charged to you.</li></ul><h3><br></h3><p><br></p>",
+      "title_nl": "HUISREGELS",
+      "body_nl": "<p>Hieronder vind je de belangrijkste huisregels die binnen het hotel gelden.</p><p>Wij vragen je deze regels te respecteren.</p><p><br></p><p>ALGEMENE REGELS</p><ul><li>Alle aanwijzingen van medewerkers van dit hotel, die verband houden met huisregels, dienen te worden opgevolgd. Klachten kun je bij het management melden.</li><li>Blijf in geval van brand kalm. Meld brand bij de receptie en/of sla de dichtstbijzijnde brandmelder in.</li><li>Verlaat bij een algemeen brandalarm direct het pand.</li><li>Gebruik bij brand in geen geval de liften.</li><li>Bij het inchecken dient een geldig legitimatiebewijs getoond te worden. Inchecken kan vanaf een leeftijd van 18 jaar.</li><li>Op diverse plaatsen binnen het hotel hangen camera’s. Wie zich in ons hotel bevindt, stemt toe in het maken van opnames. Bij calamiteiten en/of incidenten kunnen deze opnames als ondersteunend materiaal worden getoond aan de autoriteiten.</li><li>Gevonden voorwerpen dien je in te leveren bij de receptie.</li><li>Het hotel is niet verantwoordelijk voor verlies of diefstal van je bezittingen.</li><li>Het hotel stelt haar locatie niet voor andere doeleinden ter beschikking dan vastgelegd in ons beleid. Het is daarom verboden om goederen te verhandelen, te helen of diensten aan te bieden. Het bedrag van een reeds betaalde kamer zal niet worden gerestitueerd.</li><li>De directie, de eigenaar van deze locatie en/of personen die voor het hotel werkzaam zijn, kunnen niet aansprakelijk worden gesteld voor enig letsel en/of materiële dan wel immateriële schade, die bezoekers van de locatie mochten ondervinden.</li></ul><p><br></p><p>HET IS VERBODEN OM</p><ul><li>Nooduitgangen te gebruiken als (normale) in- en uitgangen.</li><li>Eigendommen van het hotel mee te nemen buiten het gebouw.</li><li>Bij het moedwillig beschadigen van eigendommen van het hotel kan men aansprakelijk gesteld worden voor de reparatie- en/of vernieuwingskosten.</li><li>Verdovende middelen te nuttigen, gebruiken, verhandelen of bij zich te hebben. Bij constatering zullen politie en justitie worden ingeschakeld.</li><li>Lachgas te gebruiken in het hotel zonder nadrukkelijke toestemming van het management.</li><li>Overlast te veroorzaken voor andere gasten, o.a. middels harde muziek, onhebbelijk gedrag of door lawaai van welke aard dan ook.</li><li>Met meer personen op de kamer te verblijven dan het aantal bedden wat zich in de kamer bevindt.</li><li>Het betaald ontvangen van gasten op de kamer ten behoeve van seksuele activiteiten.</li><li>Te roken op de kamer. Indien wij constateren dat er toch gerookt wordt op de kamer, zijn wij genoodzaakt €250 reinigingskosten in rekening te brengen. Indien het brandalarm afgaat door roken op de kamer, zullen de voorrijkosten van de brandweer van €275 aan u worden doorbelast.</li></ul>",
+      "title_fr": "RÈGLEMENT INTÉRIEUR",
+      "body_fr": "<p>Vous trouverez ci-dessous les règles principales applicables dans l’hôtel.</p><p>Nous vous demandons de les respecter.</p><p><br></p><h3>RÈGLES GÉNÉRALES</h3><ul><li>Toutes les instructions du personnel liées au règlement intérieur doivent être respectées. Les plaintes peuvent être signalées à la direction.</li><li>En cas d’incendie, gardez votre calme. Signalez-le à la réception et/ou déclenchez le détecteur d’incendie le plus proche.</li><li>En cas d’alarme incendie générale, évacuez immédiatement le bâtiment.</li><li>N’utilisez jamais les ascenseurs en cas d’incendie.</li><li>Lors du check-in, une pièce d’identité valide doit être présentée. Le check-in est autorisé à partir de&nbsp;<strong>18 ans</strong>.</li><li>Des caméras sont installées à différents endroits dans l’hôtel. Toute personne séjournant dans l’hôtel accepte d’être filmée. En cas d’incidents et/ou d’urgences, les images peuvent être transmises aux autorités.</li><li>Les objets trouvés doivent être déposés à la réception.</li><li>L’hôtel n’est pas responsable de la perte ou du vol de vos effets personnels.</li><li>L’hôtel ne met pas ses locaux à disposition pour d’autres activités que celles prévues par notre politique. Il est donc interdit de commercer, de receler des biens volés ou d’offrir des services. Le montant d’une chambre déjà payée ne sera pas remboursé.</li><li>La direction, le propriétaire du bâtiment et/ou le personnel ne peuvent être tenus responsables de blessures et/ou de dommages matériels ou immatériels subis par les visiteurs.</li></ul><p><br></p><h3>IL EST INTERDIT DE</h3><ul><li>Utiliser les sorties de secours comme entrées/sorties normales.</li><li>Sortir du matériel appartenant à l’hôtel du bâtiment.</li><li>Détériorer volontairement les biens de l’hôtel (les frais de réparation et/ou de remplacement pourront être facturés).</li><li>Consommer, utiliser, vendre ou posséder des drogues. En cas de constatation, la police et la justice seront contactées.</li><li>Utiliser du protoxyde d’azote (gaz hilarant) dans l’hôtel sans autorisation explicite de la direction.</li><li>Provoquer des nuisances pour les autres clients (musique forte, comportement inapproprié, bruit de toute nature).</li><li>Séjourner dans une chambre avec plus de personnes que le nombre de lits disponibles.</li><li>Recevoir des clients payants dans la chambre à des fins d’activités sexuelles.</li><li>Fumer dans la chambre. Si nous constatons qu’il a été fumé dans la chambre, nous sommes dans l’obligation de facturer&nbsp;<strong>250 € de frais de nettoyage</strong>.</li><li>Si l’alarme incendie se déclenche à cause de la fumée, les frais d’intervention des pompiers de&nbsp;<strong>275 €</strong>&nbsp;seront facturés.</li></ul><p><br></p>"
+    },
+    {
+      "id": "info-1769108881272-tz86gfkra",
+      "order": 14,
+      "title_en": "HOTEL ELISABETH",
+      "body_en": "<p>Hotel Elisabeth is only a&nbsp;<strong>6-minute walk</strong>&nbsp;from Hotel 3 Paardekens at the address below:</p><p><br></p><p><strong>Hotel Elisabeth</strong></p><p>GOSWIN DE STASSARTSTRAAT NR 26 / 28</p><p>MECHELEN</p>",
+      "title_nl": "HOTEL ELISABETH",
+      "body_nl": "<p>Hotel Elisabeth ligt op slechts 6 minuten wandelafstand van Hotel 3 Paardekens op het onderstaande adres:</p><p><br></p><p><strong>Hotel Elisabeth</strong></p><p>GOSWIN DE STASSARTSTRAAT NR 26 / 28</p><p>MECHELEN</p>",
+      "title_fr": "HOTEL ELISABETH",
+      "body_fr": "<p><span style=\"color: rgb(255, 255, 255);\">L’Hotel Elisabeth se trouve à seulement&nbsp;</span><strong style=\"color: rgb(255, 255, 255);\">6 minutes à pied</strong><span style=\"color: rgb(255, 255, 255);\">&nbsp;de l’Hotel 3 Paardekens, à l’adresse suivante :</span></p><p><br></p><p><strong>Hotel Elisabeth</strong></p><p>GOSWIN DE STASSARTSTRAAT NR 26 / 28</p><p>MECHELEN</p>"
+    }
+  ]
+}

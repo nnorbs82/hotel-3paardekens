@@ -1,0 +1,325 @@
+{
+  "generated_by": "one-time image optimization",
+  "files": [
+    {
+      "original": "assets/background.jpg",
+      "optimized": "optimized/assets/background.webp",
+      "original_dimensions": [
+        5472,
+        3648
+      ],
+      "optimized_dimensions": [
+        2560,
+        1707
+      ],
+      "original_bytes": 10738345,
+      "optimized_bytes": 557466
+    },
+    {
+      "original": "aboutus/aboutus1.jpg",
+      "optimized": "optimized/aboutus/aboutus1.webp",
+      "original_dimensions": [
+        1086,
+        724
+      ],
+      "optimized_dimensions": [
+        1086,
+        724
+      ],
+      "original_bytes": 251990,
+      "optimized_bytes": 115080
+    },
+    {
+      "original": "Rooms/Double/1.jpg",
+      "optimized": "optimized/Rooms/Double/1.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 457198,
+      "optimized_bytes": 142306
+    },
+    {
+      "original": "Rooms/Double/2.jpg",
+      "optimized": "optimized/Rooms/Double/2.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 446109,
+      "optimized_bytes": 139212
+    },
+    {
+      "original": "Rooms/Double/3.jpg",
+      "optimized": "optimized/Rooms/Double/3.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 370447,
+      "optimized_bytes": 93402
+    },
+    {
+      "original": "Rooms/Double/4.jpg",
+      "optimized": "optimized/Rooms/Double/4.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 393691,
+      "optimized_bytes": 99858
+    },
+    {
+      "original": "Rooms/Double/5.jpg",
+      "optimized": "optimized/Rooms/Double/5.webp",
+      "original_dimensions": [
+        3000,
+        2000
+      ],
+      "optimized_dimensions": [
+        2000,
+        1333
+      ],
+      "original_bytes": 1246564,
+      "optimized_bytes": 291940
+    },
+    {
+      "original": "Rooms/Double/6.jpg",
+      "optimized": "optimized/Rooms/Double/6.webp",
+      "original_dimensions": [
+        3000,
+        2000
+      ],
+      "optimized_dimensions": [
+        2000,
+        1333
+      ],
+      "original_bytes": 1730973,
+      "optimized_bytes": 283750
+    },
+    {
+      "original": "Rooms/Double/7.jpg",
+      "optimized": "optimized/Rooms/Double/7.webp",
+      "original_dimensions": [
+        3000,
+        2000
+      ],
+      "optimized_dimensions": [
+        2000,
+        1333
+      ],
+      "original_bytes": 1746667,
+      "optimized_bytes": 279484
+    },
+    {
+      "original": "Rooms/Double/8.jpg",
+      "optimized": "optimized/Rooms/Double/8.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 578170,
+      "optimized_bytes": 246940
+    },
+    {
+      "original": "Rooms/Single/1.jpg",
+      "optimized": "optimized/Rooms/Single/1.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 398975,
+      "optimized_bytes": 117432
+    },
+    {
+      "original": "Rooms/Single/2.jpg",
+      "optimized": "optimized/Rooms/Single/2.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 395786,
+      "optimized_bytes": 108954
+    },
+    {
+      "original": "Rooms/Single/3.jpg",
+      "optimized": "optimized/Rooms/Single/3.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 457690,
+      "optimized_bytes": 157336
+    },
+    {
+      "original": "Rooms/Single/4.jpg",
+      "optimized": "optimized/Rooms/Single/4.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 471992,
+      "optimized_bytes": 174738
+    },
+    {
+      "original": "Rooms/Single/5.jpg",
+      "optimized": "optimized/Rooms/Single/5.webp",
+      "original_dimensions": [
+        1200,
+        900
+      ],
+      "optimized_dimensions": [
+        1200,
+        900
+      ],
+      "original_bytes": 436065,
+      "optimized_bytes": 140160
+    },
+    {
+      "original": "Rooms/Single/6.jpg",
+      "optimized": "optimized/Rooms/Single/6.webp",
+      "original_dimensions": [
+        1000,
+        750
+      ],
+      "optimized_dimensions": [
+        1000,
+        750
+      ],
+      "original_bytes": 436721,
+      "optimized_bytes": 181526
+    },
+    {
+      "original": "Rooms/Single/7.jpg",
+      "optimized": "optimized/Rooms/Single/7.webp",
+      "original_dimensions": [
+        800,
+        1107
+      ],
+      "optimized_dimensions": [
+        800,
+        1107
+      ],
+      "original_bytes": 468725,
+      "optimized_bytes": 188384
+    },
+    {
+      "original": "Rooms/Twin/1.jpg",
+      "optimized": "optimized/Rooms/Twin/1.webp",
+      "original_dimensions": [
+        3000,
+        2000
+      ],
+      "optimized_dimensions": [
+        2000,
+        1333
+      ],
+      "original_bytes": 1298605,
+      "optimized_bytes": 165802
+    },
+    {
+      "original": "Rooms/Twin/2.jpg",
+      "optimized": "optimized/Rooms/Twin/2.webp",
+      "original_dimensions": [
+        2000,
+        1333
+      ],
+      "optimized_dimensions": [
+        2000,
+        1333
+      ],
+      "original_bytes": 386830,
+      "optimized_bytes": 114596
+    },
+    {
+      "original": "Rooms/Twin/3.jpg",
+      "optimized": "optimized/Rooms/Twin/3.webp",
+      "original_dimensions": [
+        3000,
+        2000
+      ],
+      "optimized_dimensions": [
+        2000,
+        1333
+      ],
+      "original_bytes": 1642758,
+      "optimized_bytes": 222958
+    },
+    {
+      "original": "Rooms/Twin/4.jpg",
+      "optimized": "optimized/Rooms/Twin/4.webp",
+      "original_dimensions": [
+        800,
+        1067
+      ],
+      "optimized_dimensions": [
+        800,
+        1067
+      ],
+      "original_bytes": 472880,
+      "optimized_bytes": 194188
+    }
+  ],
+  "mapping": {
+    "/Rooms/Double/1.jpg": "/optimized/Rooms/Double/1.webp",
+    "/Rooms/Double/2.jpg": "/optimized/Rooms/Double/2.webp",
+    "/Rooms/Double/3.jpg": "/optimized/Rooms/Double/3.webp",
+    "/Rooms/Double/4.jpg": "/optimized/Rooms/Double/4.webp",
+    "/Rooms/Double/5.jpg": "/optimized/Rooms/Double/5.webp",
+    "/Rooms/Double/6.jpg": "/optimized/Rooms/Double/6.webp",
+    "/Rooms/Double/7.jpg": "/optimized/Rooms/Double/7.webp",
+    "/Rooms/Double/8.jpg": "/optimized/Rooms/Double/8.webp",
+    "/Rooms/Single/1.jpg": "/optimized/Rooms/Single/1.webp",
+    "/Rooms/Single/2.jpg": "/optimized/Rooms/Single/2.webp",
+    "/Rooms/Single/3.jpg": "/optimized/Rooms/Single/3.webp",
+    "/Rooms/Single/4.jpg": "/optimized/Rooms/Single/4.webp",
+    "/Rooms/Single/5.jpg": "/optimized/Rooms/Single/5.webp",
+    "/Rooms/Single/6.jpg": "/optimized/Rooms/Single/6.webp",
+    "/Rooms/Single/7.jpg": "/optimized/Rooms/Single/7.webp",
+    "/Rooms/Twin/1.jpg": "/optimized/Rooms/Twin/1.webp",
+    "/Rooms/Twin/2.jpg": "/optimized/Rooms/Twin/2.webp",
+    "/Rooms/Twin/3.jpg": "/optimized/Rooms/Twin/3.webp",
+    "/Rooms/Twin/4.jpg": "/optimized/Rooms/Twin/4.webp"
+  },
+  "totals": {
+    "original_bytes": 24827181,
+    "optimized_bytes": 4015512,
+    "saving_percent": 83.8
+  }
+}

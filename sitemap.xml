@@ -1,41 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <!-- Homepage -->
   <url>
-    <loc>https://www.3paardekens.com/</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.3paardekens.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://www.3paardekens.com/?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.3paardekens.com/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.3paardekens.com/"/>
+    <loc>https://3paardekens.com/?lang=en</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/?lang=en"/>
   </url>
-  
-  <!-- Rooms Page -->
   <url>
-    <loc>https://www.3paardekens.com/rooms.html</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.3paardekens.com/rooms.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://www.3paardekens.com/rooms.html?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.3paardekens.com/rooms.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.3paardekens.com/rooms.html"/>
+    <loc>https://3paardekens.com/?lang=nl</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/?lang=en"/>
   </url>
-  
-  <!-- Info Page -->
   <url>
-    <loc>https://www.3paardekens.com/info.html</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.3paardekens.com/info.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://www.3paardekens.com/info.html?lang=nl"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.3paardekens.com/info.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.3paardekens.com/info.html"/>
+    <loc>https://3paardekens.com/?lang=fr</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/?lang=en"/>
   </url>
-  
+  <url>
+    <loc>https://3paardekens.com/?lang=es</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/?lang=de</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/rooms.html?lang=en</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/rooms.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/rooms.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/rooms.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/rooms.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/rooms.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/rooms.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/rooms.html?lang=nl</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/rooms.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/rooms.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/rooms.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/rooms.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/rooms.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/rooms.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/rooms.html?lang=fr</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/rooms.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/rooms.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/rooms.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/rooms.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/rooms.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/rooms.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/rooms.html?lang=es</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/rooms.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/rooms.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/rooms.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/rooms.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/rooms.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/rooms.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/rooms.html?lang=de</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/rooms.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/rooms.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/rooms.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/rooms.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/rooms.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/rooms.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/info.html?lang=en</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/info.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/info.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/info.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/info.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/info.html?lang=nl</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/info.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/info.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/info.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/info.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/info.html?lang=fr</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/info.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/info.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/info.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/info.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/info.html?lang=es</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/info.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/info.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/info.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/info.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/info.html?lang=de</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/info.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/info.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/info.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/info.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/faqs.html?lang=en</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/faqs.html?lang=nl</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/faqs.html?lang=fr</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/faqs.html?lang=es</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/faqs.html?lang=de</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/apple-wallet-faqs.html?lang=en</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/apple-wallet-faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/apple-wallet-faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/apple-wallet-faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/apple-wallet-faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/apple-wallet-faqs.html?lang=nl</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/apple-wallet-faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/apple-wallet-faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/apple-wallet-faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/apple-wallet-faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/apple-wallet-faqs.html?lang=fr</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/apple-wallet-faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/apple-wallet-faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/apple-wallet-faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/apple-wallet-faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/apple-wallet-faqs.html?lang=es</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/apple-wallet-faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/apple-wallet-faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/apple-wallet-faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/apple-wallet-faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+  </url>
+  <url>
+    <loc>https://3paardekens.com/apple-wallet-faqs.html?lang=de</loc>
+    <lastmod>2026-08-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://3paardekens.com/apple-wallet-faqs.html?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3paardekens.com/apple-wallet-faqs.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://3paardekens.com/apple-wallet-faqs.html?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://3paardekens.com/apple-wallet-faqs.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://3paardekens.com/apple-wallet-faqs.html?lang=en"/>
+  </url>
 </urlset>

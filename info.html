@@ -1,577 +1,75 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- Primary Meta Tags -->
-  <title>Hotel Information & Facilities | Hotel 3 Paardekens</title>
-  <meta name="description" content="Learn about Hotel 3 Paardekens facilities, services, and amenities. Located at Begijnenstraat 3 in Mechelen. Contact: +32 15 342 713 | info@3paardekens.be" />
-  <meta name="keywords" content="Hotel 3 Paardekens information, hotel facilities Mechelen, hotel amenities, Mechelen hotel services, Hotel 3 Paardekens contact" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#B76E79" />
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://www.3paardekens.com/info.html" />
-  
-  <!-- Multi-language Support (hreflang) -->
-  <link rel="alternate" hreflang="en" href="https://www.3paardekens.com/info.html?lang=en" />
-  <link rel="alternate" hreflang="nl" href="https://www.3paardekens.com/info.html?lang=nl" />
-  <link rel="alternate" hreflang="fr" href="https://www.3paardekens.com/info.html?lang=fr" />
-  <link rel="alternate" hreflang="x-default" href="https://www.3paardekens.com/info.html" />
-  
-  <!-- Geographic Meta Tags -->
-  <meta name="geo.region" content="BE-VAN" />
-  <meta name="geo.placename" content="Mechelen" />
-  <meta name="geo.position" content="51.0259;4.4777" />
-  <meta name="ICBM" content="51.0259, 4.4777" />
-  
-  <!-- Open Graph Tags for Social Media -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Hotel Information & Facilities | Hotel 3 Paardekens" />
-  <meta property="og:description" content="Learn about Hotel 3 Paardekens facilities, services, and amenities. Located at Begijnenstraat 3 in Mechelen. Contact: +32 15 342 713 | info@3paardekens.be" />
-  <meta property="og:url" content="https://www.3paardekens.com/info.html" />
-  <meta property="og:image" content="https://www.3paardekens.com/assets/3plogo.png" />
-  <meta property="og:site_name" content="Hotel 3 Paardekens" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:locale:alternate" content="nl_BE" />
-  <meta property="og:locale:alternate" content="fr_FR" />
-  
-  <!-- Twitter Card Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hotel Information & Facilities | Hotel 3 Paardekens" />
-  <meta name="twitter:description" content="Learn about Hotel 3 Paardekens facilities, services, and amenities. Located at Begijnenstraat 3 in Mechelen." />
-  <meta name="twitter:image" content="https://www.3paardekens.com/assets/3plogo.png" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="assets/nav.css">
-  <link rel="stylesheet" href="assets/footer.css">
-  
-  <!-- Cookie Consent -->
-  <link rel="stylesheet" href="assets/cookie-consent.css">
-  <script src="assets/cookie-consent.js" defer></script>
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MX66JGB1Z9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    
-    // Set default consent mode for GDPR compliance
-    gtag('consent', 'default', {
-      'analytics_storage': 'denied',
-      'ad_storage': 'denied'
-    });
-    
-    gtag('config', 'G-MX66JGB1Z9', {
-      'cookie_flags': 'SameSite=None;Secure'
-    });
-  </script>
-  
-  <style>
-    :root {
-      --card-bg: rgba(0, 0, 0, 0.15);
-      --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.85);
-      --shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
-      --radius: 18px;
-      --accent: #B76E79;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background: #000;
-    }
-
-    .bg {
-      min-height: 100vh;
-      background: none;
-      position: relative;
-      isolation: isolate;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 50px;
-      padding: 28px;
-    }
-
-    /* Fixed background layer */
-    .bg::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image:
-        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
-        url("assets/background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transform: translateZ(0);
-      will-change: transform;
-    }
-
-    .bg.with-menubar {
-      padding-top: calc(70px + 50px + 28px);
-    }
-
-    .card {
-      width: min(980px, 100%);
-      background: var(--card-bg);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: clamp(20px, 4vw, 40px);
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    @supports not (gap: 50px) {
-      .card + .card { margin-top: 50px; }
-    }
-
-    .menubar.card {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      z-index: 9999;
-      height: 70px;
-      min-height: 70px;
-      padding: 0 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0;
-      background: rgba(0, 0, 0, 0.55);
-    }
-
-    .menu-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    /* Right-align menu items on desktop */
-    @media (min-width: 600px) {
-      .menu-row {
-        justify-content: flex-end;
-      }
-    }
-
-    .menu-logo {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding-left: 2px;
-      border-bottom: 0 !important;
-      text-decoration: none !important;
-    }
-    .menu-logo:hover {
-      border-bottom: 0 !important;
-      text-decoration: none !important;
-    }
-
-    .menu-logo img {
-      height: 46px;
-      width: auto;
-      display: block;
-    }
-
-    .menubar .pill {
-      gap: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 120ms ease;
-      padding: 10px 12px;
-      font-size: 15px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Desktop width for menu pills */
-    @media (min-width: 600px) {
-      .menubar .pill {
-        width: 94px;
-      }
-    }
-
-    .menubar .pill:hover,
-    .menubar .pill:focus,
-    .menubar .pill:active {
-      background: var(--accent);
-      outline: none;
-    }
-
-    h1 {
-      margin: 0 0 12px 0;
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 500;
-      line-height: 1.2;
-    }
-
-    .info-block {
-      background: var(--card-bg);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: clamp(24px, 4vw, 40px);
-      border: 1px solid rgba(255,255,255,0.12);
-      margin-bottom: 30px;
-      text-align: left;
-    }
-
-    .info-block:last-child {
-      margin-bottom: 0;
-    }
-
-    .info-block h2 {
-      margin: 0 0 16px 0;
-      font-size: clamp(24px, 4vw, 32px);
-      font-weight: 500;
-      color: var(--text);
-      line-height: 1.3;
-    }
-
-    .info-block-body {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: clamp(15px, 2vw, 17px);
-    }
-
-    .info-block-body p {
-      margin: 0 0 16px 0;
-    }
-
-    .info-block-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    .info-block-body h3 {
-      margin: 24px 0 12px 0;
-      font-size: clamp(20px, 3vw, 24px);
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .info-block-body h3:first-child {
-      margin-top: 0;
-    }
-
-    .info-block-body ul,
-    .info-block-body ol {
-      margin: 0 0 16px 0;
-      padding-left: 24px;
-    }
-
-    .info-block-body li {
-      margin-bottom: 8px;
-    }
-
-    .info-block-body a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(183, 110, 121, 0.4);
-      transition: border-color 120ms ease;
-    }
-
-    .info-block-body a:hover {
-      border-bottom-color: var(--accent);
-    }
-
-    .info-block-body strong {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .info-block-body em {
-      font-style: italic;
-    }
-
-    .info-block-body blockquote {
-      margin: 16px 0;
-      padding-left: 20px;
-      border-left: 4px solid var(--accent);
-      color: rgba(255, 255, 255, 0.9);
-      font-style: italic;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--muted);
-    }
-
-    .empty-state-icon {
-      font-size: 64px;
-      margin-bottom: 16px;
-      opacity: 0.6;
-    }
-
-    .empty-state-title {
-      font-size: clamp(24px, 4vw, 32px);
-      margin: 0 0 12px 0;
-      font-weight: 500;
-    }
-
-    .empty-state-desc {
-      font-size: 16px;
-      margin: 0;
-      opacity: 0.8;
-    }
-
-    #infoBlocks {
-      width: 100%;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hotel Information | Hotel 3 Paardekens Mechelen</title>
+  <meta name="description" content="Practical hotel information for your stay at Hotel 3 Paardekens in central Mechelen.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="preview-site.css">
+  <link rel="stylesheet" href="info-modern.css">
 </head>
-
-<body>
-  <main class="bg with-menubar">
-    <section class="card menubar" id="menubar" aria-label="Menu bar">
-      <!-- Navigation loaded via nav.js -->
-    </section>
-
-    <div class="card">
-      <h1 data-i18n="info.title">Information</h1>
-      
-      <div id="infoBlocks">
-        <!-- Info blocks will be loaded here -->
-      </div>
-
-      <div id="emptyState" class="empty-state" style="display: none;">
-        <h2 class="empty-state-title">No Information Available</h2>
-        <p class="empty-state-desc">Information will be displayed here once added by the administrator.</p>
+<body data-info-file="v2/content/info.json">
+  <header class="site-header" aria-label="Main navigation">
+    <div class="header-shade" aria-hidden="true"></div>
+    <div class="container-wide header-inner">
+      <a class="brand" href="index.html" aria-label="Hotel 3 Paardekens home"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="rooms.html" data-i18n="nav.rooms">Rooms</a>
+        <a href="index.html#breakfast" data-i18n="nav.breakfast">Breakfast</a>
+        <a href="index.html#about" data-i18n="nav.about">About</a>
+        <a href="index.html#location" data-i18n="nav.location">Location</a>
+        <a href="info.html" class="active">Info</a>
+        <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span><span aria-hidden="true">⌄</span></button>
+          <div class="lang-menu" role="menu"><button type="button" data-lang-option="nl">Nederlands</button><button type="button" data-lang-option="en">English</button><button type="button" data-lang-option="fr">Français</button><button type="button" data-lang-option="es">Español</button><button type="button" data-lang-option="de">Deutsch</button></div>
+        </div>
+        <a class="btn btn-filled header-book" href="#" data-book data-i18n="nav.book">Book now</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"></button>
       </div>
     </div>
+  </header>
+
+  <main>
+    <section class="info-hero">
+      <div class="info-hero-media"><img fetchpriority="high" decoding="async" src="optimized/assets/background.webp" alt="Hotel 3 Paardekens in the historic centre of Mechelen"></div>
+      <div class="container-wide info-hero-content">
+        <p class="eyebrow" id="info-eyebrow">Your stay</p>
+        <h1 class="display" id="info-title">Everything you need to know.</h1>
+        <p class="lead" id="info-lead">Practical information to make your stay at Hotel 3 Paardekens straightforward from arrival to departure.</p>
+      </div>
+    </section>
+
+    <section class="info-main">
+      <div class="container-wide info-layout">
+        <aside class="info-index" aria-label="Information sections">
+          <p class="info-index-title" id="info-index-title">On this page</p>
+          <nav class="info-index-links" id="info-index-links"></nav>
+        </aside>
+        <div>
+          <div class="info-blocks" id="info-blocks"></div>
+          <p class="info-empty" id="info-empty" hidden>No hotel information is available at the moment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-cta">
+      <div class="container-wide info-cta-inner">
+        <div><p class="eyebrow" id="info-cta-eyebrow">Ready for Mechelen?</p><h2 class="display" id="info-cta-title">Choose your dates. We’ll take care of the rest.</h2></div>
+        <a class="btn btn-light" href="#" data-book id="info-cta-button">Check availability</a>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <div id="footerContainer"></div>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"><p data-i18n="footer.short">A historic 3-star hotel in the centre of Mechelen, Belgium.</p></div><div class="footer-col"><h3 data-i18n="footer.explore">Explore</h3><a href="index.html" data-i18n="nav.home">Home</a><a href="rooms.html" data-i18n="nav.rooms">Rooms</a><a href="index.html#breakfast" data-i18n="nav.breakfast">Breakfast</a><a href="info.html">Info</a><a href="index.html#location" data-i18n="nav.location">Location</a></div><div class="footer-col"><h3 data-i18n="footer.help">Help</h3><a href="faqs.html">Google Wallet FAQs</a><a href="apple-wallet-faqs.html" data-i18n="footer.walletFaq">Apple Wallet FAQs</a><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy</a><a href="cookie-policy.html" data-i18n="footer.cookies">Cookie policy</a></div><div class="footer-col"><h3 data-i18n="footer.booking">Booking</h3><a href="#" data-book data-i18n="footer.direct">Book direct</a><a href="tel:+3215342713">+32 15 342 713</a><a href="mailto:info@3paardekens.be">info@3paardekens.be</a><a href="terms-and-conditions.html" data-i18n="footer.terms">Terms</a></div></div><div class="footer-bottom"><span>© Hotel 3 Paardekens</span></div></div></footer>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-  
-  <!-- Firebase Configuration -->
-  <script src="firebase-config.js"></script>
-  
-  <script src="translations.js"></script>
-  <script src="assets/nav.js"></script>
-  <script src="assets/footer.js"></script>
-  <script>
-    // Initialize i18n after all scripts are loaded
-    if (window.i18n) {
-      window.i18n.init();
-    }
-    
-    // Reload info blocks when language changes
-    window.addEventListener('languageChanged', function() {
-      if (typeof window.loadInfoBlocks === 'function') {
-        window.loadInfoBlocks();
-      }
-    });
-  </script>
-  <script>
-    (function() {
-      'use strict';
-
-      const STORAGE_KEY = 'hotel3p_info'; // Legacy localStorage key
-      const FIREBASE_PATH = 'infoBlocks';
-
-      // Helper to get Firebase database reference
-      function getDatabase() {
-        if (typeof firebase === 'undefined' || !firebase.database) {
-          console.warn('Firebase not available, using localStorage fallback');
-          return null;
-        }
-        
-        // Check if Firebase app is initialized
-        if (!firebase.apps || firebase.apps.length === 0) {
-          console.warn('Firebase app not initialized, using localStorage fallback');
-          return null;
-        }
-        
-        try {
-          const db = firebase.database();
-          // Verify database is actually accessible
-          if (!db) {
-            console.warn('Firebase database not accessible, using localStorage fallback');
-            return null;
-          }
-          return db;
-        } catch (error) {
-          console.error('Error accessing Firebase database:', error);
-          return null;
-        }
-      }
-
-      // Get info blocks from Firebase or localStorage fallback
-      async function getInfoBlocks() {
-        const db = getDatabase();
-        
-        if (!db) {
-          // Fallback to localStorage if Firebase is not available
-          const stored = localStorage.getItem(STORAGE_KEY);
-          if (stored) {
-            try {
-              return JSON.parse(stored);
-            } catch (e) {
-              console.error('Error parsing stored info blocks:', e);
-              return [];
-            }
-          }
-          return [];
-        }
-
-        try {
-          const snapshot = await db.ref(FIREBASE_PATH).once('value');
-          const data = snapshot.val();
-          
-          if (!data) {
-            // Try localStorage as fallback if Firebase is empty
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-              try {
-                return JSON.parse(stored);
-              } catch (e) {
-                console.error('Error parsing localStorage data:', e);
-                return [];
-              }
-            }
-            return [];
-          }
-          
-          // Convert Firebase object to array
-          return Object.keys(data).map(key => ({
-            ...data[key],
-            id: key
-          })).sort((a, b) => a.order - b.order);
-        } catch (error) {
-          console.error('Error fetching info blocks from Firebase:', error);
-          // Fallback to localStorage on error
-          const stored = localStorage.getItem(STORAGE_KEY);
-          if (stored) {
-            try {
-              return JSON.parse(stored);
-            } catch (e) {
-              console.error('Error parsing localStorage data:', e);
-              return [];
-            }
-          }
-          return [];
-        }
-      }
-
-      // Load and display info blocks - make it globally accessible
-      window.loadInfoBlocks = async function() {
-        const infoBlocks = await getInfoBlocks();
-        const container = document.getElementById('infoBlocks');
-        const emptyState = document.getElementById('emptyState');
-
-        if (!container || !emptyState) return;
-
-        if (infoBlocks.length === 0) {
-          container.innerHTML = '';
-          emptyState.style.display = 'block';
-        } else {
-          emptyState.style.display = 'none';
-          
-          // Get current language from i18n
-          const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
-          
-          // Sort by order
-          infoBlocks.sort((a, b) => a.order - b.order);
-          
-          container.innerHTML = infoBlocks.map(block => {
-            // Get language-specific data or fallback to old format
-            const blockData = block[currentLang] || block.en || block;
-            const title = blockData.title || '';
-            const body = blockData.body || '';
-            
-            return `
-              <div class="info-block">
-                <h2>${escapeHtml(title)}</h2>
-                <div class="info-block-body">${body}</div>
-              </div>
-            `;
-          }).join('');
-        }
-      }
-
-      // Helper to escape HTML to prevent XSS
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
-      // Initialize when page loads
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', window.loadInfoBlocks);
-      } else {
-        window.loadInfoBlocks();
-      }
-      
-      // Also listen for Firebase real-time updates
-      const db = getDatabase();
-      if (db) {
-        db.ref(FIREBASE_PATH).on('value', () => {
-          window.loadInfoBlocks();
-        });
-      }
-    })();
-  </script>
-  
-  <!-- Structured Data (JSON-LD) for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.3paardekens.com/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Information",
-        "item": "https://www.3paardekens.com/info.html"
-      }
-    ]
-  }
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
+  <script src="preview-site.js"></script>
+  <script src="preview-info.js"></script>
 </body>
 </html>

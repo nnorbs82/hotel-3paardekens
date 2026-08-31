@@ -1,117 +1,214 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms &amp; Conditions | Hotel 3 Paardekens</title>
-  <meta name="description" content="Terms and conditions for Hotel 3 Paardekens." />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="assets/nav.css">
-  <link rel="stylesheet" href="assets/footer.css">
-  
-  <!-- Cookie Consent -->
-  <link rel="stylesheet" href="assets/cookie-consent.css">
-  <script src="assets/cookie-consent.js" defer></script>
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MX66JGB1Z9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    
-    // Set default consent mode for GDPR compliance
-    gtag('consent', 'default', {
-      'analytics_storage': 'denied',
-      'ad_storage': 'denied'
-    });
-    
-    gtag('config', 'G-MX66JGB1Z9', {
-      'cookie_flags': 'SameSite=None;Secure'
-    });
-  </script>
-  
-  <style>
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: #ffffff;
-      background: #000;
-    }
-    .bg {
-      min-height: 100vh;
-      background: none;
-      position: relative;
-      isolation: isolate;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 28px;
-    }
-    .bg::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image:
-        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
-        url("assets/background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transform: translateZ(0);
-      will-change: transform;
-    }
-    .bg.with-menubar { padding-top: calc(70px + 50px + 28px); }
-    .card {
-      width: min(980px, 100%);
-      background: rgba(0, 0, 0, 0.15);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 18px;
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
-      padding: clamp(20px, 4vw, 40px);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .menubar.card {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      z-index: 9999;
-      height: 70px;
-      min-height: 70px;
-      padding: 0 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0;
-      background: rgba(0, 0, 0, 0.55);
-    }
-  </style>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Terms & Conditions | Hotel 3 Paardekens</title>
+  <meta name="description" content="General terms and conditions for reservations and stays at Hotel 3 Paardekens in Mechelen."><meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="favicon.ico"><link rel="stylesheet" href="preview-site.css">
 </head>
 <body>
-  <main class="bg with-menubar">
-    <section class="card menubar" id="menubar" aria-label="Menu bar"></section>
+  <header class="site-header header-solid" aria-label="Main navigation">
+    <div class="header-shade" aria-hidden="true"></div>
+    <div class="container-wide header-inner">
+      <a class="brand" href="index.html" aria-label="Hotel 3 Paardekens home"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"></a>
+      <nav class="nav" aria-label="Primary"><a href="index.html" data-i18n="nav.home">Home</a><a href="rooms.html" data-i18n="nav.rooms">Rooms</a><a href="index.html#breakfast" data-i18n="nav.breakfast">Breakfast</a><a href="index.html#about" data-i18n="nav.about">About</a><a href="index.html#location" data-i18n="nav.location">Location</a><a href="index.html#contact" data-i18n="nav.contact">Contact</a></nav>
+      <div class="header-actions"><div class="language-switcher"><button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span><span>⌄</span></button><div class="lang-menu"><button data-lang-option="nl">Nederlands</button><button data-lang-option="en">English</button><button data-lang-option="fr">Français</button><button data-lang-option="es">Español</button><button data-lang-option="de">Deutsch</button></div></div><a class="btn btn-filled header-book" href="#" data-book data-i18n="nav.book">Book now</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"></button></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="content-hero"><div class="container"><p class="eyebrow">Hotel 3 Paardekens · Legal</p><h1 class="display" id="terms-title">Terms & Conditions</h1><p class="lead" id="terms-lead">General conditions applying to reservations and stays at Hotel 3 Paardekens.</p></div></section>
+    <section class="content-section"><div class="container">
+      <article class="policy terms-language" data-terms-lang="en">
+        <p><strong>Last updated: August 2026</strong></p>
+        <p>These Terms & Conditions apply to reservations and stays at Hotel 3 Paardekens, Begijnenstraat 3, 2800 Mechelen, Belgium. By making a reservation, the guest confirms that they have read and accepted these general conditions together with any rate-specific conditions shown during the booking process.</p>
+
+        <h2>1. Reservations and confirmation</h2>
+        <p>A reservation becomes binding once it has been accepted and confirmed by the hotel or by an authorised booking platform acting on the hotel's behalf. Guests are responsible for providing complete and accurate contact, occupancy and payment information.</p>
+        <p>Where a reservation is made through an online travel agency, booking platform or other third party, that provider's booking conditions may also apply. In the event of a conflict concerning cancellation, payment or amendment conditions, the conditions attached to the specific booked rate or confirmation will take precedence over these general terms.</p>
+
+        <h2>2. Rates, taxes and included services</h2>
+        <p>Room rates and included services are those displayed at the time of booking and confirmed in the reservation confirmation. Local taxes, city taxes, breakfast, parking or other extras are included only where this is expressly stated.</p>
+        <p>Obvious pricing or technical errors do not create an entitlement to an incorrectly displayed rate. If such an error is identified, the hotel will contact the guest as soon as reasonably possible and offer the correct rate or cancellation without penalty where appropriate.</p>
+
+        <h2>3. Payment and guarantee</h2>
+        <p>Depending on the selected rate, the hotel may require a valid payment card, advance payment, deposit, pre-authorisation or another form of guarantee. The applicable payment conditions are shown during booking or in the reservation confirmation.</p>
+        <p>Guests remain responsible for all accommodation charges and additional services used during their stay. Any outstanding balance must be settled no later than departure unless another arrangement has been confirmed by the hotel in writing.</p>
+
+        <h2>4. Cancellations, changes and no-shows</h2>
+        <p>Cancellation and amendment conditions vary according to the rate or offer booked. The deadlines, charges and refundability stated in the reservation confirmation form part of the contract and take precedence over these general terms.</p>
+        <p>If a guest does not arrive and has not cancelled within the applicable conditions, the reservation may be treated as a no-show and the charge stated in the booked rate conditions may apply. Early departure does not automatically entitle the guest to a refund for unused nights.</p>
+
+        <h2>5. Check-in, check-out and identification</h2>
+        <p>Check-in and check-out times are those communicated by the hotel, displayed on the website or stated in the reservation confirmation. Early check-in and late check-out are subject to availability and may carry an additional charge where communicated by the hotel.</p>
+        <p>The hotel may require a valid official identity document at check-in and, where reasonably necessary, the payment card or other guarantee associated with the reservation. Guests must comply with legally required registration procedures.</p>
+
+        <h2>6. Occupancy, children and visitors</h2>
+        <p>Rooms may not be occupied by more persons than the confirmed maximum occupancy. All overnight guests must be registered where required by law or hotel procedure. Children and minors must be supervised in accordance with applicable law, and the hotel may require appropriate authorisation where a minor is travelling without a parent or legal guardian.</p>
+        <p>Visitors who are not registered as overnight guests must comply with hotel rules and may be restricted for security, safety or operational reasons.</p>
+
+        <h2>7. Guest conduct and use of the hotel</h2>
+        <p>Guests are expected to behave respectfully toward other guests, neighbours and hotel staff and to use the room and hotel facilities with reasonable care. Excessive noise, threatening or abusive behaviour, illegal activity, deliberate damage, interference with safety equipment, or conduct that seriously disturbs other guests may result in the hotel ending the stay without refund, to the extent permitted by law.</p>
+        <p>Smoking, pets, bicycles, equipment or other special-use requests are subject to the hotel's applicable rules and must be agreed in advance where required. Fire and safety instructions must be respected at all times.</p>
+
+        <h2>8. Damage, excessive cleaning and missing property</h2>
+        <p>The guest is responsible for damage or loss caused deliberately or negligently by the guest or persons for whom the guest is responsible. The hotel may recover reasonable and documented costs for repair, replacement or exceptional cleaning, subject to applicable law.</p>
+        <p>Hotel property may not be removed from the premises unless intended for guest use or explicitly authorised.</p>
+
+        <h2>9. Personal belongings and lost property</h2>
+        <p>Guests are responsible for taking reasonable care of their personal belongings. The hotel's liability for loss, theft or damage is limited to the extent permitted by applicable law and does not affect any liability that cannot legally be excluded or limited.</p>
+        <p>Items found after departure may be retained for a reasonable period. Return shipping or courier costs are normally the responsibility of the guest.</p>
+
+        <h2>10. Room allocation and photographs</h2>
+        <p>Photographs and descriptions are intended to represent the relevant room category and hotel facilities as accurately as reasonably possible. Individual rooms within the same category may differ in layout, dimensions, furnishings or view.</p>
+        <p>Specific room numbers, floors, views, bed positions or other preferences are requests only unless explicitly guaranteed in writing.</p>
+
+        <h2>11. Unavailability and exceptional circumstances</h2>
+        <p>If the hotel is unable to provide the confirmed accommodation because of an exceptional operational problem, force majeure or another circumstance beyond reasonable control, it will take reasonable steps to offer an appropriate solution, alternative accommodation or refund as required by applicable law and the circumstances of the booking.</p>
+        <p>The hotel is not responsible for failures or delays caused by events outside its reasonable control, except where applicable law provides otherwise.</p>
+
+        <h2>12. Third-party services and external links</h2>
+        <p>The hotel may provide links or access to services operated by independent third parties, including booking platforms, payment providers, maps or other external services. Those services are governed by the third party's own terms and privacy practices. The hotel is not responsible for the availability or content of independent third-party services except where the law provides otherwise.</p>
+
+        <h2>13. Website information</h2>
+        <p>The hotel takes reasonable care to keep website information accurate and current. Facilities, services, opening arrangements and other operational details may nevertheless change. Information contained in the guest's reservation confirmation takes precedence where it relates specifically to that reservation.</p>
+
+        <h2>14. Privacy and personal data</h2>
+        <p>Personal data is processed in accordance with applicable data-protection law and the hotel's <a href="privacy-policy.html">Privacy Policy</a>. Information about cookies and analytics is available in the <a href="cookie-policy.html">Cookie Policy</a>.</p>
+
+        <h2>15. Complaints</h2>
+        <p>Guests are encouraged to report any problem during the stay as soon as possible so that the hotel has a reasonable opportunity to investigate and, where possible, resolve it. Complaints after departure should be submitted in writing with sufficient information to identify the reservation and the issue concerned.</p>
+
+        <h2>16. Liability</h2>
+        <p>The hotel's liability is governed by applicable law. Nothing in these Terms & Conditions excludes or limits liability where such exclusion or limitation is prohibited by law, including mandatory consumer rights.</p>
+
+        <h2>17. Applicable law</h2>
+        <p>These Terms & Conditions are governed by Belgian law, without prejudice to mandatory consumer-protection rules or jurisdiction rights that apply to the guest under applicable law.</p>
+
+        <h2>18. Changes to these terms</h2>
+        <p>The hotel may update these general Terms & Conditions from time to time. The version applicable to a reservation is normally the version in force when the reservation is made, together with the specific conditions included in the booking confirmation.</p>
+
+        <h2>19. Contact</h2>
+        <p><strong>Hotel 3 Paardekens</strong><br>Begijnenstraat 3<br>2800 Mechelen, Belgium<br>Phone: +32 15 342 713<br>Email: <a href="mailto:info@3paardekens.be">info@3paardekens.be</a></p>
+      </article>
+
+      <article class="policy terms-language" data-terms-lang="nl" hidden>
+        <p><strong>Laatst bijgewerkt: augustus 2026</strong></p>
+        <p>Deze Algemene Voorwaarden zijn van toepassing op reservaties en verblijven in Hotel 3 Paardekens, Begijnenstraat 3, 2800 Mechelen, België. Door een reservatie te maken bevestigt de gast deze algemene voorwaarden te hebben gelezen en aanvaard, samen met eventuele tariefspecifieke voorwaarden die tijdens het boekingsproces worden weergegeven.</p>
+        <h2>1. Reservaties en bevestiging</h2><p>Een reservatie wordt bindend zodra ze door het hotel of door een gemachtigd boekingsplatform namens het hotel is aanvaard en bevestigd. De gast is verantwoordelijk voor het verstrekken van volledige en correcte contact-, bezettings- en betalingsgegevens.</p><p>Bij reservaties via een online reisagent, boekingsplatform of andere derde partij kunnen ook de voorwaarden van die aanbieder gelden. Bij tegenstrijdigheden over annulering, betaling of wijzigingen hebben de voorwaarden van het specifieke geboekte tarief of de reservatiebevestiging voorrang op deze algemene voorwaarden.</p>
+        <h2>2. Tarieven, belastingen en inbegrepen diensten</h2><p>De kamerprijs en inbegrepen diensten zijn deze die op het moment van boeken worden getoond en in de reservatiebevestiging worden bevestigd. Lokale belastingen, stadstaks, ontbijt, parking of andere extra's zijn alleen inbegrepen wanneer dit uitdrukkelijk vermeld staat.</p><p>Een duidelijke prijs- of technische fout geeft geen recht op een foutief weergegeven tarief. Indien een dergelijke fout wordt vastgesteld, neemt het hotel zo snel mogelijk contact op en biedt het het correcte tarief of, waar passend, een kosteloze annulering aan.</p>
+        <h2>3. Betaling en garantie</h2><p>Afhankelijk van het gekozen tarief kan het hotel een geldige betaalkaart, vooruitbetaling, waarborg, pre-autorisatie of andere garantie vereisen. De toepasselijke betalingsvoorwaarden worden tijdens het boeken of in de reservatiebevestiging meegedeeld.</p><p>De gast blijft verantwoordelijk voor alle verblijfskosten en bijkomende diensten. Een openstaand saldo moet uiterlijk bij vertrek worden voldaan, tenzij schriftelijk anders overeengekomen.</p>
+        <h2>4. Annuleringen, wijzigingen en no-shows</h2><p>Annulerings- en wijzigingsvoorwaarden verschillen per geboekt tarief of aanbod. De termijnen, kosten en terugbetalingsvoorwaarden in de reservatiebevestiging maken deel uit van de overeenkomst en hebben voorrang op deze algemene voorwaarden.</p><p>Wanneer een gast niet aankomt en niet tijdig heeft geannuleerd, kan de reservatie als no-show worden beschouwd en kunnen de kosten uit de geboekte tariefvoorwaarden worden aangerekend. Vroegtijdig vertrek geeft niet automatisch recht op terugbetaling van ongebruikte nachten.</p>
+        <h2>5. Check-in, check-out en identificatie</h2><p>De check-in- en check-outtijden zijn de tijden die door het hotel worden meegedeeld, op de website staan of in de reservatiebevestiging zijn opgenomen. Vroege check-in en late check-out zijn afhankelijk van beschikbaarheid en kunnen een bijkomende kost met zich meebrengen wanneer dit door het hotel wordt meegedeeld.</p><p>Het hotel kan bij check-in een geldig officieel identiteitsdocument verlangen en, indien redelijkerwijs noodzakelijk, de betaalkaart of andere garantie die bij de reservatie hoort. Gasten moeten voldoen aan wettelijk verplichte registratieprocedures.</p>
+        <h2>6. Bezetting, kinderen en bezoekers</h2><p>Kamers mogen niet door meer personen worden gebruikt dan de bevestigde maximale bezetting. Alle overnachtende gasten moeten worden geregistreerd wanneer dit wettelijk of volgens hotelprocedure vereist is. Minderjarigen moeten worden begeleid overeenkomstig de toepasselijke wetgeving.</p><p>Bezoekers die niet als overnachtende gast geregistreerd zijn, moeten de hotelregels respecteren en kunnen om veiligheids- of operationele redenen worden beperkt.</p>
+        <h2>7. Gedrag en gebruik van het hotel</h2><p>Gasten dienen zich respectvol te gedragen tegenover andere gasten, buren en medewerkers en de kamer en faciliteiten zorgvuldig te gebruiken. Overmatige geluidsoverlast, bedreigend of beledigend gedrag, illegale activiteiten, opzettelijke schade, manipulatie van veiligheidsvoorzieningen of ernstige verstoring van andere gasten kan, voor zover wettelijk toegestaan, leiden tot beëindiging van het verblijf zonder terugbetaling.</p><p>Roken, huisdieren, fietsen, materiaal of andere bijzondere verzoeken zijn onderworpen aan de geldende hotelregels en moeten waar nodig vooraf worden overeengekomen. Brand- en veiligheidsinstructies moeten steeds worden gevolgd.</p>
+        <h2>8. Schade, uitzonderlijke schoonmaak en ontbrekende goederen</h2><p>De gast is verantwoordelijk voor schade of verlies dat opzettelijk of door nalatigheid wordt veroorzaakt door de gast of personen voor wie de gast verantwoordelijk is. Het hotel kan redelijke en aantoonbare kosten voor herstel, vervanging of uitzonderlijke schoonmaak verhalen, onder voorbehoud van de toepasselijke wetgeving.</p>
+        <h2>9. Persoonlijke bezittingen en verloren voorwerpen</h2><p>Gasten zijn verantwoordelijk voor redelijke zorg voor hun persoonlijke bezittingen. De aansprakelijkheid van het hotel voor verlies, diefstal of schade is beperkt voor zover de toepasselijke wet dit toestaat.</p><p>Gevonden voorwerpen kunnen gedurende een redelijke periode worden bewaard. Verzend- of koerierkosten voor retourzending zijn normaal voor rekening van de gast.</p>
+        <h2>10. Kamertoewijzing en foto's</h2><p>Foto's en beschrijvingen geven de betreffende kamercategorie en hotelfaciliteiten zo nauwkeurig mogelijk weer. Individuele kamers binnen dezelfde categorie kunnen verschillen in indeling, afmetingen, inrichting of uitzicht.</p><p>Specifieke kamernummers, verdiepingen, uitzichten of andere voorkeuren zijn verzoeken tenzij ze uitdrukkelijk schriftelijk zijn gegarandeerd.</p>
+        <h2>11. Onbeschikbaarheid en uitzonderlijke omstandigheden</h2><p>Indien het hotel de bevestigde accommodatie niet kan leveren wegens een uitzonderlijk operationeel probleem, overmacht of een andere omstandigheid buiten redelijke controle, zal het redelijke stappen ondernemen om een passende oplossing, alternatieve accommodatie of terugbetaling te bieden zoals vereist door de toepasselijke wetgeving.</p>
+        <h2>12. Diensten van derden en externe links</h2><p>Het hotel kan toegang of links aanbieden naar onafhankelijke diensten van derden, zoals boekingsplatformen, betaalproviders of kaarten. Deze diensten vallen onder hun eigen voorwaarden en privacybeleid.</p>
+        <h2>13. Informatie op de website</h2><p>Het hotel besteedt redelijke zorg aan correcte en actuele website-informatie. Faciliteiten, diensten en operationele details kunnen echter wijzigen. Informatie in de reservatiebevestiging heeft voorrang wanneer deze specifiek betrekking heeft op de reservatie.</p>
+        <h2>14. Privacy en persoonsgegevens</h2><p>Persoonsgegevens worden verwerkt volgens de toepasselijke privacywetgeving en het <a href="privacy-policy.html">Privacybeleid</a> van het hotel. Informatie over cookies en analytics vindt u in het <a href="cookie-policy.html">Cookiebeleid</a>.</p>
+        <h2>15. Klachten</h2><p>Gasten worden verzocht problemen tijdens het verblijf zo snel mogelijk te melden, zodat het hotel een redelijke mogelijkheid heeft om ze te onderzoeken en waar mogelijk op te lossen. Klachten na vertrek moeten schriftelijk worden ingediend met voldoende informatie over de reservatie en het probleem.</p>
+        <h2>16. Aansprakelijkheid</h2><p>De aansprakelijkheid van het hotel wordt geregeld door de toepasselijke wetgeving. Niets in deze voorwaarden beperkt aansprakelijkheid wanneer een dergelijke beperking wettelijk niet is toegestaan, waaronder verplichte consumentenrechten.</p>
+        <h2>17. Toepasselijk recht</h2><p>Op deze voorwaarden is het Belgische recht van toepassing, zonder afbreuk te doen aan dwingende consumentenbescherming of bevoegdheidsregels die volgens de toepasselijke wetgeving voor de gast gelden.</p>
+        <h2>18. Wijzigingen van deze voorwaarden</h2><p>Het hotel kan deze algemene voorwaarden van tijd tot tijd aanpassen. Voor een reservatie geldt normaal de versie die van kracht was op het moment van boeken, samen met de specifieke voorwaarden in de boekingsbevestiging.</p>
+        <h2>19. Contact</h2><p><strong>Hotel 3 Paardekens</strong><br>Begijnenstraat 3<br>2800 Mechelen, België<br>Telefoon: +32 15 342 713<br>E-mail: <a href="mailto:info@3paardekens.be">info@3paardekens.be</a></p>
+      </article>
+
+      <article class="policy terms-language" data-terms-lang="fr" hidden>
+        <p><strong>Dernière mise à jour : août 2026</strong></p><p>Les présentes Conditions Générales s'appliquent aux réservations et séjours à l'Hôtel 3 Paardekens, Begijnenstraat 3, 2800 Malines, Belgique. En effectuant une réservation, le client confirme avoir lu et accepté ces conditions ainsi que les conditions spécifiques du tarif affichées lors de la réservation.</p>
+        <h2>1. Réservations et confirmation</h2><p>Une réservation devient contraignante lorsqu'elle est acceptée et confirmée par l'hôtel ou par une plateforme de réservation autorisée agissant pour le compte de l'hôtel. Le client est responsable de l'exactitude des informations de contact, d'occupation et de paiement fournies.</p><p>Lorsqu'une réservation est effectuée par l'intermédiaire d'une agence de voyage en ligne ou d'un autre tiers, les conditions de ce prestataire peuvent également s'appliquer. Pour les conditions d'annulation, de paiement ou de modification, les conditions du tarif réservé et de la confirmation priment sur les présentes conditions générales.</p>
+        <h2>2. Tarifs, taxes et services inclus</h2><p>Le prix de la chambre et les services inclus sont ceux affichés au moment de la réservation et confirmés dans la confirmation. Taxes locales, taxe de séjour, petit-déjeuner, parking et autres suppléments ne sont inclus que si cela est expressément indiqué.</p><p>Une erreur manifeste de prix ou une erreur technique ne donne pas droit au tarif affiché par erreur. Dans ce cas, l'hôtel contactera le client dès que raisonnablement possible et proposera le tarif correct ou, le cas échéant, une annulation sans frais.</p>
+        <h2>3. Paiement et garantie</h2><p>Selon le tarif choisi, l'hôtel peut demander une carte de paiement valide, un prépaiement, un dépôt, une préautorisation ou une autre garantie. Les conditions applicables sont indiquées lors de la réservation ou dans la confirmation.</p><p>Le client reste responsable de tous les frais d'hébergement et services supplémentaires. Tout solde dû doit être réglé au plus tard au départ, sauf accord écrit contraire.</p>
+        <h2>4. Annulations, modifications et non-présentation</h2><p>Les conditions d'annulation et de modification varient selon le tarif réservé. Les délais, frais et règles de remboursement indiqués dans la confirmation font partie du contrat et priment sur les présentes conditions générales.</p><p>En cas de non-présentation sans annulation conforme aux conditions applicables, la réservation peut être considérée comme un no-show et les frais prévus par le tarif réservé peuvent être appliqués. Un départ anticipé ne donne pas automatiquement droit au remboursement des nuits non utilisées.</p>
+        <h2>5. Arrivée, départ et identification</h2><p>Les heures d'arrivée et de départ sont celles communiquées par l'hôtel, affichées sur le site ou indiquées dans la confirmation. Une arrivée anticipée ou un départ tardif dépend de la disponibilité et peut entraîner un supplément lorsqu'il est communiqué par l'hôtel.</p><p>L'hôtel peut demander une pièce d'identité officielle valide et, lorsque cela est raisonnablement nécessaire, la carte de paiement ou garantie associée à la réservation.</p>
+        <h2>6. Occupation, enfants et visiteurs</h2><p>Une chambre ne peut pas être occupée par un nombre de personnes supérieur à l'occupation maximale confirmée. Tous les clients passant la nuit doivent être enregistrés lorsque la loi ou la procédure de l'hôtel l'exige. Les mineurs doivent être supervisés conformément à la législation applicable.</p>
+        <h2>7. Comportement des clients</h2><p>Les clients doivent respecter les autres clients, le voisinage et le personnel et utiliser les chambres et installations avec soin. Bruit excessif, comportement menaçant ou abusif, activité illégale, dommages volontaires ou atteinte grave à la tranquillité peuvent entraîner la fin du séjour sans remboursement dans la mesure permise par la loi.</p><p>Le tabac, les animaux, vélos, équipements ou autres demandes particulières sont soumis aux règles de l'hôtel et doivent être convenus à l'avance lorsque nécessaire.</p>
+        <h2>8. Dommages et nettoyage exceptionnel</h2><p>Le client est responsable des dommages ou pertes causés intentionnellement ou par négligence par lui-même ou par les personnes dont il est responsable. L'hôtel peut réclamer des coûts raisonnables et justifiés de réparation, remplacement ou nettoyage exceptionnel, sous réserve de la loi applicable.</p>
+        <h2>9. Effets personnels et objets trouvés</h2><p>Les clients sont responsables de prendre soin de leurs effets personnels. La responsabilité de l'hôtel en cas de perte, vol ou dommage est limitée dans la mesure autorisée par la loi applicable.</p><p>Les objets trouvés peuvent être conservés pendant une période raisonnable. Les frais d'expédition pour leur retour sont normalement à la charge du client.</p>
+        <h2>10. Attribution des chambres et photographies</h2><p>Les photographies et descriptions représentent aussi fidèlement que possible la catégorie concernée. Les chambres d'une même catégorie peuvent différer par leur disposition, dimensions, mobilier ou vue.</p><p>Un numéro de chambre, étage, vue ou autre préférence spécifique constitue une demande sauf garantie écrite expresse.</p>
+        <h2>11. Indisponibilité et circonstances exceptionnelles</h2><p>Si l'hôtel ne peut fournir l'hébergement confirmé en raison d'un problème opérationnel exceptionnel, d'un cas de force majeure ou d'une circonstance hors de son contrôle raisonnable, il prendra des mesures raisonnables pour proposer une solution, un hébergement alternatif ou un remboursement conformément à la loi applicable.</p>
+        <h2>12. Services de tiers</h2><p>Le site peut fournir des liens vers des services indépendants tels que plateformes de réservation, prestataires de paiement ou cartes. Ces services sont régis par leurs propres conditions et politiques de confidentialité.</p>
+        <h2>13. Informations du site</h2><p>L'hôtel veille raisonnablement à l'exactitude et à l'actualité des informations du site. Les installations, services ou détails opérationnels peuvent cependant changer. La confirmation de réservation prévaut pour les informations propres à la réservation.</p>
+        <h2>14. Vie privée et données personnelles</h2><p>Les données personnelles sont traitées conformément à la législation applicable et à la <a href="privacy-policy.html">Politique de confidentialité</a>. Les informations sur les cookies figurent dans la <a href="cookie-policy.html">Politique de cookies</a>.</p>
+        <h2>15. Réclamations</h2><p>Les clients sont encouragés à signaler tout problème dès que possible pendant le séjour afin que l'hôtel puisse l'examiner et tenter de le résoudre. Les réclamations après le départ doivent être adressées par écrit avec suffisamment d'informations pour identifier la réservation et le problème.</p>
+        <h2>16. Responsabilité</h2><p>La responsabilité de l'hôtel est régie par la loi applicable. Aucune disposition des présentes conditions n'exclut ou ne limite une responsabilité lorsque la loi l'interdit, notamment les droits impératifs des consommateurs.</p>
+        <h2>17. Droit applicable</h2><p>Les présentes conditions sont régies par le droit belge, sans préjudice des règles impératives de protection des consommateurs ou de compétence juridictionnelle applicables au client.</p>
+        <h2>18. Modification des conditions</h2><p>L'hôtel peut modifier ces conditions générales. La version applicable à une réservation est normalement celle en vigueur au moment de la réservation, avec les conditions spécifiques de la confirmation.</p>
+        <h2>19. Contact</h2><p><strong>Hotel 3 Paardekens</strong><br>Begijnenstraat 3<br>2800 Malines, Belgique<br>Téléphone : +32 15 342 713<br>E-mail : <a href="mailto:info@3paardekens.be">info@3paardekens.be</a></p>
+      </article>
+
+      <article class="policy terms-language" data-terms-lang="es" hidden>
+        <p><strong>Última actualización: agosto de 2026</strong></p><p>Estas Condiciones Generales se aplican a las reservas y estancias en Hotel 3 Paardekens, Begijnenstraat 3, 2800 Mechelen, Bélgica. Al realizar una reserva, el huésped confirma que ha leído y aceptado estas condiciones junto con las condiciones específicas de la tarifa mostradas durante la reserva.</p>
+        <h2>1. Reservas y confirmación</h2><p>La reserva pasa a ser vinculante cuando ha sido aceptada y confirmada por el hotel o por una plataforma autorizada que actúe en nombre del hotel. El huésped es responsable de proporcionar datos de contacto, ocupación y pago completos y correctos.</p><p>Cuando la reserva se realiza mediante una agencia online o un tercero, también pueden aplicarse sus condiciones. En caso de conflicto sobre cancelación, pago o modificación, prevalecen las condiciones de la tarifa reservada y de la confirmación.</p>
+        <h2>2. Tarifas, impuestos y servicios incluidos</h2><p>El precio de la habitación y los servicios incluidos son los mostrados al reservar y confirmados posteriormente. Impuestos locales, tasa turística, desayuno, aparcamiento u otros extras solo están incluidos cuando se indique expresamente.</p><p>Un error manifiesto de precio o técnico no da derecho a una tarifa mostrada de forma incorrecta. Si se detecta un error, el hotel contactará al huésped lo antes posible para ofrecer el precio correcto o, cuando corresponda, la cancelación sin penalización.</p>
+        <h2>3. Pago y garantía</h2><p>Según la tarifa elegida, el hotel puede requerir una tarjeta válida, pago anticipado, depósito, preautorización u otra garantía. Las condiciones de pago se muestran durante la reserva o en la confirmación.</p><p>El huésped es responsable de todos los cargos de alojamiento y servicios adicionales. Cualquier saldo pendiente debe abonarse como máximo a la salida salvo acuerdo escrito diferente.</p>
+        <h2>4. Cancelaciones, cambios y no presentación</h2><p>Las condiciones de cancelación y modificación dependen de la tarifa contratada. Los plazos, cargos y condiciones de reembolso indicados en la confirmación forman parte del contrato y prevalecen sobre estas condiciones generales.</p><p>Si el huésped no llega y no ha cancelado conforme a las condiciones aplicables, la reserva puede considerarse no-show y aplicarse los cargos correspondientes. Una salida anticipada no genera automáticamente derecho a reembolso por las noches no utilizadas.</p>
+        <h2>5. Llegada, salida e identificación</h2><p>Los horarios de check-in y check-out son los comunicados por el hotel, publicados en la web o incluidos en la confirmación. La llegada anticipada y salida tardía dependen de disponibilidad y pueden tener un suplemento cuando así lo comunique el hotel.</p><p>El hotel puede solicitar un documento oficial de identidad válido y, cuando sea razonablemente necesario, la tarjeta de pago o garantía asociada a la reserva.</p>
+        <h2>6. Ocupación, menores y visitantes</h2><p>Las habitaciones no pueden ser ocupadas por más personas que la ocupación máxima confirmada. Todos los huéspedes que pernocten deben registrarse cuando lo exija la ley o el procedimiento del hotel. Los menores deben estar supervisados conforme a la legislación aplicable.</p>
+        <h2>7. Conducta del huésped</h2><p>Los huéspedes deben respetar a otros huéspedes, vecinos y personal y utilizar las instalaciones con cuidado. Ruido excesivo, comportamiento amenazante o abusivo, actividades ilegales, daños intencionados o alteraciones graves pueden provocar la finalización de la estancia sin reembolso en la medida permitida por la ley.</p><p>El tabaco, mascotas, bicicletas, equipos u otras solicitudes especiales están sujetos a las normas del hotel y deberán acordarse previamente cuando sea necesario.</p>
+        <h2>8. Daños y limpieza extraordinaria</h2><p>El huésped responde de los daños o pérdidas causados intencionadamente o por negligencia por él o por las personas de las que sea responsable. El hotel podrá reclamar costes razonables y documentados de reparación, sustitución o limpieza extraordinaria conforme a la ley aplicable.</p>
+        <h2>9. Objetos personales y objetos perdidos</h2><p>Los huéspedes deben cuidar razonablemente de sus pertenencias. La responsabilidad del hotel por pérdida, robo o daño se limita en la medida permitida por la legislación aplicable.</p><p>Los objetos encontrados podrán conservarse durante un plazo razonable. Los gastos de devolución o mensajería serán normalmente a cargo del huésped.</p>
+        <h2>10. Asignación de habitaciones y fotografías</h2><p>Las fotografías y descripciones representan la categoría correspondiente con la mayor precisión razonable. Las habitaciones de una misma categoría pueden variar en distribución, dimensiones, mobiliario o vistas.</p><p>Números de habitación, plantas, vistas u otras preferencias concretas son solicitudes salvo que el hotel las garantice expresamente por escrito.</p>
+        <h2>11. Falta de disponibilidad y circunstancias excepcionales</h2><p>Si el hotel no puede proporcionar el alojamiento confirmado por un problema operativo excepcional, fuerza mayor u otra circunstancia fuera de su control razonable, tomará medidas razonables para ofrecer una solución, alojamiento alternativo o reembolso conforme a la ley aplicable.</p>
+        <h2>12. Servicios de terceros</h2><p>El hotel puede facilitar enlaces a servicios independientes de terceros, como plataformas de reserva, proveedores de pago o mapas. Dichos servicios se rigen por sus propias condiciones y políticas de privacidad.</p>
+        <h2>13. Información de la web</h2><p>El hotel procura mantener la información de la web correcta y actualizada. Las instalaciones, servicios y detalles operativos pueden cambiar. La confirmación de reserva prevalece en la información específica de esa reserva.</p>
+        <h2>14. Privacidad y datos personales</h2><p>Los datos personales se tratan conforme a la legislación aplicable y la <a href="privacy-policy.html">Política de Privacidad</a>. La información sobre cookies está disponible en la <a href="cookie-policy.html">Política de Cookies</a>.</p>
+        <h2>15. Quejas</h2><p>Se recomienda comunicar cualquier problema durante la estancia lo antes posible para que el hotel pueda investigarlo e intentar resolverlo. Las reclamaciones posteriores a la salida deberán presentarse por escrito con información suficiente para identificar la reserva y el problema.</p>
+        <h2>16. Responsabilidad</h2><p>La responsabilidad del hotel se rige por la legislación aplicable. Nada en estas condiciones excluye o limita responsabilidades cuando la ley no permite hacerlo, incluidos los derechos obligatorios de los consumidores.</p>
+        <h2>17. Legislación aplicable</h2><p>Estas condiciones se rigen por la legislación belga, sin perjuicio de las normas obligatorias de protección al consumidor o jurisdicción aplicables al huésped.</p>
+        <h2>18. Modificación de estas condiciones</h2><p>El hotel puede modificar estas condiciones generales. La versión aplicable a una reserva será normalmente la vigente al efectuarla, junto con las condiciones específicas de la confirmación.</p>
+        <h2>19. Contacto</h2><p><strong>Hotel 3 Paardekens</strong><br>Begijnenstraat 3<br>2800 Mechelen, Bélgica<br>Teléfono: +32 15 342 713<br>Correo: <a href="mailto:info@3paardekens.be">info@3paardekens.be</a></p>
+      </article>
+
+      <article class="policy terms-language" data-terms-lang="de" hidden>
+        <p><strong>Letzte Aktualisierung: August 2026</strong></p><p>Diese Allgemeinen Geschäftsbedingungen gelten für Reservierungen und Aufenthalte im Hotel 3 Paardekens, Begijnenstraat 3, 2800 Mechelen, Belgien. Mit einer Reservierung bestätigt der Gast, diese Bedingungen sowie die während des Buchungsvorgangs angezeigten tarifspezifischen Bedingungen gelesen und akzeptiert zu haben.</p>
+        <h2>1. Reservierung und Bestätigung</h2><p>Eine Reservierung wird verbindlich, sobald sie vom Hotel oder von einer autorisierten Buchungsplattform im Namen des Hotels angenommen und bestätigt wurde. Der Gast ist für vollständige und korrekte Kontakt-, Belegungs- und Zahlungsangaben verantwortlich.</p><p>Bei Buchungen über ein Online-Reiseportal oder einen sonstigen Dritten können zusätzlich dessen Bedingungen gelten. Bei Widersprüchen zu Stornierung, Zahlung oder Änderungen haben die Bedingungen des konkret gebuchten Tarifs und der Buchungsbestätigung Vorrang.</p>
+        <h2>2. Preise, Steuern und enthaltene Leistungen</h2><p>Zimmerpreise und enthaltene Leistungen entsprechen den bei der Buchung angezeigten und in der Bestätigung genannten Angaben. Lokale Steuern, City Tax, Frühstück, Parken oder weitere Extras sind nur enthalten, wenn dies ausdrücklich angegeben ist.</p><p>Offensichtliche Preis- oder technische Fehler begründen keinen Anspruch auf einen fehlerhaft angezeigten Tarif. Wird ein solcher Fehler festgestellt, wird das Hotel den Gast so bald wie möglich kontaktieren und den korrekten Preis oder gegebenenfalls eine kostenfreie Stornierung anbieten.</p>
+        <h2>3. Zahlung und Garantie</h2><p>Je nach Tarif kann das Hotel eine gültige Zahlungskarte, Vorauszahlung, Kaution, Vorautorisierung oder andere Garantie verlangen. Die jeweiligen Zahlungsbedingungen werden bei der Buchung oder in der Bestätigung angegeben.</p><p>Der Gast ist für sämtliche Übernachtungskosten und in Anspruch genommenen Zusatzleistungen verantwortlich. Offene Beträge sind spätestens bei Abreise zu begleichen, sofern keine andere schriftliche Vereinbarung besteht.</p>
+        <h2>4. Stornierung, Änderungen und Nichtanreise</h2><p>Stornierungs- und Änderungsbedingungen richten sich nach dem gebuchten Tarif oder Angebot. Fristen, Gebühren und Erstattungsregeln der Buchungsbestätigung sind Vertragsbestandteil und haben Vorrang vor diesen allgemeinen Bedingungen.</p><p>Reist ein Gast nicht an und wurde nicht gemäß den geltenden Bedingungen storniert, kann die Reservierung als No-Show behandelt und die im Tarif vorgesehene Gebühr erhoben werden. Eine vorzeitige Abreise begründet nicht automatisch einen Anspruch auf Erstattung ungenutzter Nächte.</p>
+        <h2>5. Check-in, Check-out und Identifikation</h2><p>Die Check-in- und Check-out-Zeiten entsprechen den vom Hotel mitgeteilten, auf der Website veröffentlichten oder in der Bestätigung genannten Zeiten. Früher Check-in und später Check-out sind abhängig von der Verfügbarkeit und können mit einem Zuschlag verbunden sein, wenn dies vom Hotel kommuniziert wird.</p><p>Das Hotel kann beim Check-in einen gültigen amtlichen Ausweis und, soweit vernünftigerweise erforderlich, die zur Reservierung gehörende Zahlungskarte oder Garantie verlangen.</p>
+        <h2>6. Belegung, Minderjährige und Besucher</h2><p>Zimmer dürfen nicht mit mehr Personen als der bestätigten Maximalbelegung genutzt werden. Alle übernachtenden Gäste müssen registriert werden, soweit dies gesetzlich oder nach Hotelverfahren erforderlich ist. Minderjährige müssen entsprechend den geltenden gesetzlichen Vorschriften beaufsichtigt werden.</p>
+        <h2>7. Verhalten im Hotel</h2><p>Gäste müssen andere Gäste, Nachbarn und Mitarbeiter respektieren und Zimmer und Einrichtungen sorgfältig behandeln. Übermäßiger Lärm, bedrohliches oder beleidigendes Verhalten, illegale Aktivitäten, vorsätzliche Schäden oder schwere Störungen können, soweit gesetzlich zulässig, zur Beendigung des Aufenthalts ohne Erstattung führen.</p><p>Rauchen, Haustiere, Fahrräder, Ausrüstung oder andere Sonderwünsche unterliegen den jeweiligen Hotelregeln und müssen gegebenenfalls vorab vereinbart werden.</p>
+        <h2>8. Schäden und außergewöhnliche Reinigung</h2><p>Der Gast haftet für Schäden oder Verluste, die von ihm oder von Personen, für die er verantwortlich ist, vorsätzlich oder fahrlässig verursacht wurden. Das Hotel kann angemessene und nachweisbare Reparatur-, Ersatz- oder außergewöhnliche Reinigungskosten im Rahmen des geltenden Rechts verlangen.</p>
+        <h2>9. Persönliche Gegenstände und Fundsachen</h2><p>Gäste sind für einen angemessenen Schutz ihrer persönlichen Gegenstände verantwortlich. Die Haftung des Hotels für Verlust, Diebstahl oder Beschädigung ist auf das gesetzlich zulässige Maß beschränkt.</p><p>Fundsachen können für einen angemessenen Zeitraum aufbewahrt werden. Versand- oder Kurierkosten für die Rücksendung trägt normalerweise der Gast.</p>
+        <h2>10. Zimmerzuteilung und Fotos</h2><p>Fotos und Beschreibungen sollen die jeweilige Zimmerkategorie möglichst genau darstellen. Einzelne Zimmer derselben Kategorie können sich in Grundriss, Größe, Einrichtung oder Aussicht unterscheiden.</p><p>Bestimmte Zimmernummern, Etagen, Aussichten oder andere Präferenzen sind Wünsche, sofern sie nicht ausdrücklich schriftlich garantiert wurden.</p>
+        <h2>11. Nichtverfügbarkeit und außergewöhnliche Umstände</h2><p>Kann das Hotel die bestätigte Unterkunft aufgrund eines außergewöhnlichen betrieblichen Problems, höherer Gewalt oder anderer Umstände außerhalb seiner angemessenen Kontrolle nicht bereitstellen, wird es angemessene Schritte unternehmen, um eine geeignete Lösung, alternative Unterkunft oder Erstattung nach Maßgabe des geltenden Rechts anzubieten.</p>
+        <h2>12. Dienste Dritter</h2><p>Das Hotel kann Links oder Zugang zu unabhängigen Drittanbietern wie Buchungsplattformen, Zahlungsdienstleistern oder Kartendiensten bereitstellen. Diese Dienste unterliegen deren eigenen Bedingungen und Datenschutzregeln.</p>
+        <h2>13. Informationen auf der Website</h2><p>Das Hotel bemüht sich um korrekte und aktuelle Websiteinformationen. Einrichtungen, Leistungen und betriebliche Details können sich jedoch ändern. Für reservierungsspezifische Angaben hat die Buchungsbestätigung Vorrang.</p>
+        <h2>14. Datenschutz</h2><p>Personenbezogene Daten werden gemäß dem geltenden Datenschutzrecht und der <a href="privacy-policy.html">Datenschutzerklärung</a> verarbeitet. Informationen zu Cookies finden Sie in der <a href="cookie-policy.html">Cookie-Richtlinie</a>.</p>
+        <h2>15. Beschwerden</h2><p>Probleme sollten möglichst bereits während des Aufenthalts gemeldet werden, damit das Hotel die Möglichkeit hat, diese zu prüfen und soweit möglich zu lösen. Beschwerden nach Abreise sollten schriftlich mit ausreichenden Angaben zur Reservierung und zum Sachverhalt eingereicht werden.</p>
+        <h2>16. Haftung</h2><p>Die Haftung des Hotels richtet sich nach dem geltenden Recht. Diese Bedingungen schließen keine Haftung aus und beschränken keine Haftung, soweit dies gesetzlich unzulässig ist, insbesondere nicht zwingende Verbraucherrechte.</p>
+        <h2>17. Anwendbares Recht</h2><p>Diese Bedingungen unterliegen belgischem Recht, unbeschadet zwingender Verbraucherschutz- oder Zuständigkeitsregeln, die nach dem anwendbaren Recht für den Gast gelten.</p>
+        <h2>18. Änderungen der Bedingungen</h2><p>Das Hotel kann diese allgemeinen Bedingungen von Zeit zu Zeit aktualisieren. Für eine Reservierung gilt normalerweise die zum Buchungszeitpunkt gültige Fassung zusammen mit den spezifischen Bedingungen der Buchungsbestätigung.</p>
+        <h2>19. Kontakt</h2><p><strong>Hotel 3 Paardekens</strong><br>Begijnenstraat 3<br>2800 Mechelen, Belgien<br>Telefon: +32 15 342 713<br>E-Mail: <a href="mailto:info@3paardekens.be">info@3paardekens.be</a></p>
+      </article>
+    </div></section>
   </main>
 
-  <div id="footerContainer"></div>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"><p data-i18n="footer.short">A historic 3-star hotel in the centre of Mechelen, Belgium.</p></div><div class="footer-col"><h3 data-i18n="footer.explore">Explore</h3><a href="index.html" data-i18n="nav.home">Home</a><a href="rooms.html" data-i18n="nav.rooms">Rooms</a><a href="index.html#location" data-i18n="nav.location">Location</a></div><div class="footer-col"><h3 data-i18n="footer.help">Help</h3><a href="faqs.html" data-i18n="footer.generalFaq">General FAQs</a><a href="apple-wallet-faqs.html" data-i18n="footer.walletFaq">Apple Wallet FAQs</a><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a><a href="cookie-policy.html" data-i18n="footer.cookies">Cookie policy</a></div><div class="footer-col"><h3 data-i18n="footer.booking">Booking</h3><a href="#" data-book data-i18n="footer.direct">Book direct</a><a href="mailto:info@3paardekens.be">info@3paardekens.be</a><a href="terms-and-conditions.html" data-i18n="footer.terms">Terms</a></div></div><div class="footer-bottom"><span>© Hotel 3 Paardekens</span></div></div></footer>
 
-  <script src="translations.js"></script>
-  <script src="assets/nav.js"></script>
-  <script src="assets/footer.js"></script>
+  <script src="preview-site.js"></script>
   <script>
-    if (window.i18n) {
-      window.i18n.init();
-    }
+    (() => {
+      const titles = {
+        en:['Terms & Conditions','General conditions applying to reservations and stays at Hotel 3 Paardekens.'],
+        nl:['Algemene Voorwaarden','Algemene voorwaarden voor reservaties en verblijven in Hotel 3 Paardekens.'],
+        fr:['Conditions Générales','Conditions générales applicables aux réservations et séjours à l’Hôtel 3 Paardekens.'],
+        es:['Términos y Condiciones','Condiciones generales aplicables a las reservas y estancias en Hotel 3 Paardekens.'],
+        de:['Allgemeine Geschäftsbedingungen','Allgemeine Bedingungen für Reservierungen und Aufenthalte im Hotel 3 Paardekens.']
+      };
+      const showTermsLanguage = () => {
+        const lang = ['nl','en','fr','es','de'].includes(document.documentElement.lang) ? document.documentElement.lang : 'en';
+        document.querySelectorAll('[data-terms-lang]').forEach(el => { el.hidden = el.dataset.termsLang !== lang; });
+        const copy = titles[lang] || titles.en;
+        document.getElementById('terms-title').textContent = copy[0];
+        document.getElementById('terms-lead').textContent = copy[1];
+      };
+      showTermsLanguage();
+      new MutationObserver(showTermsLanguage).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+    })();
   </script>
 </body>
 </html>

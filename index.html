@@ -1,1176 +1,160 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- Primary Meta Tags -->
-  <title>Hotel 3 Paardekens | Historic 3-Star Hotel in Mechelen, Belgium</title>
-  <meta name="description" content="Experience historic elegance at Hotel 3 Paardekens, a charming 3-star hotel in the heart of Mechelen. 33 renovated rooms, rooftop breakfast with cathedral views. Book your stay today!" />
-  <meta name="keywords" content="Hotel Mechelen, Hotel 3 Paardekens, Mechelen accommodation, historic hotel Belgium, 3-star hotel Mechelen, hotel near St Rumbold Cathedral, Mechelen city center hotel" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#B76E79" />
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://www.3paardekens.com/" />
-  
-  <!-- Multi-language Support (hreflang) -->
-  <link rel="alternate" hreflang="en" href="https://www.3paardekens.com/?lang=en" />
-  <link rel="alternate" hreflang="nl" href="https://www.3paardekens.com/?lang=nl" />
-  <link rel="alternate" hreflang="fr" href="https://www.3paardekens.com/?lang=fr" />
-  <link rel="alternate" hreflang="x-default" href="https://www.3paardekens.com/" />
-  
-  <!-- Geographic Meta Tags -->
-  <meta name="geo.region" content="BE-VAN" />
-  <meta name="geo.placename" content="Mechelen" />
-  <meta name="geo.position" content="51.0259;4.4777" />
-  <meta name="ICBM" content="51.0259, 4.4777" />
-  
-  <!-- Open Graph Tags for Social Media -->
-  <meta property="og:type" content="hotel" />
-  <meta property="og:title" content="Hotel 3 Paardekens | Historic 3-Star Hotel in Mechelen, Belgium" />
-  <meta property="og:description" content="Experience historic elegance at Hotel 3 Paardekens, a charming 3-star hotel in the heart of Mechelen. 33 renovated rooms, rooftop breakfast with cathedral views. Book your stay today!" />
-  <meta property="og:url" content="https://www.3paardekens.com/" />
-  <meta property="og:image" content="https://www.3paardekens.com/assets/3plogo.png" />
-  <meta property="og:site_name" content="Hotel 3 Paardekens" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:locale:alternate" content="nl_BE" />
-  <meta property="og:locale:alternate" content="fr_FR" />
-  
-  <!-- Twitter Card Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hotel 3 Paardekens | Historic 3-Star Hotel in Mechelen, Belgium" />
-  <meta name="twitter:description" content="Experience historic elegance at Hotel 3 Paardekens, a charming 3-star hotel in the heart of Mechelen. 33 renovated rooms, rooftop breakfast with cathedral views." />
-  <meta name="twitter:image" content="https://www.3paardekens.com/assets/3plogo.png" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="assets/nav.css">
-  <link rel="stylesheet" href="assets/footer.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
-  
-  <!-- Cookie Consent -->
-  <link rel="stylesheet" href="assets/cookie-consent.css">
-  <script src="assets/cookie-consent.js" defer></script>
-  
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MX66JGB1Z9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    
-    // Set default consent mode for GDPR compliance
-    gtag('consent', 'default', {
-      'analytics_storage': 'denied',
-      'ad_storage': 'denied'
-    });
-    
-    gtag('config', 'G-MX66JGB1Z9', {
-      'cookie_flags': 'SameSite=None;Secure'
-    });
-  </script>
-  
-  <style>
-    :root {
-      --card-bg: rgba(0, 0, 0, 0.55);
-      --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.85);
-      --shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
-      --radius: 18px;
-      --fp-hover-color: #949494;
-      --fp-dim-month: #545454;
-
-      /* fade strength at center for hero/contact "band" */
-      --band-fade-alpha: 0.55;
-
-      /* accent color (rose gold) */
-      --accent: #B76E79;
-
-      /* bookingbar border at 60% opacity */
-      --accent-60: rgba(183, 110, 121, 0.6);
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-
-    /* Fix anchor jump under fixed menubar */
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background: #000; /* fallback behind fixed layer */
-    }
-
-    .bg {
-      /* iOS fix: don't use background-attachment: fixed here */
-      min-height: 100vh;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-
-      gap: 50px;
-      padding: 28px;
-
-      /* Create stacking context so ::before can sit behind content cleanly */
-      position: relative;
-      z-index: 0;
-    }
-
-    /* Fixed background layer (works reliably on iOS Safari/Chrome) */
-    .bg::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-
-      /* Keep your original dark overlay + image */
-      background-image:
-        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
-        url("assets/background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-
-      /* Helps iOS keep this as its own composited layer */
-      transform: translateZ(0);
-      will-change: transform;
-      pointer-events: none;
-    }
-
-    .bg.with-menubar {
-      padding-top: calc(70px + 50px + 28px);
-    }
-
-    .card {
-      width: min(720px, 100%);
-      background: var(--card-bg);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: clamp(20px, 4vw, 40px);
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    @supports not (gap: 50px) {
-      .card + .card { margin-top: 50px; }
-    }
-
-    .menubar.card {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      z-index: 9999;
-      height: 70px;
-      min-height: 70px;
-      padding: 0 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0;
-    }
-
-    .menu-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    /* Right-align menu items on desktop */
-    @media (min-width: 600px) {
-      .menu-row {
-        justify-content: flex-end;
-      }
-    }
-
-    .menu-logo {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding-left: 2px;
-      border-bottom: 0 !important;
-      text-decoration: none !important;
-    }
-    .menu-logo:hover {
-      border-bottom: 0 !important;
-      text-decoration: none !important;
-    }
-
-    .menu-logo img {
-      height: 46px;
-      width: auto;
-      display: block;
-    }
-
-    #hero.card {
-      width: 100%;
-      max-width: none;
-      border-radius: 0;
-
-      background: linear-gradient(
-        90deg,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,var(--band-fade-alpha)) 50%,
-        rgba(0,0,0,0) 100%
-      );
-
-      border: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-
-      min-height: calc(100svh - (70px + 50px + 56px));
-      max-height: 500px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      gap: 0;
-      padding: clamp(28px, 6vw, 64px);
-    }
-
-    #hero #mainlogo.card {
-      width: min(520px, 90%);
-      max-height: 400px;
-
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-
-      border-radius: var(--radius);
-      padding: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    #hero #mainlogo img {
-      width: min(380px, 60vw);
-      height: auto;
-      max-width: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      display: block;
-      margin: 0 auto;
-    }
-
-    #hero #bookingbar.card {
-      width: min(920px, 92%);
-      max-width: 920px;
-
-      border: 1px solid var(--accent-60);
-      padding: 20px;
-      margin-top: 50px;
-    }
-
-    .booking-title {
-      margin: 0 0 12px 0;
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--text);
-      text-align: center;
-    }
-
-    /* About Us section */
-    #aboutus.card {
-      width: 100%;
-      max-width: none;
-      border-radius: 0;
-
-      background: linear-gradient(
-        90deg,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,var(--band-fade-alpha)) 50%,
-        rgba(0,0,0,0) 100%
-      );
-
-      border: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-
-      padding: clamp(26px, 5vw, 46px);
-      text-align: left;
-
-      /* extra safety for browsers that ignore scroll-padding-top on html */
-      scroll-margin-top: 90px;
-    }
-
-    #aboutus .aboutus-inner {
-      width: min(1100px, 92%);
-      margin: 0 auto;
-    }
-
-    .aboutus-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: clamp(18px, 3vw, 36px);
-      align-items: start;
-    }
-
-    .aboutus-kicker {
-      margin: 0 0 10px 0;
-      font-size: 14px;
-      letter-spacing: 0.16em;
-      text-transform: none;
-      color: rgba(255,255,255,0.7);
-      text-align: center;
-    }
-
-    .aboutus-title {
-      margin: 0 0 14px 0;
-      font-size: clamp(44px, 6vw, 76px);
-      line-height: 0.95;
-      font-weight: 500;
-      text-align: center;
-      font-family: ui-serif, "Georgia", "Times New Roman", Times, serif;
-      letter-spacing: -0.01em;
-    }
-
-    .aboutus-copy {
-      max-width: 520px;
-      margin: 0 auto;
-      text-align: center;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    .aboutus-copy p { margin: 0 0 16px 0; }
-    .aboutus-copy p:last-child { margin-bottom: 0; }
-
-    /* reuse the existing .links .pill sizing/style by applying class="pill" and placing inside .links */
-    #aboutus .links {
-      margin-top: 18px;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .aboutus-collage {
-      position: relative;
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      min-height: 520px;
-    }
-
-    .aboutus-collage img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 2px;
-      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.25);
-    }
-
-    /* aboutus1: 10% smaller + move 10px to the right */
-    .aboutus-img-top {
-      position: absolute;
-      left: 10px;           /* move right */
-      top: 0;
-      width: 70.2%;         /* 78% * 0.9 = 70.2% */
-      height: 39.6%;        /* 44% * 0.9 = 39.6% */
-      z-index: 1;
-    }
-
-    /* bottom uses aboutus3 (foreground) */
-    .aboutus-img-bottom {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 78%;
-      height: 52%;
-      z-index: 3;
-    }
-
-    /* right uses aboutus2 (behind foreground) */
-    .aboutus-img-right {
-      position: absolute;
-      right: 0;
-      top: 15%;
-      width: 44%;
-      height: 68%;
-      z-index: 2;
-    }
-
-    @media (max-width: 980px) {
-      .aboutus-grid {
-        grid-template-columns: 1fr;
-      }
-      .aboutus-collage {
-        max-width: 640px;
-        min-height: 540px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .aboutus-collage {
-        min-height: 480px;
-      }
-      .aboutus-img-right {
-        top: 18%;
-        width: 52%;
-      }
-      .aboutus-img-top {
-        width: 77.4%;   /* 86% * 0.9 */
-        height: 39.6%;
-        left: 10px;
-      }
-      .aboutus-img-bottom {
-        width: 86%;
-      }
-    }
-
-    /* Sister Hotel section */
-    #sisterhotel.card {
-      width: calc(100% + 56px);
-      max-width: none;
-      border-radius: 0;
-
-      background: rgba(0, 0, 0, 0.70);
-
-      border: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-
-      padding: 0;
-      text-align: left;
-
-      scroll-margin-top: 90px;
-      
-      /* Break out of parent padding (28px on each side) */
-      margin-left: -28px;
-      margin-right: -28px;
-    }
-
-    #sisterhotel .sisterhotel-inner {
-      width: 100%;
-      margin: 0;
-      padding: clamp(26px, 5vw, 46px);
-    }
-
-    .sisterhotel-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: clamp(18px, 3vw, 36px);
-      align-items: center;
-    }
-
-    .sisterhotel-kicker {
-      margin: 0 0 10px 0;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      font-weight: 400;
-    }
-
-    .sisterhotel-title {
-      margin: 0 0 20px 0;
-      font-size: clamp(36px, 5vw, 56px);
-      line-height: 0.95;
-      font-weight: 400;
-      font-family: 'Playfair Display', ui-serif, "Georgia", "Times New Roman", Times, serif;
-      letter-spacing: -0.01em;
-      color: rgba(255,255,255,0.95);
-      position: relative;
-    }
-
-    .sisterhotel-title .title-line1 {
-      display: block;
-      color: rgba(255,255,255,0.95);
-    }
-
-    .sisterhotel-title .title-line2 {
-      display: block;
-      color: #EDCECE;
-      margin-left: 30px;
-      margin-top: -13px;
-    }
-
-    .sisterhotel-copy {
-      max-width: 540px;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .sisterhotel-copy p { margin: 0 0 16px 0; }
-    .sisterhotel-copy p:last-child { margin-bottom: 0; }
-
-    #sisterhotel .links {
-      margin-top: 24px;
-      display: flex;
-      gap: 12px;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .sisterhotel-image {
-      position: relative;
-      width: 100%;
-      max-width: 520px;
-      margin-left: auto;
-    }
-
-    .sisterhotel-image img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 2px;
-      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    @media (max-width: 980px) {
-      .sisterhotel-grid {
-        grid-template-columns: 1fr;
-      }
-      .sisterhotel-image {
-        max-width: 640px;
-        margin: 0 auto;
-      }
-      .sisterhotel-kicker {
-        text-align: center;
-      }
-      .sisterhotel-title {
-        text-align: center;
-        display: inline-block;
-      }
-      .sisterhotel-right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .sisterhotel-copy {
-        text-align: center;
-      }
-      #sisterhotel .links {
-        justify-content: center;
-      }
-    }
-
-    .menubar .pill {
-      gap: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 120ms ease;
-      padding: 10px 12px;
-      font-size: 15px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Desktop width for menu pills */
-    @media (min-width: 600px) {
-      .menubar .pill {
-        width: 94px;
-      }
-    }
-
-    .menubar .pill:hover,
-    .menubar .pill:focus,
-    .menubar .pill:active {
-      background: var(--accent);
-      outline: none;
-    }
-
-    h1 { margin: 0 0 12px 0; font-size: clamp(26px, 4vw, 40px); }
-    .lines { margin: 0; font-size: clamp(16px, 2.1vw, 18px); line-height: 1.65; color: var(--muted); }
-
-    input.datepicker {
-      -webkit-appearance: none;
-      appearance: none;
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-size: 15px;
-      min-width: 150px;
-
-      text-align: center;
-      outline: none;
-      transition: border-color 120ms ease, box-shadow 120ms ease;
-    }
-
-    input.datepicker::placeholder {
-      text-align: center;
-      color: rgba(255,255,255,0.75);
-    }
-
-    input.datepicker:hover {
-      border-color: var(--accent);
-    }
-
-    input.datepicker:focus,
-    input.datepicker:focus-visible {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(183, 110, 121, 0.25);
-      outline: none;
-    }
-
-    .links { margin-top:18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-
-    a { color:var(--text); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.35); }
-    a:hover { border-bottom-color: rgba(255,255,255,0.9); }
-
-    .pill { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); }
-    .pill[aria-disabled="true"] { opacity:0.55; pointer-events:none; }
-
-    footer { margin-top:18px; font-size:13px; color: rgba(255,255,255,0.7); }
-
-    .booking-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-      justify-items: center;
-      align-items: center;
-      margin-top: 6px;
-      width: 100%;
-    }
-
-    .booking-row input.datepicker,
-    .booking-row .pill {
-      padding: 10px 12px;
-      font-size: 15px;
-      border-radius: 10px;
-      min-width: 0;
-      width: 100%;
-      box-sizing: border-box;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 100%;
-    }
-
-    .booking-row .pill {
-      gap: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 120ms ease;
-    }
-
-    .booking-row .pill:hover { background: var(--accent); }
-    .booking-row .pill:focus,
-    .booking-row .pill:active { background: var(--accent); outline: none; }
-
-    @media (max-width: 580px) {
-      .booking-row .pill {
-        grid-column: 1 / -1;
-        justify-self: stretch;
-        width: 100%;
-      }
-    }
-
-    .links .pill {
-      gap: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 120ms ease;
-
-      width: 180px;
-      justify-content: center;
-    }
-
-    .links .pill:hover,
-    .links .pill:focus,
-    .links .pill:active { background: var(--accent); outline: none; }
-
-    @media (max-width:420px) {
-      .booking-row { gap: 10px; }
-      input.datepicker { min-width:150px; }
-      .links .pill {
-        min-width:150px;
-        width: 100%;
-      }
-
-      #hero #mainlogo img { width: min(320px, 72vw); }
-    }
-
-    /* Flatpickr styling */
-    .flatpickr-calendar { background: rgba(10,10,10,0.95); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
-    .flatpickr-calendar, .flatpickr-calendar * { color: #fff !important; }
-
-    /* Change "active" day highlight (blue) to rose gold */
-    .flatpickr-day.selected,
-    .flatpickr-day.selected:hover,
-    .flatpickr-day.selected:focus,
-    .flatpickr-day.startRange,
-    .flatpickr-day.startRange:hover,
-    .flatpickr-day.startRange:focus,
-    .flatpickr-day.endRange,
-    .flatpickr-day.endRange:hover,
-    .flatpickr-day.endRange:focus {
-      background: var(--accent) !important;
-      border-color: var(--accent) !important;
-      color: #fff !important;
-    }
-
-    .flatpickr-day.today {
-      border-color: var(--accent) !important;
-    }
-    .flatpickr-day.today:hover,
-    .flatpickr-day.today:focus {
-      background: rgba(183, 110, 121, 0.25) !important;
-      border-color: var(--accent) !important;
-    }
-
-    .flatpickr-calendar .flatpickr-day:hover,
-    .flatpickr-calendar .flatpickr-weekday:hover,
-    .flatpickr-calendar .flatpickr-months .flatpickr-prev-month:hover,
-    .flatpickr-calendar .flatpickr-months .flatpickr-next-month:hover { color: var(--fp-hover-color) !important; }
-    .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month { color: #fff !important; transition: color 120ms; }
-    .flatpickr-months .flatpickr-prev-month svg,
-    .flatpickr-months .flatpickr-next-month svg { fill: currentColor !important; stroke: currentColor !important; }
-    .flatpickr-current-month .numInputWrapper .arrowUp,
-    .flatpickr-current-month .numInputWrapper .arrowDown { color: #fff !important; transition: color 120ms; }
-    .flatpickr-current-month .numInputWrapper .arrowUp svg,
-    .flatpickr-current-month .numInputWrapper .arrowDown svg { fill: #fff !important; stroke: #fff !important; }
-    .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: var(--fp-dim-month) !important; }
-
-    .flatpickr-month-year-selectors { display:flex; gap:8px; justify-content:center; padding:6px 8px; }
-    .flatpickr-month-year-selectors select {
-      background: rgba(255,255,255,0.02);
-      color:#fff !important;
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:6px;
-      padding:6px 8px;
-      font-size:13px;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .flatpickr-month-year-selectors select:hover { color: var(--fp-hover-color) !important; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hotel 3 Paardekens | Historic Hotel in the Heart of Mechelen</title>
+  <meta name="description" content="Stay in the historic heart of Mechelen at Hotel 3 Paardekens, with 33 rooms and a rooftop breakfast room overlooking St Rumbold's Cathedral.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="preview-site.css">
+  <link rel="stylesheet" href="booking-enhanced.css">
+  <link rel="stylesheet" href="modern-home.css">
+  <link rel="stylesheet" href="intro-signature.css">
 </head>
-
 <body>
-  <main class="bg with-menubar">
-    <section class="card menubar" id="menubar" aria-label="Menu bar">
-      <!-- Navigation loaded via nav.js -->
-    </section>
-
-    <section id="hero" class="card" aria-label="Hero">
-      <section id="mainlogo" class="card" aria-label="Main logo">
-        <img src="assets/3plogo.png" alt="Hotel 3 Paardekens logo">
-      </section>
-
-      <section class="card" id="bookingbar" aria-label="Booking bar">
-        <p class="booking-title" data-i18n="index.booking.title">Check Availability</p>
-
-        <div class="booking-row" aria-label="Booking controls">
-          <label for="checkin" style="position:absolute; left:-9999px" data-i18n="index.booking.checkin">Check-in date</label>
-          <input id="checkin" class="datepicker" type="text" aria-label="Check-in date" data-i18n="index.booking.checkin" placeholder="Check-in">
-          <label for="checkout" style="position:absolute; left:-9999px" data-i18n="index.booking.checkout">Check-out date</label>
-          <input id="checkout" class="datepicker" type="text" aria-label="Check-out date" data-i18n="index.booking.checkout" placeholder="Check-out">
-          <a id="book" class="pill" href="#" role="button" aria-disabled="false" data-i18n="index.booking.bookroom">Book a Room</a>
+  <header class="site-header" aria-label="Main navigation">
+    <div class="header-shade" aria-hidden="true"></div>
+    <div class="container-wide header-inner">
+      <a class="brand" href="index.html" aria-label="Hotel 3 Paardekens home"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+        <a href="rooms.html" data-i18n="nav.rooms">Rooms</a>
+        <a href="#breakfast" data-i18n="nav.breakfast">Breakfast</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#location" data-i18n="nav.location">Location</a>
+        <a href="info.html">Info</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span><span aria-hidden="true">⌄</span></button>
+          <div class="lang-menu" role="menu">
+            <button type="button" data-lang-option="nl">Nederlands</button><button type="button" data-lang-option="en">English</button><button type="button" data-lang-option="fr">Français</button><button type="button" data-lang-option="es">Español</button><button type="button" data-lang-option="de">Deutsch</button>
+          </div>
         </div>
-      </section>
-    </section>
+        <a class="btn btn-filled header-book" href="#" data-book data-i18n="nav.book">Book now</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"></button>
+      </div>
+    </div>
+  </header>
 
-    <!-- About Us comes before Contact -->
-    <section id="aboutus" class="card" aria-label="About us">
-      <div class="aboutus-inner">
-        <div class="aboutus-grid">
-          <div class="aboutus-left" aria-label="About us text">
-            <p class="aboutus-kicker">Hotel 3 Paardekens</p>
-            <h2 class="aboutus-title" id="aboutusTitle" data-i18n="index.aboutus.title">About Us</h2>
-
-            <div class="aboutus-copy">
-              <div id="aboutusCopyText">
-                <p>
-                  The 33 rooms of the charming Hotel 3 Paardekens were thoroughly renovated and refurbished in 2010.
-                  In other words: a 'historical renovation'! Everything is there to welcome you with the comfort of a 3-star hotel.
-                  The counter in the reception area exudes the grandeur of the past. You can sit and chat at the bar or relax in one of the cozy armchairs.
-                </p>
-
-                <p>
-                  The pride and uniqueness of Hotel 3 Paardekens, however, is the sublime glass-enclosed breakfast room on the top floor,
-                  with an absolutely impressive view on St Rumbold's Cathedral.
-                </p>
-              </div>
-
-              <div class="links" aria-label="About us actions">
-                <a class="pill" href="#" id="aboutusBook" data-i18n="index.contact.book">Book Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="aboutus-right" aria-label="About us images">
-            <div class="aboutus-collage" aria-label="About us photo collage">
-              <div class="aboutus-img-top">
-                <img src="aboutus/aboutus1.jpg" alt="Hotel 3 Paardekens interior">
-              </div>
-
-              <div class="aboutus-img-bottom">
-                <img src="aboutus/aboutus3.jpg" alt="Hotel 3 Paardekens room">
-              </div>
-
-              <div class="aboutus-img-right">
-                <img src="aboutus/aboutus2.jpg" alt="Hotel 3 Paardekens detail">
-              </div>
-            </div>
-          </div>
+  <main>
+    <section class="hero">
+      <div class="hero-media"><img fetchpriority="high" decoding="async" src="optimized/assets/background.webp" alt="Hotel 3 Paardekens in Mechelen"></div>
+      <div class="container-wide hero-layout">
+        <div class="hero-content">
+          <p class="eyebrow">Hotel 3 Paardekens · Mechelen</p>
+          <h1 class="display" data-i18n="hero.title" data-site-field="heroTitle">Stay in the heart of Mechelen.</h1>
+          <p class="hero-copy" data-i18n="hero.copy" data-site-field="heroText">A characterful historic hotel steps from Mechelen's main squares, with a remarkable rooftop view of St Rumbold's Cathedral.</p>
+          <div class="hero-actions"><a class="btn btn-filled" href="#" data-book data-i18n="hero.book">Book your stay</a><a class="btn btn-light" href="rooms.html" data-i18n="hero.rooms">Discover our rooms</a></div>
         </div>
       </div>
     </section>
 
-    <!-- Sister Hotel section -->
-    <section id="sisterhotel" class="card" aria-label="Sister Hotel">
-      <div class="sisterhotel-inner">
-        <div class="sisterhotel-grid">
-          <div class="sisterhotel-left">
-            <div class="sisterhotel-image">
-              <img src="elisabeth/sisterhotel.jpg" alt="Hotel Elisabeth">
-            </div>
-          </div>
+    <div class="container booking-shell" aria-label="Check availability">
+      <form class="booking-bar" onsubmit="return false;">
+        <div class="booking-field"><label for="preview-checkin" data-i18n="booking.checkin">Check-in</label><input id="preview-checkin" type="date"></div>
+        <div class="booking-field"><label for="preview-checkout" data-i18n="booking.checkout">Check-out</label><input id="preview-checkout" type="date"></div>
+        <button id="preview-book" class="booking-submit" type="submit" data-i18n="booking.check">Check availability</button>
+      </form>
+    </div>
 
-          <div class="sisterhotel-right">
-            <p class="sisterhotel-kicker" id="sisterhotelKicker">Elegance - Comfort - Design</p>
-            <h2 class="sisterhotel-title">
-              <span class="title-line1" id="sisterhotelTitleLine1">Discover Our</span>
-              <span class="title-line2" id="sisterhotelTitleLine2">Sister Property</span>
-            </h2>
-
-            <div class="sisterhotel-copy">
-              <div id="sisterhotelCopyText">
-                <p>
-                  Hotel Elisabeth is a former Hospital dating from the Inter-war Period. It has been respectively transformed in keeping with the existing architecture to a modern and cosy four-star Hotel.
-                </p>
-                <p>
-                  It is situated less than 200m walking distance from the heart of Mechelen city and offers 66 stylish and contemporary designed rooms.
-                </p>
-                <p>
-                  These rooms provide maximum comfort for guests traveling on business or those wishing to explore the unique Historical City.
-                </p>
-                <p>
-                  The Breakfast Room is beautifully light and overlooks a lovely courtyard with olive trees. Parking is located beneath the Hotel.
-                </p>
-              </div>
-
-              <div class="links">
-                <a class="pill" href="https://www.elisabeth-hotel.be/" target="_blank" rel="noopener noreferrer" id="sisterhotelVisit">Visit Hotel Elisabeth</a>
-              </div>
-            </div>
-          </div>
+    <section class="intro" id="about">
+      <div class="container intro-grid">
+        <div class="intro-image-wrap"><img loading="lazy" decoding="async"  class="intro-image-main" src="assets/st-rumbolds-mechelen.webp" alt="St Rumbold's Cathedral in Mechelen"><img loading="lazy" decoding="async"  class="intro-image-small" src="optimized/aboutus/aboutus1.webp" alt="Hotel 3 Paardekens detail"></div>
+        <div class="intro-copy">
+          <p class="eyebrow" data-i18n="about.eyebrow">Historic Mechelen · Contemporary comfort</p>
+          <h2 class="display section-title" data-i18n="about.title" data-site-field="aboutTitle">A small hotel with a very special point of view.</h2>
+          <p class="lead" data-i18n="about.body" data-site-field="aboutBody">The 33 rooms of Hotel 3 Paardekens combine the character of a historic property with the essentials of a comfortable city stay.</p>
+          <a class="btn btn-dark" href="rooms.html" data-i18n="about.button">Explore the rooms</a>
         </div>
+      </div>
+    </section>
+
+    <section class="rooms-section" id="rooms">
+      <div class="container-wide">
+        <div class="section-head">
+          <div><p class="eyebrow" data-i18n="homeRooms.eyebrow">Stay your way</p><h2 class="display section-title" data-i18n="homeRooms.title">Four room types. One historic address.</h2></div>
+          <p class="lead" data-i18n="homeRooms.body">All rooms share the same central location and hotel character. Choose the category that best fits the way you want to experience Mechelen.</p>
+        </div>
+        <div class="rooms-grid">
+          <a class="room-card" href="rooms.html#single" data-room-id="single"><img loading="lazy" decoding="async"  src="optimized/Rooms/Single/1.webp" alt="Single Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">For one</span><p class="room-name" data-room-role="name">Single Room</p><p data-room-role="description">Comfortable and uncomplicated for a city or business stay.</p></div></a>
+          <a class="room-card" href="rooms.html#twin" data-room-id="twin"><img loading="lazy" decoding="async"  src="optimized/Rooms/Twin/1.webp" alt="Twin Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">Two beds</span><p class="room-name" data-room-role="name">Twin Room</p><p data-room-role="description">Two separate beds in the centre of Mechelen.</p></div></a>
+          <a class="room-card" href="rooms.html#double" data-room-id="double"><img loading="lazy" decoding="async"  src="optimized/Rooms/Double/4.webp" alt="Double Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">For two</span><p class="room-name" data-room-role="name">Double Room</p><p data-room-role="description">A cosy city stay for two, with a double bed.</p></div></a>
+          <a class="room-card" href="rooms.html#double-deluxe" data-room-id="double-deluxe"><img loading="lazy" decoding="async"  src="optimized/Rooms/Double/6.webp" alt="Double Deluxe Room at Hotel 3 Paardekens"><div class="room-card-content"><span class="room-kicker" data-room-role="strapline">More space</span><p class="room-name" data-room-role="name">Double Deluxe</p><p data-room-role="description">The Double experience with a little extra room.</p></div></a>
+        </div>
+        <div class="rooms-link"><a class="btn btn-light" href="rooms.html" data-i18n="homeRooms.button">Explore rooms & galleries</a></div>
+      </div>
+    </section>
+
+    <section class="breakfast-modern reveal" id="breakfast">
+      <div class="breakfast-modern-media">
+        <img loading="lazy" decoding="async"  src="assets/3paardekens-breakfast.webp" alt="Hotel 3 Paardekens top-floor breakfast room">
+        <div class="breakfast-modern-caption"><span data-i18n="breakfast.eyebrow">The top floor</span><span>St Rumbold's Cathedral · Mechelen</span></div>
+      </div>
+      <div class="container-wide breakfast-modern-layout">
+        <div class="breakfast-modern-card">
+          <span class="feature-index">01</span>
+          <p class="eyebrow" data-i18n="breakfast.eyebrow">The top floor</p>
+          <h2 class="display section-title" data-i18n="breakfast.title" data-site-field="breakfastTitle">Breakfast with the cathedral in view.</h2>
+          <p class="lead" data-i18n="breakfast.body" data-site-field="breakfastText">The glass-enclosed breakfast room is the hotel's signature space.</p>
+          <div class="feature-tags"><span>Top floor</span><span>Glass-enclosed</span><span>Cathedral view</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="location-modern reveal" id="location">
+      <div class="container-wide location-modern-inner">
+        <div class="location-modern-head">
+          <p class="eyebrow">Begijnenstraat 3 · Mechelen</p>
+          <h2 class="display" data-i18n="location.title">Step outside and you're already there.</h2>
+        </div>
+        <div class="location-modern-board">
+          <div class="location-word" aria-hidden="true">MECHELEN</div>
+          <div class="location-coordinate-block"><span>51.0259° N</span><span>4.4777° E</span></div>
+          <div class="location-modern-copy">
+            <p class="lead" data-i18n="location.body">Hotel 3 Paardekens sits in the historic centre.</p>
+            <div class="location-list modern-list"><div class="location-item"><span data-i18n="location.centre">Historic centre</span><span data-i18n="location.doorstep">On your doorstep</span></div><div class="location-item"><span data-i18n="location.cathedral">St Rumbold's Cathedral</span><span data-i18n="location.central">Central Mechelen</span></div><div class="location-item"><span data-i18n="location.address">Address</span><span>Begijnenstraat 3, 2800 Mechelen</span></div></div>
+            <a class="location-map-link" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a>
+          </div>
+          <a class="location-photo" href="https://www.google.com/maps?q=Begijnenstraat+3,+2800+Mechelen" target="_blank" rel="noopener noreferrer" aria-label="Open Hotel 3 Paardekens in Google Maps"><img loading="lazy" decoding="async" src="optimized/assets/background.webp" alt="Hotel 3 Paardekens in Mechelen"><span>Historic centre</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sister-modern reveal">
+      <div class="sister-marquee" aria-hidden="true">HOTEL ELISABETH · MECHELEN · HOTEL ELISABETH · MECHELEN ·</div>
+      <div class="container-wide sister-modern-stage">
+        <div class="sister-modern-image"><img loading="lazy" decoding="async"  src="elisabeth/sisterhotel.jpg" alt="Hotel Elisabeth Mechelen"></div>
+        <div class="sister-modern-card">
+          <span class="feature-index">02</span>
+          <p class="eyebrow" data-i18n="sister.eyebrow">Our sister property</p>
+          <h2 class="display section-title" data-i18n="sister.title">Looking for a different stay in Mechelen?</h2>
+          <p class="lead" data-i18n="sister.body" data-site-field="sisterHotelText">Hotel Elisabeth offers a contemporary four-star alternative nearby.</p>
+          <a class="btn btn-light" href="https://www.elisabeth-hotel.be/" target="_blank" rel="noopener noreferrer" data-i18n="sister.button">Discover Hotel Elisabeth</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-modern reveal" id="contact">
+      <div class="cta-modern-images" aria-hidden="true">
+        <div class="cta-photo cta-photo-one"><img loading="lazy" decoding="async"  src="optimized/Rooms/Double/6.webp" alt=""></div>
+        <div class="cta-photo cta-photo-two"><img loading="lazy" decoding="async"  src="optimized/Rooms/Twin/2.webp" alt=""></div>
+        <div class="cta-photo cta-photo-three"><img loading="lazy" decoding="async"  src="optimized/Rooms/Single/3.webp" alt=""></div>
+      </div>
+      <div class="container cta-modern-copy">
+        <p class="eyebrow" data-i18n="cta.eyebrow">Your stay in Mechelen</p>
+        <h2 class="display" data-i18n="cta.title">Make the city yours.</h2>
+        <a class="btn btn-filled" href="#" data-book data-i18n="cta.button">Check availability</a>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <div id="footerContainer"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="site-content-manager.js"></script>
-  <script>
-    function formatLocalDate(d) {
-      const y = d.getFullYear();
-      const m = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      return `${y}-${m}-${dd}`;
-    }
-    function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
-    function parseYMD(s) { return s ? new Date(s + 'T00:00:00') : null; }
-
-    const checkInEl = document.getElementById('checkin');
-    const checkOutEl = document.getElementById('checkout');
-    const bookEl = document.getElementById('book');
-
-    const today = new Date();
-    const tomorrow = addDays(today, 1);
-    const todayStr = formatLocalDate(today);
-    const tomorrowStr = formatLocalDate(tomorrow);
-
-    const baseOptions = { dateFormat: 'Y-m-d', disableMobile: true, allowInput: false };
-
-    const fpOut = flatpickr(checkOutEl, {
-      ...baseOptions,
-      defaultDate: tomorrowStr,
-      minDate: tomorrowStr,
-      onChange(selectedDates) {
-        const inDate = parseYMD(checkInEl.value);
-        const outDate = selectedDates && selectedDates[0] ? selectedDates[0] : parseYMD(checkOutEl.value);
-        if (inDate && outDate && outDate.getTime() <= inDate.getTime()) {
-          const forced = addDays(inDate, 1);
-          fpOut.setDate(formatLocalDate(forced), true, 'Y-m-d');
-        }
-        updateBookState();
-      }
-    });
-
-    const fpIn = flatpickr(checkInEl, {
-      ...baseOptions,
-      defaultDate: todayStr,
-      minDate: todayStr,
-      onChange(selectedDates) {
-        if (!selectedDates || !selectedDates[0]) return;
-        const inDate = selectedDates[0];
-        const minOut = addDays(inDate, 1);
-        fpOut.set('minDate', formatLocalDate(minOut));
-        const currentOut = parseYMD(checkOutEl.value);
-        if (!currentOut || currentOut.getTime() <= inDate.getTime()) {
-          fpOut.setDate(formatLocalDate(minOut), true, 'Y-m-d');
-        }
-        updateBookState();
-      }
-    });
-
-    function updateBookState() {
-      const start = parseYMD(checkInEl.value);
-      const end = parseYMD(checkOutEl.value);
-      const disabled = !start || !end || end.getTime() <= start.getTime();
-      bookEl.setAttribute('aria-disabled', disabled ? 'true' : 'false');
-    }
-
-    function openBookingWithSelectedDates() {
-      const start = checkInEl.value;
-      const end = checkOutEl.value;
-      if (!start || !end) { alert('Please select both check-in and check-out dates.'); return; }
-      const startDate = parseYMD(start);
-      const endDate = parseYMD(end);
-      if (!startDate || !endDate || endDate.getTime() <= startDate.getTime()) {
-        alert('Check-out date must be after the check-in date.');
-        return;
-      }
-      const base = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6';
-      const url = `${base}?mewsStart=${encodeURIComponent(start)}&mewsEnd=${encodeURIComponent(end)}&mewsRoute=rooms`;
-      window.open(url, '_blank', 'noopener');
-    }
-
-    bookEl.addEventListener('click', (e) => {
-      e.preventDefault();
-      openBookingWithSelectedDates();
-    });
-
-    const aboutusBook = document.getElementById('aboutusBook');
-    if (aboutusBook) {
-      aboutusBook.addEventListener('click', (e) => {
-        e.preventDefault();
-        openBookingWithSelectedDates();
-      });
-    }
-
-    function renderParagraphs(container, text) {
-      if (!container) return;
-      const paragraphs = String(text || '')
-        .split(/\n+/)
-        .map((line) => line.trim())
-        .filter(Boolean);
-      container.innerHTML = '';
-      const fragment = document.createDocumentFragment();
-      if (paragraphs.length === 0) return;
-      paragraphs.forEach((line) => {
-        const p = document.createElement('p');
-        p.textContent = line;
-        fragment.appendChild(p);
-      });
-      container.appendChild(fragment);
-    }
-
-    async function loadSiteContent() {
-      if (typeof SiteContentManager === 'undefined') return;
-      try {
-        const content = await SiteContentManager.getContent();
-        const aboutTitle = document.getElementById('aboutusTitle');
-        const aboutCopy = document.getElementById('aboutusCopyText');
-        const sisterKicker = document.getElementById('sisterhotelKicker');
-        const sisterLine1 = document.getElementById('sisterhotelTitleLine1');
-        const sisterLine2 = document.getElementById('sisterhotelTitleLine2');
-        const sisterCopy = document.getElementById('sisterhotelCopyText');
-
-        if (aboutTitle) aboutTitle.textContent = content.about.title;
-        renderParagraphs(aboutCopy, content.about.body);
-        if (sisterKicker) sisterKicker.textContent = content.sister.kicker;
-        if (sisterLine1) sisterLine1.textContent = content.sister.titleLine1;
-        if (sisterLine2) sisterLine2.textContent = content.sister.titleLine2;
-        renderParagraphs(sisterCopy, content.sister.body);
-      } catch (error) {
-        console.error('Error loading site content:', error);
-      }
-    }
-
-    updateBookState();
-  </script>
-  <script src="translations.js"></script>
-  <script src="assets/nav.js"></script>
-  <script src="assets/footer.js"></script>
-  <script>
-    // Initialize i18n after all scripts are loaded
-    if (window.i18n) {
-      window.i18n.init();
-    }
-    
-    // Load site content after i18n is initialized so language preference is available
-    if (typeof loadSiteContent === 'function') {
-      loadSiteContent();
-    }
-    
-    // Set up Firebase listener for live updates
-    if (typeof firebase !== 'undefined' && firebase.database && firebase.apps && firebase.apps.length > 0) {
-      try {
-        const db = firebase.database();
-        const contentRef = db.ref('siteContent');
-        const detachListener = () => contentRef.off('value', loadSiteContent);
-        contentRef.on('value', loadSiteContent);
-        window.addEventListener('pagehide', detachListener);
-      } catch (error) {
-        console.warn('Could not set up site content listener:', error);
-      }
-    }
-    
-    // Reload site content when language changes
-    window.addEventListener('languageChanged', function() {
-      if (typeof loadSiteContent === 'function') {
-        loadSiteContent();
-      }
-    });
-  </script>
-  
-  <!-- Structured Data (JSON-LD) for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Hotel",
-    "name": "Hotel 3 Paardekens",
-    "description": "Historic 3-star hotel in the heart of Mechelen, Belgium with 33 renovated rooms and rooftop breakfast with cathedral views",
-    "image": "https://www.3paardekens.com/assets/background.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Begijnenstraat 3",
-      "addressLocality": "Mechelen",
-      "postalCode": "2800",
-      "addressCountry": "BE"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 51.0259,
-      "longitude": 4.4777
-    },
-    "telephone": "+32 15 342 713",
-    "email": "info@3paardekens.be",
-    "url": "https://www.3paardekens.com",
-    "starRating": {
-      "@type": "Rating",
-      "ratingValue": "3"
-    },
-    "priceRange": "$$",
-    "checkinTime": "14:00",
-    "checkoutTime": "11:00",
-    "numberOfRooms": "33",
-    "amenityFeature": [
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "Free WiFi"
-      },
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "Breakfast"
-      },
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "Rooftop Breakfast Room"
-      },
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "City Center Location"
-      }
-    ]
-  }
-  </script>
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Hotel 3 Paardekens",
-    "image": "https://www.3paardekens.com/assets/background.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Begijnenstraat 3",
-      "addressLocality": "Mechelen",
-      "postalCode": "2800",
-      "addressCountry": "BE"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 51.0259,
-      "longitude": 4.4777
-    },
-    "telephone": "+32 15 342 713",
-    "email": "info@3paardekens.be",
-    "url": "https://www.3paardekens.com",
-    "priceRange": "$$"
-  }
-  </script>
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.3paardekens.com/"
-      }
-    ]
-  }
-  </script>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><img src="assets/3plogo.png" alt="Hotel 3 Paardekens"><p data-i18n="footer.short">A historic 3-star hotel in the centre of Mechelen, Belgium.</p></div><div class="footer-col"><h3 data-i18n="footer.explore">Explore</h3><a href="rooms.html" data-i18n="nav.rooms">Rooms</a><a href="#breakfast" data-i18n="nav.breakfast">Breakfast</a><a href="#about" data-i18n="nav.about">About</a><a href="info.html">Info</a><a href="#location" data-i18n="nav.location">Location</a></div><div class="footer-col"><h3 data-i18n="footer.help">Help</h3><a href="faqs.html">Google Wallet FAQs</a><a href="apple-wallet-faqs.html" data-i18n="footer.walletFaq">Apple Wallet FAQs</a><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy</a><a href="cookie-policy.html" data-i18n="footer.cookies">Cookie policy</a></div><div class="footer-col"><h3 data-i18n="footer.booking">Booking</h3><a href="#" data-book data-i18n="footer.direct">Book direct</a><a href="tel:+3215342713">+32 15 342 713</a><a href="mailto:info@3paardekens.be">info@3paardekens.be</a><a href="terms-and-conditions.html" data-i18n="footer.terms">Terms</a></div></div><div class="footer-bottom"><span>© Hotel 3 Paardekens</span></div></div></footer>
+  <script src="preview-site.js"></script>
+  <script src="room-gallery-cms.js"></script>
+  <script src="booking-enhanced.js"></script>
+  <script src="home-modern.js"></script>
 </body>
 </html>

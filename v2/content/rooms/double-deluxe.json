@@ -1,0 +1,14 @@
+{
+  "id":"double-deluxe","order":4,
+  "name":"Double Deluxe","name_en":"Double Deluxe","name_nl":"Deluxe Tweepersoonskamer","name_fr":"Chambre Double Deluxe","name_es":"Habitación Doble Deluxe","name_de":"Deluxe Doppelzimmer",
+  "strapline":"A little more space","strapline_en":"A little more space","strapline_nl":"Net wat meer ruimte","strapline_fr":"Un peu plus d’espace","strapline_es":"Un poco más de espacio","strapline_de":"Etwas mehr Platz",
+  "description":"The same comfortable Double experience with a little extra space.","description_en":"The same comfortable Double experience with a little extra space to settle in.","description_nl":"Hetzelfde comfortabele verblijf als in onze Double Room, maar met net wat meer ruimte.","description_fr":"Le même confort que notre Chambre Double, avec simplement un peu plus d’espace.","description_es":"La misma comodidad que nuestra Habitación Doble, pero con un poco más de espacio.","description_de":"Der gleiche Komfort wie in unserem Doppelzimmer, nur mit etwas mehr Platz.",
+  "amenities":["Double bed","More spacious room","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
+  "amenities_en":["Double bed","More spacious room","TV","Private bathroom","City view","Coffee/tea maker","Heating","Wardrobe"],
+  "amenities_nl":["Tweepersoonsbed","Ruimere kamer","TV","Privébadkamer","Uitzicht op de stad","Koffie- en theefaciliteiten","Verwarming","Kledingkast"],
+  "amenities_fr":["Lit double","Chambre plus spacieuse","TV","Salle de bain privée","Vue sur la ville","Café et thé","Chauffage","Armoire"],
+  "amenities_es":["Cama doble","Habitación más amplia","TV","Baño privado","Vistas a la ciudad","Café y té","Calefacción","Armario"],
+  "amenities_de":["Doppelbett","Geräumigeres Zimmer","TV","Eigenes Badezimmer","Stadtblick","Kaffee- und Teezubereitung","Heizung","Kleiderschrank"],
+  "gallery":["/images/legacy/rooms/Double/6.jpg","/images/legacy/rooms/Double/5.jpg","/images/legacy/rooms/Double/7.jpg","/images/legacy/rooms/Double/8.jpg"],
+  "bookingUrl":"https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
+}
