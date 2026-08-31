@@ -4,12 +4,19 @@
   if(!list)return;
   const file=document.body.dataset.faqFile;
   let blocks=[];
+  let overrides={};
+  let overrideLang='';
+  let refreshToken=0;
 
   const lang=()=>window.Hotel3P?.getLanguage?.()||'en';
   const sanitize=html=>window.DOMPurify?DOMPurify.sanitize(String(html||''),{USE_PROFILES:{html:true}}):String(html||'').replace(/[<>]/g,'');
 
   function entryForLanguage(entry,l){
-    return {title:entry[`question_${l}`]||entry.question_en||entry.question||'',body:entry[`answer_${l}`]||entry.answer_en||entry.answer||''};
+    const translated=overrideLang===l?overrides[entry.id]:null;
+    return {
+      title:translated?.question||entry[`question_${l}`]||entry.question_en||entry.question||'',
+      body:translated?.answer||entry[`answer_${l}`]||entry.answer_en||entry.answer||''
+    };
   }
 
   function render(){
@@ -38,8 +45,37 @@
     });
   }
 
+  async function loadOverride(l,token){
+    if(!file?.includes('apple-wallet')||l==='en'){
+      if(token!==refreshToken)return;
+      overrides={};
+      overrideLang='';
+      return;
+    }
+    try{
+      const res=await fetch(`v2/content/faqs/apple-wallet-${l}.json`,{cache:'no-store'});
+      if(!res.ok)throw new Error(`Unable to load ${l} Apple Wallet FAQ: ${res.status}`);
+      const data=await res.json();
+      if(token!==refreshToken||l!==lang())return;
+      overrides=Object.fromEntries((Array.isArray(data.entries)?data.entries:[]).map(entry=>[entry.id,entry]));
+      overrideLang=l;
+    }catch(error){
+      console.error(error);
+      if(token!==refreshToken)return;
+      overrides={};
+      overrideLang='';
+    }
+  }
+
+  async function refresh(){
+    const token=++refreshToken;
+    const l=lang();
+    await loadOverride(l,token);
+    if(token===refreshToken)render();
+  }
+
   async function load(){
-    if(!file){render();return;}
+    if(!file){refresh();return;}
     try{
       const res=await fetch(file,{cache:'no-store'});
       if(!res.ok)throw new Error(`Unable to load FAQ content: ${res.status}`);
@@ -49,9 +85,9 @@
       console.error(error);
       blocks=[];
     }
-    render();
+    refresh();
   }
 
-  document.addEventListener('hotelLanguageChanged',render);
+  document.addEventListener('hotelLanguageChanged',refresh);
   load();
 })();
