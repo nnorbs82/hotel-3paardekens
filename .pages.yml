@@ -118,7 +118,7 @@ content:
           - { name: bookingUrl, label: Booking URL, type: string }
 
       - name: hotel_info
-        label: Hotel information page
+        label: Hotel information - English / Dutch / French
         type: file
         path: v2/content/info.json
         format: json
@@ -128,7 +128,7 @@ content:
             type: object
             list: true
             fields:
-              - { name: id, label: Internal ID, type: string }
+              - { name: id, label: Internal ID, type: string, readonly: true }
               - { name: order, label: Display order, type: number }
               - { name: title_en, label: "Heading - English", type: string }
               - { name: body_en, label: "Content - English", type: text }
@@ -136,13 +136,41 @@ content:
               - { name: body_nl, label: "Content - Dutch", type: text }
               - { name: title_fr, label: "Heading - French", type: string }
               - { name: body_fr, label: "Content - French", type: text }
-              - { name: title_es, label: "Heading - Spanish", type: string }
-              - { name: body_es, label: "Content - Spanish", type: text }
-              - { name: title_de, label: "Heading - German", type: string }
-              - { name: body_de, label: "Content - German", type: text }
+
+      - name: hotel_info_es
+        label: Hotel information - Spanish
+        type: file
+        path: v2/content/info-es.json
+        format: json
+        fields:
+          - name: entries
+            label: Information sections - Spanish
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string, readonly: true }
+              - { name: order, label: Display order, type: number, readonly: true }
+              - { name: title, label: Heading, type: string }
+              - { name: body, label: Content, type: text }
+
+      - name: hotel_info_de
+        label: Hotel information - German
+        type: file
+        path: v2/content/info-de.json
+        format: json
+        fields:
+          - name: entries
+            label: Information sections - German
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string, readonly: true }
+              - { name: order, label: Display order, type: number, readonly: true }
+              - { name: title, label: Heading, type: string }
+              - { name: body, label: Content, type: text }
 
       - name: google_wallet_faqs
-        label: Google Wallet FAQs
+        label: Google Wallet FAQs - all languages
         type: file
         path: v2/content/faqs/general.json
         format: json
@@ -152,7 +180,7 @@ content:
             type: object
             list: true
             fields:
-              - { name: id, label: Internal ID, type: string }
+              - { name: id, label: Internal ID, type: string, readonly: true }
               - { name: question_en, label: "Question - English", type: string }
               - { name: answer_en, label: "Answer - English", type: text }
               - { name: question_nl, label: "Question - Dutch", type: string }
@@ -164,28 +192,80 @@ content:
               - { name: question_de, label: "Question - German", type: string }
               - { name: answer_de, label: "Answer - German", type: text }
 
-      - name: apple_wallet_faqs
-        label: Apple Wallet FAQs
+      - name: apple_wallet_faqs_en
+        label: Apple Wallet FAQs - English
         type: file
         path: v2/content/faqs/apple-wallet.json
         format: json
         fields:
           - name: entries
-            label: Apple Wallet FAQ entries
+            label: Apple Wallet FAQ entries - English
             type: object
             list: true
             fields:
-              - { name: id, label: Internal ID, type: string }
-              - { name: question_en, label: "Question - English", type: string }
-              - { name: answer_en, label: "Answer - English", type: text }
-              - { name: question_nl, label: "Question - Dutch", type: string }
-              - { name: answer_nl, label: "Answer - Dutch", type: text }
-              - { name: question_fr, label: "Question - French", type: string }
-              - { name: answer_fr, label: "Answer - French", type: text }
-              - { name: question_es, label: "Question - Spanish", type: string }
-              - { name: answer_es, label: "Answer - Spanish", type: text }
-              - { name: question_de, label: "Question - German", type: string }
-              - { name: answer_de, label: "Answer - German", type: text }
+              - { name: id, label: Internal ID, type: string, readonly: true }
+              - { name: question_en, label: Question, type: string }
+              - { name: answer_en, label: Answer, type: text }
+
+      - name: apple_wallet_faqs_nl
+        label: Apple Wallet FAQs - Dutch
+        type: file
+        path: v2/content/faqs/apple-wallet-nl.json
+        format: json
+        fields:
+          - name: entries
+            label: Apple Wallet FAQ entries - Dutch
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string, readonly: true }
+              - { name: question, label: Question, type: string }
+              - { name: answer, label: Answer, type: text }
+
+      - name: apple_wallet_faqs_fr
+        label: Apple Wallet FAQs - French
+        type: file
+        path: v2/content/faqs/apple-wallet-fr.json
+        format: json
+        fields:
+          - name: entries
+            label: Apple Wallet FAQ entries - French
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string, readonly: true }
+              - { name: question, label: Question, type: string }
+              - { name: answer, label: Answer, type: text }
+
+      - name: apple_wallet_faqs_es
+        label: Apple Wallet FAQs - Spanish
+        type: file
+        path: v2/content/faqs/apple-wallet-es.json
+        format: json
+        fields:
+          - name: entries
+            label: Apple Wallet FAQ entries - Spanish
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string, readonly: true }
+              - { name: question, label: Question, type: string }
+              - { name: answer, label: Answer, type: text }
+
+      - name: apple_wallet_faqs_de
+        label: Apple Wallet FAQs - German
+        type: file
+        path: v2/content/faqs/apple-wallet-de.json
+        format: json
+        fields:
+          - name: entries
+            label: Apple Wallet FAQ entries - German
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Internal ID, type: string, readonly: true }
+              - { name: question, label: Question, type: string }
+              - { name: answer, label: Answer, type: text }
 
 settings:
   commit:
