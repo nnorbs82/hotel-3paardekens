@@ -7,9 +7,7 @@
   if (!list) return;
 
   const file = document.body.dataset.infoFile;
-  const firebasePath = document.body.dataset.firebasePath;
   let blocks = [];
-  let usingFirebase = false;
 
   const copy = {
     nl:{eyebrow:'Uw verblijf',title:'Alles wat u moet weten.',lead:'Praktische informatie voor een vlot verblijf bij Hotel 3 Paardekens.',index:'Op deze pagina',empty:'Er is momenteel geen hotelinformatie beschikbaar.',ctaEyebrow:'Klaar voor Mechelen?',ctaTitle:'Kies uw data. Wij zorgen voor de rest.',ctaButton:'Bekijk beschikbaarheid'},
@@ -25,22 +23,12 @@
   const escapeText = value => { const div=document.createElement('div'); div.textContent=String(value||''); return div.innerHTML; };
   const pad = n => String(n).padStart(2,'0');
 
-  function staticEntry(entry,l){
+  function entryForLanguage(entry,l){
     return {
       id:entry.id || '',
       order:Number(entry.order || 0),
       title:entry[`title_${l}`] || entry.title_en || entry.title || '',
       body:entry[`body_${l}`] || entry.body_en || entry.body || ''
-    };
-  }
-
-  function firebaseEntry(entry,l){
-    const localized = entry?.[l] || entry?.en || entry || {};
-    return {
-      id:entry?.id || '',
-      order:Number(entry?.order || 0),
-      title:localized.title || entry?.title || '',
-      body:localized.body || entry?.body || ''
     };
   }
 
@@ -63,7 +51,7 @@
     pageCopy();
     const l=lang();
     const entries=blocks
-      .map(block=>usingFirebase?firebaseEntry(block,l):staticEntry(block,l))
+      .map(block=>entryForLanguage(block,l))
       .filter(entry=>entry.title||entry.body)
       .sort((a,b)=>a.order-b.order);
 
@@ -93,39 +81,17 @@
     });
   }
 
-  async function loadStatic(){
-    if(!file) return false;
+  async function load(){
+    if(!file){render();return;}
     try{
       const res=await fetch(file,{cache:'no-store'});
-      if(!res.ok) return false;
+      if(!res.ok)throw new Error(`Unable to load info content: ${res.status}`);
       const data=await res.json();
-      const entries=Array.isArray(data.entries)?data.entries:[];
-      if(!entries.length) return false;
-      blocks=entries;
-      usingFirebase=false;
-      render();
-      return true;
-    }catch{return false;}
-  }
-
-  async function loadFirebase(){
-    if(!firebasePath || typeof firebase==='undefined' || !firebase.database) return false;
-    try{
-      const snap=await firebase.database().ref(firebasePath).once('value');
-      const data=snap.val();
-      if(!data) return false;
-      blocks=(Array.isArray(data)?data:Object.keys(data).map(key=>({...data[key],id:key}))).filter(Boolean);
-      usingFirebase=true;
-      render();
-      return true;
-    }catch{return false;}
-  }
-
-  async function load(){
-    if(await loadStatic()) return;
-    if(await loadFirebase()) return;
-    blocks=[];
-    usingFirebase=false;
+      blocks=Array.isArray(data.entries)?data.entries:[];
+    }catch(error){
+      console.error(error);
+      blocks=[];
+    }
     render();
   }
 
