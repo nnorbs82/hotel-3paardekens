@@ -141,14 +141,14 @@ content:
               - { name: title_de, label: "Heading - German", type: string }
               - { name: body_de, label: "Content - German", type: text }
 
-      - name: general_faqs
-        label: General FAQs
+      - name: google_wallet_faqs
+        label: Google Wallet FAQs
         type: file
         path: v2/content/faqs/general.json
         format: json
         fields:
           - name: entries
-            label: FAQ entries
+            label: Google Wallet FAQ entries
             type: object
             list: true
             fields:
