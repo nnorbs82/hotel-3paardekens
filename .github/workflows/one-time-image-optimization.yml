@@ -1,0 +1,281 @@
+name: One-time image optimization
+
+on:
+  push:
+    branches: [redesign]
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install --quiet pillow
+      - name: Create optimized derivatives and wire preview
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import json
+
+          root = Path('.')
+          optimized = root / 'optimized'
+          optimized.mkdir(exist_ok=True)
+
+          def convert_webp(src, dst, max_width=None, quality=90):
+              src = Path(src)
+              dst = Path(dst)
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              with Image.open(src) as opened:
+                  image = ImageOps.exif_transpose(opened)
+                  source_size = image.size
+                  icc = image.info.get('icc_profile')
+                  if max_width and image.width > max_width:
+                      new_height = round(image.height * max_width / image.width)
+                      image = image.resize((max_width, new_height), Image.Resampling.LANCZOS)
+                  save_args = dict(format='WEBP', quality=quality, method=6)
+                  if icc:
+                      save_args['icc_profile'] = icc
+                  image.save(dst, **save_args)
+                  return source_size, image.size
+
+          def convert_social_jpeg(src, dst, max_width=1600, quality=88):
+              src = Path(src)
+              dst = Path(dst)
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              with Image.open(src) as opened:
+                  image = ImageOps.exif_transpose(opened).convert('RGB')
+                  icc = image.info.get('icc_profile')
+                  if image.width > max_width:
+                      new_height = round(image.height * max_width / image.width)
+                      image = image.resize((max_width, new_height), Image.Resampling.LANCZOS)
+                  save_args = dict(format='JPEG', quality=quality, optimize=True, progressive=True)
+                  if icc:
+                      save_args['icc_profile'] = icc
+                  image.save(dst, **save_args)
+                  return image.size
+
+          manifest = {'generated_by':'one-time image optimization','files':[],'mapping':{}}
+
+          hero_src = Path('assets/background.jpg')
+          hero_dst = Path('optimized/assets/background.webp')
+          src_dim, dst_dim = convert_webp(hero_src, hero_dst, max_width=2560, quality=90)
+          convert_social_jpeg(hero_src, Path('optimized/assets/background-social.jpg'), max_width=1600, quality=88)
+          manifest['files'].append({
+              'original': str(hero_src), 'optimized': str(hero_dst),
+              'original_dimensions': list(src_dim), 'optimized_dimensions': list(dst_dim),
+              'original_bytes': hero_src.stat().st_size, 'optimized_bytes': hero_dst.stat().st_size
+          })
+
+          about_src = Path('aboutus/aboutus1.jpg')
+          about_dst = Path('optimized/aboutus/aboutus1.webp')
+          src_dim, dst_dim = convert_webp(about_src, about_dst, max_width=1600, quality=90)
+          manifest['files'].append({
+              'original': str(about_src), 'optimized': str(about_dst),
+              'original_dimensions': list(src_dim), 'optimized_dimensions': list(dst_dim),
+              'original_bytes': about_src.stat().st_size, 'optimized_bytes': about_dst.stat().st_size
+          })
+
+          room_map = {}
+          for src in sorted(Path('Rooms').glob('*/*.jpg')):
+              rel = src.relative_to('Rooms')
+              dst = Path('optimized/Rooms') / rel.with_suffix('.webp')
+              src_dim, dst_dim = convert_webp(src, dst, max_width=2000, quality=90)
+              original_url = '/' + src.as_posix()
+              optimized_url = '/' + dst.as_posix()
+              room_map[original_url] = optimized_url
+              manifest['mapping'][original_url] = optimized_url
+              manifest['files'].append({
+                  'original': src.as_posix(), 'optimized': dst.as_posix(),
+                  'original_dimensions': list(src_dim), 'optimized_dimensions': list(dst_dim),
+                  'original_bytes': src.stat().st_size, 'optimized_bytes': dst.stat().st_size
+              })
+
+          original_total = sum(item['original_bytes'] for item in manifest['files'])
+          optimized_total = sum(item['optimized_bytes'] for item in manifest['files'])
+          manifest['totals'] = {
+              'original_bytes': original_total,
+              'optimized_bytes': optimized_total,
+              'saving_percent': round((1 - optimized_total / original_total) * 100, 1) if original_total else 0
+          }
+          (optimized / 'image-map.json').write_text(json.dumps(room_map, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          (optimized / 'manifest.json').write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          def replace_room_refs(text):
+              for original, derivative in room_map.items():
+                  text = text.replace(original.lstrip('/'), derivative.lstrip('/'))
+                  text = text.replace(original, derivative)
+              return text
+
+          index_path = Path('index.html')
+          text = index_path.read_text(encoding='utf-8')
+          text = text.replace('assets/background.jpg', 'optimized/assets/background.webp')
+          text = text.replace('aboutus/aboutus1.jpg', 'optimized/aboutus/aboutus1.webp')
+          text = replace_room_refs(text)
+          index_path.write_text(text, encoding='utf-8')
+
+          rooms_path = Path('rooms.html')
+          text = rooms_path.read_text(encoding='utf-8')
+          text = replace_room_refs(text)
+          rooms_path.write_text(text, encoding='utf-8')
+
+          info_path = Path('info.html')
+          text = info_path.read_text(encoding='utf-8')
+          text = text.replace('src="assets/background.jpg"', 'fetchpriority="high" decoding="async" src="optimized/assets/background.webp"')
+          info_path.write_text(text, encoding='utf-8')
+
+          seo_path = Path('site-seo.js')
+          text = seo_path.read_text(encoding='utf-8')
+          text = text.replace('/assets/background.jpg', '/optimized/assets/background-social.jpg')
+          seo_path.write_text(text, encoding='utf-8')
+
+          gallery_path = Path('room-gallery-cms.js')
+          gallery_path.write_text(r'''(() => {
+            'use strict';
+
+            const IMAGE_MAP_FILE = 'optimized/image-map.json';
+            let imageMapPromise = null;
+
+            const getImageMap = () => {
+              if (!imageMapPromise) {
+                imageMapPromise = fetch(IMAGE_MAP_FILE, { cache: 'no-store' })
+                  .then(response => response.ok ? response.json() : {})
+                  .catch(() => ({}));
+              }
+              return imageMapPromise;
+            };
+
+            const normalizeRoomImage = (value, imageMap = {}) => {
+              let src = String(value || '').trim();
+              if (!src) return '';
+              if (/^(https?:)?\/\//i.test(src) || src.startsWith('data:')) return src;
+              src = src.replace(/^\/?images\/legacy\/rooms\//i, '/Rooms/');
+              if (/^\/?Rooms\//.test(src)) src = src.startsWith('/') ? src : `/${src}`;
+              else if (!src.startsWith('/')) src = `/${src.replace(/^\.?\//, '')}`;
+              return imageMap[src] || src;
+            };
+
+            const localizedName = data => {
+              const lang = window.Hotel3P?.getLanguage?.() || 'en';
+              return data?.[`name_${lang}`] || data?.name_en || data?.name || 'Room';
+            };
+
+            const updateHomeCard = (root, gallery, name) => {
+              if (!root.classList.contains('room-card') || !gallery.length) return;
+              const image = root.querySelector('img');
+              if (!image) return;
+              image.src = gallery[0];
+              image.alt = `${name} at Hotel 3 Paardekens`;
+            };
+
+            const updateShowcase = (root, gallery, name) => {
+              if (!root.classList.contains('room-showcase') || !gallery.length) return;
+              root.dataset.gallery = JSON.stringify(gallery);
+              root.dataset.roomName = name;
+
+              const featureImage = root.querySelector('.room-feature-image img');
+              if (featureImage) {
+                featureImage.src = gallery[0];
+                featureImage.alt = `${name} at Hotel 3 Paardekens`;
+              }
+
+              const thumbnails = root.querySelector('.room-thumbnails');
+              if (!thumbnails) return;
+              const buttons = [...thumbnails.querySelectorAll('.gallery-trigger')];
+              const remaining = gallery.slice(1);
+              thumbnails.hidden = remaining.length === 0;
+              if (!remaining.length || !buttons.length) return;
+
+              const visibleCount = Math.min(remaining.length, buttons.length);
+              thumbnails.style.gridTemplateColumns = `repeat(${visibleCount},1fr)`;
+
+              buttons.forEach((button, index) => {
+                button.classList.remove('gallery-more');
+                const oldBadge = button.querySelector('span');
+                if (oldBadge) oldBadge.remove();
+                if (index >= remaining.length) {
+                  button.hidden = true;
+                  return;
+                }
+
+                button.hidden = false;
+                const galleryIndex = index + 1;
+                button.dataset.galleryOpen = String(galleryIndex);
+                const image = button.querySelector('img');
+                if (image) {
+                  image.src = gallery[galleryIndex];
+                  image.alt = `${name} photo ${galleryIndex + 1}`;
+                }
+
+                if (index === buttons.length - 1 && remaining.length > buttons.length) {
+                  button.classList.add('gallery-more');
+                  const badge = document.createElement('span');
+                  badge.textContent = `+${remaining.length - index}`;
+                  button.appendChild(badge);
+                }
+              });
+            };
+
+            async function loadRoomGalleries() {
+              const roots = [...document.querySelectorAll('[data-room-id]')];
+              if (!roots.length) return;
+              const ids = [...new Set(roots.map(root => root.dataset.roomId).filter(Boolean))];
+              const imageMap = await getImageMap();
+
+              await Promise.all(ids.map(async id => {
+                try {
+                  const response = await fetch(`v2/content/rooms/${id}.json`, { cache: 'no-store' });
+                  if (!response.ok) return;
+                  const data = await response.json();
+                  const gallery = Array.isArray(data.gallery)
+                    ? data.gallery.map(value => normalizeRoomImage(value, imageMap)).filter(Boolean)
+                    : [];
+                  if (!gallery.length) return;
+                  const name = localizedName(data);
+
+                  document.querySelectorAll(`[data-room-id="${id}"]`).forEach(root => {
+                    updateHomeCard(root, gallery, name);
+                    updateShowcase(root, gallery, name);
+                  });
+                } catch (_) {
+                  // Existing HTML photography remains as a safe fallback.
+                }
+              }));
+            }
+
+            document.addEventListener('hotelLanguageChanged', loadRoomGalleries);
+            loadRoomGalleries();
+          })();
+          ''', encoding='utf-8')
+
+          audit = Path('performance-image-audit.json')
+          if audit.exists():
+              audit.unlink()
+          PY
+      - name: Validate scripts
+        run: |
+          node --check room-gallery-cms.js
+          node --check site-seo.js
+      - name: Remove this workflow
+        run: rm -f .github/workflows/one-time-image-optimization.yml
+      - name: Commit optimized preview
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "perf: serve optimized photography derivatives"
+            git push origin HEAD:redesign
+          fi
