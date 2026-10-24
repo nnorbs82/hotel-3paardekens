@@ -17,11 +17,23 @@ media:
     output: /images/uploads
     extensions: [jpg, jpeg, png, webp]
     rename: safe
-  - name: website_images
-    label: Website images & branding (all folders)
-    input: ""
-    output: /
+  - name: website_assets
+    label: Website images - general & logos
+    input: assets
+    output: /assets
     extensions: [jpg, jpeg, png, webp, ico]
+    rename: safe
+  - name: website_photos
+    label: Website images - page photos
+    input: optimized
+    output: /optimized
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: sister_hotel_images
+    label: Sister hotel photography
+    input: elisabeth
+    output: /elisabeth
+    extensions: [jpg, jpeg, png, webp]
     rename: safe
 
 content:
@@ -34,7 +46,7 @@ content:
         type: file
         path: v2/content/images.json
         format: json
-        description: "These images are shared by English, Dutch, French, Spanish and German. Select an existing image or upload a replacement. Clear a field to restore the original website image. Room cards, thumbnails and galleries are still managed under Hotel content > Rooms > Gallery."
+        description: "These images are shared by English, Dutch, French, Spanish and German. Remove the current selection, then select an existing image or upload a replacement directly in the relevant field. Clear a field to restore the original website image. Room cards, thumbnails and galleries are still managed under Hotel content > Rooms > Gallery."
         fields:
           - name: branding
             label: Branding - every page
@@ -44,12 +56,12 @@ content:
                 label: Hotel logo - header, footer & search metadata
                 type: image
                 description: "One logo for every page and language. Use a transparent PNG with the same proportions as the current logo."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [png, webp, jpg, jpeg] }
+                options: { media: website_assets, path: assets, extensions: [png, webp, jpg, jpeg] }
               - name: favicon
                 label: Browser tab icon - every page
                 type: image
                 description: "Use a square ICO or PNG. This changes the small icon in browser tabs."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [ico, png] }
+                options: { media: website_assets, path: assets, extensions: [ico, png] }
           - name: shared
             label: Shared hotel photography - homepage & Hotel Info
             type: object
@@ -58,7 +70,7 @@ content:
                 label: Hotel lounge - homepage hero, location photo & Hotel Info banner
                 type: image
                 description: "Changing this photo updates all three placements in every language."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_photos, path: optimized, extensions: [jpg, jpeg, png, webp] }
           - name: home
             label: Homepage - section photos
             type: object
@@ -66,35 +78,35 @@ content:
               - name: cathedral
                 label: About section - large St Rumbold's Cathedral photo
                 type: image
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_assets, path: assets, extensions: [jpg, jpeg, png, webp] }
               - name: hotelDetail
                 label: About section - small overlapping hotel detail photo
                 type: image
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_photos, path: optimized, extensions: [jpg, jpeg, png, webp] }
               - name: breakfast
                 label: Breakfast section - top-floor breakfast room
                 type: image
                 description: "Also used in the hotel's search metadata."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_assets, path: assets, extensions: [jpg, jpeg, png, webp] }
               - name: sisterHotel
                 label: Sister property section - Hotel Elisabeth photo
                 type: image
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: sister_hotel_images, path: elisabeth, extensions: [jpg, jpeg, png, webp] }
               - name: ctaLeft
                 label: Bottom booking section - left photo (Double Deluxe)
                 type: image
                 description: "Also used in the hotel's search metadata. This decorative photo is independent of the room gallery."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_photos, path: optimized, extensions: [jpg, jpeg, png, webp] }
               - name: ctaMiddle
                 label: Bottom booking section - middle photo (Twin)
                 type: image
                 description: "This decorative photo is independent of the room gallery."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_photos, path: optimized, extensions: [jpg, jpeg, png, webp] }
               - name: ctaRight
                 label: Bottom booking section - right photo (Single)
                 type: image
                 description: "This decorative photo is independent of the room gallery."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_photos, path: optimized, extensions: [jpg, jpeg, png, webp] }
           - name: rooms
             label: Rooms page - banner
             type: object
@@ -103,7 +115,7 @@ content:
                 label: Rooms page - wide photo behind the main heading
                 type: image
                 description: "This banner is independent of room gallery selections and ordering."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_photos, path: optimized, extensions: [jpg, jpeg, png, webp] }
           - name: seo
             label: Social sharing - every page
             type: object
@@ -112,7 +124,7 @@ content:
                 label: Social preview - Facebook, Open Graph & Twitter image
                 type: image
                 description: "Also the first hotel photo in search metadata. Use a landscape image, ideally 1200 x 630 pixels."
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [jpg, jpeg, png, webp] }
+                options: { media: website_photos, path: optimized, extensions: [jpg, jpeg, png, webp] }
       - name: app_icons
         label: App icons - 192 & 512 pixels
         type: file
@@ -133,7 +145,7 @@ content:
                 label: App icon PNG
                 type: image
                 required: true
-                options: { media: website_images, path: v2/public/images/uploads, extensions: [png] }
+                options: { media: website_assets, path: assets, extensions: [png] }
               - { name: type, type: string, hidden: true }
           - { name: theme_color, type: string, hidden: true }
           - { name: background_color, type: string, hidden: true }

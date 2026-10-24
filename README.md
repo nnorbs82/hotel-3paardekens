@@ -53,7 +53,7 @@ Only genuine Hotel 3 Paardekens photography should be used on the public hotel w
 
 ## Website images in Pages CMS
 
-Open **Website images - all languages > Page photos, shared images & logos**. The sections describe each placement. Remove the current selection, then select an existing image or upload its replacement and save. New uploads default to `v2/public/images/uploads/`; the **Website images & branding (all folders)** media library can browse existing images throughout the repository. Its public paths match the static site's actual file paths.
+Open **Website images - all languages > Page photos, shared images & logos**. The sections describe each placement. Remove the current selection, then select an existing image or upload its replacement and save. Each field opens its matching image library: **Website images - general & logos**, **Website images - page photos**, or **Sister hotel photography**. Select an image there or upload directly in the field. Their public paths match the static site's actual file paths. The existing room/hotel/upload libraries remain available.
 
 All five languages share these image settings in `v2/content/images.json`:
 
@@ -78,7 +78,7 @@ The same logo and browser tab icon cover Home, Rooms, Hotel Info, both Wallet FA
 
 **Website images - all languages > App icons - 192 & 512 pixels** edits the two existing PNG entries directly in `site.webmanifest`. This optional manifest is currently not linked from the page heads; its behavior and other values are preserved.
 
-Current images remain in the HTML and SEO code as fallbacks. Clearing a setting, a missing/invalid content file, a failed replacement download or disabled JavaScript keeps the original page image. The new loader also accepts existing `/images/legacy/rooms/`, `/images/legacy/about/` and `/images/uploads/` paths. It leaves the existing room-gallery loader unchanged. As with the existing site, social and structured metadata are populated by the production SEO script.
+Current photos remain in the HTML and SEO code as fallbacks. The favicon is mirrored byte-for-byte into `assets/favicon.ico` so the CMS can select it from a supported, nonempty media directory; the original root `favicon.ico` is retained for existing links. Clearing a setting, a missing/invalid content file, a failed replacement download or disabled JavaScript keeps the original page image. The new loader also accepts existing `/images/legacy/rooms/`, `/images/legacy/about/` and `/images/uploads/` paths. It leaves the existing room-gallery loader unchanged. As with the existing site, social and structured metadata are populated by the production SEO script.
 
 ## Validation
 
@@ -87,6 +87,7 @@ There is no package installation, bundler or application build step: the reposit
 ```sh
 node --test tests/site-images.test.cjs
 python3 tests/audit-site.py
+ruby tests/cms-config.rb
 ```
 
 The optional browser suite requires Playwright, a Chromium browser, Sharp and pixelmatch:
