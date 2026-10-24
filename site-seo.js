@@ -6,6 +6,10 @@
   const UI_FILE = 'v2/content/ui-i18n.json';
   const MEWS_URL = 'https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6';
   const LOCALES = { nl:'nl_BE', en:'en_GB', fr:'fr_BE', es:'es_ES', de:'de_DE' };
+  const imageUrl = (key, fallback) => new URL(
+    window.Hotel3PImages?.get(key, fallback) || fallback,
+    `${PROD_ORIGIN}/`
+  ).href;
 
   const pageFile = () => {
     const value = location.pathname.split('/').filter(Boolean).pop() || 'index.html';
@@ -108,7 +112,7 @@
   const applySocialMeta = (language, title, description) => {
     if (!isProduction()) return;
     const canonical = productionUrl(language);
-    const image = `${PROD_ORIGIN}/optimized/assets/background-social.jpg`;
+    const image = imageUrl('seo.socialImage', '/optimized/assets/background-social.jpg');
 
     upsertMeta('og-type',{property:'og:type',content:'website'});
     upsertMeta('og-site-name',{property:'og:site_name',content:'Hotel 3 Paardekens'});
@@ -144,11 +148,11 @@
       url:PROD_ORIGIN,
       description,
       image:[
-        `${PROD_ORIGIN}/optimized/assets/background-social.jpg`,
-        `${PROD_ORIGIN}/assets/3paardekens-breakfast.webp`,
-        `${PROD_ORIGIN}/optimized/Rooms/Double/6.webp`
+        imageUrl('seo.socialImage', '/optimized/assets/background-social.jpg'),
+        imageUrl('home.breakfast', '/assets/3paardekens-breakfast.webp'),
+        imageUrl('home.ctaLeft', '/optimized/Rooms/Double/6.webp')
       ],
-      logo:`${PROD_ORIGIN}/assets/3plogo.png`,
+      logo:imageUrl('branding.logo', '/assets/3plogo.png'),
       telephone:'+32 15 342 713',
       email:'info@3paardekens.be',
       address:{
@@ -212,6 +216,15 @@
     if (!isProduction()) return;
 
     try {
+      await window.Hotel3PImages?.ready;
+      if (window.Hotel3PImages?.resolve) {
+        await Promise.all([
+          ['seo.socialImage', '/optimized/assets/background-social.jpg'],
+          ['home.breakfast', '/assets/3paardekens-breakfast.webp'],
+          ['home.ctaLeft', '/optimized/Rooms/Double/6.webp'],
+          ['branding.logo', '/assets/3plogo.png']
+        ].map(([key, fallback]) => window.Hotel3PImages.resolve(key, fallback)));
+      }
       const ui = await getUI();
       const meta = ui.meta?.[pageFile()]?.[language] || ui.meta?.[pageFile()]?.en;
       const title = meta?.[0] || document.title || 'Hotel 3 Paardekens';
