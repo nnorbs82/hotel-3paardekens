@@ -42,32 +42,37 @@
       toggle?.setAttribute('aria-expanded','false');
     });
   }
+  function ensureInfoLink(container, label, beforeSelector) {
+    // SEO adds a language query to internal links before translations may finish.
+    const links = [...container.querySelectorAll('a[href]')].filter(link => {
+      try {
+        const url = new URL(link.getAttribute('href'), location.href);
+        return url.origin === location.origin && /\/info(?:\.html)?\/?$/.test(url.pathname);
+      } catch (_) { return false; }
+    });
+    let [link, ...duplicates] = links;
+    duplicates.forEach(duplicate => duplicate.remove());
+    if (!link) {
+      link = document.createElement('a');
+      link.href = 'info.html';
+      const before = container.querySelector(beforeSelector);
+      if (before) container.insertBefore(link, before);
+      else container.appendChild(link);
+    }
+    const url = new URL(link.getAttribute('href'), location.href);
+    url.searchParams.set('lang', lang());
+    link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+    link.textContent = label;
+    link.removeAttribute('data-i18n');
+    return link;
+  }
   function ensureInfoLinks(c) {
     document.querySelectorAll('.site-header .nav').forEach(nav => {
-      let link = nav.querySelector('a[href="info.html"]');
-      if (!link) {
-        link = document.createElement('a');
-        link.href = 'info.html';
-        const contact = nav.querySelector('a[href*="#contact"]');
-        if (contact) nav.insertBefore(link, contact);
-        else nav.appendChild(link);
-      }
-      link.textContent = c.navInfo;
-      link.removeAttribute('data-i18n');
-      attachMobileClose(link);
+      attachMobileClose(ensureInfoLink(nav, c.navInfo, 'a[href*="#contact"]'));
     });
     document.querySelectorAll('.site-footer .footer-col').forEach(col => {
       if (!col.querySelector('h3[data-i18n="footer.explore"]')) return;
-      let link = col.querySelector('a[href="info.html"]');
-      if (!link) {
-        link = document.createElement('a');
-        link.href = 'info.html';
-        const locationLink = col.querySelector('a[href*="#location"]');
-        if (locationLink) col.insertBefore(link, locationLink);
-        else col.appendChild(link);
-      }
-      link.textContent = c.navInfo;
-      link.removeAttribute('data-i18n');
+      ensureInfoLink(col, c.navInfo, 'a[href*="#location"]');
     });
   }
   function localizeWalletLinks(c) {
