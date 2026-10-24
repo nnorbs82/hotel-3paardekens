@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
+const { createHash } = require('node:crypto');
 
 const root = path.resolve(__dirname, '..');
 const defaults = JSON.parse(fs.readFileSync(path.join(root, 'v2/content/images.json')));
@@ -82,7 +83,7 @@ async function settle(page, file, language) {
 }
 
 async function snapshot(page) {
-  return page.evaluate(() => ({
+  const result = await page.evaluate(() => ({
     title: document.title,
     language: document.documentElement.lang,
     text: document.body.innerText,
@@ -99,6 +100,22 @@ async function snapshot(page) {
       return [node.tagName, rect.x, rect.y, rect.width, rect.height, css.fontFamily, css.fontSize, css.fontWeight, css.color, css.backgroundColor, css.transform];
     })
   }));
+  // Storage organization can change an image URL while retaining identical image bytes.
+  // Compare image content while keeping canonical links, language URLs and copy exact.
+  const normalize = value => {
+    if (Array.isArray(value)) return value.map(normalize);
+    if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, normalize(item)]));
+    if (typeof value !== 'string') return value;
+    if (value.startsWith('{')) {
+      try { return JSON.stringify(normalize(JSON.parse(value))); } catch (_) { return value; }
+    }
+    const url = new URL(value, 'https://3paardekens.com/');
+    if (url.hostname !== '3paardekens.com' || !/\.(png|webp|jpe?g|ico)$/i.test(url.pathname)) return value;
+    const file = path.resolve(root, decodeURIComponent(url.pathname).replace(/^\//, ''));
+    if (!file.startsWith(`${root}${path.sep}`) || !fs.existsSync(file)) return value;
+    return `image-sha256:${createHash('sha256').update(fs.readFileSync(file)).digest('hex')}`;
+  };
+  return normalize(result);
 }
 
 (async () => {

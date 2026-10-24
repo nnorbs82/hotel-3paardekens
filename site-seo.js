@@ -112,7 +112,7 @@
   const applySocialMeta = (language, title, description) => {
     if (!isProduction()) return;
     const canonical = productionUrl(language);
-    const image = imageUrl('seo.socialImage', '/optimized/assets/background-social.jpg');
+    const image = imageUrl('seo.socialImage', '/website-images/photos/social-preview/social-preview.jpg');
 
     upsertMeta('og-type',{property:'og:type',content:'website'});
     upsertMeta('og-site-name',{property:'og:site_name',content:'Hotel 3 Paardekens'});
@@ -148,11 +148,11 @@
       url:PROD_ORIGIN,
       description,
       image:[
-        imageUrl('seo.socialImage', '/optimized/assets/background-social.jpg'),
-        imageUrl('home.breakfast', '/assets/3paardekens-breakfast.webp'),
-        imageUrl('home.ctaLeft', '/optimized/Rooms/Double/6.webp')
+        imageUrl('seo.socialImage', '/website-images/photos/social-preview/social-preview.jpg'),
+        imageUrl('home.breakfast', '/website-images/photos/breakfast/breakfast-room.webp'),
+        imageUrl('home.ctaLeft', '/website-images/photos/booking-collage/left-double-deluxe.webp')
       ],
-      logo:imageUrl('branding.logo', '/assets/3plogo.png'),
+      logo:imageUrl('branding.logo', '/website-images/branding/hotel-logo/3plogo.png'),
       telephone:'+32 15 342 713',
       email:'info@3paardekens.be',
       address:{
@@ -219,10 +219,10 @@
       await window.Hotel3PImages?.ready;
       if (window.Hotel3PImages?.resolve) {
         await Promise.all([
-          ['seo.socialImage', '/optimized/assets/background-social.jpg'],
-          ['home.breakfast', '/assets/3paardekens-breakfast.webp'],
-          ['home.ctaLeft', '/optimized/Rooms/Double/6.webp'],
-          ['branding.logo', '/assets/3plogo.png']
+          ['seo.socialImage', '/website-images/photos/social-preview/social-preview.jpg'],
+          ['home.breakfast', '/website-images/photos/breakfast/breakfast-room.webp'],
+          ['home.ctaLeft', '/website-images/photos/booking-collage/left-double-deluxe.webp'],
+          ['branding.logo', '/website-images/branding/hotel-logo/3plogo.png']
         ].map(([key, fallback]) => window.Hotel3PImages.resolve(key, fallback)));
       }
       const ui = await getUI();

@@ -76,11 +76,11 @@ test('every fixed page image and favicon has a populated CMS control; room galle
 });
 
 test('defaults preserve image attributes and avoid preloading unchanged photos', async () => {
-  const images = [node('shared.hotelExterior', 'optimized/assets/background.webp'), node('branding.favicon', 'assets/favicon.ico', 'LINK')];
+  const images = [node('shared.hotelExterior', defaults.shared.hotelExterior.slice(1)), node('branding.favicon', defaults.branding.favicon.slice(1), 'LINK')];
   const { loads, requests } = await load({ nodes: images });
   assert.deepEqual(loads, []);
-  assert.equal(images[0].attributes.src, 'optimized/assets/background.webp');
-  assert.equal(images[1].attributes.href, 'assets/favicon.ico');
+  assert.equal(images[0].attributes.src, defaults.shared.hotelExterior.slice(1));
+  assert.equal(images[1].attributes.href, defaults.branding.favicon.slice(1));
   assert.equal(requests.length, 1);
   assert.equal(requests[0].options.cache, 'no-store');
 });

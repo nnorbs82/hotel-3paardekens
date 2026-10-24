@@ -19,6 +19,8 @@ check_image = lambda do |field, value|
   raise "Missing default image: #{file}" unless file.file?
   raise "Unsupported default extension: #{file}" unless field['options']['extensions'].include?(file.extname.delete_prefix('.'))
   raise "Upload path is outside media: #{field['name']}" unless field['options']['path'].start_with?(input)
+  raise "Upload must use a purpose folder, not the library root: #{field['name']}" if field['options']['path'] == input
+  raise "Missing upload folder: #{field['options']['path']}" unless root.join(field['options']['path']).directory?
   image_fields += 1
 end
 
@@ -38,6 +40,9 @@ end
 config.fetch('content').find { |item| item['name'] == 'website_images' }.fetch('items').each do |entry|
   visit.call(entry.fetch('fields'), JSON.parse(root.join(entry.fetch('path')).read))
 end
-raise 'Favicon appearance changed' unless root.join('favicon.ico').binread == root.join('assets/favicon.ico').binread
+JSON.parse(root.join('tests/image-file-migration.json').read).each do |image|
+  raise "Migrated image bytes changed: #{image['to']}" unless root.join(image['from']).binread == root.join(image['to']).binread
+end
+raise 'Media menu should contain three clear libraries' unless media.keys.sort == %w[room_images website_assets website_photos].sort
 raise "Expected 14 image defaults, got #{image_fields}" unless image_fields == 14
-puts "PASS: #{image_fields} CMS image defaults, supported media directories, upload paths and identical favicon bytes"
+puts "PASS: #{image_fields} CMS image defaults, three libraries, uploads routed into named folders and identical migrated image bytes"

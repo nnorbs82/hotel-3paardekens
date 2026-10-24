@@ -53,7 +53,25 @@ Only genuine Hotel 3 Paardekens photography should be used on the public hotel w
 
 ## Website images in Pages CMS
 
-Open **Website images - all languages > Page photos, shared images & logos**. The sections describe each placement. Remove the current selection, then select an existing image or upload its replacement and save. Each field opens its matching image library: **Website images - general & logos**, **Website images - page photos**, or **Sister hotel photography**. Select an image there or upload directly in the field. Their public paths match the static site's actual file paths. The existing room/hotel/upload libraries remain available.
+There are three media libraries:
+
+- **Room photography** - the existing room folders and galleries, unchanged.
+- **Website photography** - all other website photos, organized by where they appear.
+- **Logos & icons** - the hotel logo, browser icon and app icons.
+
+In **Website photography**, open the relevant folder before uploading:
+
+| Folder | Used for |
+| --- | --- |
+| `shared-hotel` | Photo shared by the homepage hero, location section and Hotel Info banner |
+| `about` | Cathedral photo and small hotel-detail photo |
+| `breakfast` | Top-floor breakfast-room photo |
+| `sister-hotel` | Hotel Elisabeth photo |
+| `rooms-banner` | Wide Rooms page banner; room galleries remain under Room photography |
+| `booking-collage` | Three decorative photos in the bottom booking section |
+| `social-preview` | Social sharing image |
+
+After uploading, open **Website images - all languages > Choose website images**, select the photo in its labeled field and save. You can also upload directly from a field: its Upload button automatically targets the matching folder above. Branding fields similarly target `hotel-logo`, `browser-icon` or `app-icons` under Logos & icons. No image control uploads to a library root.
 
 All five languages share these image settings in `v2/content/images.json`:
 
@@ -78,7 +96,7 @@ The same logo and browser tab icon cover Home, Rooms, Hotel Info, both Wallet FA
 
 **Website images - all languages > App icons - 192 & 512 pixels** edits the two existing PNG entries directly in `site.webmanifest`. This optional manifest is currently not linked from the page heads; its behavior and other values are preserved.
 
-Current photos remain in the HTML and SEO code as fallbacks. The favicon is mirrored byte-for-byte into `assets/favicon.ico` so the CMS can select it from a supported, nonempty media directory; the original root `favicon.ico` is retained for existing links. Clearing a setting, a missing/invalid content file, a failed replacement download or disabled JavaScript keeps the original page image. The new loader also accepts existing `/images/legacy/rooms/`, `/images/legacy/about/` and `/images/uploads/` paths. It leaves the existing room-gallery loader unchanged. As with the existing site, social and structured metadata are populated by the production SEO script.
+The current photos and icons are copied byte-for-byte into the organized `website-images/` folders and used as the HTML/SEO defaults. Original files and URLs are retained for backwards compatibility. The migration byte checks are stored in `tests/image-file-migration.json`; no image is recompressed. Clearing a setting, a missing/invalid content file, a failed replacement download or disabled JavaScript keeps the original page image. The new loader also accepts existing `/images/legacy/rooms/`, `/images/legacy/about/` and `/images/uploads/` paths. It leaves the existing room-gallery loader unchanged. As with the existing site, social and structured metadata are populated by the production SEO script.
 
 ## Validation
 
