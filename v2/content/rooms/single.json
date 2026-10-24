@@ -62,11 +62,14 @@
     "Kleiderschrank"
   ],
   "gallery": [
-    "/images/legacy/rooms/Single/1-warm.jpg",
-    "/images/legacy/rooms/Single/2-warm.jpg",
-    "/images/legacy/rooms/Single/3-warm.jpg",
-    "/images/legacy/rooms/Single/4-warm.jpg",
-    "/images/legacy/rooms/Single/7-warm.jpg"
+    "/images/legacy/rooms/Single/single-1-tidy-summer.png",
+    "/images/legacy/rooms/Single/single-2-tidy-summer.png",
+    "/images/legacy/rooms/Single/single-3-tidy-summer.png",
+    "/images/legacy/rooms/Single/single-4-tidy-summer.jpg",
+    "/images/legacy/rooms/Single/single-5-tidy-summer.jpg",
+    "/images/legacy/rooms/Single/single-6-tidy-summer.jpg",
+    "/images/legacy/rooms/Single/single-7-tidy-summer.jpg",
+    "/images/legacy/rooms/Single/single-8-tidy-summer.jpg"
   ],
   "bookingUrl": "https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
 }
