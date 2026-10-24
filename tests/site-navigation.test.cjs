@@ -179,3 +179,27 @@ test('cleans up existing duplicates and still adds a missing link in the expecte
   assert.equal(infoLinks(fixture.explore).length, 1);
   assert.equal(fixture.explore.links.at(-2), infoLinks(fixture.explore)[0]);
 });
+
+test('all pages request fresh loader and menu URLs in both parser and deferred loading paths', () => {
+  const loader = readFileSync(join(root, 'preview-site.js'), 'utf8');
+  for (const readyState of ['loading', 'complete']) {
+    const loaded = [];
+    vm.runInNewContext(loader, { document: {
+      readyState,
+      write: html => loaded.push(...[...html.matchAll(/src="([^"]+)"/g)].map(match => match[1])),
+      createElement: () => ({}),
+      head: { appendChild(script) { loaded.push(script.src); script.onload(); } }
+    } });
+    assert.equal(loaded.length, 3);
+    assert.equal(loaded[0], 'preview-site-core.js');
+    assert.equal(loaded[2], 'site-seo.js');
+    const menu = new URL(loaded[1], 'https://hotel.test/');
+    assert.equal(menu.pathname, '/site-i18n-complete.js');
+    assert.ok(menu.searchParams.get('v'), 'bypass previously cached menu code');
+    for (const page of readdirSync(root).filter(file => file.endsWith('.html'))) {
+      const html = readFileSync(join(root, page), 'utf8');
+      const entry = html.match(/src="(preview-site\.js[^\"]*)"/)[1];
+      assert.equal(new URL(entry, 'https://hotel.test/').searchParams.get('v'), menu.searchParams.get('v'), page);
+    }
+  }
+});
