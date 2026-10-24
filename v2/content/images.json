@@ -1,0 +1,24 @@
+{
+  "branding": {
+    "logo": "/website-images/branding/hotel-logo/3plogo.png",
+    "favicon": "/website-images/branding/browser-icon/favicon.ico"
+  },
+  "shared": {
+    "hotelExterior": "/website-images/photos/shared-hotel/lobby-3-summer.png"
+  },
+  "home": {
+    "cathedral": "/website-images/photos/about/cathedral.webp",
+    "hotelDetail": "/website-images/photos/about/hotel-detail.webp",
+    "breakfast": "/website-images/photos/breakfast/breakfast-room.webp",
+    "sisterHotel": "/website-images/photos/sister-hotel/hotel-elisabeth.jpg",
+    "ctaLeft": "/website-images/photos/booking-collage/left-double-deluxe.webp",
+    "ctaMiddle": "/website-images/photos/booking-collage/middle-twin.webp",
+    "ctaRight": "/website-images/photos/booking-collage/right-single.webp"
+  },
+  "rooms": {
+    "banner": "/website-images/photos/rooms-banner/rooms-banner.webp"
+  },
+  "seo": {
+    "socialImage": "/website-images/photos/social-preview/social-preview.jpg"
+  }
+}

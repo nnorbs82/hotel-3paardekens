@@ -1,0 +1,72 @@
+[
+  {
+    "key": "branding.logo",
+    "from": "assets/3plogo.png",
+    "to": "website-images/branding/hotel-logo/3plogo.png"
+  },
+  {
+    "key": "branding.favicon",
+    "from": "assets/favicon.ico",
+    "to": "website-images/branding/browser-icon/favicon.ico"
+  },
+  {
+    "key": "shared.hotelExterior",
+    "from": "optimized/assets/background.webp",
+    "to": "website-images/photos/shared-hotel/hotel-lounge.webp"
+  },
+  {
+    "key": "home.cathedral",
+    "from": "assets/st-rumbolds-mechelen.webp",
+    "to": "website-images/photos/about/cathedral.webp"
+  },
+  {
+    "key": "home.hotelDetail",
+    "from": "optimized/aboutus/aboutus1.webp",
+    "to": "website-images/photos/about/hotel-detail.webp"
+  },
+  {
+    "key": "home.breakfast",
+    "from": "assets/3paardekens-breakfast.webp",
+    "to": "website-images/photos/breakfast/breakfast-room.webp"
+  },
+  {
+    "key": "home.sisterHotel",
+    "from": "elisabeth/sisterhotel.jpg",
+    "to": "website-images/photos/sister-hotel/hotel-elisabeth.jpg"
+  },
+  {
+    "key": "home.ctaLeft",
+    "from": "optimized/Rooms/Double/6.webp",
+    "to": "website-images/photos/booking-collage/left-double-deluxe.webp"
+  },
+  {
+    "key": "home.ctaMiddle",
+    "from": "optimized/Rooms/Twin/2.webp",
+    "to": "website-images/photos/booking-collage/middle-twin.webp"
+  },
+  {
+    "key": "home.ctaRight",
+    "from": "optimized/Rooms/Single/3.webp",
+    "to": "website-images/photos/booking-collage/right-single.webp"
+  },
+  {
+    "key": "rooms.banner",
+    "from": "optimized/Rooms/Double/5.webp",
+    "to": "website-images/photos/rooms-banner/rooms-banner.webp"
+  },
+  {
+    "key": "seo.socialImage",
+    "from": "optimized/assets/background-social.jpg",
+    "to": "website-images/photos/social-preview/social-preview.jpg"
+  },
+  {
+    "key": "app192",
+    "from": "assets/android-chrome-192x192.png",
+    "to": "website-images/branding/app-icons/android-chrome-192x192.png"
+  },
+  {
+    "key": "app512",
+    "from": "assets/android-chrome-512x512.png",
+    "to": "website-images/branding/app-icons/android-chrome-512x512.png"
+  }
+]
