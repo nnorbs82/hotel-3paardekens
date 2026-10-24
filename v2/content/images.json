@@ -1,24 +1,24 @@
 {
   "branding": {
-    "logo": "/assets/3plogo.png",
-    "favicon": "/assets/favicon.ico"
+    "logo": "/website-images/branding/hotel-logo/3plogo.png",
+    "favicon": "/website-images/branding/browser-icon/favicon.ico"
   },
   "shared": {
-    "hotelExterior": "/optimized/assets/background.webp"
+    "hotelExterior": "/website-images/photos/shared-hotel/hotel-lounge.webp"
   },
   "home": {
-    "cathedral": "/assets/st-rumbolds-mechelen.webp",
-    "hotelDetail": "/optimized/aboutus/aboutus1.webp",
-    "breakfast": "/assets/3paardekens-breakfast.webp",
-    "sisterHotel": "/elisabeth/sisterhotel.jpg",
-    "ctaLeft": "/optimized/Rooms/Double/6.webp",
-    "ctaMiddle": "/optimized/Rooms/Twin/2.webp",
-    "ctaRight": "/optimized/Rooms/Single/3.webp"
+    "cathedral": "/website-images/photos/about/cathedral.webp",
+    "hotelDetail": "/website-images/photos/about/hotel-detail.webp",
+    "breakfast": "/website-images/photos/breakfast/breakfast-room.webp",
+    "sisterHotel": "/website-images/photos/sister-hotel/hotel-elisabeth.jpg",
+    "ctaLeft": "/website-images/photos/booking-collage/left-double-deluxe.webp",
+    "ctaMiddle": "/website-images/photos/booking-collage/middle-twin.webp",
+    "ctaRight": "/website-images/photos/booking-collage/right-single.webp"
   },
   "rooms": {
-    "banner": "/optimized/Rooms/Double/5.webp"
+    "banner": "/website-images/photos/rooms-banner/rooms-banner.webp"
   },
   "seo": {
-    "socialImage": "/optimized/assets/background-social.jpg"
+    "socialImage": "/website-images/photos/social-preview/social-preview.jpg"
   }
 }
