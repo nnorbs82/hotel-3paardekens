@@ -62,12 +62,24 @@
     "Kleiderschrank"
   ],
   "gallery": [
-    "/images/legacy/rooms/Double/1-double.jpg",
-    "/images/legacy/rooms/Double/2-double.jpg",
-    "/images/legacy/rooms/Double/3-double.jpg",
-    "/images/legacy/rooms/Double/4-double.jpg",
-    "/images/legacy/rooms/Double/7-double.jpg",
-    "/images/legacy/rooms/Double/8-double.jpg"
+    "/images/legacy/rooms/Double/double-10-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-13-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-11-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-12-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-18-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-14-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-15-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-17-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-6-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-7-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-8-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-9-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-3-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-4-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-1-tidy-summer.png",
+    "/images/legacy/rooms/Double/double-5-tidy-summer.png",
+    "/images/legacy/rooms/Double/bathroom-1.png",
+    "/images/legacy/rooms/Double/bathroom-2.png"
   ],
   "bookingUrl": "https://app.mews.com/distributor/0a316d41-2e75-4b9d-b827-e77cd4fae3d6?mewsRoute=rooms"
 }
