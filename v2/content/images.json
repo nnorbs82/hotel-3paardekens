@@ -4,7 +4,7 @@
     "favicon": "/assets/favicon.ico"
   },
   "shared": {
-    "hotelExterior": "/optimized/aboutus/aboutus1.webp"
+    "hotelExterior": "/optimized/assets/background.webp"
   },
   "home": {
     "cathedral": "/assets/st-rumbolds-mechelen.webp",
